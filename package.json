@@ -1,16 +1,17 @@
-
-  {
-    "name": "good-ol-days",
-    "version": "1.0.0",
-    "scripts": {
-      "build": "npm run setup:server",
-      "setup:app": "npm run setup:server && npm run setup:client",
-      "setup:client": "cd Good-Ol-Days.client && npm i",
-      "setup:server": "cd Good-Ol-Days && npm i",
-      "start": "node Good-Ol-Days/index.js"
-    },
-    "engines": {
-      "node": "^14.17.0"
-    }
+{
+  "name": "good-ol-days",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run setup:server",
+    "setup:app": "npm run setup:server && npm run setup:client",
+    "setup:client": "cd Good-Ol-Days.client && npm i",
+    "setup:server": "cd Good-Ol-Days && npm i",
+    "start": "node Good-Ol-Days/index.js"
+  },
+  "engines": {
+    "node": "^14.17.0"
+  },
+  "dependencies": {
+    "mdi": "^2.2.43"
   }
-  
+}
