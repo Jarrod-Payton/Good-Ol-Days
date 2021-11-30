@@ -7,7 +7,7 @@
       <router-view />
     </div>
   </main>
-  <footer></footer>
+  <footer><ProfileOffCanvas :account="account" /></footer>
 </template>
 
 <script>
@@ -17,7 +17,8 @@ export default {
   name: 'App',
   setup() {
     return {
-      appState: computed(() => AppState)
+      appState: computed(() => AppState),
+      account: computed(() => AppState.account)
     }
   }
 }

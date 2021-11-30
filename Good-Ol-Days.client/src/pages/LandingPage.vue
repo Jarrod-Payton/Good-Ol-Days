@@ -43,7 +43,7 @@ export default {
     return {
       user: computed(() => AppState.user),
       async login() {
-        AuthService.loginWithPopup()
+        await AuthService.loginWithPopup()
         router.push({ name: 'Home' })
       },
     }
