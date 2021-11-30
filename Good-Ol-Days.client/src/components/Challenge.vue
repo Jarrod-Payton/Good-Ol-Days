@@ -24,7 +24,11 @@
                 <div
                   class="d-flex justify-content-end align-content-center mt-4"
                 >
-                  <button class="customBtn btn btn-success">
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#createPostModal"
+                    class="customBtn btn btn-success"
+                  >
                     <i class="mdi mdi-cloud-upload me-1" />
                     Upload
                   </button>

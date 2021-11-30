@@ -7,7 +7,10 @@
       <router-view />
     </div>
   </main>
-  <footer><ProfileOffCanvas :account="account" /></footer>
+  <footer>
+    <ProfileOffCanvas :account="account" />
+    <CreatePostModal />
+  </footer>
 </template>
 
 <script>
