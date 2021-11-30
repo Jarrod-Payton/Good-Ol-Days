@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row mt-md-5 mt-2">
     <div class="col-md-6 order-md-2" v-if="!activeAlbum.hasChallenges">
       <Challenge />
     </div>
@@ -10,21 +10,26 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 order-md-3" v-for="p in posts2" :key="p.id">
+    <div class="col-md-3 order-md-3" v-for="p in splicedPosts" :key="p.id">
       <Post :post="p" />
     </div>
   </div>
 </template>
 <script>
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import { AppState } from "../AppState";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { albumService } from "../services/AlbumService";
 import Pop from "../utils/Pop";
 export default {
   setup() {
+    const splicedPosts = ref([])
     const route = useRoute();
+    watchEffect(() => {
+      splicedPosts.value = [...AppState.posts]
+      splicedPosts.value = splicedPosts.value.splice(2, AppState.posts.length)
+    })
     onMounted(async () => {
       try {
         albumService.setActiveAlbum();
@@ -33,8 +38,8 @@ export default {
       }
     });
     return {
-      posts2: computed(() => AppState.posts.slice(0, 2)),
-      posts1: computed(() => AppState.posts.splice(0, 2)),
+      splicedPosts,
+      posts1: computed(() => AppState.posts.slice(0, 2)),
       activeAlbum: computed(() => AppState.activeAlbum)
     };
   },

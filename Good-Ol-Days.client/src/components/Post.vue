@@ -3,7 +3,7 @@
     <div class="card-img">
       <img :src="post.imgUrl" alt="post image" />
     </div>
-    <div class="card-body">
+    <div class="card-body sharpiefont">
       {{ post.title }}
     </div>
   </div>
@@ -15,4 +15,7 @@ export default {
 };
 </script>
 <style scoped>
+.sharpiefont {
+  font-family: "Saira Condensed", sans-serif;
+}
 </style>
