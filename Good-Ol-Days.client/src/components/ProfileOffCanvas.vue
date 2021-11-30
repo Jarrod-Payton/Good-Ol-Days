@@ -80,6 +80,7 @@
                     p-1
                     rounded
                     bg-light
+                    mb-3
                   "
                 >
                   Save
@@ -87,9 +88,17 @@
               </div>
             </form>
           </div>
-          <div class="line"></div>
-          <div>
-            <p class="title mt-2 ms-1">Albums</p>
+          <div v-if="myAlbums.lenght > 0">
+            <div class="line"></div>
+            <div>
+              <p class="title mt-2 ms-1">Albums</p>
+            </div>
+          </div>
+          <div v-if="myGroupAlbums.lenght > 0">
+            <div class="line"></div>
+            <div>
+              <p class="title mt-2 ms-1">Group Albums</p>
+            </div>
           </div>
         </div>
       </div>
@@ -99,10 +108,11 @@
 
 
 <script>
-import { ref } from "@vue/reactivity"
+import { computed, ref } from "@vue/reactivity"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
+import { AppState } from "../AppState"
 export default {
   props: {
     account: { type: Object }
@@ -122,6 +132,8 @@ export default {
       },
       edit,
       editProfile,
+      myAlbums: computed(() => AppState.myAlbums),
+      myGroupAlbums: computed(() => AppState.myGroupAlbums)
     }
   }
 }
@@ -140,6 +152,11 @@ export default {
     rgba(139, 139, 139) 75%,
     rgba(225, 225, 225, 0) 100%
   );
+}
+.picconfig {
+  object-fit: cover;
+  border-color: #9964cc !important;
+  border-width: 3px !important;
 }
 .title {
   font-size: 3vh;

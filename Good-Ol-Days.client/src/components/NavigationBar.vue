@@ -25,8 +25,8 @@
           </button>
         </div>
         <div class="me-4">
-          <p class="m-0 f-14 text-end">{{ user.name }}</p>
-          <p class="m-0 text-end">{{ user.email }}</p>
+          <p class="m-0 f-14 text-end">{{ account.name }}</p>
+          <p class="m-0 text-end">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
             Logout <i class="mdi mdi-call-missed"></i>
           </p>
@@ -38,14 +38,14 @@
           class="me-2 profile-picture border"
           height="85"
           width="90"
-          :src="user.picture"
+          :src="account.picture"
           alt="Profile Picture"
         />
       </div>
     </div>
   </div>
   <!-- MOBILE NAVIGATION BAR -->
-  <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12">
+  <div v-if="account.isAuthenticated" class="NavigationBar mobile col-12 p-0">
     <div class="card cardspec">
       <div class="d-flex justify-content-center">
         <img
@@ -62,8 +62,8 @@
           </button>
         </div>
         <div class="me-4">
-          <p class="m-0 f-14 text-end textmobile">{{ user.name }}</p>
-          <p class="m-0 text-end textmobile">{{ user.email }}</p>
+          <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
+          <p class="m-0 text-end textmobile">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
             Logout <i class="mdi mdi-call-missed"></i>
           </p>
@@ -94,6 +94,7 @@ export default {
     const router = useRouter()
     return {
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
       }
@@ -169,6 +170,12 @@ export default {
     padding-right: 8px;
     margin-right: 2vh;
     margin-left: 2vh;
+  }
+  .cardspec {
+    margin-top: 0vh;
+    margin-left: 0vh;
+    margin-right: 0vh;
+    padding: 1vh;
   }
 }
 </style>
