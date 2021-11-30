@@ -13,8 +13,20 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState";
+import { onMounted } from "@vue/runtime-core";
+import { useRoute } from "vue-router";
+import { albumService } from "../services/AlbumService";
+import Pop from "../utils/Pop";
 export default {
   setup() {
+    const route = useRoute();
+    onMounted(async () => {
+      try {
+        albumService.setActiveAlbum();
+      } catch (error) {
+        Pop.toast(error);
+      }
+    });
     return {
       Posts: computed(() => AppState.posts),
     };
