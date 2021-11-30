@@ -6,7 +6,13 @@
     <div class="col-md-6 order-md-1" v-if="posts1.length > 0">
       <div class="row">
         <div class="col-md-6 rotationanim" v-for="p in posts1" :key="p.id">
-          <div class="item">
+          <div
+            @click="test"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#picture-modal"
+            class="item selectable1"
+          >
             <Post :post="p" />
           </div>
         </div>
@@ -17,7 +23,12 @@
       v-for="p in splicedPosts"
       :key="p.id"
     >
-      <div class="item">
+      <div
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#picture-modal"
+        class="item selectable1"
+      >
         <Post :post="p" />
       </div>
     </div>
@@ -30,6 +41,7 @@ import { onMounted, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { albumService } from "../services/AlbumService";
 import Pop from "../utils/Pop";
+import { logger } from "../utils/Logger";
 export default {
   setup() {
     const splicedPosts = ref([])
@@ -48,8 +60,12 @@ export default {
     return {
       splicedPosts,
       posts1: computed(() => AppState.posts.slice(0, 2)),
-      activeAlbum: computed(() => AppState.activeAlbum)
+      activeAlbum: computed(() => AppState.activeAlbum),
+      test() {
+        logger.log('works')
+      }
     };
+
   },
 };
 </script>

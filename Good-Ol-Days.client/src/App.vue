@@ -10,6 +10,7 @@
   <footer>
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
+    <PictureModal />
   </footer>
 </template>
 
