@@ -32,6 +32,9 @@
           </p>
         </div>
         <img
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
           class="me-2 profile-picture border"
           height="85"
           width="90"
@@ -59,17 +62,20 @@
           </button>
         </div>
         <div class="me-4">
-          <p class="m-0 f-14 text-end textmobile">Name goes here</p>
-          <p class="m-0 text-end textmobile">emailgoeshere@gmail.com</p>
+          <p class="m-0 f-14 text-end textmobile">{{ user.name }}</p>
+          <p class="m-0 text-end textmobile">{{ user.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
             Logout <i class="mdi mdi-call-missed"></i>
           </p>
         </div>
         <img
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
           class="me-2 profile-picture border"
           height="60"
           width="62"
-          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          :src="user.picture"
           alt=""
         />
       </div>
@@ -130,6 +136,13 @@ export default {
 }
 .mobile {
   display: none;
+}
+@font-face {
+  font-family: "MyWebFont";
+  src: url("../assets/fonts/Stickynotes-ywLPd.otf") format("woff");
+}
+.sharpie {
+  font-family: "MyWebFont";
 }
 @media only screen and (max-width: 500px) {
   .desktop {
