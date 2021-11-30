@@ -19,8 +19,10 @@
                 <h3 class="font">-Take a family picture having icecream!</h3>
               </div>
               <div class="col-12">
-                <div class="d-flex justify-content-end">
-                  <button></button>
+                <div
+                  class="d-flex justify-content-end align-content-center mt-4"
+                >
+                  <button class="btn btn-success">Upload</button>
                 </div>
               </div>
             </div>
