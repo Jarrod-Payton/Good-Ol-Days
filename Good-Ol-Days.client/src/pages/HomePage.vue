@@ -1,10 +1,82 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo" class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div
+    class="
+      home
+      flex-grow-1
+      d-flex
+      flex-column
+      align-items-center
+      justify-content-center
+    "
+  >
+    <div class="card cardspec">
+      <div class="d-flex justify-content-between">
+        <div class="p-4">
+          <p class="titles">Your Albums:</p>
+        </div>
+        <div>
+          <button class="btn buttonscss elevation-3">
+            <i class="mdi mdi-18px mdi-plus-circle me-1"></i> Add Album
+          </button>
+        </div>
+      </div>
+      <!-- ALBUMS GO HERE v  -->
+      <div>
+        <div
+          class="
+            col-6 col-md-3
+            d-flex
+            justify-content-center
+            flex-column
+            align-items-center
+            selectable1
+            mb-2
+          "
+        >
+          <div>
+            <img
+              class="img-fluid picalbum grow"
+              src="../assets/img/albumpic.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <p class="albumname">Album Name Here</p>
+          </div>
+        </div>
+      </div>
+      <!-- ALBUMS GO HERE ^  -->
+    </div>
+    <div class="card cardspec">
+      <div class="d-flex justify-content-between">
+        <div class="p-4">
+          <p class="titles">Your Group Albums:</p>
+        </div>
+        <div>
+          <button class="btn buttonscss elevation-3">
+            <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Start a group
+            album
+          </button>
+        </div>
+      </div>
+      <!-- GROUP ALBUMS GO HERE v  -->
+      <div
+        class="
+          d-flex
+          justify-content-center
+          align-items-center
+          flex-column
+          mb-4
+        "
+      >
+        <div class="card cardgroupalbum grow2 mb-3">
+          <p class="gpalbumtitle">Pool Party 10/2021</p>
+        </div>
+        <div class="card cardgroupalbum grow2 mb-3">
+          <p class="gpalbumtitle">Christmas 2020</p>
+        </div>
+      </div>
+      <!-- GROUP ALBUMS GO HERE ^ -->
     </div>
   </div>
 </template>
@@ -16,21 +88,86 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home{
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card{
-    width: 50vw;
-    > img{
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
+.cardspec {
+  margin-top: 3vh;
+  width: 99%;
+  min-height: 20vh;
+  border-width: 5px;
+  border-radius: 0;
+  border-color: #36a7d7;
+  background-color: rgba(245, 245, 245, 0.842);
+}
+.titles {
+  font-size: 5vh;
+  margin-left: 2vh;
+  margin-bottom: 0;
+}
+.buttonscss {
+  background-color: #4ac26d;
+  margin-top: 2vh;
+  margin-right: 3vh;
+  color: white;
+  font-size: 2.2vh;
+  font-family: "Saira Condensed", sans-serif;
+  letter-spacing: 0.4px;
+}
+.picalbum {
+  height: 20vh;
+}
+.albumname {
+  margin-top: 0.5vh;
+  font-size: 3vh;
+}
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+}
+.grow2 {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow2:hover {
+  transform: scale(1.01);
+}
+.cardgroupalbum {
+  width: 85%;
+  height: 5vh;
+  border-width: 3px;
+  border-radius: 0;
+  background-color: rgb(243, 243, 243);
+  border-color: #36a7d7;
+}
+.gpalbumtitle {
+  margin-left: 3vh;
+  font-size: 3vh;
+}
+@media only screen and (max-width: 500px) {
+  .buttonscss {
+    background-color: #4ac26d;
+    margin-top: 2vh;
+    margin-right: 2vh;
+    color: white;
+    font-size: 2vh;
+    font-family: "Saira Condensed", sans-serif;
+    letter-spacing: 0.4px;
+  }
+  .titles {
+    font-size: 3vh;
+    margin-left: 2vh;
+  }
+  .picalbum {
+    height: 12vh;
+  }
+  .albumname {
+    margin-top: 0.5vh;
+    font-size: 2vh;
+  }
+  .gpalbumtitle {
+    margin-left: 1vh;
+    font-size: 3vh;
   }
 }
 </style>
