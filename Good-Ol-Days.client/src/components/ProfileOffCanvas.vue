@@ -80,6 +80,7 @@
                     p-1
                     rounded
                     bg-light
+                    mb-3
                   "
                 >
                   Save
@@ -140,6 +141,9 @@ export default {
     rgba(139, 139, 139) 75%,
     rgba(225, 225, 225, 0) 100%
   );
+}
+.picconfig {
+  object-fit: cover;
 }
 .title {
   font-size: 3vh;
