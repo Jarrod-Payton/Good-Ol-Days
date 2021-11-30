@@ -1,11 +1,7 @@
 <template>
-  <div class="wrapper">
-    <div class="item">
-      <div class="polaroid">
-        <img :src="post.imgUrl" />
-        <div class="caption">{{ post.title }}</div>
-      </div>
-    </div>
+  <div class="polaroid">
+    <img :src="post.imgUrl" />
+    <div class="caption">{{ post.title }}</div>
   </div>
 </template>
 <script>
@@ -41,7 +37,6 @@ export default {
   width: 100%;
   display: inline-block;
   margin-top: 2rem;
-  filter: grayscale(100%);
 }
 .item .polaroid:before {
   content: "";
