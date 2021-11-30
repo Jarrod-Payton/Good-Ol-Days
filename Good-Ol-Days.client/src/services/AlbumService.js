@@ -1,7 +1,7 @@
 import Pop from "../utils/Pop"
 
 class AlbumService {
-  async setActiveAlbum(albumId) {
+  async setActiveAlbum() {
     Pop.toast('Hello')
   }
 }

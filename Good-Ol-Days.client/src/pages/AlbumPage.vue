@@ -22,7 +22,7 @@ export default {
     const route = useRoute();
     onMounted(async () => {
       try {
-        albumService.setActiveAlbum(route.params.albumId);
+        albumService.setActiveAlbum();
       } catch (error) {
         Pop.toast(error);
       }
