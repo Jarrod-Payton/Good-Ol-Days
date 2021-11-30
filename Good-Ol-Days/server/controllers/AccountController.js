@@ -9,7 +9,7 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
-      .get('/collaborators', this.getAllMyAlbums)
+      .get('/collaborators', this.getAllMyCollabAlbums)
       .put('', this.updateAccount)
   }
 
@@ -30,9 +30,9 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
-  async getAllMyAlbums(req,res,next){
+  async getAllMyCollabAlbums(req,res,next){
     try {
-      const result = await collaboratorsService.getAllMyAlbums(req.userInfo.id)
+      const result = await collaboratorsService.getAllMyCollabAlbums(req.userInfo.id)
       return res.send(result)
     } catch (error) {
       next(error)

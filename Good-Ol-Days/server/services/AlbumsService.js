@@ -2,6 +2,9 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors"
 
 class AlbumsService {
+  async getAllMyAlbums(body){
+    return await dbContext.Albums.find({creatorId: body.creatorId})
+  }
 
   async getAlbumById(id){
     const result = await dbContext.Albums.findById(id)

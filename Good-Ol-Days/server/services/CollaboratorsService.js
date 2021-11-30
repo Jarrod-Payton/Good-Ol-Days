@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from "../utils/Errors"
 import { albumsService } from "./AlbumsService"
 
 class CollaboratorsService {
-  async getAllMyAlbums(userId){
+  async getAllMyCollabAlbums(userId){
     const res = await dbContext.Collaborators.find({accountId: userId}).populate('album account')
     return res
   }
