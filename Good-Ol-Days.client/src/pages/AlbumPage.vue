@@ -40,7 +40,6 @@ export default {
     })
     onMounted(async () => {
       try {
-        Pop.toast('Voodo')
         albumService.setActiveAlbum();
       } catch (error) {
         Pop.toast(error);
