@@ -15,7 +15,11 @@
           <p class="titles">Your Albums:</p>
         </div>
         <div class="desktop">
-          <button class="btn buttonscss elevation-3">
+          <button
+            class="btn buttonscss elevation-3"
+            data-bs-toggle="modal"
+            data-bs-target="#createAlbumModal"
+          >
             <i class="mdi mdi-18px mdi-plus-circle me-1"></i> Add Album
           </button>
         </div>
@@ -46,7 +50,11 @@
         </div>
       </div>
       <div class="media text-center mb-3">
-        <button class="btn buttonscss elevation-3">
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#createAlbumModal"
+          class="btn buttonscss elevation-3"
+        >
           <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Add Album
         </button>
       </div>
@@ -89,6 +97,7 @@
       </div>
     </div>
   </div>
+  <CreateAlbumModal />
 </template>
 
 <script>
