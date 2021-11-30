@@ -11,7 +11,7 @@
 <script>
 export default {
   props: { post: { type: Object, required: true } },
-  setup(props) {},
+  setup(props) { },
 };
 </script>
 <style scoped>
