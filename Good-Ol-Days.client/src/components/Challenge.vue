@@ -6,7 +6,17 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12">
-                <h3 class="text-center font">Let's make some memories!</h3>
+                <h2 class="text-center font pb-3 pt-2 text-sm-h2">
+                  Let's make some memories!
+                </h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <h3 class="font limeText">Weekly Challenge:</h3>
+              </div>
+              <div class="col-12">
+                <h3 class="font">-Take a family picture having icecream!</h3>
               </div>
             </div>
           </div>
@@ -29,9 +39,25 @@ export default {
   border-width: 5px;
   border-radius: 0;
   border-color: #4ac26d;
-  background-color: rgba(245, 245, 245, 0.794);
+  background-color: rgb(245, 245, 245, 0.9);
 }
 .font {
   font-family: "Saira Condensed", sans-serif;
+}
+.limeText {
+  color: #4ac26d;
+}
+@media only screen and (max-width: 500px) {
+  .text-sm-h2 {
+    font-size: 3vh;
+  }
+  .cardspec {
+    height: 30vh;
+    width: 100%;
+    border-width: 5px;
+    border-radius: 0;
+    border-color: #4ac26d;
+    background-color: rgb(245, 245, 245, 0.9);
+  }
 }
 </style>

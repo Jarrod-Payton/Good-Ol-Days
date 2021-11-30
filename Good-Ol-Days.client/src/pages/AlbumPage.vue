@@ -1,5 +1,5 @@
 <template>
-  <div class="row mt-md-5 mt-2">
+  <div class="row mt-md-5 mt-2 m-0">
     <div class="col-md-6 order-md-2" v-if="!activeAlbum.hasChallenges">
       <Challenge />
     </div>
