@@ -14,7 +14,7 @@
         <div class="p-4">
           <p class="titles">Your Albums:</p>
         </div>
-        <div>
+        <div class="desktop">
           <button class="btn buttonscss elevation-3">
             <i class="mdi mdi-18px mdi-plus-circle me-1"></i> Add Album
           </button>
@@ -45,14 +45,19 @@
           </div>
         </div>
       </div>
+      <div class="media text-center mb-3">
+        <button class="btn buttonscss elevation-3">
+          <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Add Album
+        </button>
+      </div>
       <!-- ALBUMS GO HERE ^  -->
     </div>
-    <div class="card cardspec">
+    <div class="card cardspec mb-3">
       <div class="d-flex justify-content-between">
         <div class="p-4">
           <p class="titles">Your Group Albums:</p>
         </div>
-        <div>
+        <div class="desktop">
           <button class="btn buttonscss elevation-3">
             <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Start a group
             album
@@ -66,7 +71,7 @@
           justify-content-center
           align-items-center
           flex-column
-          mb-4
+          margindesk
         "
       >
         <div class="card cardgroupalbum grow2 mb-3">
@@ -77,6 +82,11 @@
         </div>
       </div>
       <!-- GROUP ALBUMS GO HERE ^ -->
+      <div class="media text-center mb-3">
+        <button class="btn buttonscss elevation-3">
+          <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Start a group album
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -144,7 +154,22 @@ export default {
   margin-left: 3vh;
   font-size: 3vh;
 }
+.media {
+  display: none;
+}
+.desktop {
+  display: block;
+}
+.margindesk {
+  margin-bottom: 2vh;
+}
 @media only screen and (max-width: 500px) {
+  .media {
+    display: block;
+  }
+  .desktop {
+    display: none;
+  }
   .buttonscss {
     background-color: #4ac26d;
     margin-top: 2vh;
@@ -168,6 +193,9 @@ export default {
   .gpalbumtitle {
     margin-left: 1vh;
     font-size: 3vh;
+  }
+  .margindesk {
+    margin-bottom: 0vh;
   }
 }
 </style>
