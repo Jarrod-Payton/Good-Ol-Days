@@ -11,12 +11,14 @@
       "
     >
       <div>
-        <img
-          width="230"
-          class="img-fluid"
-          src="../assets/img/logo2w.png"
-          alt=""
-        />
+        <router-link :to="{ name: 'Home' }">
+          <img
+            width="230"
+            class="img-fluid"
+            src="../assets/img/logo2w.png"
+            alt=""
+          />
+        </router-link>
       </div>
       <div class="d-flex align-items-center">
         <div>
@@ -25,8 +27,8 @@
           </button>
         </div>
         <div class="me-4">
-          <p class="m-0 f-14 text-end">{{ user.name }}</p>
-          <p class="m-0 text-end">{{ user.email }}</p>
+          <p class="m-0 f-14 text-end">{{ account.name }}</p>
+          <p class="m-0 text-end">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
             Logout <i class="mdi mdi-call-missed"></i>
           </p>
@@ -38,14 +40,14 @@
           class="me-2 profile-picture border"
           height="85"
           width="90"
-          :src="user.picture"
+          :src="account.picture"
           alt="Profile Picture"
         />
       </div>
     </div>
   </div>
   <!-- MOBILE NAVIGATION BAR -->
-  <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12">
+  <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12 p-0">
     <div class="card cardspec">
       <div class="d-flex justify-content-center">
         <img
@@ -57,13 +59,13 @@
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div>
-          <button class="btn notifications elevation-3">
+          <button class="btn notifications me-5 elevation-3">
             <i class="mdi mdi-18px mdi-bell-outline"></i>
           </button>
         </div>
-        <div class="me-4">
-          <p class="m-0 f-14 text-end textmobile">{{ user.name }}</p>
-          <p class="m-0 text-end textmobile">{{ user.email }}</p>
+        <div class="me-3 ms-3">
+          <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
+          <p class="m-0 text-end textmobile">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
             Logout <i class="mdi mdi-call-missed"></i>
           </p>
@@ -75,7 +77,7 @@
           class="me-2 profile-picture border"
           height="60"
           width="62"
-          :src="user.picture"
+          :src="account.picture"
           alt=""
         />
       </div>
@@ -94,6 +96,7 @@ export default {
     const router = useRouter()
     return {
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
       }
@@ -137,13 +140,7 @@ export default {
 .mobile {
   display: none;
 }
-@font-face {
-  font-family: "MyWebFont";
-  src: url("../assets/fonts/Stickynotes-ywLPd.otf") format("woff");
-}
-.sharpie {
-  font-family: "MyWebFont";
-}
+
 @media only screen and (max-width: 500px) {
   .desktop {
     display: none;
@@ -169,6 +166,12 @@ export default {
     padding-right: 8px;
     margin-right: 2vh;
     margin-left: 2vh;
+  }
+  .cardspec {
+    margin-top: 0vh;
+    margin-left: 0vh;
+    margin-right: 0vh;
+    padding: 1vh;
   }
 }
 </style>
