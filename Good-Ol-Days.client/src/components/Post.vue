@@ -1,7 +1,7 @@
 <template>
   <div class="polaroid">
     <img :src="post.imgUrl" />
-    <div class="caption">{{ post.title }}</div>
+    <div class="caption sharpie">{{ post.title }}</div>
   </div>
 </template>
 <script>
