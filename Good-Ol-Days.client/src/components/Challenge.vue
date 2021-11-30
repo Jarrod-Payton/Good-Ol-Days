@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row m-0">
     <div class="col-12">
       <div class="d-flex justify-content-center align-content-center">
         <div class="card cardspec">
