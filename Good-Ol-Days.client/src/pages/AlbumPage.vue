@@ -1,11 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">Let's Make Some Memories!</div>
-      </div>
+    <div class="col-md-6" v-if="!activeAlbum.hasChallenges">
+      <Challenge />
     </div>
-    <div class="col-3" v-for="p in Posts" :key="p.id">
+    <div class="col-3" v-for="p in posts" :key="p.id">
       <Post :post="p" />
     </div>
   </div>
@@ -28,7 +26,8 @@ export default {
       }
     });
     return {
-      Posts: computed(() => AppState.posts),
+      posts: computed(() => AppState.posts),
+      activeAlbum: computed(() => AppState.activeAlbum),
     };
   },
 };
