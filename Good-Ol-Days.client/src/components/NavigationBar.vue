@@ -57,11 +57,11 @@
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div>
-          <button class="btn notifications elevation-3">
+          <button class="btn notifications me-5 elevation-3">
             <i class="mdi mdi-18px mdi-bell-outline"></i>
           </button>
         </div>
-        <div class="me-4">
+        <div class="me-3 ms-3">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
           <p class="m-0 text-end textmobile">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
@@ -75,7 +75,7 @@
           class="me-2 profile-picture border"
           height="60"
           width="62"
-          :src="user.picture"
+          :src="account.picture"
           alt=""
         />
       </div>
@@ -138,13 +138,7 @@ export default {
 .mobile {
   display: none;
 }
-@font-face {
-  font-family: "MyWebFont";
-  src: url("../assets/fonts/Stickynotes-ywLPd.otf") format("woff");
-}
-.sharpie {
-  font-family: "MyWebFont";
-}
+
 @media only screen and (max-width: 500px) {
   .desktop {
     display: none;
