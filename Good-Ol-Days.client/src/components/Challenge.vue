@@ -18,6 +18,11 @@
               <div class="col-12">
                 <h3 class="font">-Take a family picture having icecream!</h3>
               </div>
+              <div class="col-12">
+                <div class="d-flex justify-content-end">
+                  <button></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -26,9 +31,18 @@
   </div>
 </template>
 <script>
+import { computed } from "@vue/reactivity"
+import { AppState } from "../AppState"
+import { onMounted } from "@vue/runtime-core"
+import { quoteService } from "../services/QuoteService"
 export default {
   setup() {
-
+    onMounted(async () => {
+      await quoteService.setActiveQuote()
+    })
+    return {
+      quote: computed(() => AppState.activeQuote)
+    }
   },
 }
 </script>
