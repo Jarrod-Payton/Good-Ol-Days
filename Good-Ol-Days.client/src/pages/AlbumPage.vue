@@ -1,9 +1,16 @@
 <template>
   <div class="row">
-    <div class="col-md-6" v-if="!activeAlbum.hasChallenges">
+    <div class="col-md-6 order-md-2" v-if="!activeAlbum.hasChallenges">
       <Challenge />
     </div>
-    <div class="col-3" v-for="p in posts" :key="p.id">
+    <div class="col-md-6 order-md-1" v-if="posts1.length > 0">
+      <div class="row">
+        <div class="col-md-6" v-for="p in posts1" :key="p.id">
+          <Post :post="p" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 order-md-3" v-for="p in posts2" :key="p.id">
       <Post :post="p" />
     </div>
   </div>
@@ -26,8 +33,9 @@ export default {
       }
     });
     return {
-      posts: computed(() => AppState.posts),
-      activeAlbum: computed(() => AppState.activeAlbum),
+      posts2: computed(() => AppState.posts.slice(0, 2)),
+      posts1: computed(() => AppState.posts.splice(0, 2)),
+      activeAlbum: computed(() => AppState.activeAlbum)
     };
   },
 };
