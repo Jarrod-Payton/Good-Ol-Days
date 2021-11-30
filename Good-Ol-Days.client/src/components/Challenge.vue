@@ -50,7 +50,7 @@ export default {
 </script>
 <style scoped>
 .cardspec {
-  height: 30vh;
+  height: 100%;
   width: 70%;
   border-width: 5px;
   border-radius: 0;
@@ -68,7 +68,7 @@ export default {
     font-size: 3vh;
   }
   .cardspec {
-    height: 30vh;
+    height: 100%;
     width: 100%;
     border-width: 5px;
     border-radius: 0;
