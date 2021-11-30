@@ -7,10 +7,20 @@ export class AlbumsController extends BaseController{
         super('api/albums')
         this.router
         .use(Auth0Provider.getAuthorizedUserInfo)
+        .get('', this.getAllMyAlbums)
         .get('/:id', this.getAlbumById)
         .post('', this.createAlbum)
         .put('/:id',this.editAlbum)
         .delete('/:id', this.deleteAlbum)
+    }
+    async getAllMyAlbums(req, res, next){
+        try {
+            req.body.creatorId = req.userInfo.id
+            const result = await albumsService.getAllMyAlbums(req.body)
+            return res.send(result)
+        } catch (error) {
+            next(error)
+        }
     }
     async getAlbumById(req,res,next){
         try {
