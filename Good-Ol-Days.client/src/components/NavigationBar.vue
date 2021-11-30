@@ -45,7 +45,7 @@
     </div>
   </div>
   <!-- MOBILE NAVIGATION BAR -->
-  <div v-if="account.isAuthenticated" class="NavigationBar mobile col-12 p-0">
+  <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12 p-0">
     <div class="card cardspec">
       <div class="d-flex justify-content-center">
         <img
