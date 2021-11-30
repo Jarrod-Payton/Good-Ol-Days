@@ -8,13 +8,19 @@ function loadPage(page) {
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: loadPage('HomePage')
+    name: 'Landing',
+    component: loadPage('LandingPage')
   },
   {
     path: '/about',
     name: 'About',
     component: loadPage('AboutPage')
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: loadPage('HomePage'),
+    beforeEnter: authGuard
   },
   {
     path: '/account',
