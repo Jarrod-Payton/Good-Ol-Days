@@ -11,12 +11,14 @@
       "
     >
       <div>
-        <img
-          width="230"
-          class="img-fluid"
-          src="../assets/img/logo2w.png"
-          alt=""
-        />
+        <router-link :to="{ name: 'Home' }">
+          <img
+            width="230"
+            class="img-fluid"
+            src="../assets/img/logo2w.png"
+            alt=""
+          />
+        </router-link>
       </div>
       <div class="d-flex align-items-center">
         <div>
