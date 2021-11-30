@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user.isAuthenticated" class="NavigationBar col-12">
+  <div v-if="user.isAuthenticated" class="NavigationBar desktop col-12">
     <div
       class="
         card
@@ -18,16 +18,7 @@
           alt=""
         />
       </div>
-      <div v-if="!user.isAuthenticated">
-        <div>
-          <button @click="login" class="btn notifications elevation-3">
-            <p class="m-0">
-              Login <i class="mdi ms-1 mdi-18px mdi-camera"></i>
-            </p>
-          </button>
-        </div>
-      </div>
-      <div v-else class="d-flex align-items-center">
+      <div class="d-flex align-items-center">
         <div>
           <button class="btn notifications elevation-3">
             Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
@@ -46,6 +37,40 @@
           width="90"
           :src="user.picture"
           alt="Profile Picture"
+        />
+      </div>
+    </div>
+  </div>
+  <!-- MOBILE NAVIGATION BAR -->
+  <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12">
+    <div class="card cardspec">
+      <div class="d-flex justify-content-center">
+        <img
+          width="230"
+          class="img-fluid"
+          src="../assets/img/logo2w.png"
+          alt=""
+        />
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <div>
+          <button class="btn notifications elevation-3">
+            <i class="mdi mdi-18px mdi-bell-outline"></i>
+          </button>
+        </div>
+        <div class="me-4">
+          <p class="m-0 f-14 text-end textmobile">Name goes here</p>
+          <p class="m-0 text-end textmobile">emailgoeshere@gmail.com</p>
+          <p @click="logout" class="m-0 logout selectable1 text-end">
+            Logout <i class="mdi mdi-call-missed"></i>
+          </p>
+        </div>
+        <img
+          class="me-2 profile-picture border"
+          height="60"
+          width="62"
+          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          alt=""
         />
       </div>
     </div>
@@ -84,7 +109,7 @@ export default {
 }
 .profile-picture {
   object-fit: cover;
-  border-width: 2px !important;
+  border-width: 1px !important;
   border-color: #9964cc !important;
 }
 .logout {
@@ -99,5 +124,38 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   margin-right: 4vh;
+}
+.desktop {
+  display: block;
+}
+.mobile {
+  display: none;
+}
+@media only screen and (max-width: 500px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .profile-picture {
+    object-fit: cover;
+    border-width: 2px !important;
+    border-color: #9964cc !important;
+  }
+  .textmobile {
+    font-size: 14px !important;
+  }
+  .logout {
+    margin-top: 2px !important;
+    font-size: 14px !important;
+  }
+  .notifications {
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 2vh;
+    margin-left: 2vh;
+  }
 }
 </style>
