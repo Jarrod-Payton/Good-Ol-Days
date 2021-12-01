@@ -1,32 +1,32 @@
 import { albumsService } from '../services/AlbumsService'
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
+import { challengeService } from '../services/ChallengeService'
 
 export class AlbumsController extends BaseController {
   constructor() {
     super('api/albums')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('', this.getAllMyAlbums)
       .get('/:id', this.getAlbumById)
+      .get('/:id', this.getChallengesByAlbum)
       .post('', this.createAlbum)
       .put('/:id', this.editAlbum)
       .delete('/:id', this.deleteAlbum)
   }
 
-  async getAllMyAlbums(req, res, next) {
+  async getAlbumById(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
-      const result = await albumsService.getAllMyAlbums(req.body)
+      const result = await albumsService.getAlbumById(req.params.id)
       return res.send(result)
     } catch (error) {
       next(error)
     }
   }
 
-  async getAlbumById(req, res, next) {
+  async getChallengesByAlbum(req, res, next) {
     try {
-      const result = await albumsService.getAlbumById(req.params.id)
+      const result = await challengeService.getChallengesByAlbum(req.params.id)
       return res.send(result)
     } catch (error) {
       next(error)
