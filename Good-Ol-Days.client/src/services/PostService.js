@@ -22,9 +22,7 @@ class PostService {
     if (body.challengeId === 'true') {
       body.challengeId = AppState.activeChallenge.id
     }
-    logger.log('before creation', body)
     const res = await api.post(`api/albums/${AppState.activeAlbum.id}/posts`, body)
-    logger.log('Created Post', res.data)
     AppState.posts.unshift(res.data)
   }
 }
