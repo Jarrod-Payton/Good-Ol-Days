@@ -23,6 +23,11 @@
                 <img class="img-fluid" :src="activePost.imgUrl" alt="" />
               </div>
               <div class="text-center d-flex">
+                <div class="text-start align-self-center">
+                  <button title="Delete this picture" class="btn p-0 m-0">
+                    <i class="mdi mdi-24px text-danger mdi-trash-can"></i>
+                  </button>
+                </div>
                 <p class="m-0 pb-2 pt-3 w-100 title">{{ activePost.title }}</p>
                 <div class="text-end align-self-center">
                   <button title="Download This Picture" class="btn p-0 m-0">

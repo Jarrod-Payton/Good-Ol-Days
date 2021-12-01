@@ -6,8 +6,8 @@
       </button>
     </div>
     <div class="mobile">
-      <button class="btn notifications elevation-3">
-        Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
+      <button class="btn notifications me-5 elevation-3">
+        <i class="mdi mdi-18px mdi-bell-outline"></i>
       </button>
     </div>
   </div>
