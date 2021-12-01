@@ -5,7 +5,7 @@ import { api } from "./AxiosService"
 
 class AlbumService {
   async getMyAlbums() {
-    const res = await api.get(`/api/albums`)
+    const res = await api.get(`/account/albums`)
     logger.log('All Albums', res.data)
     AppState.myAlbums = res.data
   }
