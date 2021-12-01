@@ -1,6 +1,6 @@
 <template>
   <div class="row m-0">
-    <div class="col-12">
+    <div class="col-12 paddingmobile">
       <div class="d-flex justify-content-center align-content-center">
         <div class="card cardspec">
           <div class="card-body">
@@ -95,6 +95,9 @@ export default {
     border-radius: 0;
     border-color: #4ac26d;
     background-color: rgb(245, 245, 245, 0.9);
+  }
+  .paddingmobile {
+    padding: 0;
   }
 }
 </style>

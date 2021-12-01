@@ -1,6 +1,6 @@
 <template>
   <div class="polaroid">
-    <img :src="post.imgUrl" />
+    <img class="image" :src="post.imgUrl" />
     <div class="caption sharpie">{{ post.title }}</div>
   </div>
 </template>
@@ -25,8 +25,9 @@ export default {
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
 }
 .polaroid > img {
-  max-width: 100%;
-  height: auto;
+  max-width: auto;
+  height: 30vh;
+  object-fit: cover;
 }
 .caption {
   font-size: 1.8rem;
@@ -44,69 +45,31 @@ export default {
   z-index: -1;
   transition: all 0.35s;
 }
-.item:nth-of-type(4n + 1) {
-  transform: scale(0.8, 0.8) rotate(5deg);
-  transition: all 0.35s;
+
+.image {
+  height: 30vh;
+  width: 100%;
+  object-fit: cover;
 }
-.item:nth-of-type(4n + 1) .polaroid:before {
-  transform: rotate(6deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  right: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.4);
-}
-.item:nth-of-type(4n + 2) {
-  transform: scale(0.8, 0.8) rotate(-5deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 2) .polaroid:before {
-  transform: rotate(-6deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  left: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.4);
-}
-.item:nth-of-type(4n + 4) {
-  transform: scale(0.8, 0.8) rotate(3deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 4) .polaroid:before {
-  transform: rotate(4deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  right: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.3);
-}
-.item:nth-of-type(4n + 3) {
-  transform: scale(0.8, 0.8) rotate(-3deg);
-  transition: all 0.35s;
-}
-.item:nth-of-type(4n + 3) .polaroid:before {
-  transform: rotate(-4deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  left: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0, 0, 0, 0.3);
-}
-.item:hover {
-  filter: none;
-  transform: scale(1, 1) rotate(0deg) !important;
-  transition: all 0.35s;
-}
-.item:hover .polaroid:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  transform: rotate(0deg);
-  height: 90%;
-  width: 90%;
-  bottom: 0%;
-  right: 5%;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
-  transition: all 0.35s;
+@media only screen and (max-width: 500px) {
+  .image {
+    height: 15vh !important;
+    width: 100%;
+    object-fit: cover;
+  }
+  .polaroid {
+    background: #fff;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0;
+
+    box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  }
+  .caption {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.05rem;
+  }
 }
 </style>
