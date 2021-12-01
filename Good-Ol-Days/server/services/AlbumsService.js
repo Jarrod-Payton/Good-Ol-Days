@@ -1,5 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
+import { firebaseService } from './FirebaseService'
 
 class AlbumsService {
   async getAllMyAlbums(body) {
@@ -39,6 +40,7 @@ class AlbumsService {
     if (!found) {
       throw new BadRequest('Invalid Id')
     }
+    await firebaseService.deleteFirebaseFolder(found.name)
     await dbContext.Albums.findByIdAndDelete(body.id)
   }
 }

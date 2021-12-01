@@ -1,7 +1,8 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
-import { albumsService } from "../services/AlbumsService"
-import { collaboratorsService } from "../services/CollaboratorsService"
+import { albumsService } from '../services/AlbumsService'
+import { collaboratorsService } from '../services/CollaboratorsService'
+import { firebaseService } from '../services/FirebaseService'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -32,20 +33,30 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
-  async getAllMyAlbums(req, res, next){
-    try {
-        req.body.creatorId = req.userInfo.id
-        const result = await albumsService.getAllMyAlbums(req.body)
-        return res.send(result)
-    } catch (error) {
-        next(error)
-    }
-}
 
-  async getAllMyCollabAlbums(req,res,next){
+  async getAllMyAlbums(req, res, next) {
+    try {
+      req.body.creatorId = req.userInfo.id
+      const result = await albumsService.getAllMyAlbums(req.body)
+      return res.send(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getAllMyCollabAlbums(req, res, next) {
     try {
       const result = await collaboratorsService.getAllMyCollabAlbums(req.userInfo.id)
       return res.send(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getFirebaseAuthToken(req, res, next) {
+    try {
+      const token = await firebaseService.getFirebaseAuthToken(req.userInfo.id)
+      return res.send({ token })
     } catch (error) {
       next(error)
     }
