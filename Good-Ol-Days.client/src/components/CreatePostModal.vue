@@ -18,12 +18,21 @@
                   Post image URL:
                   <input
                     type="text"
-                    v-model="postDetails.editable.imgUrl"
+                    v-model="postDetails.imgUrl"
                     placeholder="Image Url ..."
                     class="form-control border-white"
                     required
                   />
                 </p>
+              </div>
+              <div class="col-12">
+                <input
+                  type="file"
+                  ref="fileInput"
+                  accept="image/*,video/*,audio/*"
+                  @change="filePicked"
+                  multiple="multiple"
+                />
               </div>
               <div class="col-12">
                 <p class="S1">
@@ -32,7 +41,7 @@
                     type="text"
                     class="form-control border-white"
                     placeholder="Title your post ..."
-                    v-model="postDetails.editable.title"
+                    v-model="postDetails.title"
                     required
                   />
                 </p>
@@ -43,7 +52,7 @@
                   <input
                     type="text"
                     class="form-control border-white"
-                    v-model="postDetails.editable.description"
+                    v-model="postDetails.description"
                     required
                   />
                 </p>
@@ -53,13 +62,13 @@
                   Is this post for the challenge?:
                   <input
                     type="radio"
-                    v-model="postDetails.editable.challengeId"
+                    v-model="postDetails.challengeId"
                     value="true"
                   />
                   Yes
                   <input
                     type="radio"
-                    v-model="postDetails.editable.challengeId"
+                    v-model="postDetails.challengeId"
                     value="false"
                   />
                   No
@@ -77,14 +86,14 @@
   </div>
 </template>
 <script>
-import { computed, reactive } from "@vue/reactivity"
+import { computed, ref } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import Pop from "../utils/Pop"
 import { postService } from "../services/PostService"
 import { Modal } from "bootstrap"
 export default {
   setup() {
-    const postDetails = reactive({ editable: {} })
+    const postDetails = ref({})
     return {
       postDetails,
       async createPost() {

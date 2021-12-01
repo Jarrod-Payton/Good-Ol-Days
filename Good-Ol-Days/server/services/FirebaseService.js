@@ -2,13 +2,13 @@ import firebaseAdmin from 'firebase-admin'
 
 const firebaseAccountKey = require('../../firebase-admin.json')
 
-const bucket = firebaseAdmin.storage().bucket()
 class FirebaseService {
   constructor() {
     firebaseAdmin.initializeApp({
       // @ts-ignore
       credential: firebaseAdmin.credential.cert(firebaseAccountKey)
     })
+    this.bucket = firebaseAdmin.storage().bucket('gs://good-ol--days.appspot.com/')
   }
 
   async getFirebaseAuthToken(user) {
@@ -18,13 +18,13 @@ class FirebaseService {
 
   async deleteFirebasePost(imageURL) {
     const fileName = imageURL.slice(imageURL.indexOf('%2F') + 3, imageURL.indexOf('?alt'))
-    await bucket.deleteFiles({
+    await this.bucket.deleteFiles({
       prefix: `${fileName}`
     })
   }
 
   async deleteFirebaseFolder(albumName) {
-    await bucket.deleteFiles({
+    await this.bucket.deleteFiles({
       prefix: `${albumName}`
     })
   }
