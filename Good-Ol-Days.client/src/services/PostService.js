@@ -1,5 +1,6 @@
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
 
@@ -14,6 +15,22 @@ class PostService {
     const res = await api.get(`api/albums/${albumId}/posts`)
     logger.log('Posts', res.data)
     AppState.posts = res.data
+  }
+  async createPost(body) {
+    if (body.challengeId === 'false') {
+      body.challengeId = body.challengeId.remove
+    }
+    if (body.challengeId === 'true') {
+      body.challengeId = AppState.activeChallenge.id
+    }
+    const res = await api.post(`api/albums/${AppState.activeAlbum.id}/posts`, body)
+    AppState.posts.unshift(res.data)
+  }
+  async deletePost() {
+    await api.delete(`api/albums/${AppState.activeAlbum.id}/posts/${AppState.activePost.id}`)
+    AppState.posts = AppState.posts.filter(p => p.id !== AppState.activePost.id)
+    AppState.activePost = {}
+    Pop.toast('Deleted Post')
   }
 }
 export const postService = new PostService()

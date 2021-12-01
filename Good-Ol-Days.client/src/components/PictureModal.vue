@@ -23,6 +23,15 @@
                 <img class="img-fluid" :src="activePost.imgUrl" alt="" />
               </div>
               <div class="text-center d-flex">
+                <div class="text-start align-self-center">
+                  <button
+                    title="Delete this picture"
+                    @click="deletePost"
+                    class="btn p-0 m-0"
+                  >
+                    <i class="mdi mdi-24px text-danger mdi-trash-can"></i>
+                  </button>
+                </div>
                 <p class="m-0 pb-2 pt-3 w-100 title">{{ activePost.title }}</p>
                 <div class="text-end align-self-center">
                   <button title="Download This Picture" class="btn p-0 m-0">
@@ -43,9 +52,15 @@
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { onMounted } from "@vue/runtime-core"
+import { postService } from "../services/PostService"
+import { Modal } from "bootstrap"
 export default {
   setup() {
     return {
+      async deletePost() {
+        await postService.deletePost()
+        Modal.getOrCreateInstance(document.getElementById("picture-modal")).toggle()
+      },
       activePost: computed(() => AppState.activePost)
     }
   }
