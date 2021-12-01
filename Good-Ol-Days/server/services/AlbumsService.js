@@ -1,40 +1,42 @@
-import { dbContext } from "../db/DbContext"
-import { BadRequest, Forbidden } from "../utils/Errors"
+import { dbContext } from '../db/DbContext'
+import { BadRequest, Forbidden } from '../utils/Errors'
 
 class AlbumsService {
-  async getAllMyAlbums(body){
-    return await dbContext.Albums.find({creatorId: body.creatorId})
+  async getAllMyAlbums(body) {
+    return await dbContext.Albums.find({ creatorId: body.creatorId })
   }
 
-  async getAlbumById(id){
+  async getAlbumById(id) {
     const result = await dbContext.Albums.findById(id)
-    if(!result){
-      throw new BadRequest("Invalid Id")
+    if (!result) {
+      throw new BadRequest('Invalid Id')
     }
     return result
   }
-  async createAlbum(body){
+
+  async createAlbum(body) {
     const newAlbum = await dbContext.Albums.create(body)
     return newAlbum
   }
 
-  async editAlbum(id,body){
+  async editAlbum(id, body) {
     const found = await this.getAlbumById(id)
-    if(found.creatorId.toString() !== body.creatorId){
+    if (found.creatorId.toString() !== body.creatorId) {
       throw new Forbidden('You do not have permission to delete this')
     }
-    if(!found){
+    if (!found) {
       throw new BadRequest('Invalid Id')
     }
-    const updatedAlbum = await dbContext.Albums.findByIdAndUpdate(id , body, {new:true})
+    const updatedAlbum = await dbContext.Albums.findByIdAndUpdate(id, body, { new: true })
     return updatedAlbum
   }
-  async deleteAlbum(body, userInfo){
+
+  async deleteAlbum(body, userInfo) {
     const found = await this.getAlbumById(body.id)
-    if(found.creatorId.toString() !== userInfo.id){
+    if (found.creatorId.toString() !== userInfo.id) {
       throw new Forbidden('You do not have permission to delete this')
     }
-    if(!found){
+    if (!found) {
       throw new BadRequest('Invalid Id')
     }
     await dbContext.Albums.findByIdAndDelete(body.id)

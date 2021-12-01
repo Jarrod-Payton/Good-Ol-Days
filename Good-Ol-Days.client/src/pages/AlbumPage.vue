@@ -3,7 +3,7 @@
     <div class="col-md-6 order-md-2 p-0" v-show="activeAlbum.hasChallenges">
       <Challenge />
     </div>
-    <div class="col-md-6 order-md-1" v-if="posts1.length > 0">
+    <div class="col-md-6 order-md-1">
       <div class="row">
         <div class="col-6 rotationanim" v-for="p in posts1" :key="p.id">
           <div

@@ -5,13 +5,13 @@
         <form @submit.prevent="createAlbum">
           <div class="modal-header">
             <div class="modal-title">
-              <h10>New Album</h10>
+              <h7>New Album</h7>
             </div>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
-                <h10>Album name:</h10>
+                <h7 class="">Album name:</h7>
                 <input
                   type="text"
                   class="albumName form-control border-white"
@@ -21,19 +21,19 @@
                 />
               </div>
               <div class="col-12">
-                <h10>Enable week challenges?</h10>
+                <h7 class="">Enable week challenges?</h7>
                 <input
                   type="radio"
                   v-model="albumDetails.editable.hasChallenges"
                   :value="true"
                 />
-                <h10>Yes</h10>
+                <h7>Yes</h7>
                 <input
                   type="radio"
                   v-model="albumDetails.editable.hasChallenges"
                   :value="false"
                 />
-                <h10>No</h10>
+                <h7>No</h7>
               </div>
             </div>
           </div>
@@ -75,8 +75,9 @@ export default {
 }
 </script>
 <style scoped>
-h10 {
+h7 {
   font-size: 2vh;
+  font-family: "Saira Condensed", sans-serif;
 }
 .buttonscss {
   background-color: #4ac26d;

@@ -113,8 +113,10 @@ export default {
 .cardsheight {
   height: 100%;
 }
-.grow:hover {
+.grow {
   transition: all 0.2s ease-in-out;
+}
+.grow:hover {
   transform: scale(1.2);
   z-index: 5;
 }
