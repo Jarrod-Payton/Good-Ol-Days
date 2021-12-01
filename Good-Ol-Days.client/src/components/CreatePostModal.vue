@@ -4,6 +4,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <p class="modal-title">Post Photo</p>
+          <button
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <form @submit.prevent="createPost">
           <div class="modal-body">
