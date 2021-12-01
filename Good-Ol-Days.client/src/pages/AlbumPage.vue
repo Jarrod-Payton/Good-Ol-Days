@@ -1,6 +1,6 @@
 <template>
   <div class="row mt-md-5 mt-2 m-0 p-0">
-    <div class="col-md-6 order-md-2 p-0" v-show="!activeAlbum.hasChallenges">
+    <div class="col-md-6 order-md-2 p-0" v-show="activeAlbum.hasChallenges">
       <Challenge />
     </div>
     <div class="col-md-6 order-md-1" v-if="posts1.length > 0">
@@ -54,7 +54,8 @@ export default {
     })
     onMounted(async () => {
       try {
-        albumService.setActiveAlbum();
+        albumService.setActiveAlbum(route.params.albumId);
+        albumService.getPosts(route.params.albumId)
       } catch (error) {
         Pop.toast(error);
       }

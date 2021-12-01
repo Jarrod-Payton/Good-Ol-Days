@@ -25,29 +25,8 @@
         </div>
       </div>
       <!-- ALBUMS GO HERE v  -->
-      <div>
-        <div
-          class="
-            col-6 col-md-3
-            d-flex
-            justify-content-center
-            flex-column
-            align-items-center
-            selectable1
-            mb-2
-          "
-        >
-          <div>
-            <img
-              class="img-fluid picalbum grow"
-              src="../assets/img/albumpic.png"
-              alt=""
-            />
-          </div>
-          <div>
-            <p class="albumname">Album Name Here</p>
-          </div>
-        </div>
+      <div class="row">
+        <Album v-for="a in myAlbums" :key="a.id" :album="a" />
       </div>
       <div class="media text-center mb-3">
         <button
@@ -101,8 +80,19 @@
 </template>
 
 <script>
+import { computed, onMounted } from "@vue/runtime-core"
+import { albumService } from "../services/AlbumService"
+import { AppState } from "../AppState"
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup() {
+    onMounted(async () => {
+      await albumService.getMyAlbums()
+    })
+    return {
+      myAlbums: computed(() => AppState.myAlbums)
+    }
+  }
 }
 </script>
 
