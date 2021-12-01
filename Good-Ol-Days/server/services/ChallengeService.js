@@ -3,7 +3,7 @@ import { BadRequest } from "../utils/Errors"
 
 class ChallengeService {
   async getChallengeById(id){
-    const res = await dbContext.Challenges.find({id: id})
+    const res = await dbContext.Challenges.findById(id)
     return res
   }
   async getChallengesByAlbum(id){
@@ -12,9 +12,10 @@ class ChallengeService {
   }
   async createChallenge(data){
     const found = await this.getChallengeById(data.id)
-    if(!found){
+    if(found){
       throw new BadRequest('Invalid Id')
     }
+  
     const newChallenge = await dbContext.Challenges.create(data)
     return newChallenge
   }
