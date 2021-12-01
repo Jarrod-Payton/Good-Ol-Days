@@ -20,16 +20,20 @@
               <div class="col-12">
                 <div
                   class="
+                    heightSet
                     px-1
                     d-flex
                     justify-content-between
                     align-content-center
                   "
                 >
-                  <button class="buttonscss btn" @click="refreshOptions">
+                  <button
+                    class="buttonscss btn widthButton text-center"
+                    @click="refreshOptions"
+                  >
                     X
                   </button>
-                  <select>
+                  <select class="heightSet">
                     <option value="General">General</option>
                     <option value="Family">Family</option>
                     <option value="Friends">Friends</option>
@@ -98,9 +102,16 @@ export default {
 }
 </script>
 <style scoped>
+.heightSet {
+  height: 3vh;
+}
+.widthButton {
+  width: 2vh;
+  padding: 0;
+}
 .buttonscss {
   background-color: #4ac26d;
-  margin-top: 1vh;
+  margin-top: 0vh;
   margin-right: 3vh;
   color: white;
   font-size: 1.5vh;
