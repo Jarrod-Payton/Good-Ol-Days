@@ -26,9 +26,7 @@
       </div>
       <!-- ALBUMS GO HERE v  -->
       <div class="row">
-        <div class="d-flex eachone">
-          <Album v-for="a in myAlbums" :key="a.id" :album="a" />
-        </div>
+        <Album v-for="a in myAlbums" :key="a.id" :album="a" />
       </div>
       <div class="media text-center mb-3">
         <button

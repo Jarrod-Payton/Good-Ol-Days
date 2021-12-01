@@ -10,6 +10,7 @@
       selectable1
       mb-2
     "
+    @click="routerLink"
   >
     <div>
       <img
@@ -25,10 +26,19 @@
   <!-- </router-link> -->
 </template>
 <script>
+import { useRouter } from "vue-router"
 export default {
   props: { album: { type: Object, required: true } },
   setup(props) {
-
+    const router = useRouter()
+    return {
+      routerLink() {
+        router.push({
+          name: "Album",
+          params: { albumId: props.album.id }
+        })
+      }
+    }
   },
 }
 </script>

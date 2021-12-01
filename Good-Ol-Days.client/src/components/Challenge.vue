@@ -18,7 +18,7 @@
               </div>
               <div class="col-12">
                 <!-- TODO This is where we will put the challenge if we have one -->
-                <h3 class="font">-Take a family picture having icecream!</h3>
+                <h3 class="font">{{ activeChallenge.title }}</h3>
               </div>
               <div class="col-12">
                 <div
@@ -55,7 +55,8 @@ export default {
       await quoteService.setActiveQuote()
     })
     return {
-      quote: computed(() => AppState.activeQuote)
+      quote: computed(() => AppState.activeQuote),
+      activeChallenge: computed(() => AppState.activeChallenge)
     }
   },
 }
