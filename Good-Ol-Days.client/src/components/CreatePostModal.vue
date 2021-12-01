@@ -14,24 +14,11 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
-                <p class="S1">
-                  Post image URL:
-                  <input
-                    type="text"
-                    v-model="postDetails.imgUrl"
-                    placeholder="Image Url ..."
-                    class="form-control border-white"
-                    required
-                  />
-                </p>
-              </div>
-              <div class="col-12">
                 <input
                   type="file"
                   ref="fileInput"
-                  accept="image/*,video/*,audio/*"
-                  @change="filePicked"
-                  multiple="multiple"
+                  accept="image/*"
+                  @change="fileSelect"
                 />
               </div>
               <div class="col-12">
@@ -74,10 +61,11 @@
                   No
                 </p>
               </div>
+              <img src="" alt="" class="img-fluid" id="image" />
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn" @click="upload">Submit</button>
             <button data-bs-dismiss="modal" class="btn">Close</button>
           </div>
         </form>
@@ -91,17 +79,47 @@ import { AppState } from "../AppState"
 import Pop from "../utils/Pop"
 import { postService } from "../services/PostService"
 import { Modal } from "bootstrap"
+import { logger } from '../utils/Logger'
+import { firebaseService } from '../services/FirebaseService'
 export default {
   setup() {
     const postDetails = ref({})
+    const files = ref([])
     return {
       postDetails,
-      async createPost() {
-        postService.createPost(postDetails.editable)
-        postDetails.editable = {}
-        Modal.getOrCreateInstance(document.getElementById("createPostModal")).toggle()
+      files,
+      activeAlbum: computed(() => AppState.activeAlbum),
+      fileSelect(e) {
+        files.value = e.target.files
+        logger.log('files ref value', files.value)
+        const reader = new FileReader()
+        reader.readAsDataURL(files.value[0])
+        reader.onload = () => {
+          document.getElementById('image').src = reader.result
+        }
       },
-      activeAlbum: computed(() => AppState.activeAlbum)
+      async createPost() {
+        try {
+          postService.createPost(postDetails.value)
+          document.getElementById('image').src = ''
+          postDetails.value = {}
+          files.value = []
+          Modal.getOrCreateInstance(document.getElementById("createPostModal")).toggle()
+
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      async upload() {
+        try {
+          const url = await firebaseService.upload(files.value[0], this.activeAlbum)
+          postDetails.value.imgUrl = url
+          logger.log(url)
+          await this.createPost()
+        } catch (error) {
+          logger.error(error)
+        }
+      }
     }
   },
 }

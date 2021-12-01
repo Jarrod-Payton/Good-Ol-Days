@@ -13,6 +13,7 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .get('/collaborators', this.getAllMyCollabAlbums)
       .get('/albums', this.getAllMyAlbums)
+      .get('/firebase-token', this.getFirebaseAuthToken)
       .put('', this.updateAccount)
   }
 

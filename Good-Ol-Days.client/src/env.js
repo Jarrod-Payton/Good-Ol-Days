@@ -6,7 +6,7 @@ export const clientId = 'UxyDEa3WSyRfuRMFsP3hSI4Fhbo5MeFN'
 export const audience = 'https://good-ol-days.com'
 
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyD9_lNlvnsAwjSMSHlrI63X2Eeqs_NGvlw",
   authDomain: "good-ol--days.firebaseapp.com",
   projectId: "good-ol--days",
