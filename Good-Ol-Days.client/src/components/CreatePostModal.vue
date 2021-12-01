@@ -13,7 +13,7 @@
                   Post image URL:
                   <input
                     type="text"
-                    v-model="postDetails.imgUrl"
+                    v-model="postDetails.editable.imgUrl"
                     placeholder="Image Url ..."
                     class="form-control border-white"
                     required
@@ -27,7 +27,7 @@
                     type="text"
                     class="form-control border-white"
                     placeholder="Title your post ..."
-                    v-model="postDetails.title"
+                    v-model="postDetails.editable.title"
                     required
                   />
                 </p>
@@ -38,7 +38,7 @@
                   <input
                     type="text"
                     class="form-control border-white"
-                    v-model="postDetails.description"
+                    v-model="postDetails.editable.description"
                     required
                   />
                 </p>
@@ -52,7 +52,11 @@
                     value="true"
                   />
                   Yes
-                  <input type="radio" />
+                  <input
+                    type="radio"
+                    v-model="postDetails.editable.challengeId"
+                    value="false"
+                  />
                   No
                 </p>
               </div>
@@ -71,13 +75,17 @@
 import { computed, reactive } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import Pop from "../utils/Pop"
+import { postService } from "../services/PostService"
+import { Modal } from "bootstrap"
 export default {
   setup() {
     const postDetails = reactive({ editable: {} })
     return {
       postDetails,
       async createPost() {
-        Pop.toast('HEllo')
+        postService.createPost(postDetails.editable)
+        postDetails.editable = {}
+        Modal.getOrCreateInstance(document.getElementById("createPostModal")).toggle()
       },
       activeAlbum: computed(() => AppState.activeAlbum)
     }
