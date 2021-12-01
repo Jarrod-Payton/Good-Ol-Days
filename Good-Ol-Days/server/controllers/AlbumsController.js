@@ -2,6 +2,7 @@ import { albumsService } from '../services/AlbumsService'
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { challengeService } from '../services/ChallengeService'
+import { firebaseService } from '../services/FirebaseService'
 
 export class AlbumsController extends BaseController {
   constructor() {
@@ -64,5 +65,4 @@ export class AlbumsController extends BaseController {
       next(error)
     }
   }
-  
 }
