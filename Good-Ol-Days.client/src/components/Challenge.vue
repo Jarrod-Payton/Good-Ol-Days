@@ -11,8 +11,41 @@
                 </h2>
               </div>
             </div>
+            <div class="row" v-if="!activeChallenge.body">
+              <div class="col-12">
+                <h5 class="font">
+                  Choose a category and choose a challenge for the week
+                </h5>
+              </div>
+              <div class="col-12">
+                <div
+                  class="
+                    heightSet
+                    px-1
+                    d-flex
+                    justify-content-between
+                    align-content-center
+                  "
+                >
+                  <button
+                    class="buttonscss btn widthButton text-center"
+                    @click="refreshOptions"
+                  >
+                    X
+                  </button>
+                  <select class="heightSet">
+                    <option value="General">General</option>
+                    <option value="Family">Family</option>
+                    <option value="Friends">Friends</option>
+                    <option value="Fun">Random / Fun</option>
+                    <option value="SignificantOther">Significant Other</option>
+                    <option value="Child">Child</option>
+                  </select>
+                </div>
+              </div>
+            </div>
             <!--This is for when the challenge is active-->
-            <div class="row">
+            <div class="row" v-if="activeChallenge.body">
               <div class="col-12">
                 <h3 class="font limeText">Weekly Challenge:</h3>
               </div>
@@ -34,6 +67,8 @@
                   </button>
                 </div>
               </div>
+            </div>
+            <div class="row">
               <div class="col-12">
                 <p class="text-center mt-3">"{{ quote }}"</p>
               </div>
@@ -49,19 +84,40 @@ import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { onMounted } from "@vue/runtime-core"
 import { quoteService } from "../services/QuoteService"
+import Pop from "../utils/Pop"
 export default {
   setup() {
     onMounted(async () => {
       await quoteService.setActiveQuote()
     })
     return {
+      refreshOptions() {
+        Pop.toast('Hello')
+      },
       quote: computed(() => AppState.activeQuote),
+      recommended: computed(() => AppState.recommendedChallenges),
       activeChallenge: computed(() => AppState.activeChallenge)
     }
   },
 }
 </script>
 <style scoped>
+.heightSet {
+  height: 3vh;
+}
+.widthButton {
+  width: 2vh;
+  padding: 0;
+}
+.buttonscss {
+  background-color: #4ac26d;
+  margin-top: 0vh;
+  margin-right: 3vh;
+  color: white;
+  font-size: 1.5vh;
+  font-family: "Saira Condensed", sans-serif;
+  letter-spacing: 0.4px;
+}
 .cardspec {
   height: 100%;
   width: 70%;
