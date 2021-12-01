@@ -25,5 +25,8 @@ class AlbumService {
     AppState.activeAlbum = newPost.data
     return newPost.data
   }
+  clear(){
+    AppState.activeAlbum = {}
+  }
 }
 export const albumService = new AlbumService()

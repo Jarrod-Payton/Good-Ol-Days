@@ -22,9 +22,7 @@
       </div>
       <div class="d-flex align-items-center">
         <div>
-          <button class="btn notifications elevation-3">
-            Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
-          </button>
+          <NavHome />
         </div>
         <div class="me-4">
           <p class="m-0 f-14 text-end">{{ account.name }}</p>
@@ -59,9 +57,7 @@
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div>
-          <button class="btn notifications me-5 elevation-3">
-            <i class="mdi mdi-18px mdi-bell-outline"></i>
-          </button>
+          <NavHome />
         </div>
         <div class="me-3 ms-3">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
@@ -97,6 +93,7 @@ export default {
     return {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
+      activeAlbum: computed(() => AppState.activeAlbum),
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
       }
@@ -125,15 +122,7 @@ export default {
   color: #36a7d7;
   margin-top: 7px !important;
 }
-.notifications {
-  background-color: #4ac26d;
-  color: rgb(255, 255, 255);
-  font-family: "Saira Condensed", sans-serif;
-  padding: 3px;
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-right: 4vh;
-}
+
 .desktop {
   display: block;
 }
