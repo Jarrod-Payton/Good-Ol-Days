@@ -1,28 +1,28 @@
 <template>
-  <router-link :to="{ name: 'Album', params: { albumId: album.id } }">
-    <div
-      class="
-        col-6 col-md-3
-        d-flex
-        justify-content-center
-        flex-column
-        align-items-center
-        selectable1
-        mb-2
-      "
-    >
-      <div>
-        <img
-          class="img-fluid picalbum grow"
-          src="../assets/img/albumpic.png"
-          alt=""
-        />
-      </div>
-      <div>
-        <p class="albumname">{{ album.title }}</p>
-      </div>
+  <!-- <router-link :to="{ name: 'Album', params: { albumId: album.id } }"> -->
+  <div
+    class="
+      col-6 col-md-3
+      d-flex
+      justify-content-center
+      flex-column
+      align-items-center
+      selectable1
+      mb-2
+    "
+  >
+    <div>
+      <img
+        class="img-fluid picalbum eachone grow"
+        src="../assets/img/albumpic.png"
+        alt=""
+      />
     </div>
-  </router-link>
+    <div>
+      <p class="albumname">{{ album.title }}</p>
+    </div>
+  </div>
+  <!-- </router-link> -->
 </template>
 <script>
 export default {

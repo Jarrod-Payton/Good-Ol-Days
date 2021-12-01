@@ -26,7 +26,7 @@
       </div>
       <!-- ALBUMS GO HERE v  -->
       <div class="row">
-        <div>
+        <div class="d-flex eachone">
           <Album v-for="a in myAlbums" :key="a.id" :album="a" />
         </div>
       </div>
@@ -99,6 +99,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.eachone {
+  width: 100%;
+}
 .cardspec {
   margin-top: 3vh;
   width: 99%;
