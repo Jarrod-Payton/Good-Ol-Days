@@ -21,7 +21,7 @@
                 />
               </div>
               <div class="col-12">
-                <p class="S1 text-white">
+                <p class="S1">
                   Enable week challenges?
                   <input
                     type="radio"
