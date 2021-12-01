@@ -6,7 +6,8 @@ const ObjectId = Schema.Types.ObjectId
 export const ChallengeSchema = new Schema(
 {
   title: {type:String, requried:true},
-  albumId: {type:ObjectId, required:true, ref:'Album'}
+  albumId: {type:ObjectId, required:true, ref:'Album'},
+  isActive: {type:Boolean, required:true, default:false},
 },
 { timestamps: true, toJSON: { virtuals: true } }
 )
