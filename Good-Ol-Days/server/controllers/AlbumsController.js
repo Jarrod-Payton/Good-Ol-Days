@@ -9,7 +9,7 @@ export class AlbumsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getAlbumById)
-      .get('/:id', this.getChallengesByAlbum)
+      .get('/:id/challenges', this.getChallengesByAlbum)
       .post('', this.createAlbum)
       .put('/:id', this.editAlbum)
       .delete('/:id', this.deleteAlbum)
@@ -64,4 +64,5 @@ export class AlbumsController extends BaseController {
       next(error)
     }
   }
+  
 }
