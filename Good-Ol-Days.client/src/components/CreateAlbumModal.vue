@@ -12,7 +12,7 @@
             <h2>Hello</h2>
           </div>
           <div class="modal-footer">
-            <button type="submit">Make Album</button>
+            <button class="buttonscss btn" type="submit">Make Album</button>
           </div>
         </form>
       </div>
@@ -20,9 +20,11 @@
   </div>
 </template>
 <script>
+import { reactive } from "@vue/reactivity"
 import { albumService } from "../services/AlbumService"
 export default {
   setup() {
+    const albumDetails = reactive({ editable: {} })
     return {
       async createAlbum() {
         albumService.setActiveAlbum()
@@ -34,5 +36,14 @@ export default {
 <style scoped>
 h10 {
   font-size: 2vh;
+}
+.buttonscss {
+  background-color: #4ac26d;
+  margin-top: 2vh;
+  margin-right: 3vh;
+  color: white;
+  font-size: 2.2vh;
+  font-family: "Saira Condensed", sans-serif;
+  letter-spacing: 0.4px;
 }
 </style>
