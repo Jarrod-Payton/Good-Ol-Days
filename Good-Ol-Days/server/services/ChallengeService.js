@@ -19,5 +19,13 @@ class ChallengeService {
     const newChallenge = await dbContext.Challenges.create(data)
     return newChallenge
   }
+  async flipActive(id){
+    const found = await this.getChallengeById(id)
+    if(!found.isActive) {
+      throw new BadRequest('This challenge is no longer active')
+    }
+    return await dbContext.Challenges.findByIdAndUpdate(id, {isActive: false})
+
+  }
 }
 export const challengeService = new ChallengeService()

@@ -6,6 +6,7 @@ export class ChallengeController extends BaseController {
         this.router
         .get('/:id', this.getChallengeById)
         .post('', this.createChallenge)
+        .delete('/:id',this.flipActive)
     }
     async getChallengeById(req,res,next){
         try {
@@ -19,6 +20,14 @@ export class ChallengeController extends BaseController {
         try {
             const newChallenge = await challengeService.createChallenge(req.body)
             return res.send(newChallenge)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async flipActive(req,res,next){
+        try {
+            const result = await challengeService.flipActive(req.params.id)
+            return res.send(result)
         } catch (error) {
             next(error)
         }
