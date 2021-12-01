@@ -83,6 +83,7 @@
 import { computed, onMounted } from "@vue/runtime-core"
 import { albumService } from "../services/AlbumService"
 import { AppState } from "../AppState"
+import { logger } from "../utils/Logger"
 export default {
   name: 'Home',
   setup() {
