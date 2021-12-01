@@ -55,7 +55,7 @@ export default {
     onMounted(async () => {
       try {
         albumService.setActiveAlbum(route.params.albumId);
-        albumService.getPosts(route.params.albumId)
+        postService.getPosts(route.params.albumId)
       } catch (error) {
         Pop.toast(error);
       }
