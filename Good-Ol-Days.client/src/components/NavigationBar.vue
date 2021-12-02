@@ -24,8 +24,8 @@
       <div class="d-flex align-items-center">
         <div>
           <NavHome v-if="!activeAlbum.id && !activeGroupAlbum.id" />
-          <NavAlbum v-if="activeAlbum.id" />
-          <NavGroupAlbum v-if="activeGroupAlbum.id" />
+          <NavAlbum v-if="activeGroupAlbum.id" />
+          <NavGroupAlbum v-if="activeAlbum.id" />
         </div>
         <div class="me-4">
           <p class="m-0 f-14 text-end">{{ account.name }}</p>
