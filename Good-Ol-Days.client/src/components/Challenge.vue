@@ -33,7 +33,7 @@
                   >
                     X
                   </button>
-                  <select class="heightSet">
+                  <select class="heightSet" v-model="type.value">
                     <option value="General">General</option>
                     <option value="Family">Family</option>
                     <option value="Friends">Friends</option>
@@ -42,6 +42,22 @@
                     <option value="Child">Child</option>
                   </select>
                 </div>
+              </div>
+              <div class="col-12" v-for="s in mySuggestions" :key="s">
+                <ChallengeSuggestions :suggestion="s" />
+              </div>
+              <div class="col-12">
+                <h5 class="font">Don't like ours? try making your own!</h5>
+                <form @submit.prevent="madeChallenge">
+                  <input
+                    type="text"
+                    required
+                    class="form-control border-white"
+                    v-model="form.value"
+                    placeholder="What would you like your challenge for the week to be ..."
+                    maxlength="200"
+                  />
+                </form>
               </div>
             </div>
             <!--This is for when the challenge is active-->
@@ -80,22 +96,45 @@
   </div>
 </template>
 <script>
-import { computed } from "@vue/reactivity"
+import { computed, ref } from "@vue/reactivity"
 import { AppState } from "../AppState"
-import { onMounted } from "@vue/runtime-core"
+import { onMounted, watchEffect } from "@vue/runtime-core"
 import { quoteService } from "../services/QuoteService"
+import { challengeService } from "../services/ChallengeService"
 import Pop from "../utils/Pop"
 export default {
   setup() {
+    const type = ref('')
+    const mySuggestions = ref([])
+    const form = ref('')
+    watchEffect(() => {
+      let s = AppState.suggestedChallenges
+      if (type.value != '') {
+        s = AppState.suggestedChallenges.filter(s => s.type == type.value)
+        mySuggestions.value = challengeService.grabThreeChallenges(s)
+      }
+    })
     onMounted(async () => {
       await quoteService.setActiveQuote()
     })
     return {
+      form,
+      type,
+      mySuggestions,
+      async madeChallenge() {
+        await challengeService.createActiveChallenge(form.value)
+      },
       refreshOptions() {
-        Pop.toast('Hello')
+        let s = AppState.suggestedChallenges
+        if (type.value != '') {
+          s = AppState.suggestedChallenges.filter(s => s.type == type.value)
+          mySuggestions.value = challengeService.grabThreeChallenges(s)
+        } else {
+          Pop.toast('You need to select a genre')
+        }
       },
       quote: computed(() => AppState.activeQuote),
-      recommended: computed(() => AppState.recommendedChallenges),
+      MyChallenges: computed(() => AppState.suggestedChallenges),
       activeChallenge: computed(() => AppState.activeChallenge)
     }
   },
