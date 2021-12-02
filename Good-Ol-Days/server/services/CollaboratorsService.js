@@ -1,6 +1,8 @@
 import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors"
+import { logger } from "../utils/Logger"
 import { albumsService } from "./AlbumsService"
+import { notificationService } from "./NotificationService"
 
 class CollaboratorsService {
   async getAllMyCollabAlbums(userId){
@@ -13,6 +15,8 @@ class CollaboratorsService {
       throw new BadRequest('They are already a collaborator')
     }
     const newCollaborator = await dbContext.Collaborators.create(data)
+    const notification = await notificationService.createCollaboratorNotification(data.accountId, data.albumId)
+    logger.log(notification)
     return newCollaborator.populate('album account')
   }
   async deleteCollaborator(user, collaborator){

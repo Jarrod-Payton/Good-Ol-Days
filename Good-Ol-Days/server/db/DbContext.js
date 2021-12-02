@@ -3,6 +3,7 @@ import { AccountSchema, ProfileSchema } from '../models/Account'
 import { AlbumSchema } from "../models/Album";
 import { ChallengeSchema } from "../models/Challenge";
 import { CollaboratorSchema } from "../models/Collaborator";
+import { NotificationSchema } from "../models/Notification";
 import { PostSchema } from "../models/Post";
 import { ValueSchema } from '../models/Value'
 
@@ -18,6 +19,8 @@ class DbContext {
   Collaborators = mongoose.model('Collaborator', CollaboratorSchema)
 
   Posts = mongoose.model('Post', PostSchema)
+
+  Notifications = mongoose.model('Notification', NotificationSchema)
 }
 
 export const dbContext = new DbContext()

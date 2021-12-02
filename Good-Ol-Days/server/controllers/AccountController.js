@@ -3,6 +3,7 @@ import { accountService } from '../services/AccountService'
 import { albumsService } from '../services/AlbumsService'
 import { collaboratorsService } from '../services/CollaboratorsService'
 import { firebaseService } from '../services/FirebaseService'
+import { notificationService } from "../services/NotificationService"
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -13,6 +14,7 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .get('/collaborators', this.getAllMyCollabAlbums)
       .get('/albums', this.getAllMyAlbums)
+      .get('/notifications', this.getMyNotifications)
       .get('/firebase-token', this.getFirebaseAuthToken)
       .put('', this.updateAccount)
   }
@@ -58,6 +60,14 @@ export class AccountController extends BaseController {
     try {
       const token = await firebaseService.getFirebaseAuthToken(req.userInfo.id)
       return res.send({ token })
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getMyNotifications(req,res,next){
+    try {
+      const result = await notificationService.getMyNotifications(req.userInfo.id)
+      return res.send(result)
     } catch (error) {
       next(error)
     }
