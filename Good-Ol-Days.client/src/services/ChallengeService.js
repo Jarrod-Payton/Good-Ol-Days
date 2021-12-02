@@ -20,6 +20,17 @@ class ChallengeService {
     logger.log('active Challenge', activeChallenge.data)
     AppState.activeChallenge = activeChallenge.data
   }
+  async getChallenges() {
+    AppState.activeChallenge = {}
+    if (AppState.activeAlbum.hasChallenges === true) {
+      const res = await api.get(`api/albums/${AppState.activeAlbum.id}/challenges`)
+      logger.log('challenges', res.data)
+      AppState.challenges = res.data
+      if (AppState.challenges.length > 0) {
+        AppState.activeChallenge = AppState.challenges.find(c => c.isActive === true)
+      }
+    }
+  }
 }
 
 export const challengeService = new ChallengeService()
