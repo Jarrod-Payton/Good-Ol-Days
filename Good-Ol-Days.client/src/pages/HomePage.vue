@@ -89,6 +89,7 @@ export default {
   setup() {
     onMounted(async () => {
       await albumService.getMyAlbums()
+      AppState.activeAlbum = {}
     })
     return {
       myAlbums: computed(() => AppState.myAlbums)
