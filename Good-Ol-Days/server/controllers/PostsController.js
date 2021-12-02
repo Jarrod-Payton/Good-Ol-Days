@@ -4,9 +4,8 @@ import { postsService } from '../services/PostsService'
 
 export class PostsController extends BaseController {
   constructor() {
-    super('api/albums/:albumId/posts')
+    super('api/posts')
     this.router
-      .get('', this.getPostsByAlbumId)
       .get('/:id', this.getPostId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createPost)
@@ -24,14 +23,6 @@ export class PostsController extends BaseController {
     }
   }
 
-  async getPostsByAlbumId(req, res, next) {
-    try {
-      const posts = await postsService.getPostsByAlbumId(req.params.albumId)
-      res.send(posts)
-    } catch (error) {
-      next(error)
-    }
-  }
 
   async getPostId(req, res, next) {
     try {

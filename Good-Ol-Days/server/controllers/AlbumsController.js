@@ -4,11 +4,12 @@ import { Auth0Provider } from '@bcwdev/auth0provider'
 import { challengeService } from '../services/ChallengeService'
 import { firebaseService } from '../services/FirebaseService'
 import { collaboratorsService } from '../services/CollaboratorsService'
-
+import { postsService } from "../services/PostsService"
 export class AlbumsController extends BaseController {
   constructor() {
     super('api/albums')
     this.router
+    .get('/:id/posts', this.getPostsByAlbumId)
       .get('/:id', this.getAlbumById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id/challenges', this.getChallengesByAlbum)
@@ -18,6 +19,14 @@ export class AlbumsController extends BaseController {
       .delete('/:id', this.deleteAlbum)
   }
 
+  async getPostsByAlbumId(req, res, next) {
+    try {
+      const posts = await postsService.getPostsByAlbumId(req.params.albumId)
+      res.send(posts)
+    } catch (error) {
+      next(error)
+    }
+  }
   async getAlbumById(req, res, next) {
     try {
       const result = await albumsService.getAlbumById(req.params.id)
