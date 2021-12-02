@@ -10,15 +10,14 @@
             <div>
               <p class="p-0 mb-0 ps-2">People in this group:</p>
             </div>
-            <div class="d-flex">
+            <div class="d-flex" v-for="u in collabThisAlbum" :key="u.accountId">
               <div>
-                <img class="profilepics" :src="account.picture" alt="" />
-              </div>
-              <div>
-                <img class="profilepics" :src="account.picture" alt="" />
-              </div>
-              <div>
-                <img class="profilepics" :src="account.picture" alt="" />
+                <img
+                  :title="u.name"
+                  class="profilepics"
+                  :src="u.picture"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -67,7 +66,7 @@ import { AppState } from "../AppState"
 export default {
   setup() {
     return {
-      activeGroupAlbum: computed(() => AppState.activeGroupAlbum),
+      collabThisAlbum: computed(() => AppState.collabThisAlbum),
       account: computed(() => AppState.account)
     }
   }

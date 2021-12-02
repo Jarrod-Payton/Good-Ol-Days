@@ -1,6 +1,7 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 import { firebaseService } from './FirebaseService'
+import { postsService } from "./PostsService"
 
 class AlbumsService {
   async getAllMyAlbums(body) {
@@ -42,6 +43,9 @@ class AlbumsService {
     }
     await firebaseService.deleteFirebaseFolder(found.name)
     await dbContext.Albums.findByIdAndDelete(body.id)
+    await dbContext.Posts.deleteMany({albumId: body.id})
+    await dbContext.Challenges.deleteMany({albumId: body.id})
+    await dbContext.Collaborators.deleteMany({albumId: body.id})
   }
 }
 export const albumsService = new AlbumsService()

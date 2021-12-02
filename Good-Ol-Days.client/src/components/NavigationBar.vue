@@ -23,9 +23,9 @@
       </div>
       <div class="d-flex align-items-center">
         <div>
-          <NavHome v-if="!activeAlbum.id && !activeGroupAlbum.id" />
-          <NavAlbum v-if="activeAlbum.id" />
-          <NavGroupAlbum v-if="activeGroupAlbum.id" />
+          <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <NavGroupAlbum v-if="collabThisAlbum[0]?.name" />
         </div>
         <div class="me-4">
           <p class="m-0 f-14 text-end">{{ account.name }}</p>
@@ -63,9 +63,9 @@
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div>
-          <NavHome v-if="!activeAlbum.id && !activeGroupAlbum.id" />
-          <NavAlbum v-if="activeAlbum.id" />
-          <NavGroupAlbum v-if="activeGroupAlbum.id" />
+          <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <NavGroupAlbum v-if="collabThisAlbum[0]?.name" />
         </div>
         <div class="me-3 ms-3">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
@@ -103,7 +103,7 @@ export default {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       activeAlbum: computed(() => AppState.activeAlbum),
-      activeGroupAlbum: computed(() => AppState.activeGroupAlbum),
+      collabThisAlbum: computed(() => AppState.collabThisAlbum),
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
       },

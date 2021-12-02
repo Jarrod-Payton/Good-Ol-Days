@@ -8,7 +8,7 @@ class CollaboratorsService {
     return res
   }
   async getCollabByAlbumId(albumId){
-    const res = await dbContext.Collaborators.find({albumId: albumId}).populate('album')
+    const res = await dbContext.Collaborators.find({albumId: albumId}).populate('album account')
     return res
   }
   async addCollaborator(data){

@@ -31,5 +31,9 @@ class PostsService {
     await firebaseService.deleteFirebasePost(post.imgUrl)
     await dbContext.Posts.findByIdAndDelete(body.id)
   }
+  async deletePostByAlbum(album){
+    const res = await dbContext.Posts.findByIdAndDelete({albumId: album})
+    return res
+  }
 }
 export const postsService = new PostsService()
