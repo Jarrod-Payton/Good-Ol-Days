@@ -1,7 +1,9 @@
 <template>
-  <div class="card selectable" @click="createActive">
+  <div class="card selectable card-styling" @click="createActive">
     <div class="card-title">
-      {{ suggestion.body }}
+      <h5 class="font">
+        {{ suggestion.body }}
+      </h5>
     </div>
   </div>
 </template>
@@ -19,4 +21,20 @@ export default {
 }
 </script>
 <style scoped>
+.font {
+  font-family: "Saira Condensed", sans-serif;
+}
+.card-styling {
+  border-color: #4ac26e;
+  padding-top: 1vh;
+  margin-top: 1vh;
+  padding-left: 0.8vh;
+  border-width: 0.2vh;
+  border-radius: 0vh;
+}
+@media only screen and (max-width: 500px) {
+  .font {
+    font-size: 2vh;
+  }
+}
 </style>

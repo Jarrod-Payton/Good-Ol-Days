@@ -1,94 +1,109 @@
 <template>
-  <div class="row m-0">
-    <div class="col-12 paddingmobile">
-      <div class="d-flex justify-content-center align-content-center">
-        <div class="card cardspec">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <h2 class="text-center font pb-3 pt-2 text-sm-h2">
-                  Let's make some memories!
-                </h2>
-              </div>
-            </div>
-            <div class="row" v-if="!activeChallenge.title">
-              <div class="col-12">
-                <h5 class="font">
-                  Choose a category and choose a challenge for the week
-                </h5>
-              </div>
-              <div class="col-12">
-                <div
-                  class="
-                    heightSet
-                    px-1
-                    d-flex
-                    justify-content-between
-                    align-content-center
-                  "
-                >
-                  <button
-                    class="buttonscss btn widthButton text-center"
-                    @click="refreshOptions"
-                  >
-                    X
-                  </button>
-                  <select class="heightSet" v-model="type">
-                    <option value="General" selected>General</option>
-                    <option value="Family">Family</option>
-                    <option value="Friends">Friends</option>
-                    <option value="Fun">Random / Fun</option>
-                    <option value="SignificantOther">Significant Other</option>
-                    <option value="Child">Child</option>
-                  </select>
+  <div>
+    <div class="row m-0">
+      <div class="col-12 paddingmobile">
+        <div class="d-flex justify-content-center align-content-center">
+          <div class="card cardspec">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <h2 class="text-center font pb-3 pt-2 text-sm-h2">
+                    Let's make some memories!
+                  </h2>
                 </div>
               </div>
-              <div class="col-12" v-for="s in mySuggestions" :key="s">
-                <ChallengeSuggestions :suggestion="s" />
+              <div class="row" v-if="!activeChallenge.title">
+                <div class="col-12">
+                  <div class="d-flex">
+                    <h5 class="font">Here are some suggested challenges:</h5>
+                    <select
+                      class="heightSet font mx-2 px-2 py-0 font"
+                      v-model="type"
+                    >
+                      <option value="General">General</option>
+                      <option value="Family">Family</option>
+                      <option value="Friends">Friends</option>
+                      <option value="Fun">Random / Fun</option>
+                      <option value="SignificantOther">
+                        Significant Other
+                      </option>
+                      <option value="Child">Child</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="heightSet px-1 d-flex shuffleParent">
+                    <h5 class="font shuffleSuggest">Shuffle Suggestions:</h5>
+                    <i
+                      class="
+                        mdi mdi-shuffle-variant
+                        selectable1
+                        refreshButton
+                        border-2
+                        px-1
+                        mb-5
+                      "
+                      title="Refresh Options"
+                      @click="refreshOptions"
+                    />
+                  </div>
+                </div>
+                <div class="col-12" v-for="s in mySuggestions" :key="s">
+                  <ChallengeSuggestions :suggestion="s" />
+                </div>
+                <div class="col-12">
+                  <h5 class="font createOwnText">
+                    Don't like ours? try making your own!
+                    <i
+                      class="mdi mdi-comment-edit selectable1"
+                      title="Refresh Options"
+                      @click="toggleMakeOwn"
+                    />
+                  </h5>
+                  <form @submit.prevent="madeChallenge" v-if="makeOwn">
+                    <input
+                      type="text"
+                      required
+                      class="form-control border-white inputField font"
+                      v-model="form"
+                      placeholder="What would you like your challenge for the week to be ..."
+                      maxlength="200"
+                    />
+                  </form>
+                </div>
               </div>
-              <div class="col-12">
-                <h5 class="font">
-                  Don't like ours? try making your own!
-                  <i class="mdi mdi-delete selectable" @click="toggleMakeOwn" />
-                </h5>
-                <form @submit.prevent="madeChallenge" v-if="makeOwn">
-                  <input
-                    type="text"
-                    required
-                    class="form-control border-white"
-                    v-model="form"
-                    placeholder="What would you like your challenge for the week to be ..."
-                    maxlength="200"
-                  />
-                </form>
-              </div>
-            </div>
-            <!--This is for when the challenge is active-->
-            <div class="row" v-if="activeChallenge?.title">
-              <div class="col-12">
-                <h3 class="font limeText">Weekly Challenge:</h3>
-              </div>
-              <div class="col-12">
-                <!-- TODO This is where we will put the challenge if we have one -->
-                <h3 class="font">{{ activeChallenge.title }}</h3>
-              </div>
-              <div class="col-12">
-                <div
-                  class="d-flex justify-content-end align-content-center mt-4"
-                >
-                  <button
-                    data-bs-toggle="modal"
-                    data-bs-target="#createPostModal"
-                    class="customBtn btn btn-success"
+              <!--This is for when the challenge is active-->
+              <div class="row" v-if="activeChallenge?.title">
+                <div class="col-12">
+                  <h3 class="font limeText weeklyChallenges">
+                    Weekly Challenge:
+                  </h3>
+                </div>
+                <div class="col-12">
+                  <!-- TODO This is where we will put the challenge if we have one -->
+                  <h3 class="font takeAPhoto challengeFont">
+                    {{ activeChallenge.title }}
+                  </h3>
+                </div>
+                <div class="col-12">
+                  <div
+                    class="d-flex justify-content-end align-content-center mt-4"
                   >
-                    <i class="mdi mdi-cloud-upload me-1" />
-                    Upload
-                  </button>
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target="#createPostModal"
+                      class="customBtn btn btn-success cloudy"
+                      title="Upload Photo"
+                    >
+                      <i class="mdi mdi-cloud-upload me-1" />
+                      Upload
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12">
+            <div class="row m-0">
+              <div class="col-12 align-self-end">
                 <p class="text-center mt-3">"{{ quote }}"</p>
               </div>
             </div>
@@ -156,6 +171,39 @@ export default {
 }
 </script>
 <style scoped>
+.cloudy {
+  margin-top: 3vh;
+  font-size: 2vh;
+}
+.weeklyChallenges {
+  margin-bottom: 3vh;
+}
+.takeAPhoto {
+  padding-top: 0.5vh;
+  padding-left: 1vh;
+  margin-bottom: 1vh;
+}
+.createOwnText {
+  padding-top: 0.4vh;
+  padding-left: 1vh;
+}
+.shuffleSuggest {
+  padding-top: 0.3vh;
+  padding-right: 0.2vh;
+}
+.shuffleParent {
+  padding-top: 1.3vh;
+  margin-left: 1vh;
+  padding-bottom: 2vh;
+}
+.inputField {
+  border-color: #4ac26d !important;
+  border-width: 0.2vh;
+  border-radius: 0vh;
+}
+.refreshButton {
+  font-size: 2.2vh;
+}
 .heightSet {
   height: 3vh;
 }
@@ -175,6 +223,7 @@ export default {
 .cardspec {
   height: 100%;
   width: 70%;
+  min-height: 40vh;
   border-width: 5px;
   border-radius: 0;
   border-color: #4ac26d;
@@ -196,6 +245,22 @@ export default {
   margin-right: 4vh;
 }
 @media only screen and (max-width: 500px) {
+  .challengeFont {
+    font-size: 3vh !important;
+  }
+  .cloudy {
+    margin-top: 1vh;
+    font-size: 1.5vh;
+  }
+  .cardspec {
+    height: 100%;
+    width: 70%;
+    min-height: 25vh;
+    border-width: 5px;
+    border-radius: 0;
+    border-color: #4ac26d;
+    background-color: rgb(245, 245, 245, 0.9);
+  }
   .text-sm-h2 {
     font-size: 3vh;
   }
@@ -209,6 +274,10 @@ export default {
   }
   .paddingmobile {
     padding: 0;
+  }
+
+  .font {
+    font-size: 2vh;
   }
 }
 </style>
