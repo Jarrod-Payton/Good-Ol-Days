@@ -15,7 +15,6 @@ export class PostsController extends BaseController {
   async createPost(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
-      req.body.albumId = req.params.albumId
       const post = await postsService.createPost(req.body)
       return res.send(post)
     } catch (error) {
@@ -35,9 +34,7 @@ export class PostsController extends BaseController {
 
   async deletePost(req, res, next) {
     try {
-      req.body.id = req.params.id
-      req.body.creatorId = req.userInfo.id
-      await postsService.deletePost(req.body, req.userInfo)
+      await postsService.deletePost(req.params.id, req.userInfo.id)
       return res.send('this post was deleted')
     } catch (error) {
       next(error)
