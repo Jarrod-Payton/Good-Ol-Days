@@ -4,33 +4,35 @@
       <div class="modal-content">
         <form @submit.prevent="createAlbum">
           <div class="modal-header">
-            <div class="modal-title">
+            <div class="modal-title f-18">
               <p>New Album</p>
             </div>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
-                <p class="S1">Album name:</p>
+                <p class="S1 f-14">Album name:</p>
                 <input
                   type="text"
-                  class="albumName form-control border-white"
+                  class="albumName form-control border-0"
                   placeholder="Name your album ..."
                   v-model="albumDetails.editable.title"
                   required
                 />
               </div>
               <div class="col-12">
-                <p class="S1">
+                <p class="S1 mt-4">
                   Enable week challenges?
                   <input
                     type="radio"
+                    class="ms-3"
                     v-model="albumDetails.editable.hasChallenges"
                     :value="true"
                   />
                   Yes
                   <input
                     type="radio"
+                    class="ms-3"
                     v-model="albumDetails.editable.hasChallenges"
                     :value="false"
                   />
@@ -40,7 +42,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button class="buttonscss btn" type="submit">Make Album</button>
+            <button class="buttonscss btn" type="submit">Add Album</button>
           </div>
         </form>
       </div>
@@ -82,7 +84,7 @@ export default {
   font-family: "Saira Condensed", sans-serif;
 }
 .buttonscss {
-  background-color: #4ac26d;
+  background-color: #4ac26d !important;
   margin-top: 2vh;
   margin-right: 3vh;
   color: white;
