@@ -11,7 +11,7 @@
                 </h2>
               </div>
             </div>
-            <div class="row" v-if="!activeChallenge.body">
+            <div class="row" v-if="!activeChallenge.title">
               <div class="col-12">
                 <h5 class="font">
                   Choose a category and choose a challenge for the week
@@ -33,8 +33,8 @@
                   >
                     X
                   </button>
-                  <select class="heightSet" v-model="type.value">
-                    <option value="General">General</option>
+                  <select class="heightSet" v-model="type">
+                    <option value="General" selected>General</option>
                     <option value="Family">Family</option>
                     <option value="Friends">Friends</option>
                     <option value="Fun">Random / Fun</option>
@@ -47,13 +47,16 @@
                 <ChallengeSuggestions :suggestion="s" />
               </div>
               <div class="col-12">
-                <h5 class="font">Don't like ours? try making your own!</h5>
-                <form @submit.prevent="madeChallenge">
+                <h5 class="font">
+                  Don't like ours? try making your own!
+                  <i class="mdi mdi-delete selectable" @click="toggleMakeOwn" />
+                </h5>
+                <form @submit.prevent="madeChallenge" v-if="makeOwn">
                   <input
                     type="text"
                     required
                     class="form-control border-white"
-                    v-model="form.value"
+                    v-model="form"
                     placeholder="What would you like your challenge for the week to be ..."
                     maxlength="200"
                   />
@@ -61,7 +64,7 @@
               </div>
             </div>
             <!--This is for when the challenge is active-->
-            <div class="row" v-if="activeChallenge.body">
+            <div class="row" v-if="activeChallenge?.title">
               <div class="col-12">
                 <h3 class="font limeText">Weekly Challenge:</h3>
               </div>
@@ -102,11 +105,13 @@ import { onMounted, watchEffect } from "@vue/runtime-core"
 import { quoteService } from "../services/QuoteService"
 import { challengeService } from "../services/ChallengeService"
 import Pop from "../utils/Pop"
+import { logger } from "../utils/Logger"
 export default {
   setup() {
     const type = ref('')
     const mySuggestions = ref([])
     const form = ref('')
+    const makeOwn = ref(false)
     watchEffect(() => {
       let s = AppState.suggestedChallenges
       if (type.value != '') {
@@ -116,11 +121,21 @@ export default {
     })
     onMounted(async () => {
       await quoteService.setActiveQuote()
+      type.value = 'General'
     })
     return {
       form,
       type,
       mySuggestions,
+      makeOwn,
+      toggleMakeOwn() {
+        try {
+          makeOwn.value = !makeOwn.value
+          logger.log('h', makeOwn.value)
+        } catch (error) {
+          logger.log(error)
+        }
+      },
       async madeChallenge() {
         await challengeService.createActiveChallenge(form.value)
       },
