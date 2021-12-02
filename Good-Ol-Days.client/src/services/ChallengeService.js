@@ -5,7 +5,7 @@ import { api } from "./AxiosService"
 class ChallengeService {
   grabThreeChallenges(array) {
     let challenge1 = array[Math.floor(Math.random() * array.length)]
-    array = array.filter(s => s.body !== challenge1)
+    array = array.filter(s => s !== challenge1)
     let challenge2 = array[Math.floor(Math.random() * array.length)]
     array = array.filter(s => s !== challenge2)
     let challenge3 = array[Math.floor(Math.random() * array.length)]
