@@ -3,14 +3,14 @@ import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { challengeService } from '../services/ChallengeService'
 import { firebaseService } from '../services/FirebaseService'
-import { collaboratorsService } from "../services/CollaboratorsService"
+import { collaboratorsService } from '../services/CollaboratorsService'
 
 export class AlbumsController extends BaseController {
   constructor() {
     super('api/albums')
     this.router
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id', this.getAlbumById)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:id/challenges', this.getChallengesByAlbum)
       .get('/:id/collaborators', this.getCollabByAlbumId)
       .post('', this.createAlbum)
@@ -26,7 +26,8 @@ export class AlbumsController extends BaseController {
       next(error)
     }
   }
-  async getCollabByAlbumId(req,res,next){
+
+  async getCollabByAlbumId(req, res, next) {
     try {
       const result = await collaboratorsService.getCollabByAlbumId(req.params.id)
       return res.send(result)

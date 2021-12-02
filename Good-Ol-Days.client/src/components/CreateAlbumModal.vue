@@ -11,6 +11,18 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
+                <p class="S1">
+                  Upload Album Cover <i>(Optional)</i>
+                  <input
+                    class="inputupload mtop"
+                    type="file"
+                    ref="fileInput"
+                    accept="image/*"
+                    @change="fileSelect"
+                  />
+                </p>
+              </div>
+              <div class="col-12">
                 <p class="S1 f-14">Album name:</p>
                 <input
                   type="text"
@@ -40,9 +52,16 @@
                 </p>
               </div>
             </div>
+            <img src="" alt="" class="img-fluid" id="image" />
           </div>
           <div class="modal-footer">
-            <button class="buttonscss btn" type="submit">Add Album</button>
+            <button
+              @click="uploadCoverImg"
+              class="buttonscss btn"
+              type="button"
+            >
+              Add Album
+            </button>
           </div>
         </form>
       </div>
@@ -50,14 +69,16 @@
   </div>
 </template>
 <script>
-import { reactive } from "@vue/reactivity"
+import { reactive, ref } from "@vue/reactivity"
 import { albumService } from "../services/AlbumService"
 import { logger } from "../utils/Logger"
 import { useRouter } from "vue-router"
 import { Modal } from "bootstrap"
+import { firebaseService } from "../services/FirebaseService"
 export default {
   setup() {
     const albumDetails = reactive({ editable: {} })
+    const files = ref([])
     const router = useRouter()
     return {
       albumDetails,
@@ -72,6 +93,29 @@ export default {
           albumDetails.editable = {}
         } catch (error) {
           logger.log(error)
+        }
+      },
+      fileSelect(e) {
+        files.value = e.target.files
+        logger.log('files ref value', files.value)
+        const reader = new FileReader()
+        reader.readAsDataURL(files.value[0])
+        reader.onload = () => {
+          document.getElementById('image').src = reader.result
+        }
+      },
+      async uploadCoverImg() {
+        try {
+          if (!files.value[0]) { await this.createAlbum() }
+          else {
+            const url = await firebaseService.upload(files.value[0], albumDetails.editable)
+            albumDetails.editable.coverImg = url
+            logger.log(url)
+            await this.createAlbum()
+          }
+
+        } catch (error) {
+          logger.error(error)
         }
       }
     }
@@ -91,5 +135,13 @@ export default {
   font-size: 2.2vh;
   font-family: "Saira Condensed", sans-serif;
   letter-spacing: 0.4px;
+}
+.inputupload {
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+  border: 0 !important;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
 }
 </style>

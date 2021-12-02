@@ -19,7 +19,6 @@ class AlbumService {
     logger.log('Posts', res.data)
   }
   async createAlbum(album) {
-    album.coverImg = `https://thiscatdoesnotexist.com`
     logger.log('Album Info', album)
     const newPost = await api.post(`/api/albums`, album)
     AppState.activeAlbum = newPost.data
