@@ -60,12 +60,11 @@
           flex-column
           margindesk
         "
+        v-for="c in collaborators"
+        :key="c.albumId"
       >
         <div class="card cardgroupalbum grow2 mb-3">
-          <p class="gpalbumtitle">Pool Party 10/2021</p>
-        </div>
-        <div class="card cardgroupalbum grow2 mb-3">
-          <p class="gpalbumtitle">Christmas 2020</p>
+          <p class="gpalbumtitle">{{ c.albumTitle }}</p>
         </div>
       </div>
       <!-- GROUP ALBUMS GO HERE ^ -->
@@ -82,6 +81,7 @@
 <script>
 import { computed, onMounted } from "@vue/runtime-core"
 import { albumService } from "../services/AlbumService"
+import { collaboratorService } from "../services/CollaboratorService"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 export default {
@@ -90,9 +90,11 @@ export default {
     onMounted(async () => {
       await albumService.getMyAlbums()
       AppState.activeAlbum = {}
+      await collaboratorService.getAllMyCollabAlbums()
     })
     return {
-      myAlbums: computed(() => AppState.myAlbums)
+      myAlbums: computed(() => AppState.myAlbums),
+      collaborators: computed(() => AppState.collaborators)
     }
   }
 }

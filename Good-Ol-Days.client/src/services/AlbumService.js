@@ -33,6 +33,7 @@ class AlbumService {
   clear(){
     AppState.activeAlbum = {}
     AppState.activeGroupAlbum = {}
+    AppState.collabThisAlbum = []
   }
 }
 export const albumService = new AlbumService()
