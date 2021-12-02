@@ -44,6 +44,7 @@ import { albumService } from "../services/AlbumService";
 import { postService } from "../services/PostService";
 import Pop from "../utils/Pop";
 import { logger } from "../utils/Logger";
+import { challengeService } from "../services/ChallengeService";
 export default {
   setup() {
     const splicedPosts = ref([])
@@ -51,11 +52,13 @@ export default {
     watchEffect(() => {
       splicedPosts.value = [...AppState.posts]
       splicedPosts.value = splicedPosts.value.splice(2, AppState.posts.length)
+      
     })
     onMounted(async () => {
       try {
-        albumService.setActiveAlbum(route.params.albumId);
-        postService.getPosts(route.params.albumId)
+        await albumService.setActiveAlbum(route.params.albumId);
+        await challengeService.getChallenges()
+        await postService.getPosts(route.params.albumId)
       } catch (error) {
         Pop.toast(error);
       }

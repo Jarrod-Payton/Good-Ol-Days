@@ -29,7 +29,6 @@
                     v-model="albumDetails.editable.hasChallenges"
                     :value="true"
                   />
-
                   Yes
                   <input
                     type="radio"
