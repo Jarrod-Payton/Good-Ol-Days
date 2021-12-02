@@ -88,13 +88,24 @@
               </div>
             </form>
           </div>
-          <div v-if="myAlbums.lenght > 0">
+          <div v-if="myAlbums[0]">
             <div class="line"></div>
             <div>
               <p class="title mt-2 ms-1">Albums</p>
             </div>
+            <div
+              class="card text-center border-0 cardalbums selectable"
+              v-for="a in myAlbums"
+              :key="a.id"
+            >
+              <div data-bs-dismiss="offcanvas" @click="routeTo(a.id)">
+                <div>
+                  {{ a.title }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div v-if="myGroupAlbums.lenght > 0">
+          <div v-if="myGroupAlbums[0]">
             <div class="line"></div>
             <div>
               <p class="title mt-2 ms-1">Group Albums</p>
@@ -113,6 +124,7 @@ import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
 import { AppState } from "../AppState"
+import { useRouter } from "vue-router"
 export default {
   props: {
     account: { type: Object }
@@ -120,7 +132,13 @@ export default {
   setup() {
     let edit = ref(true)
     let editProfile = ref({})
+    const router = useRouter()
     return {
+      myAlbums: computed(() => AppState.myAlbums),
+      myGroupAlbums: computed(() => AppState.myGroupAlbums),
+      edit,
+      editProfile,
+      router,
       async editAccount() {
         try {
           await accountService.editAccount(editProfile.value)
@@ -130,10 +148,9 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
-      edit,
-      editProfile,
-      myAlbums: computed(() => AppState.myAlbums),
-      myGroupAlbums: computed(() => AppState.myGroupAlbums)
+      routeTo(id) {
+        router.push({ name: 'Album', params: { albumId: id } })
+      },
     }
   }
 }
@@ -160,5 +177,11 @@ export default {
 }
 .title {
   font-size: 3vh;
+}
+.cardalbums {
+  background-color: rgb(230, 230, 230);
+  padding: 0.4vh;
+  font-family: "Saira Condensed", sans-serif;
+  margin-bottom: 1vh;
 }
 </style>

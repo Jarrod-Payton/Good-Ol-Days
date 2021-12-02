@@ -14,19 +14,23 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
-                <input
-                  type="file"
-                  ref="fileInput"
-                  accept="image/*"
-                  @change="fileSelect"
-                />
+                <p class="S1">
+                  Upload your file:
+                  <input
+                    class="inputupload mtop"
+                    type="file"
+                    ref="fileInput"
+                    accept="image/*"
+                    @change="fileSelect"
+                  />
+                </p>
               </div>
               <div class="col-12">
                 <p class="S1">
                   Post Title:
                   <input
                     type="text"
-                    class="form-control border-white"
+                    class="form-control border-0 mtop"
                     placeholder="Title your post ..."
                     v-model="postDetails.title"
                     required
@@ -38,7 +42,7 @@
                   Post Description:
                   <input
                     type="text"
-                    class="form-control border-white"
+                    class="form-control border-0 mtop"
                     v-model="postDetails.description"
                     required
                   />
@@ -46,15 +50,17 @@
               </div>
               <div class="col-12">
                 <p>
-                  Is this post for the challenge?:
+                  Is this post for the challenge?
                   <input
                     type="radio"
+                    class="ms-3"
                     v-model="postDetails.challengeId"
                     value="true"
                   />
                   Yes
                   <input
                     type="radio"
+                    class="ms-2"
                     v-model="postDetails.challengeId"
                     value="false"
                   />
@@ -125,4 +131,19 @@ export default {
 }
 </script>
 <style scoped>
+.inputupload {
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+  border: 0 !important;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+}
+.mtop {
+  margin-top: 5px;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
 </style>

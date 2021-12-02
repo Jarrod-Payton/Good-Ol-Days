@@ -1,4 +1,4 @@
-<template>
+<template  >
   <div class="component">
     <div class="desktop">
       <button class="btn notifications elevation-3">
@@ -15,9 +15,13 @@
 
 
 <script>
+import { computed } from "@vue/reactivity"
+import { AppState } from "../AppState"
 export default {
   setup() {
-    return {}
+    return {
+      activeAlbum: computed(() => AppState.activeAlbum)
+    }
   }
 }
 </script>

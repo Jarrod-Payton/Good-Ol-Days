@@ -13,6 +13,7 @@
       <div>
         <router-link :to="{ name: 'Home' }">
           <img
+            @click="clear"
             width="230"
             class="img-fluid"
             src="../assets/img/logo2w.png"
@@ -22,7 +23,9 @@
       </div>
       <div class="d-flex align-items-center">
         <div>
-          <NavHome />
+          <NavHome v-if="!activeAlbum.id && !activeGroupAlbum.id" />
+          <NavAlbum v-if="activeAlbum.id" />
+          <NavGroupAlbum v-if="activeGroupAlbum.id" />
         </div>
         <div class="me-4">
           <p class="m-0 f-14 text-end">{{ account.name }}</p>
@@ -48,16 +51,21 @@
   <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12 p-0">
     <div class="card cardspec">
       <div class="d-flex justify-content-center">
-        <img
-          width="230"
-          class="img-fluid"
-          src="../assets/img/logo2w.png"
-          alt=""
-        />
+        <router-link :to="{ name: 'Home' }">
+          <img
+            @click="clear"
+            width="230"
+            class="img-fluid"
+            src="../assets/img/logo2w.png"
+            alt=""
+          />
+        </router-link>
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div>
-          <NavHome />
+          <NavHome v-if="!activeAlbum.id && !activeGroupAlbum.id" />
+          <NavAlbum v-if="activeAlbum.id" />
+          <NavGroupAlbum v-if="activeGroupAlbum.id" />
         </div>
         <div class="me-3 ms-3">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
@@ -87,6 +95,7 @@ import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { AuthService } from "../services/AuthService"
 import { useRouter } from "vue-router"
+import { albumService } from "../services/AlbumService"
 export default {
   setup() {
     const router = useRouter()
@@ -94,8 +103,12 @@ export default {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       activeAlbum: computed(() => AppState.activeAlbum),
+      activeGroupAlbum: computed(() => AppState.activeGroupAlbum),
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
+      },
+      clear() {
+        albumService.clear()
       }
     }
   }

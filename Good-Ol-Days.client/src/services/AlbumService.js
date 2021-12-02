@@ -25,8 +25,14 @@ class AlbumService {
     AppState.activeAlbum = newPost.data
     return newPost.data
   }
+  async deleteAlbum(albumId) {
+    const res = await api.delete('api/albums/' + albumId)
+    logger.log('DELETE ALBUM', res.data)
+    AppState.myAlbums.filter( a => a.id !== albumId )
+  }
   clear(){
     AppState.activeAlbum = {}
+    AppState.activeGroupAlbum = {}
   }
 }
 export const albumService = new AlbumService()
