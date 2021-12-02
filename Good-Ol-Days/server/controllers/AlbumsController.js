@@ -21,7 +21,7 @@ export class AlbumsController extends BaseController {
 
   async getPostsByAlbumId(req, res, next) {
     try {
-      const posts = await postsService.getPostsByAlbumId(req.params.albumId)
+      const posts = await postsService.getPostsByAlbumId(req.params.id)
       res.send(posts)
     } catch (error) {
       next(error)
