@@ -139,6 +139,50 @@
     {
       "type": "General",
       "body": "Take a photo of your hobby"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of you eating cinnamon toast crunch cereal but it looks super soggy"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of a someone random but act like they are super famous"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of you doing something slightly irregular"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of yourself doing something really smart but in a dumb way"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of yourself showing off something you don't fully understand"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of something you wish you could undo doing"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo recreation of a funny meme"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo totally dressed up in a fairly cheap area"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of yourself acting like you are in a different space (example: acting like you are underwater or in a busy location)"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of something you think is not funny at all but most people seem to"
+    },
+    {
+      "type": "Meme",
+      "body": "Take a photo of something precious being thrown or ready to be thrown"
     }
   ]
 }
