@@ -10,7 +10,12 @@ class NotificationService {
     AppState.notifications = res.data
   }
   findType(notification) {
-    Pop.toast('Hello')
+    if (notification.type === "post") {
+      return false
+    }
+    if (notification.type === "collaborator") {
+      return true
+    }
   }
 }
 
