@@ -195,6 +195,10 @@ export default {
 }
 
 @media only screen and (max-width: 500px) {
+  .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
   .desktop {
     display: none;
   }

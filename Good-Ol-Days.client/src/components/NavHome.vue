@@ -84,7 +84,10 @@ export default {
 .mobile {
   display: none;
 }
-
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 @media only screen and (max-width: 500px) {
   .desktop {
     display: none;
