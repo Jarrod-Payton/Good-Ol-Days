@@ -27,16 +27,17 @@ class CollaboratorsService {
       throw new Forbidden("You don't have permission to do this")
     }
     await dbContext.Collaborators.findByIdAndDelete(collaborator)
+    await dbContext.Notifications.findOneAndDelete({notifier: res.accountId, albumId: res.albumId})
   }
-  async editCollaborator(collaborator, body){
-    const found = await dbContext.Collaborators.findById(collaborator)
+  async editCollaborator(collaboratorId, body){
+    const found = await dbContext.Collaborators.findById(collaboratorId)
     if(!found){
       throw new BadRequest('Invalid Id')
     }
-    if(found.accountId.toString()!== body.creatorId) {
-      throw new Forbidden("You don't have permission to do this")
-    }
-    const updatedCollab = await dbContext.Collaborators.findByIdAndUpdate(collaborator, {verified: true}, {new:true})
+
+    const updatedCollab = await dbContext.Collaborators.findByIdAndUpdate(collaboratorId, {verified: true}, {new:true})
+    
+    await dbContext.Notifications.findOneAndUpdate({albumId: found.albumId, notifier:found.accountId}, {isVerified: true}, {new:true})
     return updatedCollab
   }
 }

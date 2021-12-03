@@ -6,7 +6,7 @@ import { notificationService } from "./NotificationService"
 class PostsService {
   async createPost(body) {
     const newPost = await dbContext.Posts.create(body)
-    await notificationService.createPostNotification(body.accountId, body.albumId)
+    await notificationService.createPostNotification(body.creatorId, body.albumId)
     return newPost.populate('creator')
   }
 
@@ -22,16 +22,21 @@ class PostsService {
     return post
   }
 
-  async deletePost(body, userInfo) {
-    const post = await this.getPostId(body.id)
-    if (post.creatorId.toString() !== userInfo.id) {
+  async deletePost(postId, userId) {
+    const post = await this.getPostId(postId)
+    if (post.creatorId.toString() !== userId) {
       throw new Forbidden('You do not have permission to delete this post')
     }
     if (!post) {
       throw new BadRequest('Invalid Id')
     }
     await firebaseService.deleteFirebasePost(post.imgUrl)
-    await dbContext.Posts.findByIdAndDelete(body.id)
+    await dbContext.Posts.findByIdAndDelete(postId)
+  }
+
+  async deletePostByAlbum(album) {
+    const res = await dbContext.Posts.findByIdAndDelete({ albumId: album })
+    return res
   }
 }
 export const postsService = new PostsService()

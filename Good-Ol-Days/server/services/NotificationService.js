@@ -1,31 +1,30 @@
 import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors"
+import { accountService } from "./AccountService"
 import { albumsService } from "./AlbumsService"
 import { profileService } from "./ProfileService"
 
 class NotificationService{
   async createCollaboratorNotification(user,album){
       const found = await albumsService.getAlbumById({_id: album})
-      const profile = await profileService.getProfileById(user)
       if(!found){
         throw new BadRequest("You're trying to join an album that doesn't exist")
       }
-      await dbContext.Notifications.create({type: 'collaborator', notifier:`${profile.name}`,albumName:found.title, isAnswered:false, recipients:[found.creatorId], })
+      await dbContext.Notifications.create({type: 'collaborator', notifier:`${user}`,albumId:found.id, isVerified:false, recipient:[found.creatorId], })
     }
     async createPostNotification(user,album){
       const found = await albumsService.getAlbumById({_id: album})
-      const profile = await profileService.getProfileById(user)
-      await dbContext.Notifications.create({type: 'post', notifier:`${profile.name}`, albumName:found.title, recipients:[found.creatorId]})
+      const account = await accountService.getAccount(user)
+      await dbContext.Notifications.create({type: 'post', notifier:`${account.id}`, albumId:found.id, recipient:[found.creatorId]})
     }
   async getMyNotifications(userId){
-    const notifications = await dbContext.Notifications.find({})
+    const notifications = await dbContext.Notifications.find({recipient: userId}).populate('album').populate('recipient')
     if(!notifications){
       throw new BadRequest('You have no notifications')
     }
-    const myNotifications = notifications.filter(n => n.recipients.includes(userId))
-    return myNotifications
+    return notifications
   }
-  async deleteNotifi(notificationId){
+  async deleteNotification(notificationId){
     const res = await dbContext.Notifications.findById(notificationId)
     if(!res){
       throw new BadRequest('Invalid Id')
@@ -35,6 +34,14 @@ class NotificationService{
     // }
     await dbContext.Notifications.findByIdAndDelete(notificationId)
   }
-  
+  async editSeen(accountId){
+    const result = await dbContext.Notifications.find({recipient: accountId})
+    if(!result){
+      throw new BadRequest('You have no notifications')
+    }
+    await dbContext.Notifications.updateMany({recipient: accountId}, {seen:true}, {new:true})
+    const update = await dbContext.Notifications.find({recipient: accountId})
+    return  update
+  }
 }
 export const notificationService = new NotificationService()

@@ -15,7 +15,7 @@ export class PostsController extends BaseController {
   async createPost(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
-      const post = await postsService.createPost(req.body)
+      const post = await postsService.createPost(req.body,)
       return res.send(post)
     } catch (error) {
       next(error)

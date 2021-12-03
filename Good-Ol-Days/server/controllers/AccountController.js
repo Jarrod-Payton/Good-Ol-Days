@@ -16,7 +16,8 @@ export class AccountController extends BaseController {
       .get('/albums', this.getAllMyAlbums)
       .get('/firebase-token', this.getFirebaseAuthToken)
       .get('/notifications', this.getMyNotifications)
-      .delete('/notifications/:id', this.deleteNotifi)
+      .put('/notifications', this.setSeen)
+      .delete('/notifications/:id', this.deleteNotification)
       .put('', this.updateAccount)
   }
 
@@ -73,9 +74,17 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
-  async deleteNotifi(req, res, next){
+  async deleteNotification(req, res, next){
     try {
-      const result = await notificationService.deleteNotifi(req.params.id)
+      const result = await notificationService.deleteNotification(req.params.id)
+      return res.send(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async setSeen(req,res,next){
+    try {
+      const result = await notificationService.editSeen(req.userInfo.id)
       return res.send(result)
     } catch (error) {
       next(error)
