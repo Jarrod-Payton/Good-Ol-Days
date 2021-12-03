@@ -1,9 +1,15 @@
 <template>
   <div class="row mt-md-5 mt-2 m-0 p-0">
-    <div class="col-md-6 order-md-2 p-0" v-show="activeAlbum.hasChallenges">
-      <Challenge
-        v-if="user.isAuthenticated && account.id === activeAlbum.creatorId"
-      />
+    <div
+      class="col-md-6 order-md-2 p-0"
+      v-show="
+        (activeAlbum.hasChallenges &&
+          user.isAuthenticated &&
+          activeChallenge.isActive === true) ||
+        account.id === activeAlbum.creatorId
+      "
+    >
+      <Challenge />
     </div>
     <div class="col-md-6 order-md-1">
       <div class="row">
@@ -84,6 +90,7 @@ export default {
       splicedPosts,
       posts1: computed(() => AppState.posts.slice(0, 2)),
       activeAlbum: computed(() => AppState.activeAlbum),
+      activeChallenge: computed(() => AppState.activeChallenge),
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       setActive(id) {

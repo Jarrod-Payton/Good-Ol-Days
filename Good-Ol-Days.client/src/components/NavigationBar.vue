@@ -24,20 +24,37 @@
       <div class="d-flex align-items-center">
         <div>
           <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
-          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.verified" />
           <NavGroupAlbum
-            v-if="collabThisAlbum.find((c) => c.accountId === account.id)"
+            v-if="
+              collabThisAlbum.find(
+                (c) => c.accountId === account.id && c.verified
+              )
+            "
           />
-          <div v-if="!user.isAuthenticated">
+          <div
+            v-if="
+              !collabThisAlbum.find((c) => c.accountId === account.id) &&
+              route.name !== 'Home' &&
+              activeAlbum.creatorId !== account.id
+            "
+          >
             <NavJoin :user="user" />
           </div>
           <div
             v-if="
-              !collabThisAlbum.find((c) => c.accountId === account.id) &&
-              !['Home']
+              collabThisAlbum.find(
+                (c) => c.accountId === account.id && !c.verified
+              ) && activeAlbum.creatorId !== account.id
             "
           >
-            <NavJoin :user="user" />
+            <button
+              title="Request pending"
+              class="btn share disabled elevation-3"
+            >
+              <i class="mdi ms-1 mdi-18px mdi-account-arrow-right-outline"></i>
+              Pending request to join
+            </button>
           </div>
         </div>
         <div class="me-4" v-if="user.isAuthenticated">
@@ -121,7 +138,8 @@ export default {
   setup() {
     const route = useRoute()
     return {
-
+      route,
+      route: computed(() => route),
       activeAlbum: computed(() => AppState.activeAlbum),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
       user: computed(() => AppState.user),
@@ -140,6 +158,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.share {
+  background-color: #9964cc;
+  color: rgb(255, 255, 255);
+  font-family: "Saira Condensed", sans-serif;
+  padding: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-right: 4vh;
+  margin-bottom: 2vh;
+}
 .cardspec {
   border-radius: 0;
   border-width: 4px !important;
