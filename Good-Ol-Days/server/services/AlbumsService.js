@@ -9,7 +9,7 @@ class AlbumsService {
   }
 
   async getAlbumById(id) {
-    const result = await dbContext.Albums.findById(id)
+    const result = await dbContext.Albums.findById(id).populate('creator')
     if (!result) {
       throw new BadRequest('Invalid Id')
     }
@@ -18,7 +18,7 @@ class AlbumsService {
 
   async createAlbum(body) {
     const newAlbum = await dbContext.Albums.create(body)
-    return newAlbum
+    return newAlbum.populate('creator')
   }
 
   async editAlbum(id, body) {

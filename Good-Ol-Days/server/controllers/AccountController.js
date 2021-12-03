@@ -3,6 +3,7 @@ import { accountService } from '../services/AccountService'
 import { albumsService } from '../services/AlbumsService'
 import { collaboratorsService } from '../services/CollaboratorsService'
 import { firebaseService } from '../services/FirebaseService'
+import { notificationService } from "../services/NotificationService"
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -14,6 +15,9 @@ export class AccountController extends BaseController {
       .get('/collaborators', this.getAllMyCollabAlbums)
       .get('/albums', this.getAllMyAlbums)
       .get('/firebase-token', this.getFirebaseAuthToken)
+      .get('/notifications', this.getMyNotifications)
+      .put('/notifications', this.setSeen)
+      .delete('/notifications/:id', this.deleteNotification)
       .put('', this.updateAccount)
   }
 
@@ -58,6 +62,30 @@ export class AccountController extends BaseController {
     try {
       const token = await firebaseService.getFirebaseAuthToken(req.userInfo.id)
       return res.send({ token })
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getMyNotifications(req,res,next){
+    try {
+      const result = await notificationService.getMyNotifications(req.userInfo.id)
+      return res.send(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async deleteNotification(req, res, next){
+    try {
+      const result = await notificationService.deleteNotification(req.params.id)
+      return res.send(result)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async setSeen(req,res,next){
+    try {
+      const result = await notificationService.editSeen(req.userInfo.id)
+      return res.send(result)
     } catch (error) {
       next(error)
     }
