@@ -105,10 +105,21 @@
               </div>
             </div>
           </div>
-          <div v-if="myGroupAlbums[0]">
+          <div v-if="collaborators[0]">
             <div class="line"></div>
             <div>
               <p class="title mt-2 ms-1">Group Albums</p>
+            </div>
+            <div
+              v-for="c in collaborators"
+              :key="c.albumId"
+              class="card text-center border-0 cardalbums selectable"
+            >
+              <div data-bs-dismiss="offcanvas" @click="routeTo(c.albumId)">
+                <div>
+                  {{ c.albumTitle }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -135,7 +146,7 @@ export default {
     const router = useRouter()
     return {
       myAlbums: computed(() => AppState.myAlbums),
-      myGroupAlbums: computed(() => AppState.myGroupAlbums),
+      collaborators: computed(() => AppState.collaborators),
       edit,
       editProfile,
       router,

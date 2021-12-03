@@ -4,7 +4,7 @@
       <NavigationBar />
     </div>
     <div class="row">
-      <router-view />
+      <router-view :user="user" />
     </div>
   </main>
   <footer>
@@ -22,7 +22,8 @@ export default {
   setup() {
     return {
       appState: computed(() => AppState),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      user: computed(() => AppState.user),
     }
   }
 }

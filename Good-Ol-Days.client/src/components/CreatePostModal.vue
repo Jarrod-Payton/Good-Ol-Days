@@ -19,8 +19,8 @@
                   <input
                     class="inputupload mtop"
                     type="file"
-                    ref="fileInput"
                     accept="image/*"
+                    id="inputfile"
                     @change="fileSelect"
                   />
                 </p>
@@ -125,6 +125,7 @@ export default {
           files.value = []
           Modal.getOrCreateInstance(document.getElementById("createPostModal")).toggle()
           submitting.value = false
+          document.getElementById('inputfile').value = ""
         } catch (error) {
           logger.error(error)
         }

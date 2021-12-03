@@ -1,7 +1,9 @@
 <template>
   <div class="row mt-md-5 mt-2 m-0 p-0">
     <div class="col-md-6 order-md-2 p-0" v-show="activeAlbum.hasChallenges">
-      <Challenge />
+      <Challenge
+        v-if="user.isAuthenticated && account.id === activeAlbum.creatorId"
+      />
     </div>
     <div class="col-md-6 order-md-1">
       <div class="row">
@@ -47,7 +49,10 @@ import { logger } from "../utils/Logger";
 import { challengeService } from "../services/ChallengeService";
 import { collaboratorService } from "../services/CollaboratorService";
 export default {
-  setup() {
+  props: {
+    user: { type: Object, required: true }
+  },
+  setup(props) {
     const splicedPosts = ref([])
     const route = useRoute();
     watchEffect(() => {
@@ -55,15 +60,22 @@ export default {
       splicedPosts.value = splicedPosts.value.splice(2, AppState.posts.length)
 
     })
-    const user = computed(() => AppState.user)
     onMounted(async () => {
       try {
-        if (user.isAuthenticated) {
+        await albumService.setActiveAlbum(route.params.albumId);
+        if (props.user.isAuthenticated) {
+          await challengeService.getChallenges()
+        }
+        await postService.getPosts(route.params.albumId)
+      } catch (error) {
+        Pop.toast(error);
+      }
+    });
+    watchEffect(async () => {
+      try {
+        if (props.user.isAuthenticated && route.params.albumId) {
           await collaboratorService.getCollabThisAlbum(route.params.albumId)
         }
-        await albumService.setActiveAlbum(route.params.albumId);
-        await challengeService.getChallenges()
-        await postService.getPosts(route.params.albumId)
       } catch (error) {
         Pop.toast(error);
       }
@@ -72,7 +84,8 @@ export default {
       splicedPosts,
       posts1: computed(() => AppState.posts.slice(0, 2)),
       activeAlbum: computed(() => AppState.activeAlbum),
-
+      user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       setActive(id) {
         postService.setActive(id)
       }
