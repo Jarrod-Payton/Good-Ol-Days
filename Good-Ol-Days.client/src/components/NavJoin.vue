@@ -14,7 +14,7 @@
   <div class="me-4 mt-3 mobile">
     <div>
       <button
-        :disabled="collabThisAlbum.find((c) => c.accountId === account.id)"
+        :disabled="collabThisAlbum.find((c) => c.accountId === user.id)"
         @click="login"
         title="Request to join this album"
         class="btn share elevation-3"
@@ -33,6 +33,7 @@ import { AppState } from "../AppState"
 import { AuthService } from "../services/AuthService"
 import { collaboratorService } from "../services/CollaboratorService"
 import { useRoute } from "vue-router"
+import { challengeService } from "../services/ChallengeService"
 export default {
   props: {
     user: { type: Object }
@@ -43,10 +44,13 @@ export default {
       route,
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
       async login() {
-        await AuthService.loginWithPopup()
-        if (props.user.isAuthenticated) {
+        if (!props.user.isAuthenticated) {
+          await AuthService.loginWithPopup()
+        }
+        if (props.user.isAuthenticated && !this.collabThisAlbum.find((c) => c.accountId === account.id)) {
           await collaboratorService.addColab(route.params.albumId)
         }
+        await challengeService.getChallenges()
       },
     }
   }

@@ -2,6 +2,7 @@
 
 export class Collaborator {
   constructor(data){
+    this.id = data.id
     this.albumId = data.albumId
     this.albumTitle = data.album.title
     this.picture = data.account.picture
