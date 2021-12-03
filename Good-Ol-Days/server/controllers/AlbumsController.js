@@ -19,6 +19,7 @@ export class AlbumsController extends BaseController {
       .delete('/:id', this.deleteAlbum)
   }
 
+  //This gets all the Posts in our one album
   async getPostsByAlbumId(req, res, next) {
     try {
       const posts = await postsService.getPostsByAlbumId(req.params.id)
@@ -27,6 +28,8 @@ export class AlbumsController extends BaseController {
       next(error)
     }
   }
+
+  // This gets just one single Album
   async getAlbumById(req, res, next) {
     try {
       const result = await albumsService.getAlbumById(req.params.id)
@@ -36,6 +39,7 @@ export class AlbumsController extends BaseController {
     }
   }
 
+  // This gets all the collaborators associated with this one album
   async getCollabByAlbumId(req, res, next) {
     try {
       const result = await collaboratorsService.getCollabByAlbumId(req.params.id)
@@ -45,6 +49,7 @@ export class AlbumsController extends BaseController {
     }
   }
 
+  //This gets all the challenges assouciated with this one album
   async getChallengesByAlbum(req, res, next) {
     try {
       const result = await challengeService.getChallengesByAlbum(req.params.id)
@@ -54,6 +59,7 @@ export class AlbumsController extends BaseController {
     }
   }
 
+  // This creates an Album
   async createAlbum(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
@@ -64,6 +70,7 @@ export class AlbumsController extends BaseController {
     }
   }
 
+  // This deletes an Album and cascades to delete everything inside of the album
   async deleteAlbum(req, res, next) {
     try {
       req.body.id = req.params.id
@@ -75,6 +82,7 @@ export class AlbumsController extends BaseController {
     }
   }
 
+  // This is so that we can edit any part of an album
   async editAlbum(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id

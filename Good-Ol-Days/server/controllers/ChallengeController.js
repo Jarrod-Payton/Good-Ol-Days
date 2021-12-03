@@ -9,6 +9,7 @@ export class ChallengeController extends BaseController {
       .delete('/:id', this.flipActive)
   }
 
+  // This gets the single challenge by finding its id. 
   async getChallengeById(req, res, next) {
     try {
       const result = await challengeService.getChallengeById(req.params.id)
@@ -18,6 +19,7 @@ export class ChallengeController extends BaseController {
     }
   }
 
+  // This creates a challenge and connects it to the associated album
   async createChallenge(req, res, next) {
     try {
       const newChallenge = await challengeService.createChallenge(req.body)
@@ -27,6 +29,7 @@ export class ChallengeController extends BaseController {
     }
   }
 
+  // This is a soft delete (edits) that flips a bool for a challenge. It changes the "isActive" to false
   async flipActive(req, res, next) {
     try {
       const flipped = await challengeService.flipActive(req.params.id)
