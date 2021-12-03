@@ -14,8 +14,7 @@ class NotificationService{
     }
     async createPostNotification(user,album){
       const found = await albumsService.getAlbumById({_id: album})
-      const account = await accountService.getAccount(user)
-      await dbContext.Notifications.create({type: 'post', notifier:`${account.id}`, albumId:found.id, recipient:[found.creatorId]})
+      await dbContext.Notifications.create({type: 'post', notifier:`${user}`, albumId:found.id, recipient:[found.creatorId]})
     }
   async getMyNotifications(userId){
     const notifications = await dbContext.Notifications.find({recipient: userId}).populate('album').populate('recipient')
