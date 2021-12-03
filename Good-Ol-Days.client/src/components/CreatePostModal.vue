@@ -48,20 +48,20 @@
                   />
                 </p>
               </div>
-              <div class="col-12">
+              <div class="col-12" v-if="activeChallenge.id">
                 <p>
                   Is this post for the challenge?
                   <input
                     type="radio"
                     class="ms-3"
-                    v-model="postDetails.challengeId"
+                    v-model="hasChallenge"
                     value="true"
                   />
                   Yes
                   <input
                     type="radio"
                     class="ms-2"
-                    v-model="postDetails.challengeId"
+                    v-model="hasChallenge"
                     value="false"
                   />
                   No
@@ -71,7 +71,15 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn" @click="upload">Submit</button>
+            <button
+              type="button"
+              class="btn"
+              @click="upload"
+              :disabled="submitting"
+            >
+              <h5 v-if="!submitting">Submit</h5>
+              <i class="mdi mdi-spin mdi-loading" v-if="submitting" />
+            </button>
             <button data-bs-dismiss="modal" class="btn">Close</button>
           </div>
         </form>
@@ -90,11 +98,16 @@ import { firebaseService } from '../services/FirebaseService'
 export default {
   setup() {
     const postDetails = ref({})
+    const hasChallenge = ref(false)
     const files = ref([])
+    const submitting = ref(false)
     return {
+      hasChallenge,
+      submitting,
       postDetails,
       files,
       activeAlbum: computed(() => AppState.activeAlbum),
+      activeChallenge: computed(() => AppState.activeChallenge),
       fileSelect(e) {
         files.value = e.target.files
         logger.log('files ref value', files.value)
@@ -106,18 +119,20 @@ export default {
       },
       async createPost() {
         try {
-          postService.createPost(postDetails.value)
+          await postService.createPost(postDetails.value, hasChallenge.value)
           document.getElementById('image').src = ''
           postDetails.value = {}
           files.value = []
           Modal.getOrCreateInstance(document.getElementById("createPostModal")).toggle()
-
+          submitting.value = false
         } catch (error) {
           logger.error(error)
         }
       },
       async upload() {
         try {
+          submitting.value = true
+          logger.log('Submitting', submitting.value)
           const url = await firebaseService.upload(files.value[0], this.activeAlbum)
           postDetails.value.imgUrl = url
           logger.log(url)

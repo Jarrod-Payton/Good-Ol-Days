@@ -16,11 +16,8 @@ class PostService {
     logger.log('Posts', res.data)
     AppState.posts = res.data
   }
-  async createPost(body) {
-    if (body.challengeId === 'false') {
-      body.challengeId = body.challengeId.remove
-    }
-    if (body.challengeId === 'true') {
+  async createPost(body, hasChallenge) {
+    if (hasChallenge === 'true') {
       body.challengeId = AppState.activeChallenge.id
     }
     const res = await api.post(`api/albums/${AppState.activeAlbum.id}/posts`, body)
