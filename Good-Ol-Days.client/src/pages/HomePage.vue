@@ -58,7 +58,10 @@
         v-for="c in collaborators"
         :key="c.albumId"
       >
-        <div class="card cardgroupalbum grow2 mb-3">
+        <div
+          @click="routerLink(c.albumId)"
+          class="card selectable cardgroupalbum grow2 mb-3"
+        >
           <p class="gpalbumtitle">{{ c.albumTitle }}</p>
         </div>
       </div>
@@ -75,17 +78,26 @@ import { collaboratorService } from "../services/CollaboratorService"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import { resetService } from "../services/ResetService"
+import { useRouter } from "vue-router"
 export default {
   name: 'Home',
   setup() {
+    const router = useRouter()
     onMounted(async () => {
       await albumService.getMyAlbums()
       await collaboratorService.getAllMyCollabAlbums()
       resetService.resetUtil()
     })
     return {
+      router,
       myAlbums: computed(() => AppState.myAlbums),
-      collaborators: computed(() => AppState.collaborators)
+      collaborators: computed(() => AppState.collaborators),
+      routerLink(albumId) {
+        router.push({
+          name: "Album",
+          params: { albumId: albumId }
+        })
+      }
     }
   }
 }

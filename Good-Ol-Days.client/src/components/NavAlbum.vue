@@ -1,9 +1,10 @@
 <template>
   <div class="component">
-    <div class="desktop d-flex">
+    <div v-if="activeAlbum.creatorId === account.id" class="desktop d-flex">
       <div class="d-flex flex-row">
         <div>
           <button
+            v-if="activeAlbum.creatorId === account.id"
             title="Add to this this album"
             data-bs-toggle="modal"
             data-bs-target="#createPostModal"
@@ -32,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="mobile">
+    <div v-if="activeAlbum.creatorId === account.id" class="mobile">
       <button
         data-bs-toggle="modal"
         data-bs-target="#createPostModal"
@@ -67,6 +68,7 @@ export default {
       router,
       route,
       activeAlbum: computed(() => AppState.activeAlbum),
+      account: computed(() => AppState.account),
       async deleteAlbum() {
         try {
           if (await Pop.confirm()) {

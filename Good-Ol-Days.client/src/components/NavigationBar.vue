@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user.isAuthenticated" class="NavigationBar desktop col-12">
+  <div class="NavigationBar desktop col-12">
     <div
       class="
         card
@@ -25,9 +25,22 @@
         <div>
           <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
           <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.name" />
-          <NavGroupAlbum v-if="collabThisAlbum[0]?.name" />
+          <NavGroupAlbum
+            v-if="collabThisAlbum.find((c) => c.accountId === account.id)"
+          />
+          <div v-if="!user.isAuthenticated">
+            <NavJoin :user="user" />
+          </div>
+          <div
+            v-if="
+              !collabThisAlbum.find((c) => c.accountId === account.id) &&
+              !['Home']
+            "
+          >
+            <NavJoin :user="user" />
+          </div>
         </div>
-        <div class="me-4">
+        <div class="me-4" v-if="user.isAuthenticated">
           <p class="m-0 f-14 text-end">{{ account.name }}</p>
           <p class="m-0 text-end">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
@@ -35,6 +48,7 @@
           </p>
         </div>
         <img
+          v-if="user.isAuthenticated"
           data-bs-toggle="offcanvas"
           href="#offcanvasExample"
           role="button"
@@ -48,7 +62,7 @@
     </div>
   </div>
   <!-- MOBILE NAVIGATION BAR -->
-  <div v-if="user.isAuthenticated" class="NavigationBar mobile col-12 p-0">
+  <div class="NavigationBar mobile col-12 p-0">
     <div class="card cardspec">
       <div class="d-flex justify-content-center">
         <router-link :to="{ name: 'Home' }">
@@ -65,9 +79,15 @@
         <div>
           <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
           <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.name" />
-          <NavGroupAlbum v-if="collabThisAlbum[0]?.name" />
+          <NavGroupAlbum
+            v-if="
+              collabThisAlbum[0]?.name &&
+              collabThisAlbum.find((c) => c.accountId === account.id)
+            "
+          />
+          <NavJoin v-if="!user.isAuthenticated" />
         </div>
-        <div class="me-3 ms-3">
+        <div class="me-3 ms-3" v-if="user.isAuthenticated">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
           <p class="m-0 text-end textmobile">{{ account.email }}</p>
           <p @click="logout" class="m-0 logout selectable1 text-end">
@@ -75,6 +95,7 @@
           </p>
         </div>
         <img
+          v-if="user.isAuthenticated"
           data-bs-toggle="offcanvas"
           href="#offcanvasExample"
           role="button"
@@ -94,16 +115,17 @@
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { AuthService } from "../services/AuthService"
-import { useRouter } from "vue-router"
+import { useRoute } from "vue-router"
 import { albumService } from "../services/AlbumService"
 export default {
   setup() {
-    const router = useRouter()
+    const route = useRoute()
     return {
-      user: computed(() => AppState.user),
-      account: computed(() => AppState.account),
+
       activeAlbum: computed(() => AppState.activeAlbum),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
+      user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
       },
@@ -113,6 +135,7 @@ export default {
     }
   }
 }
+
 </script>
 
 

@@ -1,4 +1,4 @@
-<template>
+<template >
   <div>
     <div class="row m-0">
       <div class="col-12 paddingmobile" v-if="doneSyncing">

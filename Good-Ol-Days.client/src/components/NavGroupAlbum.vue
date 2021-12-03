@@ -4,20 +4,22 @@
       <div class="d-flex">
         <div class="me-5">
           <div class="card topcard border-0 text-center">
-            Pool Party 10/2020
+            {{ collabThisAlbum[0].albumTitle }}
           </div>
           <div class="card bottomcard border-0">
             <div>
               <p class="p-0 mb-0 ps-2">People in this group:</p>
             </div>
-            <div class="d-flex" v-for="u in collabThisAlbum" :key="u.accountId">
-              <div>
-                <img
-                  :title="u.name"
-                  class="profilepics"
-                  :src="u.picture"
-                  alt=""
-                />
+            <div class="d-flex">
+              <div v-for="u in collabThisAlbum" :key="u.accountId">
+                <div class="">
+                  <img
+                    :title="u.name"
+                    class="profilepics"
+                    :src="u.picture"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -36,8 +38,12 @@
           <p class="album text-center">Album: Shared</p>
         </div>
       </div>
-      <div>
-        <button title="Delete this album" class="btn delete elevation-3">
+      <div v-if="activeAlbum.creatorId === account.id">
+        <button
+          @click="deleteAlbum"
+          title="Delete this album"
+          class="btn delete elevation-3"
+        >
           <i class="mdi mdi-18px mdi-trash-can"></i>
         </button>
       </div>
@@ -63,11 +69,32 @@
 <script>
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
+import Pop from "../utils/Pop"
+import { logger } from "../utils/Logger"
+import { albumService } from "../services/AlbumService"
+import { useRoute, useRouter } from "vue-router"
 export default {
   setup() {
+    const route = useRoute()
+    const router = useRouter()
     return {
+      route,
+      router,
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      activeAlbum: computed(() => AppState.activeAlbum),
+      async deleteAlbum() {
+        try {
+          if (await Pop.confirm()) {
+            await albumService.deleteAlbum(route.params.albumId)
+            router.push({ name: 'Home' })
+            Pop.toast('Album deleted!', 'success')
+          }
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }
