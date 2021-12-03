@@ -52,7 +52,7 @@ class AlbumsService {
       throw new Forbidden('You do not have permission to delete this')
     }
     if (!found) {
-      // if theere is no Id, throw BadRequest
+      // if there is no Id, throw BadRequest
       throw new BadRequest('Invalid Id')
     }
     await firebaseService.deleteFirebaseFolder(found.title)
@@ -60,6 +60,7 @@ class AlbumsService {
     await dbContext.Posts.deleteMany({ albumId: body.id })
     await dbContext.Challenges.deleteMany({ albumId: body.id })
     await dbContext.Collaborators.deleteMany({ albumId: body.id })
+    await dbContext.Notifications.deleteMany({ albumId: body.id })
   }
 }
 export const albumsService = new AlbumsService()
