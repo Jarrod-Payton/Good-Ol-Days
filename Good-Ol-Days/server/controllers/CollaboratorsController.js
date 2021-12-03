@@ -12,6 +12,7 @@ export class CollaboratorsController extends BaseController {
       .put('/:id', this.editCollaborator)
   }
 
+  // add a collaborator and add a notification
   async addCollaborator(req, res, next) {
     try {
       req.body.accountId = req.userInfo.id
@@ -22,6 +23,7 @@ export class CollaboratorsController extends BaseController {
     }
   }
 
+  // This deletes a collaborator from an album, this is a hard delete
   async deleteCollaborator(req, res, next) {
     try {
       const userId = req.userInfo.id
@@ -33,6 +35,7 @@ export class CollaboratorsController extends BaseController {
     }
   }
 
+  // this edits a collaborator and a notification. In Collaborator, it switches "verified" to true and in notification it switches "verfied" to true.  
   async editCollaborator(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id

@@ -12,6 +12,7 @@ export class PostsController extends BaseController {
       .delete('/:id', this.deletePost)
   }
 
+  // This will create a post associated to an albumId. It will also add a notification
   async createPost(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
@@ -22,7 +23,7 @@ export class PostsController extends BaseController {
     }
   }
 
-
+  // This will get jus one single post's Id
   async getPostId(req, res, next) {
     try {
       const post = await postsService.getPostId(req.params.id)
@@ -32,6 +33,7 @@ export class PostsController extends BaseController {
     }
   }
 
+  // This will delete a single post.
   async deletePost(req, res, next) {
     try {
       await postsService.deletePost(req.params.id, req.userInfo.id)
