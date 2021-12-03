@@ -20,6 +20,14 @@ class FirebaseService {
         logger.log(url)
         return url
     }
+
+    async uploadProfile(profilePic, ProfileName) {
+        logger.log('ProfilePic', profilePic)
+        logger.log('ProfileName', ProfileName)
+        const collection = storage.ref('profiles')
+        const resource = collection.child(profileName).child(profilePic)
+        const snapshot = await resource.put()
+    }
     async login() {
         try {
             const res = await api.get('/account/firebase-token')
