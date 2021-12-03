@@ -15,6 +15,7 @@ class PostService {
     const res = await api.get(`api/albums/${albumId}/posts`)
     logger.log('Posts', res.data)
     AppState.posts = res.data
+    AppState.doneSyncing = true
   }
   async createPost(body, hasChallenge) {
     if (hasChallenge === 'true') {

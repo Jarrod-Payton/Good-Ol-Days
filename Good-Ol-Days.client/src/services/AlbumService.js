@@ -27,9 +27,9 @@ class AlbumService {
   async deleteAlbum(albumId) {
     const res = await api.delete('api/albums/' + albumId)
     logger.log('DELETE ALBUM', res.data)
-    AppState.myAlbums.filter( a => a.id !== albumId )
+    AppState.myAlbums.filter(a => a.id !== albumId)
   }
-  clear(){
+  clear() {
     AppState.activeAlbum = {}
     AppState.activeGroupAlbum = {}
     AppState.collabThisAlbum = []

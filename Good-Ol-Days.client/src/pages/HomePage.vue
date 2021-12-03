@@ -77,6 +77,7 @@ import { albumService } from "../services/AlbumService"
 import { collaboratorService } from "../services/CollaboratorService"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
+import { resetService } from "../services/ResetService"
 import { useRouter } from "vue-router"
 export default {
   name: 'Home',
@@ -84,8 +85,8 @@ export default {
     const router = useRouter()
     onMounted(async () => {
       await albumService.getMyAlbums()
-      AppState.activeAlbum = {}
       await collaboratorService.getAllMyCollabAlbums()
+      resetService.resetUtil()
     })
     return {
       router,

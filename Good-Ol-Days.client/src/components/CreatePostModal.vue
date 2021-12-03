@@ -98,7 +98,7 @@ import { firebaseService } from '../services/FirebaseService'
 export default {
   setup() {
     const postDetails = ref({})
-    const hasChallenge = ref(false)
+    const hasChallenge = ref(Boolean)
     const files = ref([])
     const submitting = ref(false)
     return {
@@ -109,12 +109,17 @@ export default {
       activeAlbum: computed(() => AppState.activeAlbum),
       activeChallenge: computed(() => AppState.activeChallenge),
       fileSelect(e) {
-        files.value = e.target.files
-        logger.log('files ref value', files.value)
-        const reader = new FileReader()
-        reader.readAsDataURL(files.value[0])
-        reader.onload = () => {
-          document.getElementById('image').src = reader.result
+        try {
+          files.value = e.target.files
+          logger.log('files ref value', files.value)
+          const reader = new FileReader()
+          reader.readAsDataURL(files.value[0])
+          reader.onload = () => {
+            document.getElementById('image').src = reader.result
+          }
+        } catch (error) {
+          Pop.toast(error)
+          submitting.value = false
         }
       },
       async createPost() {
@@ -127,7 +132,9 @@ export default {
           submitting.value = false
           document.getElementById('inputfile').value = ""
         } catch (error) {
-          logger.error(error)
+          Pop.toast(error)
+          submitting.value = false
+
         }
       },
       async upload() {

@@ -1,10 +1,11 @@
 <template >
   <div>
     <div class="row m-0">
-      <div class="col-12 paddingmobile">
+      <div class="col-12 paddingmobile" v-if="doneSyncing">
         <div class="d-flex justify-content-center align-content-center">
           <div class="card cardspec">
             <div class="card-body">
+              <!--This is the make some memories header-->
               <div class="row">
                 <div class="col-12">
                   <h2 class="text-center font pb-3 pt-2 text-sm-h2">
@@ -12,6 +13,36 @@
                   </h2>
                 </div>
               </div>
+              <!--This is for when the challenge is active-->
+              <div class="row" v-if="activeChallenge?.title">
+                <div class="col-12">
+                  <h3 class="font limeText weeklyChallenges">
+                    Weekly Challenge:
+                  </h3>
+                </div>
+                <div class="col-12">
+                  <!-- TODO This is where we will put the challenge if we have one -->
+                  <h3 class="font takeAPhoto challengeFont">
+                    {{ activeChallenge.title }}
+                  </h3>
+                </div>
+                <div class="col-12">
+                  <div
+                    class="d-flex justify-content-end align-content-center mt-4"
+                  >
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target="#createPostModal"
+                      class="customBtn btn btn-success cloudy"
+                      title="Upload Photo"
+                    >
+                      <i class="mdi mdi-cloud-upload me-1" />
+                      Upload
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--If No Challenge-->
               <div class="row" v-if="!activeChallenge.title">
                 <div class="col-12">
                   <div class="d-flex">
@@ -73,40 +104,21 @@
                   </form>
                 </div>
               </div>
-              <!--This is for when the challenge is active-->
-              <div class="row" v-if="activeChallenge?.title">
-                <div class="col-12">
-                  <h3 class="font limeText weeklyChallenges">
-                    Weekly Challenge:
-                  </h3>
-                </div>
-                <div class="col-12">
-                  <!-- TODO This is where we will put the challenge if we have one -->
-                  <h3 class="font takeAPhoto challengeFont">
-                    {{ activeChallenge.title }}
-                  </h3>
-                </div>
-                <div class="col-12">
-                  <div
-                    class="d-flex justify-content-end align-content-center mt-4"
-                  >
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#createPostModal"
-                      class="customBtn btn btn-success cloudy"
-                      title="Upload Photo"
-                    >
-                      <i class="mdi mdi-cloud-upload me-1" />
-                      Upload
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <!--This is for the quote-->
             </div>
             <div class="row m-0">
               <div class="col-12 align-self-end">
                 <p class="text-center mt-3">"{{ quote }}"</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" v-else>
+        <div class="card cardspec">
+          <div class="card-body">
+            <div class="d-flex justify-content-center align-items-center">
+              <i class="mdi mdi-spin mdi-loading loadingthing text-center" />
             </div>
           </div>
         </div>
@@ -166,12 +178,21 @@ export default {
       },
       quote: computed(() => AppState.activeQuote),
       MyChallenges: computed(() => AppState.suggestedChallenges),
-      activeChallenge: computed(() => AppState.activeChallenge)
+      activeChallenge: computed(() => AppState.activeChallenge),
+      doneSyncing: computed(() => AppState.doneSyncing)
     }
   },
 }
 </script>
 <style scoped>
+.loadingthing {
+  font-size: 3vh;
+  width: 10vh;
+  height: 10vh;
+}
+.card-thing {
+  size: 100%;
+}
 .cloudy {
   margin-top: 3vh;
   font-size: 2vh;

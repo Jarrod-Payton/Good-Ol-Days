@@ -16,5 +16,6 @@ export const AppState = reactive({
   quotes: ['Things end but memories last forever.', 'Memories are timeless treasures of the heart.', 'Happy times come and go but the memories stay forever', 'It takes more than good memory to have good memories.', 'The best thing about memories is making them.', 'Little moments big memories.', 'A good life is a collection of good memories.'],
   activeQuote: '',
   collaborators: [],
-  collabThisAlbum: []
+  collabThisAlbum: [],
+  doneSyncing: false
 })
