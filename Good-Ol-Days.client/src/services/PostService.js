@@ -24,7 +24,7 @@ class PostService {
       body.challengeId = AppState.activeChallenge.id
     }
     body.albumId = AppState.activeAlbum.id
-    const res = await api.post(`api/posts`, body)
+    const res = await api.post('api/posts', body)
     AppState.posts.push(res.data)
   }
   async deletePost() {
