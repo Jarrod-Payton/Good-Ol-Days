@@ -4,7 +4,7 @@ const ObjectId = Schema.Types.ObjectId
 
 export const AlbumSchema = new Schema(
   {
-    coverImg: { type: String, required: true, default: 'https://firebasestorage.googleapis.com/v0/b/good-ol--days.appspot.com/o/defaultCoverImg%2Falbumpic.png?alt=media&token=a18e9380-4b7f-42ba-bb37-0e38ed2da186' },
+    coverImg: { type: String, required: true, default: 'https://firebasestorage.googleapis.com/v0/b/good-ol--days.appspot.com/o/albumpic.png?alt=media&token=44c45d74-d3d4-41eb-8d98-bc4dc4a48d5e' },
     hasChallenges: { type: Boolean, required: true, default: false },
     creatorId: { type: ObjectId, required: true, ref: 'Profile' },
     title: { type: String, requried: true },

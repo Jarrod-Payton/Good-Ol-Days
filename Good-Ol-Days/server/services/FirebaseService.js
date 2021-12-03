@@ -29,7 +29,7 @@ class FirebaseService {
 
   async deleteFirebaseFolder(albumName) {
     await this.bucket.deleteFiles({
-      prefix: `${albumName}`
+      prefix: `albums/${albumName}/`
     })
   }
 }
