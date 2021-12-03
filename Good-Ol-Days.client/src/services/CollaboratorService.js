@@ -17,14 +17,14 @@ async getCollabThisAlbum(albumId){
   const collab = res.data.map( c => c = new Collaborator(c))
   AppState.collabThisAlbum = collab
   logger.log('COLLAB THIS ALBUM', AppState.collabThisAlbum)
-  let account = AppState.account
-  if( !AppState.collabThisAlbum.find(c => c.accountId === account.id) && AppState.collabThisAlbum.length > 0) {
+  const accountId = AppState.account.id
+  if( !AppState.collabThisAlbum.find(c => c.accountId === accountId) && AppState.collabThisAlbum.length > 0) {
     this.addColab(albumId)
-    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === account.id)
+    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === accountId)
     this.verify(collabowner.id)
   }
-  if( AppState.activeAlbum.accountId === AppState.account.id && AppState.collabThisAlbum.find(c => !c.verified)) {
-    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === account.id)
+  if( AppState.activeAlbum.creatorId === accountId && AppState.collabThisAlbum.find((c) => c.accountId === accountId && c.verified)) {
+    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === accountId)
     this.verify(collabowner.id)
   }
 
@@ -37,9 +37,7 @@ async verify(id){
 async addColab(albumId){
   const res = await api.post('api/collaborators', {albumId: albumId})
   logger.log('ADD COLLAB', res.data)
-  if ( AppState.activeAlbum.creatorId === account.id) {
-    
-  }
+
 }
 }
 export const collaboratorService = new CollaboratorService()

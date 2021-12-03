@@ -11,15 +11,18 @@
               <p class="p-0 mb-0 ps-2">People in this group:</p>
             </div>
             <div class="d-flex">
-              <div v-for="u in collabThisAlbum" :key="u.accountId">
+              <div>
                 <div class="">
                   <img
-                    :title="u.name"
+                    :title="account.name"
                     class="profilepics"
-                    :src="u.picture"
+                    :src="account.picture"
                     alt=""
                   />
                 </div>
+              </div>
+              <div v-for="u in collabThisAlbum" :key="u.accountId">
+                <ProfileCircles />
               </div>
             </div>
           </div>
