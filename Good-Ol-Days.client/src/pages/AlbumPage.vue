@@ -3,10 +3,10 @@
     <div
       class="col-md-6 order-md-2 p-0"
       v-show="
-        (activeAlbum.hasChallenge &&
+        (activeAlbum.hasChallenges &&
           user.isAuthenticated &&
           activeChallenge.isActive === true) ||
-        (account.id === activeAlbum.creatorId && activeAlbum.hasChallenge)
+        (account.id === activeAlbum.creatorId && activeAlbum.hasChallenges)
       "
     >
       <Challenge />
