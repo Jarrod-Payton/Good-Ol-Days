@@ -20,11 +20,12 @@ class PostService {
     if (hasChallenge === 'true') {
       body.challengeId = AppState.activeChallenge.id
     }
-    const res = await api.post(`api/albums/${AppState.activeAlbum.id}/posts`, body)
+    body.albumId = AppState.activeAlbum.id
+    const res = await api.post(`api/posts`, body)
     AppState.posts.push(res.data)
   }
   async deletePost() {
-    await api.delete(`api/albums/${AppState.activeAlbum.id}/posts/${AppState.activePost.id}`)
+    await api.delete(`api/posts/${AppState.activePost.id}`)
     AppState.posts = AppState.posts.filter(p => p.id !== AppState.activePost.id)
     AppState.activePost = {}
     Pop.toast('Deleted Post')

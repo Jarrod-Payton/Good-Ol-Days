@@ -6,20 +6,35 @@ import { logger } from "../utils/Logger"
 
 
 class FirebaseService {
-    async upload(postData, albumData) {
-        logger.log('Post DATA:', postData)
+    async upload(data, albumData, ) {
+        logger.log('Post DATA:', data)
          logger.log('ALBUM DATA:', albumData)
         const collection = storage.ref('albums')
-        const resource = collection.child(albumData.title).child(postData.name)
-        const snapshot = await resource.put(postData, {
+        const resource = collection.child(albumData.title).child(data.name)
+        const snapshot = await resource.put(data, {
             customMetadata: {
-                 uid: AppState.account.id, size: postData.size, type: postData.type
+                 uid: AppState.account.id, size: data.size, type: data.type
             }
         })
         const url = await snapshot.ref.getDownloadURL()
         logger.log(url)
         return url
     }
+    async uploadCoverImg(data, albumData) {
+        logger.log('Cover DATA:', data)
+        logger.log('ALBUM DATA:', albumData)
+        const collection = storage.ref('albums')
+        const resource = collection.child(albumData.title).child('coverImg').child(data.name)
+        const snapshot = await resource.put(data, {
+            customMetadata: {
+                 uid: AppState.account.id, size: data.size, type: data.type
+            }
+        })
+        const url = await snapshot.ref.getDownloadURL()
+        logger.log(url)
+        return url
+    }
+    
     async login() {
         try {
             const res = await api.get('/account/firebase-token')

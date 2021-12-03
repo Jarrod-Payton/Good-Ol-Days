@@ -20,8 +20,8 @@ class PostsService {
     return post
   }
 
-  async deletePost(body, userInfo) {
-    const post = await this.getPostId(body.id)
+  async deletePost(postId, userInfo) {
+    const post = await this.getPostId(postId)
     if (post.creatorId.toString() !== userInfo.id) {
       throw new Forbidden('You do not have permission to delete this post')
     }
@@ -29,7 +29,7 @@ class PostsService {
       throw new BadRequest('Invalid Id')
     }
     await firebaseService.deleteFirebasePost(post.imgUrl)
-    await dbContext.Posts.findByIdAndDelete(body.id)
+    await dbContext.Posts.findByIdAndDelete(postId)
   }
   async deletePostByAlbum(album){
     const res = await dbContext.Posts.findByIdAndDelete({albumId: album})

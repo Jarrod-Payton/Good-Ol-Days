@@ -55,9 +55,12 @@ export default {
       splicedPosts.value = splicedPosts.value.splice(2, AppState.posts.length)
 
     })
+    const user = computed(() => AppState.user)
     onMounted(async () => {
       try {
-        await collaboratorService.getCollabThisAlbum(route.params.albumId)
+        if (user.isAuthenticated) {
+          await collaboratorService.getCollabThisAlbum(route.params.albumId)
+        }
         await albumService.setActiveAlbum(route.params.albumId);
         await challengeService.getChallenges()
         await postService.getPosts(route.params.albumId)
@@ -69,6 +72,7 @@ export default {
       splicedPosts,
       posts1: computed(() => AppState.posts.slice(0, 2)),
       activeAlbum: computed(() => AppState.activeAlbum),
+
       setActive(id) {
         postService.setActive(id)
       }

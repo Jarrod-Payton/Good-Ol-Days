@@ -15,7 +15,7 @@
     <div>
       <img
         class="img-fluid picalbum eachone grow"
-        src="../assets/img/albumpic.png"
+        :src="album.coverImg"
         alt=""
       />
     </div>

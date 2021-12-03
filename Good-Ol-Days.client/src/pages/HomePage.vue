@@ -44,12 +44,7 @@
         <div class="p-4">
           <p class="titles">Your Group Albums:</p>
         </div>
-        <div class="desktop">
-          <button class="btn buttonscss elevation-3">
-            <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Start a group
-            album
-          </button>
-        </div>
+        <div class="desktop"></div>
       </div>
       <!-- GROUP ALBUMS GO HERE v  -->
       <div
@@ -68,11 +63,6 @@
         </div>
       </div>
       <!-- GROUP ALBUMS GO HERE ^ -->
-      <div class="media text-center mb-3">
-        <button class="btn buttonscss elevation-3">
-          <i class="me-1 mdi-18px mdi mdi-plus-circle"></i> Start a group album
-        </button>
-      </div>
     </div>
   </div>
   <CreateAlbumModal />
