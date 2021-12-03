@@ -1,10 +1,12 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden, NotFound } from '../utils/Errors'
 import { firebaseService } from './FirebaseService'
+import { notificationService } from "./NotificationService"
 
 class PostsService {
   async createPost(body) {
     const newPost = await dbContext.Posts.create(body)
+    await notificationService.createPostNotification(body.accountId, body.albumId)
     return newPost.populate('creator')
   }
 

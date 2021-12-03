@@ -12,6 +12,11 @@ class NotificationService{
       }
       await dbContext.Notifications.create({type: 'collaborator', notifier:`${profile.name}`,albumName:found.title, isAnswered:false, recipients:[found.creatorId], })
     }
+    async createPostNotification(user,album){
+      const found = await albumsService.getAlbumById({_id: album})
+      const profile = await profileService.getProfileById(user)
+      await dbContext.Notifications.create({type: 'post', notifier:`${profile.name}`, albumName:found.title, recipients:[found.creatorId]})
+    }
   async getMyNotifications(userId){
     const notifications = await dbContext.Notifications.find({})
     if(!notifications){
@@ -30,5 +35,6 @@ class NotificationService{
     // }
     await dbContext.Notifications.findByIdAndDelete(notificationId)
   }
+  
 }
 export const notificationService = new NotificationService()

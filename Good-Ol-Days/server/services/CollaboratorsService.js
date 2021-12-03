@@ -15,8 +15,7 @@ class CollaboratorsService {
       throw new BadRequest('They are already a collaborator')
     }
     const newCollaborator = await dbContext.Collaborators.create(data)
-    const notification = await notificationService.createCollaboratorNotification(data.accountId, data.albumId)
-    logger.log(notification)
+    await notificationService.createCollaboratorNotification(data.accountId, data.albumId)
     return newCollaborator.populate('album account')
   }
   async deleteCollaborator(user, collaborator){
