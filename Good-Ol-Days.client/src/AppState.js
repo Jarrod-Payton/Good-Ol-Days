@@ -17,5 +17,6 @@ export const AppState = reactive({
   activeQuote: '',
   collaborators: [],
   collabThisAlbum: [],
-  doneSyncing: false
+  doneSyncing: false,
+  notifications: [],
 })

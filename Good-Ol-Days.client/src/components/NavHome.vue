@@ -1,14 +1,38 @@
 <template  >
   <div class="component">
     <div class="desktop">
-      <button class="btn notifications elevation-3">
-        Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
-      </button>
+      <div class="dropdown">
+        <button
+          class="btn notifications elevation-3 dropdown-toggle"
+          type="button"
+          id="notifications"
+          data-bs-toggle="dropdown"
+        >
+          Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
+        </button>
+        <ul class="dropdown-menu">
+          <li v-if="notifications.length == 0">
+            <h5 class="notificationHead text-center">No Notifications Yet</h5>
+          </li>
+          <Notification
+            :notification="n"
+            v-for="n in notifications"
+            :key="n.id"
+          />
+        </ul>
+      </div>
     </div>
     <div class="mobile">
-      <button class="btn notifications me-5 elevation-3">
-        <i class="mdi mdi-18px mdi-bell-outline"></i>
-      </button>
+      <div class="dropdown">
+        <button
+          class="btn notifications me-5 elevation-3 dropdown-toggle"
+          type="button"
+          id="notifications"
+          data-bs-toggle="dropdown"
+        >
+          <i class="mdi mdi-18px mdi-bell-outline"></i>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +44,8 @@ import { AppState } from "../AppState"
 export default {
   setup() {
     return {
-      activeAlbum: computed(() => AppState.activeAlbum)
+      activeAlbum: computed(() => AppState.activeAlbum),
+      notifications: computed(() => AppState.notifications)
     }
   }
 }
@@ -28,6 +53,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.notificationHead {
+  font-size: 1.5vh;
+  font-family: "Saira Condensed", sans-serif;
+  padding-left: 1vh;
+  padding-right: 1vh;
+}
 .notifications {
   background-color: #4ac26d;
   color: rgb(255, 255, 255);

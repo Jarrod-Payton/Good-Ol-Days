@@ -2,7 +2,7 @@
   <div class="modal fade" id="createAlbumModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form @submit.prevent="createAlbum">
+        <form @submit.prevent="uploadCoverImg">
           <div class="modal-header">
             <div class="modal-title f-18">
               <p>New Album</p>
@@ -47,6 +47,7 @@
                     class="ms-3"
                     v-model="albumDetails.editable.hasChallenges"
                     :value="false"
+                    required
                   />
                   No
                 </p>
@@ -55,12 +56,9 @@
             <img src="" alt="" class="img-fluid" id="image" />
           </div>
           <div class="modal-footer">
-            <button
-              @click="uploadCoverImg"
-              class="buttonscss btn"
-              type="button"
-            >
-              Add Album
+            <button class="btn" type="submit" :disabled="submitting">
+              <h5 class="font" v-if="!submitting">Add Album</h5>
+              <i class="mdi mdi-spin mdi-loading" v-if="submitting" />
             </button>
           </div>
         </form>
@@ -77,13 +75,16 @@ import { Modal } from "bootstrap"
 import { firebaseService } from "../services/FirebaseService"
 export default {
   setup() {
+    const submitting = ref(false)
     const albumDetails = reactive({ editable: {} })
     const files = ref([])
     const router = useRouter()
     return {
       albumDetails,
+      submitting,
       async createAlbum() {
         try {
+          submitting.value = true
           const newPost = await albumService.createAlbum(albumDetails.editable)
           router.push({
             name: "Album",
@@ -91,6 +92,7 @@ export default {
           })
           Modal.getOrCreateInstance(document.getElementById("createAlbumModal")).toggle()
           albumDetails.editable = {}
+          submitting.value = false
         } catch (error) {
           logger.log(error)
         }
@@ -106,16 +108,19 @@ export default {
       },
       async uploadCoverImg() {
         try {
-          if (!files.value[0]) { await this.createAlbum() }
+          submitting.value = true
+          if (!files.value[0]) {
+            await this.createAlbum()
+          }
           else {
             const url = await firebaseService.upload(files.value[0], albumDetails.editable)
             albumDetails.editable.coverImg = url
             logger.log(url)
             await this.createAlbum()
           }
-
         } catch (error) {
           logger.error(error)
+          submitting.value = false
         }
       }
     }
