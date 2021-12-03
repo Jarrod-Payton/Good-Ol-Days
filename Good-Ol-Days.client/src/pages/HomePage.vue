@@ -74,13 +74,14 @@ import { albumService } from "../services/AlbumService"
 import { collaboratorService } from "../services/CollaboratorService"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
+import { resetService } from "../services/ResetService"
 export default {
   name: 'Home',
   setup() {
     onMounted(async () => {
       await albumService.getMyAlbums()
-      AppState.activeAlbum = {}
       await collaboratorService.getAllMyCollabAlbums()
+      resetService.resetUtil()
     })
     return {
       myAlbums: computed(() => AppState.myAlbums),
