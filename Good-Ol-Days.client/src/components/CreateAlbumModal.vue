@@ -29,6 +29,7 @@
                   class="albumName form-control border-0"
                   placeholder="Name your album ..."
                   v-model="albumDetails.editable.title"
+                  maxlength="20"
                   required
                 />
               </div>
