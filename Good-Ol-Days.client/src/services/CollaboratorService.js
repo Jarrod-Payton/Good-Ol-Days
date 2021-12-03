@@ -20,16 +20,26 @@ async getCollabThisAlbum(albumId){
   let account = AppState.account
   if( !AppState.collabThisAlbum.find(c => c.accountId === account.id) && AppState.collabThisAlbum.length > 0) {
     this.addColab(albumId)
+    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === account.id)
+    this.verify(collabowner.id)
+  }
+  if( AppState.activeAlbum.accountId === AppState.account.id && AppState.collabThisAlbum.find(c => !c.verified)) {
+    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === account.id)
+    this.verify(collabowner.id)
   }
 
 }
 async verify(id){
+
   const res = await api.put('api/collaborators/' + id)
   logger.log('VERIFY COLLAB', res.data)
 }
 async addColab(albumId){
   const res = await api.post('api/collaborators', {albumId: albumId})
   logger.log('ADD COLLAB', res.data)
+  if ( AppState.activeAlbum.creatorId === account.id) {
+    
+  }
 }
 }
 export const collaboratorService = new CollaboratorService()
