@@ -72,17 +72,23 @@
 </template>
 
 <script>
-import { computed, onMounted } from "@vue/runtime-core"
+import { computed, onMounted, watchEffect } from "@vue/runtime-core"
 import { albumService } from "../services/AlbumService"
 import { collaboratorService } from "../services/CollaboratorService"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import { resetService } from "../services/ResetService"
 import { useRouter } from "vue-router"
+import { notificationService } from "../services/NotificationService"
 export default {
   name: 'Home',
   setup() {
     const router = useRouter()
+    watchEffect(async () => {
+      if (AppState.account.name) {
+        await notificationService.getMyNotifications()
+      }
+    })
     onMounted(async () => {
       await albumService.getMyAlbums()
       await collaboratorService.getAllMyCollabAlbums()

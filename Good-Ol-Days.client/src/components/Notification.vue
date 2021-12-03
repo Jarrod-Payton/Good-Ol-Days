@@ -1,7 +1,7 @@
 <template>
   <li>
     <a class="dropdown-item">
-      <h6 class="font">{{}}</h6>
+      <h6 class="font">Hello</h6>
     </a>
   </li>
 </template>
