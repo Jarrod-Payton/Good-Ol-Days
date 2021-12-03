@@ -51,8 +51,14 @@
 <script>
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
+import { onMounted } from "@vue/runtime-core"
+import { notificationService } from "../services/NotificationService"
 export default {
   setup() {
+    onMounted(async () => {
+      await notificationService.getMyNotifications()
+      await notificationService.findType()
+    })
     return {
       activeAlbum: computed(() => AppState.activeAlbum),
       notifications: computed(() => AppState.notifications)
