@@ -32,6 +32,16 @@
         >
           <i class="mdi mdi-18px mdi-bell-outline"></i>
         </button>
+        <ul class="dropdown-menu">
+          <li v-if="notifications.length == 0">
+            <h5 class="notificationHead text-center">No Notifications Yet</h5>
+          </li>
+          <Notification
+            :notification="n"
+            v-for="n in notifications"
+            :key="n.id"
+          />
+        </ul>
       </div>
     </div>
   </div>
