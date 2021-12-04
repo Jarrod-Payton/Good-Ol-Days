@@ -7,6 +7,7 @@
           type="button"
           id="notifications"
           data-bs-toggle="dropdown"
+          @click="seen"
         >
           Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
         </button>
@@ -14,11 +15,18 @@
           <li v-if="notifications.length == 0">
             <h5 class="notificationHead text-center">No Notifications Yet</h5>
           </li>
-          <Notification
-            :notification="n"
-            v-for="n in notifications"
-            :key="n.id"
-          />
+          <li v-if="!notifications.length == 0">
+            <div class="d-flex justify-content-center">
+              <button class="notificationHead clearButton btn" @click="clear">
+                <h5 class="notificationHead text-center buttonText">
+                  Clear All Your Notifications
+                </h5>
+              </button>
+            </div>
+          </li>
+          <li v-for="n in notifications" :key="n.id">
+            <Notification :notification="n" v-if="notifications.length > 0" />
+          </li>
         </ul>
       </div>
     </div>
@@ -29,6 +37,7 @@
           type="button"
           id="notifications"
           data-bs-toggle="dropdown"
+          @click="seen"
         >
           <i class="mdi mdi-18px mdi-bell-outline"></i>
         </button>
@@ -36,11 +45,18 @@
           <li v-if="notifications.length == 0">
             <h5 class="notificationHead text-center">No Notifications Yet</h5>
           </li>
-          <Notification
-            :notification="n"
-            v-for="n in notifications"
-            :key="n.id"
-          />
+          <li v-if="!notifications.length == 0">
+            <div class="d-flex justify-content-center">
+              <button class="notificationHead clearButton btn" @click="clear">
+                <h5 class="notificationHead text-center buttonText">
+                  Clear All Your Notifications
+                </h5>
+              </button>
+            </div>
+          </li>
+          <li v-for="n in notifications" :key="n.id">
+            <Notification :notification="n" v-if="notifications.length > 0" />
+          </li>
         </ul>
       </div>
     </div>
@@ -59,15 +75,33 @@ export default {
       await notificationService.findType()
     })
     return {
+      async seen() {
+        await notificationService.seen()
+      },
+      async clear() {
+        await notificationService.clear()
+      },
       activeAlbum: computed(() => AppState.activeAlbum),
       notifications: computed(() => AppState.notifications)
     }
   }
 }
 </script>
-
+// border-radius: 1.5vh;
+// border-radius: 1vh;
 
 <style lang="scss" scoped>
+.buttonText {
+  background-color: rgb(255, 255, 255);
+  font-size: 1.8vh !important;
+}
+.clearButton {
+  background-color: #c24a4a;
+  color: black;
+  height: 3.3vh;
+  width: 38vh !important;
+  border-radius: 0vh !important;
+}
 .notificationHead {
   font-size: 1.5vh;
   font-family: "Saira Condensed", sans-serif;

@@ -17,6 +17,20 @@ class NotificationService {
       return true
     }
   }
+  async deleteNotification(notificationId) {
+    await api.delete(`account/notifications/${notificationId}`)
+    AppState.notifications = AppState.notifications.filter(n => n.id != notificationId)
+    Pop.toast('Deleted Notification')
+  }
+  async seen() {
+    await api.put(`account/notifications`)
+  }
+  async clear() {
+    for (let n = 0; n < AppState.notifications.length; n++) {
+      api.delete(`account/notifications/${n.id}`)
+    }
+    AppState.notifications = []
+  }
 }
 
 export const notificationService = new NotificationService()
