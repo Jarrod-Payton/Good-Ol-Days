@@ -114,7 +114,7 @@ export default {
             await this.createAlbum()
           }
           else {
-            const url = await firebaseService.upload(files.value[0], albumDetails.editable)
+            const url = await firebaseService.uploadCoverImg(files.value[0], albumDetails.editable)
             albumDetails.editable.coverImg = url
             logger.log(url)
             await this.createAlbum()
