@@ -2,12 +2,12 @@
   <div class="row mt-md-5 mt-2 m-0 p-0">
     <div
       class="col-md-6 order-md-2 p-0"
-      v-show="
+      v-if="
         (activeAlbum.hasChallenges && user.isAuthenticated) ||
         (account.id === activeAlbum.creatorId && activeAlbum.hasChallenges)
       "
     >
-      <Challenge :collabThisAlbum="collabThisAlbum" />
+      <Challenge />
     </div>
     <div class="col-md-6 order-md-1">
       <div class="row">
