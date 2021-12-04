@@ -1,7 +1,7 @@
 <template>
   <main class="container-fluid background">
     <div class="row">
-      <NavigationBar />
+      <NavigationBar :user="user" />
     </div>
     <div class="row">
       <router-view :user="user" />

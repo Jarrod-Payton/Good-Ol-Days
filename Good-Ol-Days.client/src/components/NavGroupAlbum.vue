@@ -60,7 +60,11 @@
         >
           <i class="mdi mdi-18px mdi-plus-circle-outline"> </i>
         </button>
-        <button title="Delete this album" class="btn ms-2 delete elevation-3">
+        <button
+          v-if="activeAlbum.creatorId === account.id"
+          title="Delete this album"
+          class="btn ms-2 delete elevation-3"
+        >
           <i class="mdi mdi-18px mdi-trash-can"></i>
         </button>
       </div>

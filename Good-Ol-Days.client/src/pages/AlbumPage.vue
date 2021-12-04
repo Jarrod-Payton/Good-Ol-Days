@@ -9,7 +9,7 @@
         (account.id === activeAlbum.creatorId && activeAlbum.hasChallenges)
       "
     >
-      <Challenge />
+      <Challenge :collabThisAlbum="collabThisAlbum" />
     </div>
     <div class="col-md-6 order-md-1">
       <div class="row">
@@ -56,7 +56,7 @@ import { challengeService } from "../services/ChallengeService";
 import { collaboratorService } from "../services/CollaboratorService";
 export default {
   props: {
-    user: { type: Object, required: true }
+    user: { type: Object }
   },
   setup(props) {
     const splicedPosts = ref([])
@@ -93,6 +93,7 @@ export default {
       activeChallenge: computed(() => AppState.activeChallenge),
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
+      collabThisAlbum: computed(() => AppState.collabThisAlbum),
       setActive(id) {
         postService.setActive(id)
       }
