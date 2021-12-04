@@ -17,13 +17,13 @@ class FirebaseService {
     return firebaseToken
   }
 
-  async deleteFirebasePost(imageURL) {
+  async deleteFirebasePost(albumName, imageURL) {
     logger.log(imageURL)
     const fileName = imageURL.slice(imageURL.indexOf('%2F') + 3, imageURL.indexOf('?alt'))
-    const slice = fileName.slice(imageURL.indexOf('%2F') + 3)
+    const slice = fileName.slice(fileName.indexOf('%2F') + 3)
     logger.log(slice)
     await this.bucket.deleteFiles({
-      prefix: `${slice}`
+      prefix: `albums/${albumName}/${slice}`
     })
   }
 

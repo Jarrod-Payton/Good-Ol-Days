@@ -4,12 +4,12 @@ const ObjectId = Schema.Types.ObjectId
 
 export const PostSchema = new Schema(
   {
-    imgUrl:{type:String},
-    title:{type: String, required:true, default:''},
-    description:{type:String, required:true, default:''},
-    creatorId: {type: String, required: true, ref: 'Profile'},
-    albumId: {type:ObjectId, required:true, ref:'Album'},
-    challengeId: {type:ObjectId, ref:'Challenge'}
+    imgUrl: { type: String },
+    title: { type: String, required: true, default: '' },
+    description: { type: String, required: true, default: '' },
+    creatorId: { type: String, required: true, ref: 'Profile' },
+    albumId: { type: ObjectId, required: true, ref: 'Album' },
+    challengeId: { type: ObjectId, ref: 'Challenge' }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 
