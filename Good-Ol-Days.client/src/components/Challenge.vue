@@ -1,9 +1,5 @@
 <template >
-  <div
-    v-show="
-      collabThisAlbum.find((c) => c.accountId === account.id && !c.verified)
-    "
-  >
+  <div>
     <div class="row m-0">
       <div class="col-12 paddingmobile" v-if="doneSyncing">
         <div class="d-flex justify-content-center align-content-center">
@@ -25,7 +21,7 @@
                   </h3>
                 </div>
                 <div class="col-12">
-                  <!-- TODO This is where we will put the challenge if we have one -->
+                  <!-- This is where we will put the challenge if we have one -->
                   <h3 class="font takeAPhoto challengeFont">
                     {{ activeChallenge.title }}
                   </h3>
@@ -48,7 +44,10 @@
               </div>
               <!--If No Challenge-->
               <div class="row" v-if="!activeChallenge.title">
-                <div class="col-12">
+                <div
+                  class="col-12"
+                  v-show="activeAlbum.creatorId == account.id"
+                >
                   <div class="d-flex">
                     <h5 class="font">Here are some suggested challenges:</h5>
                     <select
@@ -159,7 +158,6 @@ export default {
       type.value = 'General'
     })
     return {
-      account: computed(() => AppState.account),
       form,
       type,
       mySuggestions,
@@ -187,7 +185,9 @@ export default {
       quote: computed(() => AppState.activeQuote),
       MyChallenges: computed(() => AppState.suggestedChallenges),
       activeChallenge: computed(() => AppState.activeChallenge),
-      doneSyncing: computed(() => AppState.doneSyncing)
+      activeAlbum: (() => AppState.activeAlbum),
+      doneSyncing: computed(() => AppState.doneSyncing),
+      account: computed(() => AppState.account),
     }
   },
 }
