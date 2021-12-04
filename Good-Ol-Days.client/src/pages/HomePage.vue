@@ -59,6 +59,7 @@
         :key="c.albumId"
       >
         <div
+          v-if="c.verified"
           @click="routerLink(c.albumId)"
           class="card selectable cardgroupalbum grow2 mb-3"
         >

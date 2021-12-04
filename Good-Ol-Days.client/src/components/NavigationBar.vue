@@ -1,5 +1,5 @@
 <template>
-  <div class="NavigationBar desktop col-12">
+  <div class="NavigationBar desktop col-12" v-show="route.name !== 'Landing'">
     <div
       class="
         card
@@ -29,7 +29,9 @@
             v-if="
               collabThisAlbum.find(
                 (c) => c.accountId === account.id && c.verified
-              )
+              ) ||
+              (activeAlbum.creatorId === account.id &&
+                collabThisAlbum.find((c) => c.verified))
             "
           />
           <div
@@ -45,7 +47,7 @@
             v-if="
               collabThisAlbum.find(
                 (c) => c.accountId === account.id && !c.verified
-              ) && activeAlbum.creatorId !== account.id
+              ) && !activeAlbum.creatorId === account.id
             "
           >
             <button

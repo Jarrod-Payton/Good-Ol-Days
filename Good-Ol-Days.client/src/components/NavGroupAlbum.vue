@@ -14,15 +14,15 @@
               <div>
                 <div class="">
                   <img
-                    :title="account.name"
+                    :title="activeAlbum.creator.name"
                     class="profilepics"
-                    :src="account.picture"
+                    :src="activeAlbum.creator.picture"
                     alt=""
                   />
                 </div>
               </div>
               <div v-for="u in collabThisAlbum" :key="u.accountId">
-                <ProfileCircles />
+                <ProfileCircles :collab="u" />
               </div>
             </div>
           </div>
