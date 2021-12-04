@@ -1,5 +1,9 @@
 <template >
-  <div>
+  <div
+    v-show="
+      collabThisAlbum.find((c) => c.accountId === account.id && !c.verified)
+    "
+  >
     <div class="row m-0">
       <div class="col-12 paddingmobile" v-if="doneSyncing">
         <div class="d-flex justify-content-center align-content-center">
@@ -135,6 +139,9 @@ import { challengeService } from "../services/ChallengeService"
 import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
 export default {
+  props: {
+    collabThisAlbum: { type: Object, required: true }
+  },
   setup() {
     const type = ref('')
     const mySuggestions = ref([])
@@ -152,6 +159,7 @@ export default {
       type.value = 'General'
     })
     return {
+      account: computed(() => AppState.account),
       form,
       type,
       mySuggestions,

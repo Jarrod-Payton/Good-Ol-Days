@@ -1,5 +1,5 @@
 <template>
-  <div class="NavigationBar desktop col-12">
+  <div class="NavigationBar desktop col-12" v-show="route.name !== 'Landing'">
     <div
       class="
         card
@@ -10,7 +10,7 @@
         align-items-md-center
       "
     >
-      <div>
+      <div class="d-flex">
         <router-link :to="{ name: 'Home' }">
           <img
             @click="clear"
@@ -20,6 +20,15 @@
             alt=""
           />
         </router-link>
+        <div class="ms-3">
+          <button
+            @click="routeAbout"
+            title="About Page"
+            class="btn about elevation-3"
+          >
+            <i class="mdi ms-1 mdi-shimmer"></i> About
+          </button>
+        </div>
       </div>
       <div class="d-flex align-items-center">
         <div>
@@ -29,14 +38,17 @@
             v-if="
               collabThisAlbum.find(
                 (c) => c.accountId === account.id && c.verified
-              )
+              ) ||
+              (activeAlbum.creatorId === account.id &&
+                collabThisAlbum.find((c) => c.verified))
             "
           />
           <div
             v-if="
               !collabThisAlbum.find((c) => c.accountId === account.id) &&
               route.name !== 'Home' &&
-              activeAlbum.creatorId !== account.id
+              activeAlbum.creatorId !== account.id &&
+              route.name !== 'About'
             "
           >
             <NavJoin :user="user" />
@@ -95,14 +107,41 @@
       <div class="d-flex align-items-center justify-content-center">
         <div>
           <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
-          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.verified" />
           <NavGroupAlbum
             v-if="
-              collabThisAlbum[0]?.name &&
-              collabThisAlbum.find((c) => c.accountId === account.id)
+              collabThisAlbum.find(
+                (c) => c.accountId === account.id && c.verified
+              ) ||
+              (activeAlbum.creatorId === account.id &&
+                collabThisAlbum.find((c) => c.verified))
             "
           />
-          <NavJoin v-if="!user.isAuthenticated" />
+          <div
+            v-if="
+              !collabThisAlbum.find((c) => c.accountId === account.id) &&
+              route.name !== 'Home' &&
+              activeAlbum.creatorId !== account.id &&
+              route.name !== 'About'
+            "
+          >
+            <NavJoin :user="user" />
+          </div>
+          <div
+            v-if="
+              collabThisAlbum.find(
+                (c) => c.accountId === account.id && !c.verified
+              ) && activeAlbum.creatorId !== account.id
+            "
+          >
+            <button
+              title="Request pending"
+              class="btn share disabled elevation-3"
+            >
+              <i class="mdi ms-1 mdi-18px mdi-account-arrow-right-outline"></i>
+              Pending request to join
+            </button>
+          </div>
         </div>
         <div class="me-3 ms-3" v-if="user.isAuthenticated">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
@@ -132,13 +171,30 @@
 import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { AuthService } from "../services/AuthService"
-import { useRoute } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { albumService } from "../services/AlbumService"
+import { watchEffect } from "@vue/runtime-core"
+import { collaboratorService } from "../services/CollaboratorService"
+import Pop from "../utils/Pop"
 export default {
-  setup() {
+  props: {
+    user: { type: Object }
+  },
+  setup(props) {
     const route = useRoute()
+    const router = useRouter()
+    watchEffect(async () => {
+      try {
+        if (props.user.isAuthenticated && route.params.albumId) {
+          await collaboratorService.getCollabThisAlbum(route.params.albumId)
+        }
+      } catch (error) {
+        Pop.toast(error);
+      }
+    });
     return {
       route,
+      router,
       route: computed(() => route),
       activeAlbum: computed(() => AppState.activeAlbum),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
@@ -149,6 +205,9 @@ export default {
       },
       clear() {
         albumService.clear()
+      },
+      routeAbout() {
+        router.push('About')
       }
     }
   }
@@ -167,6 +226,17 @@ export default {
   padding-right: 8px;
   margin-right: 4vh;
   margin-bottom: 2vh;
+}
+.about {
+  background-color: #9964cc;
+  color: rgb(255, 255, 255);
+  font-family: "Saira Condensed", sans-serif;
+  padding: 2px;
+  padding-left: 3px;
+  padding-right: 6px;
+  margin-right: 4vh;
+  margin-bottom: 2vh;
+  font-size: 1.7vh;
 }
 .cardspec {
   border-radius: 0;
@@ -193,12 +263,11 @@ export default {
 .mobile {
   display: none;
 }
-
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
 @media only screen and (max-width: 500px) {
-  .btn:focus {
-    outline: none;
-    box-shadow: none;
-  }
   .desktop {
     display: none;
   }

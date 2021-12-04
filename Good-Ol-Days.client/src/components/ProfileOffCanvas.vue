@@ -113,6 +113,7 @@
             <div
               v-for="c in collaborators"
               :key="c.albumId"
+              v-show="c.verified"
               class="card text-center border-0 cardalbums selectable"
             >
               <div data-bs-dismiss="offcanvas" @click="routeTo(c.albumId)">

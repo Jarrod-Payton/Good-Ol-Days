@@ -1,6 +1,6 @@
 <template>
   <div class="polaroid">
-    <img class="image" :src="post.imgUrl" />
+    <img class="image border border-dark" :src="post.imgUrl" />
     <div class="caption sharpie">{{ post.title }}</div>
   </div>
 </template>

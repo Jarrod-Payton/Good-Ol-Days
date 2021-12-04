@@ -17,18 +17,9 @@ async getCollabThisAlbum(albumId){
   const collab = res.data.map( c => c = new Collaborator(c))
   AppState.collabThisAlbum = collab
   logger.log('COLLAB THIS ALBUM', AppState.collabThisAlbum)
-  const accountId = AppState.account.id
-  if( !AppState.collabThisAlbum.find(c => c.accountId === accountId) && AppState.collabThisAlbum.length > 0) {
-    this.addColab(albumId)
-    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === accountId)
-    this.verify(collabowner.id)
-  }
-  if( AppState.activeAlbum.creatorId === accountId && AppState.collabThisAlbum.find((c) => c.accountId === accountId && c.verified)) {
-    const collabowner = AppState.collabThisAlbum.find(c => c.accountId === accountId)
-    this.verify(collabowner.id)
   }
 
-}
+
 async verify(id){
 
   const res = await api.put('api/collaborators/' + id)
