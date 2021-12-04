@@ -3,9 +3,7 @@
     <div
       class="col-md-6 order-md-2 p-0"
       v-show="
-        (activeAlbum.hasChallenges &&
-          user.isAuthenticated &&
-          activeChallenge.isActive === true) ||
+        (activeAlbum.hasChallenges && user.isAuthenticated) ||
         (account.id === activeAlbum.creatorId && activeAlbum.hasChallenges)
       "
     >
