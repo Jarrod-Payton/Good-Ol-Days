@@ -1,4 +1,5 @@
 <template>
+  <!-- Create a new Album Modal v -->
   <div class="modal fade" id="createAlbumModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -11,6 +12,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
+                <!-- Upload File from computer v  -->
                 <p class="S1">
                   Upload Album Cover <i>(Optional)</i>
                   <input
@@ -21,6 +23,7 @@
                     @change="fileSelect"
                   />
                 </p>
+                <!-- Upload File from computer ^  -->
               </div>
               <div class="col-12">
                 <p class="S1 f-14">Album name:</p>
@@ -66,6 +69,7 @@
       </div>
     </div>
   </div>
+  <!-- Create a new Album Modal ^ -->
 </template>
 <script>
 import { reactive, ref } from "@vue/reactivity"

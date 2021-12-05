@@ -1,4 +1,5 @@
 <template>
+  <!-- NavBar when on Desktop View v  -->
   <div class="NavigationBar desktop col-12" v-show="route.name !== 'Landing'">
     <div
       class="
@@ -32,8 +33,15 @@
       </div>
       <div class="d-flex align-items-center">
         <div>
+          <!-- Components set to each Page and condition v  -->
+          <!--  -->
+          <!-- Condition set to only show at the HomePage checking if there is an ActiveAlbum and GroupAlbum open -->
           <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <!--  -->
+          <!-- Condition set to only show at AlbumPage and only if album is private checking if there's an ActiveAlbum and if the album is private -->
           <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.verified" />
+          <!--  -->
+          <!-- Condition set to only show at AlbumPage and only if album is shared checking if user account match one of the collaborators of that album and it is verified or if the user account matches the creator of that album and there's at least one collaborator verified  -->
           <NavGroupAlbum
             v-if="
               collabThisAlbum.find(
@@ -43,6 +51,8 @@
                 collabThisAlbum.find((c) => c.verified))
             "
           />
+          <!--  -->
+          <!-- Condition set to only show at AlbumPage and only if the user account isn't a collaborator of this Album -->
           <div
             v-if="
               !collabThisAlbum.find((c) => c.accountId === account.id) &&
@@ -53,6 +63,8 @@
           >
             <NavJoin :user="user" />
           </div>
+          <!--  -->
+          <!-- Condition set to show "Request Pending" checking if the user account is a collaborator and isn't verified -->
           <div
             v-if="
               collabThisAlbum.find(
@@ -68,6 +80,8 @@
               Pending request to join
             </button>
           </div>
+          <!--  -->
+          <!-- Components set to each Page and condition ^  -->
         </div>
         <div class="me-4" v-if="user.isAuthenticated">
           <p class="m-0 f-14 text-end">{{ account.name }}</p>
@@ -89,8 +103,9 @@
         />
       </div>
     </div>
+    <!-- NavBar when on Desktop View ^  -->
   </div>
-  <!-- MOBILE NAVIGATION BAR -->
+  <!-- NavBar when on Mobile View v  -->
   <div class="NavigationBar mobile col-12 p-0">
     <div class="card cardspec">
       <div class="d-flex justify-content-center">
@@ -106,8 +121,15 @@
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <div>
+          <!-- Components set to each Page and condition v  -->
+          <!--  -->
+          <!-- Condition set to only show at the HomePage checking if there is an ActiveAlbum and GroupAlbum open -->
           <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <!--  -->
+          <!-- Condition set to only show at AlbumPage and only if album is private checking if there's an ActiveAlbum and if the album is private -->
           <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.verified" />
+          <!--  -->
+          <!-- Condition set to only show at AlbumPage and only if album is shared checking if user account match one of the collaborators of that album and it is verified or if the user account matches the creator of that album and there's at least one collaborator verified  -->
           <NavGroupAlbum
             v-if="
               collabThisAlbum.find(
@@ -117,6 +139,8 @@
                 collabThisAlbum.find((c) => c.verified))
             "
           />
+          <!--  -->
+          <!-- Condition set to only show at AlbumPage and only if the user account isn't a collaborator of this Album -->
           <div
             v-if="
               !collabThisAlbum.find((c) => c.accountId === account.id) &&
@@ -127,6 +151,8 @@
           >
             <NavJoin :user="user" />
           </div>
+          <!--  -->
+          <!-- Condition set to show "Request Pending" checking if the user account is a collaborator and isn't verified -->
           <div
             v-if="
               collabThisAlbum.find(
@@ -142,6 +168,8 @@
               Pending request to join
             </button>
           </div>
+          <!--  -->
+          <!-- Components set to each Page and condition ^  -->
         </div>
         <div class="me-3 ms-3" v-if="user.isAuthenticated">
           <p class="m-0 f-14 text-end textmobile">{{ account.name }}</p>
@@ -163,6 +191,7 @@
         />
       </div>
     </div>
+    <!-- NavBar when on Mobile View ^  -->
   </div>
 </template>
 

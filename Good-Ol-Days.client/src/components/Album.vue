@@ -1,5 +1,5 @@
 <template>
-  <!-- <router-link :to="{ name: 'Album', params: { albumId: album.id } }"> -->
+  <!-- INDIVIDUAL ALBUM v -->
   <div
     class="
       col-6 col-md-3
@@ -13,17 +13,21 @@
     @click="routerLink"
   >
     <div>
+      <!-- Album Image v -->
       <img
         class="img-fluid picalbum eachone grow"
         :src="album.coverImg"
         alt=""
       />
+      <!-- Album Image ^ -->
     </div>
     <div>
+      <!-- Album Name v -->
       <p class="albumname">{{ album.title }}</p>
+      <!-- Album Name ^ -->
     </div>
   </div>
-  <!-- </router-link> -->
+  <!-- INDIVIDUAL ALBUM ^ -->
 </template>
 <script>
 import { useRouter } from "vue-router"
