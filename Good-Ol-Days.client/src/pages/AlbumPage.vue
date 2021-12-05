@@ -3,7 +3,11 @@
     <div
       class="col-md-6 order-md-2 p-0"
       v-if="
-        (activeAlbum.hasChallenges && user.isAuthenticated) ||
+        (activeAlbum.hasChallenges &&
+          user.isAuthenticated &&
+          collabThisAlbum.find(
+            (c) => c.accountId === account.id && c.verified
+          )) ||
         (account.id === activeAlbum.creatorId && activeAlbum.hasChallenges)
       "
     >

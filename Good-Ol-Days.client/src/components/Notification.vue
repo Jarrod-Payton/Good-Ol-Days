@@ -44,7 +44,7 @@ export default {
     const message = ref('')
     onMounted(async () => {
       if (props.notification.type === "collaborator") {
-        message.value = `${props.notification.notifier.name} is trying to become a collaborator in ${props.notification.album.title}`
+        message.value = `${props.notification.notifier.name} requested to join ${props.notification.album.title} Album`
       }
       if (props.notification.type === "post") {
         message.value = `${props.notification.notifier.name} posted a new photo to ${props.notification.album.title}`
@@ -58,7 +58,7 @@ export default {
         }
       },
       async acceptCollaborator() {
-        await collaboratorService.acceptColab()
+        await collaboratorService.acceptColab(props.notification)
       }
     }
   },

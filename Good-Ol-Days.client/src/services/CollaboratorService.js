@@ -29,7 +29,13 @@ class CollaboratorService {
     const res = await api.post('api/collaborators', { albumId: albumId })
     logger.log('ADD COLLAB', res.data)
   }
-  async acceptColab() {
+  async acceptColab(notification) {
+    const album = AppState.myAlbums.find( a => a.id === notification.albumId)
+    logger.log('TEST JOHN 1', album)
+    await this.getCollabThisAlbum(album.id)
+    const collabToAccept = AppState.collabThisAlbum.find( c => c.accountId === notification.notifier)
+    logger.log('TEST JOHN 2',collabToAccept)
+    await this.verify(collabToAccept.id)
     Pop.toast('Accepted Collab')
   }
 }
