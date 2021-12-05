@@ -55,7 +55,9 @@ class AlbumsService {
       // if there is no Id, throw BadRequest
       throw new BadRequest('Invalid Id')
     }
+    // deletes the album from firebase
     await firebaseService.deleteFirebaseFolder(found.title)
+    //Delete the album from database then cascade deletes posts/challenges/collabs/contifications associated to the album
     await dbContext.Albums.findByIdAndDelete(body.id)
     await dbContext.Posts.deleteMany({ albumId: body.id })
     await dbContext.Challenges.deleteMany({ albumId: body.id })
