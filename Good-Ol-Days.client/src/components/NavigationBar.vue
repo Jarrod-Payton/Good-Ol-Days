@@ -207,7 +207,7 @@ export default {
         albumService.clear()
       },
       routeAbout() {
-        router.push('About')
+        router.push('/about')
       }
     }
   }

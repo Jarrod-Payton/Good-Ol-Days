@@ -361,7 +361,7 @@ export default {
   }
   .cardspec {
     width: 100%;
-    height: 160vh;
+    height: 178vh;
   }
   .about {
     padding: 0;
@@ -397,7 +397,7 @@ export default {
     transform: rotate(-6deg);
   }
   .about {
-    height: 170vh;
+    height: 183vh;
   }
   .cardsheight {
     height: auto;
