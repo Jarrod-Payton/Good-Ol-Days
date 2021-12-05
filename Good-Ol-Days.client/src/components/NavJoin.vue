@@ -6,8 +6,14 @@
         title="Request to join this album"
         class="btn share elevation-3"
       >
-        <i class="mdi me-2 mdi-18px mdi-account-arrow-right-outline"></i>Request
-        to join this album
+        <div v-if="user.isAuthenticated">
+          <i class="mdi me-2 mdi-18px mdi-account-arrow-right-outline"></i
+          >Request to join this album
+        </div>
+        <div v-if="!user.isAuthenticated">
+          <i class="mdi me-2 mdi-18px mdi-account-lock"></i>Login and request to
+          join this album
+        </div>
       </button>
     </div>
   </div>
@@ -19,8 +25,14 @@
         title="Request to join this album"
         class="btn share elevation-3"
       >
-        <i class="mdi me-2 mdi-18px mdi-account-arrow-right-outline"></i>Request
-        to join
+        <div v-if="user.isAuthenticated">
+          <i class="mdi me-2 mdi-18px mdi-account-arrow-right-outline"></i
+          >Request to join
+        </div>
+        <div v-if="!user.isAuthenticated">
+          <i class="mdi me-2 mdi-18px mdi-account-lock"></i>Login join this
+          album
+        </div>
       </button>
     </div>
   </div>
@@ -43,14 +55,17 @@ export default {
     return {
       route,
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
+      activeAlbum: computed(() => AppState.activeAlbum),
+      account: computed(() => AppState.account),
       async login() {
         if (!props.user.isAuthenticated) {
           await AuthService.loginWithPopup()
         }
-        if (props.user.isAuthenticated && !this.collabThisAlbum.find((c) => c.accountId === account.id)) {
+        else if (props.user.isAuthenticated && !this.collabThisAlbum.find((c) => c.accountId === this.account.id)) {
           await collaboratorService.addColab(route.params.albumId)
         }
         await challengeService.getChallenges()
+        await collaboratorService.getCollabThisAlbum(this.activeAlbum.id)
       },
     }
   }

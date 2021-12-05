@@ -38,6 +38,7 @@ import { notificationService } from "../services/NotificationService"
 import { collaboratorService } from "../services/CollaboratorService"
 import Pop from "../utils/Pop"
 
+
 export default {
   props: { notification: { type: Object, required: true } },
   setup(props) {
@@ -59,6 +60,7 @@ export default {
       },
       async acceptCollaborator() {
         await collaboratorService.acceptColab(props.notification)
+
       }
     }
   },
