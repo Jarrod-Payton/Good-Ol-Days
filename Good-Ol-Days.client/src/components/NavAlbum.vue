@@ -18,7 +18,12 @@
           </div>
         </div>
         <div>
-          <button title="Share this album" class="btn share elevation-3">
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#shareModal"
+            title="Share this album"
+            class="btn share elevation-3"
+          >
             <i class="mdi ms-1 mdi-18px mdi-share-variant"></i> Share this album
           </button>
         </div>

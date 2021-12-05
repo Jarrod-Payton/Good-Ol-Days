@@ -24,6 +24,7 @@ export default {
       appState: computed(() => AppState),
       account: computed(() => AppState.account),
       user: computed(() => AppState.user),
+
     }
   }
 }

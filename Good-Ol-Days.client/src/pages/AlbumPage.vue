@@ -43,6 +43,7 @@
         <Post :post="p" />
       </div>
     </div>
+    <ShareAlbumModal :activeAlbum="activeAlbum" />
   </div>
 </template>
 <script>
