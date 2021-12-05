@@ -8,18 +8,30 @@
         :src="collab.picture"
         alt=""
       />
+      <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li>
+          <a @click="unverify" class="dropdown-item text-danger" href="#"
+            >End collaboration with this person
+          </a>
+        </li>
+      </ul> -->
     </div>
   </div>
 </template>
 
 
 <script>
+import { collaboratorService } from "../services/CollaboratorService"
 export default {
   props: {
     collab: { type: Object, required: true }
   },
   setup() {
-    return {}
+    return {
+      // async unverify(){
+      //   await collaboratorService.unverify()
+      // }
+    }
   }
 }
 </script>
