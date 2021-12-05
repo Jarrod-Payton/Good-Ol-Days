@@ -4,6 +4,7 @@ import { api } from "./AxiosService"
 
 class ChallengeService {
   grabThreeChallenges(array) {
+    //Grabs three challenges one by one and after one is selected then deletes that one from the potential options which are all sorted by type before being passed in
     let challenge1 = array[Math.floor(Math.random() * array.length)]
     array = array.filter(s => s !== challenge1)
     let challenge2 = array[Math.floor(Math.random() * array.length)]
@@ -13,6 +14,7 @@ class ChallengeService {
     return recommended3
   }
   async createActiveChallenge(ChallengeBody) {
+    //This just grabs the info created from the form over in the Challenge.vue component and assigns the bits we need in order to prevent making the challenge part of the form required for albums that do not have any challenges then sends it to the data base and the AppState
     const body = {}
     body.title = ChallengeBody
     body.albumId = AppState.activeAlbum.id
@@ -21,6 +23,7 @@ class ChallengeService {
     AppState.activeChallenge = activeChallenge.data
   }
   async getChallenges() {
+    //This checks if the active album has challenges and if it does it makes a network request to get all of them and if it doesn't it saves the client from sending an extra network request, it then filters those to find the one that is set to is active and if there is none then it comes back as an empty object but keeps the challenges stored in the AppState to be used for the back of the post cards
     if (AppState.activeAlbum.hasChallenges === true) {
       const res = await api.get(`api/albums/${AppState.activeAlbum.id}/challenges`)
       logger.log('challenges', res.data)
@@ -41,7 +44,7 @@ class ChallengeService {
       }
     }
   }
-  // 606590170
+  // 606590170 This is a week in miliseconds in order to actually get our app functional
 }
 
 export const challengeService = new ChallengeService()

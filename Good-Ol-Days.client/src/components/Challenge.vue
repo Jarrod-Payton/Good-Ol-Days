@@ -1,6 +1,7 @@
 <template >
   <div>
     <div class="row m-0">
+      <!--This is a if statement that is only there for a better UI experience so that you aren't seeing a glimpse of an empty form and the previous posts from the last album-->
       <div class="col-12 paddingmobile" v-if="doneSyncing">
         <div class="d-flex justify-content-center align-content-center">
           <div class="card cardspec">
@@ -44,12 +45,14 @@
               </div>
               <!--If No Challenge-->
               <div class="row" v-if="!activeChallenge.title">
+                <!--This is in place to make sure only the creator can choose the next challenge and if you take away the v-show then it will still work as intended-->
                 <div
                   class="col-12"
                   v-show="activeAlbum.creatorId == account.id"
                 >
                   <div class="d-flex">
                     <h5 class="font">Here are some suggested challenges:</h5>
+                    <!--A spot for the client to choose the type of suggestion he desires which is used to go through a filter-->
                     <select
                       class="heightSet font mx-2 px-2 py-0 font"
                       v-model="type"
@@ -67,6 +70,7 @@
                   </div>
                 </div>
                 <div class="col-12">
+                  <!--This whole DIV is just to be able to re run the function that gets your three suggestions-->
                   <div class="heightSet px-1 d-flex shuffleParent">
                     <h5 class="font shuffleSuggest">Shuffle Suggestions:</h5>
                     <i
@@ -83,9 +87,11 @@
                     />
                   </div>
                 </div>
+                <!--This is to get the cards for the three challenges and uses a v-for to make one for each-->
                 <div class="col-12" v-for="s in mySuggestions" :key="s">
                   <ChallengeSuggestions :suggestion="s" />
                 </div>
+                <!--This whole DIV is used to toggle a form which gives the client the chance to work in their own challenge if they don't want or like the suggested ones-->
                 <div class="col-12">
                   <h5 class="font createOwnText">
                     Don't like ours? try making your own!
@@ -107,7 +113,7 @@
                   </form>
                 </div>
               </div>
-              <!--This is for the quote-->
+              <!--This is for the quote being shown-->
             </div>
             <div class="row m-0">
               <div class="col-12 align-self-end">
@@ -117,6 +123,7 @@
           </div>
         </div>
       </div>
+      <!--This is the loading icon so that the user sees a loading icon while the application is getting their challenge and posts so they don't feel inclined to refresh before the request is finished-->
       <div class="col-12" v-else>
         <div class="card cardspec">
           <div class="card-body">
@@ -138,23 +145,34 @@ import { challengeService } from "../services/ChallengeService"
 import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
 export default {
+  //If you are a collaborator you can see the challenge, this is to pass down the collaborators
   props: {
     collabThisAlbum: { type: Object, required: true }
   },
   setup() {
+    //The filter for the suggested challenges
     const type = ref('')
+    //The list of three suggestions
     const mySuggestions = ref([])
+    //The form to create your own challenge
     const form = ref('')
+    //The ref to toggle open or closed the create your own form
     const makeOwn = ref(false)
     watchEffect(() => {
+      //One of my instructors Mark Ohnsman helped me write this code for a different project and it is brilliant for the suggested challenge filter by type, we had to use a variable because the watchEffect looks for changes in the variables displayed in order to trigger the function but if we used the straight AppState then we ran into a problem where it was seeing the AppState constantly chaning so it was always re running the function
       let s = AppState.suggestedChallenges
+      //If the string isn't empty
       if (type.value != '') {
+        //Filters the AppState
         s = AppState.suggestedChallenges.filter(s => s.type == type.value)
+        //Grabs three challenges based on the array given
         mySuggestions.value = challengeService.grabThreeChallenges(s)
       }
     })
     onMounted(async () => {
+      //Sets the active quote
       await quoteService.setActiveQuote()
+      //Sets the value of the filter for suggested challenges to start at general
       type.value = 'General'
     })
     return {
@@ -164,16 +182,18 @@ export default {
       makeOwn,
       toggleMakeOwn() {
         try {
+          //Just flipps the value of the form being displayed
           makeOwn.value = !makeOwn.value
-          logger.log('h', makeOwn.value)
         } catch (error) {
           logger.log(error)
         }
       },
       async madeChallenge() {
+        //Sends the challenge up to the server and sets it as the active Challenge
         await challengeService.createActiveChallenge(form.value)
       },
       refreshOptions() {
+        //Same exact code from the watchEffect in order to reroll the three suggested challenges
         let s = AppState.suggestedChallenges
         if (type.value != '') {
           s = AppState.suggestedChallenges.filter(s => s.type == type.value)

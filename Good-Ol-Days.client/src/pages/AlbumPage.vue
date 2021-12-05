@@ -1,5 +1,7 @@
 <template>
+  <!--Whenever you open up an album this is the page you are routed to-->
   <div class="row mt-md-5 mt-2 m-0 p-0">
+    <!--Checks to see your role on this page in order to determine your interaction ability and view of the challenge-->
     <div
       class="col-md-6 order-md-2 p-0"
       v-if="
@@ -11,10 +13,12 @@
         (account.id === activeAlbum.creatorId && activeAlbum.hasChallenges)
       "
     >
+      <!--Shows the challenge-->
       <Challenge />
     </div>
     <div class="col-md-6 order-md-1">
       <div class="row">
+        <!--Divided all posts into two sets of posts in order to keep the challenge on the right hand side even if there no posts made yet (We were stumped on how to do this for quite a while, so thank you to one of our instructors Mick Shannahan for coming up with this brilliant method)-->
         <div class="col-6 rotationanim" v-for="p in posts1" :key="p.id">
           <div
             @click="setActive(p.id)"
@@ -28,6 +32,7 @@
         </div>
       </div>
     </div>
+    <!--Second half of our split posts-->
     <div
       class="col-6 col-md-3 rotationanim order-md-3"
       v-for="p in splicedPosts"
@@ -43,6 +48,7 @@
         <Post :post="p" />
       </div>
     </div>
+    <!--Our modal for the sharing of the album-->
     <ShareAlbumModal :activeAlbum="activeAlbum" />
   </div>
 </template>
@@ -62,19 +68,26 @@ export default {
     user: { type: Object }
   },
   setup(props) {
+    // A ref to be used to split the posts
     const splicedPosts = ref([])
+    // The router to be able to grab the album Id off of the url
     const route = useRoute();
     watchEffect(() => {
+      //We needed this variable because the WatchEffect runs this set of functions whenever any aspect of this data gets adjusted but for whatever reason just setting the variable equal to it and then changing that variable actually changed the AppState as a whole so it would just re run and re run the functions over and over so thank you to one of our assistant instructors Justin Carpenter for coming up with this amazing fix
       splicedPosts.value = [...AppState.posts]
       splicedPosts.value = splicedPosts.value.splice(2, AppState.posts.length)
 
     })
     onMounted(async () => {
       try {
+        //Sets the active album in the AppState
         await albumService.setActiveAlbum(route.params.albumId);
+        //Checks if they are authenticated so that if they are not then they will not get the challenges
         if (props.user.isAuthenticated) {
+          //Grabs the challenges using the active album in the AppState
           await challengeService.getChallenges()
         }
+        //Grabs the posts for this album by using the album id in the url
         await postService.getPosts(route.params.albumId)
       } catch (error) {
         Pop.toast(error);
@@ -98,6 +111,7 @@ export default {
       account: computed(() => AppState.account),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
       setActive(id) {
+        //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)
       }
     };

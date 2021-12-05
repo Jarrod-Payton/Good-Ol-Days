@@ -8,6 +8,11 @@
             <div class="modal-title f-18">
               <p>New Album</p>
             </div>
+            <button
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="row">
@@ -25,6 +30,7 @@
                 </p>
                 <!-- Upload File from computer ^  -->
               </div>
+              <!--This DIV has just the basic form set up for the information required to make a album-->
               <div class="col-12">
                 <p class="S1 f-14">Album name:</p>
                 <input
@@ -40,23 +46,16 @@
                 <p class="S1 mt-4">
                   Enable week challenges?
                   <input
-                    type="radio"
+                    type="checkbox"
                     class="ms-3"
                     v-model="albumDetails.editable.hasChallenges"
                     :value="true"
                   />
                   Yes
-                  <input
-                    type="radio"
-                    class="ms-3"
-                    v-model="albumDetails.editable.hasChallenges"
-                    :value="false"
-                    required
-                  />
-                  No
                 </p>
               </div>
             </div>
+            <!--Is used to add a nice buffer between the bottom of the form and the last bit of input-->
             <img src="" alt="" class="img-fluid" id="image" />
           </div>
           <div class="modal-footer">
@@ -80,22 +79,30 @@ import { Modal } from "bootstrap"
 import { firebaseService } from "../services/FirebaseService"
 export default {
   setup() {
+    //Variable to make the submit button disapear and become disabled when set to true and is set to true at the begging of each function and set back to false at the end
     const submitting = ref(false)
+    //Form used for information
     const albumDetails = reactive({ editable: {} })
+    //FireBase variable to be set to the image selected
     const files = ref([])
+    //Used to grab the url info
     const router = useRouter()
     return {
       albumDetails,
       submitting,
       async createAlbum() {
         try {
+          //Makes the album and sets the submitting to true so the user cannot spam click submit
           submitting.value = true
           const newPost = await albumService.createAlbum(albumDetails.editable)
+          //Pushes you to the album page just created
           router.push({
             name: "Album",
             params: { albumId: newPost.id }
           })
+          //Closes the modal behind you
           Modal.getOrCreateInstance(document.getElementById("createAlbumModal")).toggle()
+          //Sets the modal info back to empty
           albumDetails.editable = {}
           submitting.value = false
         } catch (error) {
