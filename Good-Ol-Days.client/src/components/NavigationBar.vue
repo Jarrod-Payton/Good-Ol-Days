@@ -35,11 +35,17 @@
         <div>
           <!-- Components set to each Page and condition v  -->
           <!--  -->
-          <!-- Condition set to only show at the HomePage checking if there is an ActiveAlbum and GroupAlbum open -->
-          <NavHome v-if="!activeAlbum.id && !collabThisAlbum[0]?.name" />
+          <!-- Condition set to only show at the HomePage checking if the route is Home -->
+          <NavHome v-if="route.name === 'Home'" />
           <!--  -->
-          <!-- Condition set to only show at AlbumPage and only if album is private checking if there's an ActiveAlbum and if the album is private -->
-          <NavAlbum v-if="activeAlbum.id && !collabThisAlbum[0]?.verified" />
+          <!-- Condition set to only show at AlbumPage and only if album is private checking if there's an ActiveAlbum, if the album is private and if the route is 'Album' -->
+          <NavAlbum
+            v-if="
+              route.name === 'Album' &&
+              activeAlbum.id &&
+              !collabThisAlbum[0]?.verified
+            "
+          />
           <!--  -->
           <!-- Condition set to only show at AlbumPage and only if album is shared checking if user account match one of the collaborators of that album and it is verified or if the user account matches the creator of that album and there's at least one collaborator verified  -->
           <NavGroupAlbum
