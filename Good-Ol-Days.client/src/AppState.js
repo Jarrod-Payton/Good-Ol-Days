@@ -8,7 +8,6 @@ export const AppState = reactive({
   myAlbums: [],
   myGroupAlbums: [],
   activeAlbum: {},
-  activeGroupAlbum: {},
   posts: [],
   challenges: [],
   activeChallenge: {},
