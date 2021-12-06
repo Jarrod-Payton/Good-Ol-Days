@@ -69,6 +69,7 @@ import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { onMounted, watchEffect } from "@vue/runtime-core"
 import { notificationService } from "../services/NotificationService"
+import Pop from "../utils/Pop"
 export default {
   setup() {
     onMounted(async () => {
@@ -79,7 +80,9 @@ export default {
         await notificationService.seen()
       },
       async clear() {
-        await notificationService.clear()
+        if (await Pop.confirm()) {
+          await notificationService.clear()
+        }
       },
       activeAlbum: computed(() => AppState.activeAlbum),
       notifications: computed(() => AppState.notifications)
