@@ -3,12 +3,12 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 export const CollaboratorSchema = new Schema(
-{
-  albumId:{type:ObjectId, required:true, ref:'Album'},
-  accountId:{type:ObjectId, required:true, ref:'Account'},
-  verified:{type:Boolean, default:false}
-},
-{ timestamps: true, toJSON: { virtuals: true } }
+  {
+    albumId: { type: ObjectId, required: true, ref: 'Album' },
+    accountId: { type: ObjectId, required: true, ref: 'Account' },
+    verified: { type: Boolean, default: false }
+  },
+  { timestamps: true, toJSON: { virtuals: true } }
 
 )
 CollaboratorSchema.virtual('album', {
