@@ -38,9 +38,6 @@ class CollaboratorsService {
       throw new BadRequest('Invalid Id')
     }
     // Checks to see if the userId of the collaboration is not equal to the creator of the collaboration. If false throws invalid permission
-    if (res.accountId.toString() !== user) {
-      throw new Forbidden("You don't have permission to do this")
-    }
     // If the if statements pass deletes the collaborator and the notification associated with it
     await dbContext.Collaborators.findByIdAndDelete(collaborator)
     await dbContext.Notifications.findOneAndDelete({ notifier: res.accountId, albumId: res.albumId })

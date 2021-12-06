@@ -2,6 +2,7 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
+import { collaboratorService } from "./CollaboratorService"
 
 class NotificationService {
   async getMyNotifications() {
@@ -10,10 +11,14 @@ class NotificationService {
     logger.log('Notifications', res.data)
     AppState.notifications = res.data
   }
-  async deleteNotification(notificationId) {
+  async deleteNotification(notification) {
+    logger.log('Notification', notification)
+    if (notification.type === "collaborator") {
+      collaboratorService.Deny(notification)
+    }
     //This just deletes the notification by notification id and filters the AppState so it deletes on the user end without refresh
-    await api.delete(`account/notifications/${notificationId}`)
-    AppState.notifications = AppState.notifications.filter(n => n.id != notificationId)
+    await api.delete(`account/notifications/${notification.id}`)
+    AppState.notifications = AppState.notifications.filter(n => n.id != notification.id)
     Pop.toast('Deleted Notification')
   }
   async seen() {

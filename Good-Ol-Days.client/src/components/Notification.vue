@@ -66,7 +66,7 @@ export default {
       async deleteNotification() {
         //Gives the user the chance to confirm the deletion of the notification and then deletes it
         if (await Pop.confirm()) {
-          await notificationService.deleteNotification(props.notification.id)
+          await notificationService.deleteNotification(props.notification)
         }
       },
       async acceptCollaborator() {
