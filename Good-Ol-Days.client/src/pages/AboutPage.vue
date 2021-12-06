@@ -225,10 +225,11 @@
           <div class="col-md-4 cardsheight d-flex justify-content-center">
             <div class="card4 elevation-3 grow">
               <div>
-                <img class="img-fluid images"
-                src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg" <<<<<<<
-                HEAD alt="" ======= alt="Lucas Payton's Profile Picture" >>>>>>>
-                4915bda4704e1009008a083c2adbddfe4f8e50b2 />
+                <img
+                  class="img-fluid images"
+                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
+                  alt="Lucas Payton's Profile Picture"
+                />
               </div>
               <div class="d-flex align-items-center justify-content-center">
                 <div><p class="m-0 me-4 f-18">Lucas Payton</p></div>
