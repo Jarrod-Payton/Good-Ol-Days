@@ -95,7 +95,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
                   alt=""
                 />
               </div>
