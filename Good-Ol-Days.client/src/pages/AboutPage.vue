@@ -53,11 +53,15 @@
                 <div><p class="m-0 me-1 f-18">Jake Carpenter</p></div>
                 <div>
                   <a
+                    src="https://www.linkedin.com/in/dev-man-jacob-carpenter/"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
-                  <a class="mdi f-24 mdi-github github selectable1"></a>
+                  <a
+                    src="https://github.com/JakeCarp"
+                    class="mdi f-24 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
@@ -221,15 +225,10 @@
           <div class="col-md-4 cardsheight d-flex justify-content-center">
             <div class="card4 elevation-3 grow">
               <div>
-                <img
-                  class="img-fluid images"
-                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
-<<<<<<< HEAD
-                  alt=""
-=======
-                  alt="Lucas Payton's Profile Picture"
->>>>>>> 4915bda4704e1009008a083c2adbddfe4f8e50b2
-                />
+                <img class="img-fluid images"
+                src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg" <<<<<<<
+                HEAD alt="" ======= alt="Lucas Payton's Profile Picture" >>>>>>>
+                4915bda4704e1009008a083c2adbddfe4f8e50b2 />
               </div>
               <div class="d-flex align-items-center justify-content-center">
                 <div><p class="m-0 me-4 f-18">Lucas Payton</p></div>
