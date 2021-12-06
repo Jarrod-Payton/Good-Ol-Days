@@ -55,7 +55,7 @@
                 </p>
               </div>
             </div>
-            <!--Is used to add a nice buffer between the bottom of the form and the last bit of input-->
+            <!--Empty image tag used to hold preview from file reader-->
             <img src="" alt="" class="img-fluid" id="image" />
           </div>
           <div class="modal-footer">

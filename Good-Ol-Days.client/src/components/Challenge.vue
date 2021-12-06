@@ -227,7 +227,6 @@ export default {
       activeAlbum: computed(() => AppState.activeAlbum),
       doneSyncing: computed(() => AppState.doneSyncing),
       account: computed(() => AppState.account),
-      user: computed(() => AppState.user)
     }
   },
 }

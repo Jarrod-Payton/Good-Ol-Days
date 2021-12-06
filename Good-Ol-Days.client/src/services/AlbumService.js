@@ -35,7 +35,7 @@ class AlbumService {
     AppState.myAlbums.filter(a => a.id !== albumId)
   }
   clear() {
-    // Cleat the data in AppState for activeAlbum and collabThisAlbum
+    // Clear the data in AppState for activeAlbum and collabThisAlbum
     AppState.activeAlbum = {}
     AppState.collabThisAlbum = []
   }
