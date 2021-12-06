@@ -177,7 +177,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://animesenpai.net/wp-content/uploads/2021/09/images_720.jpg"
+                  src="https://honeysanime.com/wp-content/uploads/2019/08/Dr.-Stone-Wallpaper-2-560x313.png"
                   alt=""
                 />
               </div>
