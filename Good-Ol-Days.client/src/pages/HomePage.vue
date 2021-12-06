@@ -61,7 +61,7 @@
         <div
           v-if="c.verified"
           @click="routerLink(c.albumId)"
-          class="card selectable cardgroupalbum grow2 mb-3"
+          class="card selectable cardgroupalbum grow2 mb-2"
         >
           <p class="gpalbumtitle">{{ c.albumTitle }}</p>
         </div>

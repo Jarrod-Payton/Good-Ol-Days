@@ -10,7 +10,7 @@
   <footer>
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
-    <PictureModal />
+    <PictureModal :posts="posts" />
   </footer>
 </template>
 
@@ -24,6 +24,7 @@ export default {
       appState: computed(() => AppState),
       account: computed(() => AppState.account),
       user: computed(() => AppState.user),
+      posts: computed(() => AppState.posts),
 
     }
   }
