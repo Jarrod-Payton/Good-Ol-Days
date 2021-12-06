@@ -26,6 +26,10 @@
                 <p class="m-0 pb-2 pt-3 w-100 title">{{ activePost.title }}</p>
                 <div class="text-end align-self-center">
                   <button
+                    v-show="
+                      posts.creatorId === account.id ||
+                      activeAlbum.creatorId === account.id
+                    "
                     title="Delete this picture"
                     @click="deletePost"
                     class="btn p-0 m-0"
@@ -56,6 +60,9 @@ import { postService } from "../services/PostService"
 import { Modal } from "bootstrap"
 import Pop from "../utils/Pop"
 export default {
+  props: {
+    posts: { type: Object }
+  },
   setup() {
     return {
       async deletePost() {
@@ -65,7 +72,9 @@ export default {
           Pop.toast('Picture deleted!', 'success')
         }
       },
-      activePost: computed(() => AppState.activePost)
+      activePost: computed(() => AppState.activePost),
+      account: computed(() => AppState.account),
+      activeAlbum: computed(() => AppState.activeAlbum)
     }
   }
 }
