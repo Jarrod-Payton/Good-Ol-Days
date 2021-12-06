@@ -34,11 +34,9 @@ class FirebaseService {
         logger.log(url)
         return url
     }
-      async uploadProfileImage(profileImg,  ) {
-        logger.log('Post DATA:', data)
-         logger.log('ALBUM DATA:', albumData)
-        const collection = storage.ref('albums')
-        const resource = collection.child(albumData.title).child(data.name)
+      async uploadProfileImage(profileImg, profileName) {
+        const collection = storage.ref(`${profileName}`)
+        const resource = collection.child('profilePic').child(profileImg)
         const snapshot = await resource.put(data, {
             customMetadata: {
                  uid: AppState.account.id, size: data.size, type: data.type

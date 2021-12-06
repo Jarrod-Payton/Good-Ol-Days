@@ -142,6 +142,7 @@ export default {
     account: { type: Object }
   },
   setup() {
+    //TODO flip this ref on close of the off canvas
     let edit = ref(true)
     let editProfile = ref({})
     const router = useRouter()
@@ -151,6 +152,16 @@ export default {
       edit,
       editProfile,
       router,
+      //This is on the right track, but needs more thought
+      // async changePFP(e) {
+      //   try {
+      //     editProfile.picture.value = e.target.file
+
+      //   } catch (error) {
+      //     logger.error(error)
+      //   }
+
+      // },
       async editAccount() {
         try {
           await accountService.editAccount(editProfile.value)
