@@ -12,12 +12,13 @@ class NotificationService {
     AppState.notifications = res.data
   }
   async deleteNotification(notification) {
+    logger.log('Notification', notification)
     if (notification.type === "collaborator") {
       collaboratorService.Deny(notification)
     }
     //This just deletes the notification by notification id and filters the AppState so it deletes on the user end without refresh
     await api.delete(`account/notifications/${notification.id}`)
-    AppState.notifications = AppState.notifications.filter(n => n.id != notificationId)
+    AppState.notifications = AppState.notifications.filter(n => n.id != notification.id)
     Pop.toast('Deleted Notification')
   }
   async seen() {

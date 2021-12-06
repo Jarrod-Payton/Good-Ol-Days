@@ -46,7 +46,8 @@ class CollaboratorService {
     // Change the verify to true with the collaboration ID
     await this.verify(collabToAccept.id)
     // Delete that notification with notification ID
-    await notificationService.deleteNotification(notification.id)
+    await api.delete(`account/notifications/${notification.id}`)
+    AppState.notifications = AppState.notifications.filter(n => n.id != notification.id)
     Pop.toast('Accepted Collab')
   }
   async Deny(notification) {
@@ -57,7 +58,7 @@ class CollaboratorService {
     await this.getCollabThisAlbum(album.id)
     // Get the person that matches the notification that you accepted to change verify to true
     const collab = AppState.collabThisAlbum.find(c => c.accountId === notification.notifier.id)
-    logger.log('TEST JOHN 2', collabToAccept)
+    logger.log('TEST JOHN 2', collab)
     await api.delete(`api/collaborators/${collab.id}`)
   }
 }
