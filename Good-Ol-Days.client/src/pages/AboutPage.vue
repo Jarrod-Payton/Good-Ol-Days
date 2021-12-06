@@ -23,7 +23,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://images.immediate.co.uk/production/volatile/sites/23/2014/11/GettyImages-888995042-c1288ee.jpg?quality=90&crop=147px%2C265px%2C1605px%2C1069px&resize=620%2C413"
                   alt=""
                 />
               </div>
@@ -117,7 +117,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5jEe3u-zFbNX7_hKxiG-NWIz_3pDTaRcVTP0x3W7TMgoYO1k1Prrtf3oewZDfmHX67aQ&usqp=CAU"
                   alt=""
                 />
               </div>
