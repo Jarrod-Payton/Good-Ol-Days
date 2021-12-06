@@ -107,7 +107,10 @@
                   ></a>
                 </div>
                 <div>
-                  <a class="mdi f-24 mdi-github github selectable1"></a>
+                  <a
+                    class="mdi f-24 mdi-github github selectable1"
+                    href="https://github.com/Jarrod-Payton"
+                  ></a>
                 </div>
               </div>
             </div>
@@ -216,8 +219,8 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
-                  alt=""
+                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
+                  alt="Lucas Payton's Profile Picture"
                 />
               </div>
               <div class="d-flex align-items-center justify-content-center">
@@ -229,7 +232,10 @@
                   ></a>
                 </div>
                 <div>
-                  <a href="" class="mdi f-26 mdi-github github selectable1"></a>
+                  <a
+                    href="https://github.com/Jarrod-Payton"
+                    class="mdi f-26 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
