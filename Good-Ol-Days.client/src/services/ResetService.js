@@ -6,6 +6,7 @@ class ResetService {
     AppState.activeAlbum = {}
     AppState.posts = []
     AppState.activePost = {}
+    AppState.myGroupAlbums = []
     AppState.activeChallenge = {}
     AppState.doneSyncing = false
   }
