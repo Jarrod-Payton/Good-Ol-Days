@@ -79,6 +79,7 @@ import { computed } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { onMounted, watchEffect } from "@vue/runtime-core"
 import { notificationService } from "../services/NotificationService"
+import Pop from "../utils/Pop"
 export default {
   setup() {
     return {
@@ -87,6 +88,9 @@ export default {
         await notificationService.seen()
       },
       async clear() {
+        if (await Pop.confirm()) {
+          await notificationService.clear()
+        }
         //Deletes every single notification
         await notificationService.clear()
       },
