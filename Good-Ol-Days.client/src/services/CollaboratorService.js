@@ -41,7 +41,7 @@ class CollaboratorService {
     // Get All collabs on this album with the album ID
     await this.getCollabThisAlbum(album.id)
     // Get the person that matches the notification that you accepted to change verify to true
-    const collabToAccept = AppState.collabThisAlbum.find( c => c.accountId === notification.notifier)
+    const collabToAccept = AppState.collabThisAlbum.find( c => c.accountId === notification.notifier.id)
     logger.log('TEST JOHN 2',collabToAccept)
     // Change the verify to true with the collaboration ID
     await this.verify(collabToAccept.id)
