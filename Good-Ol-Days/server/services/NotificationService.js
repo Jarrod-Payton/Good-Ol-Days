@@ -24,7 +24,9 @@ class NotificationService {
     // Finds an album by album ID
     const found = await albumsService.getAlbumById({ _id: album })
     // Creates a post notification using the found album's data
-    await dbContext.Notifications.create({ type: 'post', notifier: `${user}`, albumId: found.id, recipient: [found.creatorId] })
+    if(!user === found.creatorId){
+      await dbContext.Notifications.create({ type: 'post', notifier: `${user}`, albumId: found.id, recipient: [found.creatorId] })
+    }
   }
 
   async getMyNotifications(userId) {
