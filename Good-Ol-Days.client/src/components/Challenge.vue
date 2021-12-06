@@ -45,7 +45,7 @@
               </div>
               <!--If No Challenge-->
               <div class="row" v-if="!activeChallenge.title">
-                <div class="col-12" v-if="activeAlbum.creatorId == account.id">
+                <div class="col-12" v-if="activeAlbum.creatorId === account.id">
                   <!--This is in place to make sure only the creator can choose the next challenge and if you take away the v-show then it will still work as intended-->
                   <div class="row">
                     <div class="col-12">
@@ -224,9 +224,10 @@ export default {
       quote: computed(() => AppState.activeQuote),
       MyChallenges: computed(() => AppState.suggestedChallenges),
       activeChallenge: computed(() => AppState.activeChallenge),
-      activeAlbum: (() => AppState.activeAlbum),
+      activeAlbum: computed(() => AppState.activeAlbum),
       doneSyncing: computed(() => AppState.doneSyncing),
       account: computed(() => AppState.account),
+      user: computed(() => AppState.user)
     }
   },
 }
