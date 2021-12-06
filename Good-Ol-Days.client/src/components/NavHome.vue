@@ -20,7 +20,7 @@
           </li>
           <!--This is to set the given and also give the user the option to delete all of their notifications-->
           <li v-if="!notifications.length == 0">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center parentDropdown">
               <button class="notificationHead clearButton btn" @click="clear">
                 <h5 class="notificationHead text-center buttonText">
                   Clear All Your Notifications
@@ -89,10 +89,10 @@ export default {
       },
       async clear() {
         if (await Pop.confirm()) {
+          //Deletes every single notification
           await notificationService.clear()
+          Pop.toast('Notifications Cleared')
         }
-        //Deletes every single notification
-        await notificationService.clear()
       },
       activeAlbum: computed(() => AppState.activeAlbum),
       notifications: computed(() => AppState.notifications)
@@ -105,15 +105,19 @@ export default {
 
 <style lang="scss" scoped>
 .buttonText {
-  background-color: rgb(255, 255, 255);
-  font-size: 1.8vh !important;
+  background-color: rgb(204, 55, 55);
+  font-size: 1.6vh !important;
+  padding-bottom: 0.5vh;
+  padding-top: 0.5vh;
 }
 .clearButton {
-  background-color: #c24a4a;
-  color: black;
+  background-color: #ffffff;
+  color: rgb(248, 248, 248);
   height: 3.3vh;
-  width: 38vh !important;
   border-radius: 0vh !important;
+}
+.parentDropdown {
+  width: 38vh !important;
 }
 .notificationHead {
   font-size: 1.5vh;

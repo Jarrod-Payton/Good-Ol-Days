@@ -23,7 +23,7 @@ class NotificationService {
   async clear() {
     //This just deletes every notification that a person has through a simple forloop
     for (let n = 0; n < AppState.notifications.length; n++) {
-      api.delete(`account/notifications/${n.id}`)
+      api.delete(`account/notifications/${AppState.notifications[n].id}`)
     }
     AppState.notifications = []
   }
