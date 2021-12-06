@@ -2,19 +2,23 @@
   <div class="ProfilesCircles">
     <div class="">
       <img
+        id="dropdownMenuLink"
+        data-bs-toggle="dropdown"
         v-if="collab.verified"
         :title="collab.name"
         class="profilepics"
         :src="collab.picture"
         alt=""
       />
-      <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li>
-          <a @click="unverify" class="dropdown-item text-danger" href="#"
+          <a
+            @click="unverify(collab)"
+            class="dropdown-item selectable1 text-danger"
             >End collaboration with this person
           </a>
         </li>
-      </ul> -->
+      </ul>
     </div>
   </div>
 </template>
@@ -28,9 +32,9 @@ export default {
   },
   setup() {
     return {
-      // async unverify(){
-      //   await collaboratorService.unverify()
-      // }
+      async unverify(collab) {
+        await collaboratorService.unverify(collab)
+      }
     }
   }
 }

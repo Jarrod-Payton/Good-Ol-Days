@@ -29,6 +29,10 @@ class CollaboratorService {
     const res = await api.put('api/collaborators/' + id)
     logger.log('VERIFY COLLAB', res.data)
   }
+  async unverify(collab){
+    const res = await api.delete(`api/collaborators/${collab.id}`)
+    logger.log(`Collaboration with ${collab.name} ended`, res.data )
+  }
   async addColab(albumId) {
     // Add someone as collaborator but verify is false with the album ID
     const res = await api.post('api/collaborators', { albumId: albumId })
