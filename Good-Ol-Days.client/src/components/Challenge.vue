@@ -45,72 +45,91 @@
               </div>
               <!--If No Challenge-->
               <div class="row" v-if="!activeChallenge.title">
-                <!--This is in place to make sure only the creator can choose the next challenge and if you take away the v-show then it will still work as intended-->
-                <div
-                  class="col-12"
-                  v-show="activeAlbum.creatorId == account.id"
-                >
-                  <div class="d-flex">
-                    <h5 class="font">Here are some suggested challenges:</h5>
-                    <!--A spot for the client to choose the type of suggestion he desires which is used to go through a filter-->
-                    <select
-                      class="heightSet font mx-2 px-2 py-0 font"
-                      v-model="type"
-                    >
-                      <option value="General">General</option>
-                      <option value="Family">Family</option>
-                      <option value="Friends">Friends</option>
-                      <option value="Fun">Random / Fun</option>
-                      <option value="SignificantOther">
-                        Significant Other
-                      </option>
-                      <option value="Child">Child</option>
-                      <option value="Meme">Meme</option>
-                    </select>
+                <div class="col-12" v-if="activeAlbum.creatorId == account.id">
+                  <!--This is in place to make sure only the creator can choose the next challenge and if you take away the v-show then it will still work as intended-->
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="d-flex">
+                        <h5 class="font">
+                          Here are some suggested challenges:
+                        </h5>
+                        <!--A spot for the client to choose the type of suggestion he desires which is used to go through a filter-->
+                        <select
+                          class="heightSet font mx-2 px-2 py-0 font"
+                          v-model="type"
+                        >
+                          <option value="General">General</option>
+                          <option value="Family">Family</option>
+                          <option value="Friends">Friends</option>
+                          <option value="Fun">Random / Fun</option>
+                          <option value="SignificantOther">
+                            Significant Other
+                          </option>
+                          <option value="Child">Child</option>
+                          <option value="Meme">Meme</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <!--This whole DIV is just to be able to re run the function that gets your three suggestions-->
+                      <div class="heightSet px-1 d-flex shuffleParent">
+                        <h5 class="font shuffleSuggest">
+                          Shuffle Suggestions:
+                        </h5>
+                        <i
+                          class="
+                            mdi mdi-shuffle-variant
+                            selectable1
+                            refreshButton
+                            border-2
+                            px-1
+                            mb-5
+                          "
+                          title="Refresh Options"
+                          @click="refreshOptions"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!--This is to get the cards for the three challenges and uses a v-for to make one for each-->
+                  <div class="row">
+                    <div class="col-12" v-for="s in mySuggestions" :key="s">
+                      <ChallengeSuggestions :suggestion="s" />
+                    </div>
+                  </div>
+                  <!--This whole DIV is used to toggle a form which gives the client the chance to work in their own challenge if they don't want or like the suggested ones-->
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="font createOwnText">
+                        Don't like ours? try making your own!
+                        <i
+                          class="mdi mdi-comment-edit selectable1"
+                          title="Refresh Options"
+                          @click="toggleMakeOwn"
+                        />
+                      </h5>
+                      <form @submit.prevent="madeChallenge" v-if="makeOwn">
+                        <input
+                          type="text"
+                          required
+                          class="form-control border-white inputField font"
+                          v-model="form"
+                          placeholder="What would you like your challenge for the week to be ..."
+                          maxlength="200"
+                        />
+                      </form>
+                    </div>
                   </div>
                 </div>
-                <div class="col-12">
-                  <!--This whole DIV is just to be able to re run the function that gets your three suggestions-->
-                  <div class="heightSet px-1 d-flex shuffleParent">
-                    <h5 class="font shuffleSuggest">Shuffle Suggestions:</h5>
-                    <i
-                      class="
-                        mdi mdi-shuffle-variant
-                        selectable1
-                        refreshButton
-                        border-2
-                        px-1
-                        mb-5
-                      "
-                      title="Refresh Options"
-                      @click="refreshOptions"
-                    />
+                <div class="col-12" v-else>
+                  <div class="d-flex justify-content-center">
+                    <h2 class="text-center pt-2 font">
+                      As a collaborator you have to wait for the creator to
+                      select a challenge
+                    </h2>
                   </div>
-                </div>
-                <!--This is to get the cards for the three challenges and uses a v-for to make one for each-->
-                <div class="col-12" v-for="s in mySuggestions" :key="s">
-                  <ChallengeSuggestions :suggestion="s" />
-                </div>
-                <!--This whole DIV is used to toggle a form which gives the client the chance to work in their own challenge if they don't want or like the suggested ones-->
-                <div class="col-12">
-                  <h5 class="font createOwnText">
-                    Don't like ours? try making your own!
-                    <i
-                      class="mdi mdi-comment-edit selectable1"
-                      title="Refresh Options"
-                      @click="toggleMakeOwn"
-                    />
-                  </h5>
-                  <form @submit.prevent="madeChallenge" v-if="makeOwn">
-                    <input
-                      type="text"
-                      required
-                      class="form-control border-white inputField font"
-                      v-model="form"
-                      placeholder="What would you like your challenge for the week to be ..."
-                      maxlength="200"
-                    />
-                  </form>
                 </div>
               </div>
               <!--This is for the quote being shown-->
