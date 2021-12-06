@@ -12,7 +12,7 @@ class FirebaseService {
 
     async upload(data, albumData,) {
 
-        //Collection refers to the referecne to the 'albums' storage file
+        //Collection refers to the referencing the 'albums' storage file
         const collection = storage.ref('albums')
 
         //Resource is path to the specific asset, .child is the method used to define
@@ -20,7 +20,7 @@ class FirebaseService {
 
         const resource = collection.child(albumData.title).child(data.name)
 
-        //Snapshot is a bannana word, this part appends our metadata to the file
+        //Snapshot is a banana word, this part appends our metadata to the file
 
         const snapshot = await resource.put(data, {
             customMetadata: {
@@ -36,7 +36,7 @@ class FirebaseService {
         return url
     }
 
-    //This functions mimics the upload function above, except that it stores the images
+    //This function mimics the upload function above, except that it stores the images
     //in a different destination to be used as album cover images
     //TODO refactor to reduce repeated lines
     async uploadCoverImg(data, albumData) {
