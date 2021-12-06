@@ -108,13 +108,23 @@ export default {
       files,
       activeAlbum: computed(() => AppState.activeAlbum),
       activeChallenge: computed(() => AppState.activeChallenge),
+
+      //When files are selected there is a process we need to go through to 
+      //generate a usable form on our page. We do this process to have an image preview
       fileSelect(e) {
         try {
+
+          //Grab the file object our of the event and put it into the reference object
           files.value = e.target.files
           logger.log('files ref value', files.value)
+
+          //FileReader is a default js feature, it is super touch but will produce a renderable B64 version of whaterver
+          //image file you have selected
           const reader = new FileReader()
           reader.readAsDataURL(files.value[0])
           reader.onload = () => {
+
+            //Take the image you've now turned into something usable and set it into the src of the blank image elem we have
             document.getElementById('image').src = reader.result
           }
         } catch (error) {
@@ -122,9 +132,15 @@ export default {
           submitting.value = false
         }
       },
+
+      //This is the post where we use the postDetails reference object to actually make and store our mongoDB objects
       async createPost() {
         try {
+
+          //Make the call to the service layer to hit our API and save our post
           await postService.createPost(postDetails.value, hasChallenge.value)
+
+          //Now we reset all of our refs to their default state
           document.getElementById('image').src = ''
           postDetails.value = {}
           files.value = []
@@ -136,13 +152,22 @@ export default {
           submitting.value = false
         }
       },
+
+      //We hit this function before the create one above. Here we upload the selected image into firebase
       async upload() {
         try {
+          //This ref is used to change the UI and prevent multiple submissions
           submitting.value = true
           logger.log('Submitting', submitting.value)
+
+          //This line is going to both upload the image into firebase and return the new hosted URL for our img
           const url = await firebaseService.upload(files.value[0], this.activeAlbum)
+
+          //Now just set the reference objects image url to our new firebase hosted one
           postDetails.value.imgUrl = url
           logger.log(url)
+
+          //now we kick over to our created function to make the mongoDB calls
           await this.createPost()
         } catch (error) {
           logger.error(error)

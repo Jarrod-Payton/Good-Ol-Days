@@ -109,6 +109,9 @@ export default {
           logger.log(error)
         }
       },
+
+      //The process of file selection and upload are nearly identical, full comment documentation
+      //in the CreatePostModal.vue component
       fileSelect(e) {
         files.value = e.target.files
         logger.log('files ref value', files.value)
