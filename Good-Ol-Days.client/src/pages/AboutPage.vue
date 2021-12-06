@@ -45,7 +45,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://animesenpai.net/wp-content/uploads/2021/09/images_720.jpg"
                   alt=""
                 />
               </div>
@@ -125,11 +125,15 @@
                 <div><p class="m-0 me-3 f-18">Ryan Mera</p></div>
                 <div>
                   <a
+                    href="https://www.linkedin.com/in/ryan-mera/"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
-                  <i class="mdi f-24 mdi-github github selectable1"></i>
+                  <a
+                    href="https://github.com/ryanmera3"
+                    class="mdi f-24 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
@@ -143,7 +147,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://images.immediate.co.uk/production/volatile/sites/23/2014/11/GettyImages-888995042-c1288ee.jpg?quality=90&crop=147px%2C265px%2C1605px%2C1069px&resize=620%2C413"
                   alt=""
                 />
               </div>
@@ -166,7 +170,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://animesenpai.net/wp-content/uploads/2021/09/images_720.jpg"
                   alt=""
                 />
               </div>
@@ -216,7 +220,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
                   alt=""
                 />
               </div>
@@ -239,7 +243,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5jEe3u-zFbNX7_hKxiG-NWIz_3pDTaRcVTP0x3W7TMgoYO1k1Prrtf3oewZDfmHX67aQ&usqp=CAU"
                   alt=""
                 />
               </div>
