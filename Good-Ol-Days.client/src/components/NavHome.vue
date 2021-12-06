@@ -2,6 +2,8 @@
   <div class="component">
     <div class="desktop">
       <div class="dropdown">
+        <!--The notifications button for monitor view-->
+        <!--This button is set to an onclick that both opens the notifications but also sets every one of them to seen-->
         <button
           class="btn notifications elevation-3 dropdown-toggle"
           type="button"
@@ -12,9 +14,11 @@
           Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
         </button>
         <ul class="dropdown-menu">
+          <!--This is if there are no notifications at all-->
           <li v-if="notifications.length == 0">
             <h5 class="notificationHead text-center">No Notifications Yet</h5>
           </li>
+          <!--This is to set the given and also give the user the option to delete all of their notifications-->
           <li v-if="!notifications.length == 0">
             <div class="d-flex justify-content-center">
               <button class="notificationHead clearButton btn" @click="clear">
@@ -24,14 +28,17 @@
               </button>
             </div>
           </li>
+          <!--For displaying all the notifications as a list item in the dropdown-->
           <li v-for="n in notifications" :key="n.id">
             <Notification :notification="n" v-if="notifications.length > 0" />
           </li>
         </ul>
       </div>
     </div>
+    <!--Nav Bar for mobile view-->
     <div class="mobile">
       <div class="dropdown">
+        <!--This button is set to an onclick that both opens the notifications but also sets every one of them to seen-->
         <button
           class="btn notifications me-5 elevation-3 dropdown-toggle"
           type="button"
@@ -42,9 +49,11 @@
           <i class="mdi mdi-18px mdi-bell-outline"></i>
         </button>
         <ul class="dropdown-menu">
+          <!--This is if there are no notifications at all-->
           <li v-if="notifications.length == 0">
             <h5 class="notificationHead text-center">No Notifications Yet</h5>
           </li>
+          <!--This is to set the given and also give the user the option to delete all of their notifications-->
           <li v-if="!notifications.length == 0">
             <div class="d-flex justify-content-center">
               <button class="notificationHead clearButton btn" @click="clear">
@@ -54,6 +63,7 @@
               </button>
             </div>
           </li>
+          <!--For displaying all the notifications as a list item in the dropdown-->
           <li v-for="n in notifications" :key="n.id">
             <Notification :notification="n" v-if="notifications.length > 0" />
           </li>
@@ -72,17 +82,17 @@ import { notificationService } from "../services/NotificationService"
 import Pop from "../utils/Pop"
 export default {
   setup() {
-    onMounted(async () => {
-      await notificationService.findType()
-    })
     return {
       async seen() {
+        //Sets every notification on that account to seen
         await notificationService.seen()
       },
       async clear() {
         if (await Pop.confirm()) {
           await notificationService.clear()
         }
+        //Deletes every single notification
+        await notificationService.clear()
       },
       activeAlbum: computed(() => AppState.activeAlbum),
       notifications: computed(() => AppState.notifications)

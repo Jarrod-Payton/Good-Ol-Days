@@ -42,6 +42,7 @@
 
 
 <script>
+import Pop from "../utils/Pop";
 export default {
   props: {
     activeAlbum: { type: Object }
@@ -54,6 +55,7 @@ export default {
     copy() {
       this.$refs.clone.focus();
       document.execCommand('copy');
+      Pop.toast('Link Copied!', 'success')
     }
   }
 };

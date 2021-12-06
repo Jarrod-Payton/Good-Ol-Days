@@ -1,4 +1,5 @@
 <template>
+  <!--Modal for creating a post-->
   <div class="modal fade" id="createPostModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -10,7 +11,8 @@
             aria-label="Close"
           ></button>
         </div>
-        <form @submit.prevent="createPost">
+        <!--Firebase Form to be able to upload photos-->
+        <form @submit.prevent="upload">
           <div class="modal-body">
             <div class="row">
               <div class="col-12">
@@ -25,6 +27,7 @@
                   />
                 </p>
               </div>
+              <!--The rest is straight forward input fields-->
               <div class="col-12">
                 <p class="S1">
                   Post Title:
@@ -48,6 +51,7 @@
                   />
                 </p>
               </div>
+              <!--This is for if the user would like the challenge they have active to be attached to the photo-->
               <div class="col-12" v-if="activeChallenge.id">
                 <p>
                   Is this post for the challenge?
@@ -67,16 +71,12 @@
                   No
                 </p>
               </div>
+              <!--This image tag is for spacing between the bottom of the modal and the bottom of the input area-->
               <img src="" alt="" class="img-fluid" id="image" />
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn"
-              @click="upload"
-              :disabled="submitting"
-            >
+            <button type="submi" class="btn" :disabled="submitting">
               <h5 v-if="!submitting">Submit</h5>
               <i class="mdi mdi-spin mdi-loading" v-if="submitting" />
             </button>
@@ -134,7 +134,6 @@ export default {
         } catch (error) {
           Pop.toast(error)
           submitting.value = false
-
         }
       },
       async upload() {

@@ -1,4 +1,5 @@
 <template>
+  <!--Is just the style of the individual suggested challenges-->
   <div class="card selectable card-styling" @click="createActive">
     <div class="card-title">
       <h5 class="font">
@@ -10,10 +11,12 @@
 <script>
 import { challengeService } from "../services/ChallengeService"
 export default {
+  //Challenge.vue component passes it a prop so the body changes with the recommendation
   props: { suggestion: { type: Object, required: true } },
   setup(props) {
     return {
       async createActive() {
+        //Just sends this suggested challenge to become the active challenge
         await challengeService.createActiveChallenge(props.suggestion.body)
       }
     }
