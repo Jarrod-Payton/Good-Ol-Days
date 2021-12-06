@@ -1,6 +1,8 @@
 import { Server } from 'socket.io'
 import { logger } from './utils/Logger'
 import { attachHandlers } from '../Setup'
+import { accountService } from './services/AccountService'
+import { notificationService } from './services/NotificationService'
 
 const SOCKET_EVENTS = {
   connection: 'connection',
@@ -37,14 +39,24 @@ class SocketProvider {
     })
   }
 
+  notifyUser(userId, eventName, payload) {
+    try {
+      this.io.to(userId).emit(eventName, payload)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
   /**
    * Sends a direct message to a user
    * @param {string} userId
    * @param {string} eventName
    * @param {any} payload
    */
+
   messageUser(userId, eventName, payload) {
     try {
+      logger.log('[SOCKET_MESSAGE_USER]', userId, eventName, payload)
       this.io.to(userId).emit(eventName, payload)
     } catch (e) {
       logger.error('[SOCKET_ERROR] messageUser', e, { userId, eventName, payload })
