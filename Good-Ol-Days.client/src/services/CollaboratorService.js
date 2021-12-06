@@ -36,18 +36,29 @@ class CollaboratorService {
   }
   async acceptColab(notification) {
     // Get the album that this collab if from, with album ID from the notification
-    const album = AppState.myAlbums.find( a => a.id === notification.albumId)
+    const album = AppState.myAlbums.find(a => a.id === notification.albumId)
     logger.log('TEST JOHN 1', album)
     // Get All collabs on this album with the album ID
     await this.getCollabThisAlbum(album.id)
     // Get the person that matches the notification that you accepted to change verify to true
-    const collabToAccept = AppState.collabThisAlbum.find( c => c.accountId === notification.notifier.id)
-    logger.log('TEST JOHN 2',collabToAccept)
+    const collabToAccept = AppState.collabThisAlbum.find(c => c.accountId === notification.notifier.id)
+    logger.log('TEST JOHN 2', collabToAccept)
     // Change the verify to true with the collaboration ID
     await this.verify(collabToAccept.id)
     // Delete that notification with notification ID
     await notificationService.deleteNotification(notification.id)
     Pop.toast('Accepted Collab')
+  }
+  async Deny(notification) {
+    // Get the album that this collab if from, with album ID from the notification
+    const album = AppState.myAlbums.find(a => a.id === notification.albumId)
+    logger.log('TEST Jarrod 1', album)
+    // Get All collabs on this album with the album ID
+    await this.getCollabThisAlbum(album.id)
+    // Get the person that matches the notification that you accepted to change verify to true
+    const collab = AppState.collabThisAlbum.find(c => c.accountId === notification.notifier.id)
+    logger.log('TEST JOHN 2', collabToAccept)
+    await api.delete(`api/collaborators/${collab.id}`)
   }
 }
 export const collaboratorService = new CollaboratorService()
