@@ -6,6 +6,7 @@ export const PostSchema = new Schema(
   {
     imgUrl: { type: String },
     title: { type: String, required: true, default: '' },
+    type: { type: String, required: true },
     description: { type: String, required: true, default: '' },
     creatorId: { type: String, required: true, ref: 'Profile' },
     albumId: { type: ObjectId, required: true, ref: 'Album' },

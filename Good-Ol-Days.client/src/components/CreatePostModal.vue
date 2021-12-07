@@ -21,7 +21,7 @@
                   <input
                     class="inputupload mtop"
                     type="file"
-                    accept="image/*"
+                    accept="image/*,video/*"
                     id="inputfile"
                     @change="fileSelect"
                   />
@@ -72,6 +72,7 @@
                 </p>
               </div>
               <!--This image tag is for spacing between the bottom of the modal and the bottom of the input area-->
+              <video class="img-fluid" src="" id="video"></video>
               <img src="" alt="" class="img-fluid" id="image" />
             </div>
           </div>
@@ -126,6 +127,7 @@ export default {
 
             //Take the image you've now turned into something usable and set it into the src of the blank image elem we have
             document.getElementById('image').src = reader.result
+            document.getElementById('video').src = reader.result
           }
         } catch (error) {
           Pop.toast(error)
@@ -142,6 +144,7 @@ export default {
 
           //Now we reset all of our refs to their default state
           document.getElementById('image').src = ''
+          document.getElementById('video').src = ''
           postDetails.value = {}
           files.value = []
           Modal.getOrCreateInstance(document.getElementById("createPostModal")).toggle()
@@ -164,6 +167,7 @@ export default {
           const url = await firebaseService.upload(files.value[0], this.activeAlbum, 'post')
 
           //Now just set the reference objects image url to our new firebase hosted one
+          postDetails.value.type = files.value[0].type
           postDetails.value.imgUrl = url
           logger.log(url)
 
