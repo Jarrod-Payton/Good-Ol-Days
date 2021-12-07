@@ -108,6 +108,7 @@
           width="90"
           :src="account.picture"
           alt="Profile Picture"
+          @click="open"
         />
       </div>
     </div>
@@ -189,7 +190,8 @@
           height="60"
           width="62"
           :src="account.picture"
-          alt=""
+          alt="Profile Picture"
+          @click="open"
         />
       </div>
     </div>
@@ -207,6 +209,7 @@ import { albumService } from "../services/AlbumService"
 import { watchEffect } from "@vue/runtime-core"
 import { collaboratorService } from "../services/CollaboratorService"
 import Pop from "../utils/Pop"
+import { resetService } from "../services/ResetService"
 export default {
   props: {
     user: { type: Object }
@@ -226,6 +229,9 @@ export default {
     return {
       route,
       router,
+      open() {
+        resetService.openOffCanvas()
+      },
       route: computed(() => route),
       activeAlbum: computed(() => AppState.activeAlbum),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
