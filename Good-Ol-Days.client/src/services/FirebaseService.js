@@ -2,6 +2,8 @@ import { AppState } from "../AppState"
 import { api } from "./AxiosService"
 import {fbAuth, storage } from '../utils/FirebaseProvider'
 import { logger } from "../utils/Logger"
+import JSZip from "jszip"
+import { saveAs } from "file-saver"
 
 
 
@@ -43,6 +45,37 @@ class FirebaseService {
 
         //return the url to be saved into the MongoDB object
         return url
+    }
+
+    async downloadFirebase(posts, albumName) {
+        logger.log(posts)
+        const accountId = AppState.account.id
+        const jszip = new JSZip()
+        const downloadUrls = []
+    
+        posts.forEach(async p => {
+                
+                  const fileName = p.imgUrl.slice(p.imgUrl.indexOf('%2F') + 3, p.imgUrl.indexOf('?alt'))
+            const slice = fileName.slice(fileName.indexOf('%2F') + 3)
+                logger.log(slice)
+   
+                downloadUrls.push(this.albumsCollection.child(albumName + '-' + accountId).child(slice).getDownloadURL())
+          })
+        
+        logger.log('urls', downloadUrls)
+        const downloadedFiles = []
+          //FIXME do this later
+        await Promise.all(downloadUrls.forEach(url => fetch(url).then(async (res) => {
+            logger.log('Res', res)
+            downloadedFiles.push(await res.blob())
+        }).catch(err => logger.error(err))))
+        
+        logger.warn('blobs', downloadedFiles)
+        downloadedFiles.forEach((file, i) => {
+            jszip.file(posts[i].title, file)
+        })
+        const content = await jszip.generateAsync({ type: 'blob' })
+        saveAs(content, "Good Ol' Days")
     }
 
     //This function mimics the upload function above, except that it stores the images

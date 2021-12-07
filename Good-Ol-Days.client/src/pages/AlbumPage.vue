@@ -171,7 +171,8 @@ export default {
       },
       async downloadImages() {
         try {
-          await firebaseService.downloadFirebase(que.value)
+
+          await firebaseService.downloadFirebase(que.value, this.activeAlbum.title)
         } catch (error) {
           logger.error(error)
         }
