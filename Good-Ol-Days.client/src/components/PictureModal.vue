@@ -1,25 +1,18 @@
 <template>
   <div class="PictureModal">
     <div
-      class="modal fade scrollbar-post parent"
+      class="modal fade"
       id="picture-modal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-dialog">
         <div class="modal-content border-0 rounded-0 transparent">
-          <div class="modal-body d-flex justify-content-center flip-container">
-            <div class="flipper">
-              <div class="front">
-                <div class="card">
-                  <div class="card-body">
-                    <img class="img-fluid" :src="activePost.imgUrl" alt="" />
-                  </div>
-                </div>
-              </div>
-              <div class="back">
-                <p>Hello World</p>
+          <div class="modal-body d-flex justify-content-center">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <img class="img-fluid" :src="activePost.imgUrl" alt="" />
               </div>
               <!-- <div class="text-end py-1"></div>
               <div class="d-flex justify-content-center"></div>
@@ -84,111 +77,50 @@ export default {
 
 
 <style lang="scss" scoped>
-.flip-container.hover .flipper {
-  transform: rotateY(180deg);
+.flip-card {
+  background-color: transparent;
+  width: 80%;
+  height: 100%;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
-.flip-container,
-.front,
-.back {
-  width: 250px;
-  height: 250px;
-}
-
-/* flip speed */
-
-.flipper {
-  transition: 0.8s;
-  transform-style: preserve-3d;
+/* This container is needed to position the front and back side */
+.flip-card-inner {
   position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
-/* hide back of pane during swap */
-
-.front,
-.back {
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* front pane, placed above back */
-
-.front {
-  z-index: 2;
-  transform: rotateY(0deg);
-}
-
-/* back, initially hidden pane */
-
-.back {
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
-  background-color: #fff;
 }
-.polaroid {
-  background: #fff;
-  padding: 1rem;
-  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
-}
-.polaroid > img {
-  max-width: auto;
-  height: 30vh;
-  object-fit: cover;
-}
-.scrollbar-post {
-  overflow-y: scroll;
-}
-.scrollbar-post::-webkit-scrollbar {
-  width: 0vh;
-}
-.image {
-  width: auto !important;
-}
-// .flip-card {
-//   background-color: transparent;
-//   width: 80%;
-//   height: 100%;
-//   perspective: 1000px; /* Remove this if you don't want the 3D effect */
-// }
 
-// /* This container is needed to position the front and back side */
-// .flip-card-inner {
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-//   text-align: center;
-//   transition: transform 0.8s;
-//   transform-style: preserve-3d;
-// }
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
 
-// /* Do an horizontal flip when you move the mouse over the flip box container */
-// .flip-card:hover .flip-card-inner {
-//   transform: rotateY(180deg);
-// }
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
 
-// /* Position the front and back side */
-// .flip-card-front,
-// .flip-card-back {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   -webkit-backface-visibility: hidden; /* Safari */
-//   backface-visibility: hidden;
-// }
-
-// /* Style the front side (fallback if image is missing) */
-// .flip-card-front {
-//   background-color: #bbb;
-//   color: black;
-// }
-
-// /* Style the back side */
-// .flip-card-back {
-//   background-color: dodgerblue;
-//   color: white;
-//   transform: rotateY(180deg);
-// }
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
 @font-face {
   font-family: "MyWebFont";
   src: url("../assets/fonts/Stickynotes-ywLPd.otf") format("woff");
@@ -216,11 +148,9 @@ export default {
   margin-top: 0;
   margin-bottom: 0;
 }
-.img-fluid {
-  max-height: 80vh;
-  max-width: 200vh;
-  width: auto !important;
-}
+// .img-fluid {
+//   max-height: 80vh;
+// }
 .delete {
   color: #999999;
   border-color: #999999;
@@ -236,17 +166,5 @@ export default {
   background-color: red;
   color: white;
   border-color: red;
-}
-@media only screen and (max-width: 500px) {
-  .img-fluid {
-    max-height: 80vh;
-    max-width: 30vh;
-    width: auto !important;
-    margin-left: 0;
-  }
-  .parent {
-    margin-left: 0 !important;
-    padding-left: 0;
-  }
 }
 </style>
