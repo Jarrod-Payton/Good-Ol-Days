@@ -37,6 +37,7 @@ class CollaboratorService {
     // Add someone as collaborator but verify is false with the album ID
     const res = await api.post('api/collaborators', { albumId: albumId })
     logger.log('ADD COLLAB', res.data)
+    AppState.collabThisAlbum.unshift(new Collaborator(res.data))
   }
   async acceptColab(notification) {
     // Get the album that this collab if from, with album ID from the notification
@@ -45,7 +46,7 @@ class CollaboratorService {
     // Get All collabs on this album with the album ID
     await this.getCollabThisAlbum(album.id)
     // Get the person that matches the notification that you accepted to change verify to true
-    const collabToAccept = AppState.collabThisAlbum.find(c => c.accountId === notification.notifier.id)
+    const collabToAccept = AppState.collabThisAlbum.find(c => c.accountId === notification.notifierId)
     logger.log('TEST JOHN 2', collabToAccept)
     // Change the verify to true with the collaboration ID
     await this.verify(collabToAccept.id)
@@ -61,7 +62,7 @@ class CollaboratorService {
     // Get All collabs on this album with the album ID
     await this.getCollabThisAlbum(album.id)
     // Get the person that matches the notification that you accepted to change verify to true
-    const collab = AppState.collabThisAlbum.find(c => c.accountId === notification.notifier.id)
+    const collab = AppState.collabThisAlbum.find(c => c.accountId === notification.notifierId)
     logger.log('TEST JOHN 2', collab)
     await api.delete(`api/collaborators/${collab.id}`)
   }

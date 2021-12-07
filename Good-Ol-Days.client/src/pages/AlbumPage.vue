@@ -31,7 +31,10 @@
           </div>
         </div>
       </div>
-      <div v-if="posts.length === 0" class="row justify-content-center">
+      <div
+        v-if="posts.length === 0 && doneSyncing"
+        class="row justify-content-center"
+      >
         <div class="col-11 card cardmessage">
           <p class="message m-0 p-1">
             Add a picture and start creating memories!
@@ -117,6 +120,7 @@ export default {
       account: computed(() => AppState.account),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
       posts: computed(() => AppState.posts),
+      doneSyncing: computed(() => AppState.doneSyncing),
       setActive(id) {
         //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)

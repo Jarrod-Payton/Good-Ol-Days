@@ -108,6 +108,7 @@
           width="90"
           :src="account.picture"
           alt="Profile Picture"
+          @click="open"
         />
       </div>
     </div>
@@ -161,13 +162,7 @@
           </div>
           <!--  -->
           <!-- Condition set to show "Request Pending" checking if the user account is a collaborator and isn't verified -->
-          <div
-            v-if="
-              collabThisAlbum.find(
-                (c) => c.accountId === account.id && !c.verified
-              ) && activeAlbum.creatorId !== account.id
-            "
-          >
+          <div v-if="collabPending">
             <button
               title="Request pending"
               class="btn share disabled elevation-3"
@@ -195,7 +190,8 @@
           height="60"
           width="62"
           :src="account.picture"
-          alt=""
+          alt="Profile Picture"
+          @click="open"
         />
       </div>
     </div>
@@ -213,6 +209,7 @@ import { albumService } from "../services/AlbumService"
 import { watchEffect } from "@vue/runtime-core"
 import { collaboratorService } from "../services/CollaboratorService"
 import Pop from "../utils/Pop"
+import { resetService } from "../services/ResetService"
 export default {
   setup() {
     const user = computed(() => AppState.user)
@@ -220,7 +217,7 @@ export default {
     const router = useRouter()
     watchEffect(async () => {
       try {
-        if (user.isAuthenticated && route.params.albumId) {
+        if (route.params.albumId) {
           await collaboratorService.getCollabThisAlbum(route.params.albumId)
         }
       } catch (error) {
@@ -230,9 +227,13 @@ export default {
     return {
       route,
       router,
+      open() {
+        resetService.openOffCanvas()
+      },
       route: computed(() => route),
       activeAlbum: computed(() => AppState.activeAlbum),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
+      collabPending: computed(() => AppState.collabThisAlbum.find((c) => c.accountId === AppState.account.id && !c.verified) && AppState.activeAlbum.creatorId !== AppState.account.id),
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async logout() {

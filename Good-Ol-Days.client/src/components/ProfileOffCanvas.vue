@@ -21,7 +21,7 @@
             class="d-flex justify-content-center flex-column align-items-center"
           >
             <i
-              @click="edit = !edit"
+              @click="openEdit"
               aria-label="edit profile"
               class="mdi mdi-pencil selectable1 align-self-end"
               >Edit Profile</i
@@ -136,17 +136,19 @@ import { accountService } from "../services/AccountService"
 import { AppState } from "../AppState"
 import { useRouter } from "vue-router"
 import { firebaseService } from '../services/FirebaseService'
+import { onMounted, watchEffect } from "@vue/runtime-core"
+import { resetService } from "../services/ResetService"
 export default {
   props: {
     account: { type: Object }
   },
   setup(props) {
     //TODO flip this ref on close of the off canvas
-    let edit = ref(true)
     let editProfile = ref({})
     let files = ref([])
     const submitting = ref(false)
     const router = useRouter()
+    let edit = ref(false)
     return {
       submitting,
       myAlbums: computed(() => AppState.myAlbums),
@@ -186,9 +188,15 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
+      openEdit() {
+        AppState.editProfile = !AppState.editProfile
+      },
       routeTo(id) {
         router.push({ name: 'Album', params: { albumId: id } })
       },
+      myAlbums: computed(() => AppState.myAlbums),
+      collaborators: computed(() => AppState.collaborators),
+      edit: computed(() => AppState.editProfile)
     }
   }
 }

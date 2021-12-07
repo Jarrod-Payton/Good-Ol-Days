@@ -28,6 +28,8 @@ export const AppState = reactive({
   collabThisAlbum: [],
   //A simple boolean that is flipped and watched for the beggining of the onMounted in the album page in order to prevent a glimpse of a form, purely for a better experience and not actually needed for raw functionality
   doneSyncing: false,
+  //A bool so when you leave your off canvas for the profile edit you don't stay on that edit
+  editProfile: true,
   //A list of every notification set a user has and is set in the NavHome.vue component's on load
   notifications: [],
 })

@@ -4,7 +4,7 @@ const objectId = Schema.Types.ObjectId
 
 export const NotificationSchema = new Schema(
   {
-    notifier:{type:objectId, required:true, ref:'Account'},
+    notifierId:{type:objectId, required:true, ref:'Account'},
     albumId: {type:objectId, required:true, ref:'Album'},
     seen: {type:Boolean, required:true, default:false},
     type:{type:String, enum:['post', 'collaborator'], required:true},
@@ -20,8 +20,8 @@ NotificationSchema.virtual('album', {
   justOne: true,
   ref: 'Album'
 })
-NotificationSchema.virtual('account', {
-  localField: 'notifier',
+NotificationSchema.virtual('notifier', {
+  localField: 'notifierId',
   foreignField: '_id',
   justOne: true,
   ref: 'Account'
