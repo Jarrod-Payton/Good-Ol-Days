@@ -14,7 +14,7 @@ class NotificationService {
       throw new BadRequest("You're trying to join an album that doesn't exist")
     }
     // If the if statement passes it creates a notification for the collaborator that is being created
-    await dbContext.Notifications.create({ type: 'collaborator', notifier: `${user}`, albumId: found.id, isVerified: false, recipient: [found.creatorId] })
+    await dbContext.Notifications.create({ type: 'collaborator', notifierId: `${user}`, albumId: found.id, isVerified: false, recipient: [found.creatorId] })
     const eventName = 'NEW_NOTIFICATION'
     const payload = await this.getMyNotifications(found.creatorId)
     socketProvider.messageUser(found.creatorId.toString(), eventName, payload)
@@ -25,7 +25,7 @@ class NotificationService {
     const found = await albumsService.getAlbumById({ _id: album })
     // Creates a post notification using the found album's data
     if(!user === found.creatorId){
-      await dbContext.Notifications.create({ type: 'post', notifier: `${user}`, albumId: found.id, recipient: [found.creatorId] })
+      await dbContext.Notifications.create({ type: 'post', notifierId: `${user}`, albumId: found.id, recipient: [found.creatorId] })
     }
   }
 
