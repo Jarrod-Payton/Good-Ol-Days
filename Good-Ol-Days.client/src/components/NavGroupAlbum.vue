@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="">
+      <div class="d-flex flex-column justify-content-center">
         <button
           data-bs-toggle="modal"
           data-bs-target="#createPostModal"
@@ -41,11 +41,14 @@
           <p class="album text-center">Album: Shared</p>
         </div>
       </div>
-      <div v-if="activeAlbum.creatorId === account.id">
+      <div
+        class="d-flex align-items-center"
+        v-if="activeAlbum.creatorId === account.id"
+      >
         <button
           @click="deleteAlbum"
           title="Delete this album"
-          class="btn delete elevation-3"
+          class="btn mb-4 delete btn-outline-danger"
         >
           <i class="mdi mdi-18px mdi-trash-can"></i>
         </button>
@@ -61,9 +64,10 @@
           <i class="mdi mdi-18px mdi-plus-circle-outline"> </i>
         </button>
         <button
+          @click="deleteAlbum"
           v-if="activeAlbum.creatorId === account.id"
           title="Delete this album"
-          class="btn ms-2 delete elevation-3"
+          class="btn btn-danger-outline ms-2 delete elevation-3"
         >
           <i class="mdi mdi-18px mdi-trash-can"></i>
         </button>
@@ -110,7 +114,7 @@ export default {
 
 <style lang="scss" scoped>
 .add {
-  background-color: #36a7d7;
+  background-color: #9964cc;
   color: rgb(255, 255, 255);
   font-family: "Saira Condensed", sans-serif;
   padding: 3px;
@@ -170,14 +174,18 @@ export default {
   box-shadow: none;
 }
 .delete {
-  background-color: #e94040;
-  color: rgb(255, 255, 255);
-  font-family: "Saira Condensed", sans-serif;
+  color: #999999;
+  border-color: #999999;
   padding: 3px;
   padding-left: 8px;
   padding-right: 8px;
   margin-right: 4vh;
   margin-bottom: 2vh;
+}
+.delete:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
 }
 @media only screen and (max-width: 500px) {
   .desktop {

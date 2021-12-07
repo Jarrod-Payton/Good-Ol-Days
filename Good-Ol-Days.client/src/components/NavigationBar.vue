@@ -21,7 +21,7 @@
             alt=""
           />
         </router-link>
-        <div class="ms-3">
+        <!-- <div class="ms-3">
           <button
             @click="routeAbout"
             title="About Page"
@@ -29,7 +29,7 @@
           >
             <i class="mdi ms-1 mdi-shimmer"></i> About
           </button>
-        </div>
+        </div> -->
       </div>
       <div class="d-flex align-items-center">
         <div>

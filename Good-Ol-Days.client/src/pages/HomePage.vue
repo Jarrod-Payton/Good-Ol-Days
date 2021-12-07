@@ -39,7 +39,7 @@
       </div>
       <!-- ALBUMS GO HERE ^  -->
     </div>
-    <div class="card cardspec mb-3">
+    <div v-if="collaborators.length > 0" class="card cardspec mb-3">
       <div class="d-flex justify-content-between">
         <div class="p-4">
           <p class="titles">Your Group Albums:</p>

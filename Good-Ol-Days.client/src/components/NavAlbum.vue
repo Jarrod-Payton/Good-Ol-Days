@@ -24,14 +24,14 @@
             title="Share this album"
             class="btn share elevation-3"
           >
-            <i class="mdi ms-1 mdi-18px mdi-share-variant"></i> Share this album
+            <i class="mdi ms-1 mdi-18px mdi-share-variant"></i>
           </button>
         </div>
         <div>
           <button
             @click="deleteAlbum"
             title="Delete this album"
-            class="btn delete elevation-3"
+            class="btn delete"
           >
             <i class="mdi mdi-18px mdi-trash-can"></i>
           </button>
@@ -50,7 +50,10 @@
       <button title="Share this album" class="btn share elevation-3">
         <i class="mdi mdi-18px mdi-share-variant"></i>
       </button>
-      <button title="Delete this album" class="btn delete elevation-3">
+      <button
+        title="Delete this album"
+        class="btn delete delete btn-outline-danger elevation-3"
+      >
         <i class="mdi mdi-18px mdi-trash-can"></i>
       </button>
     </div>
@@ -94,33 +97,39 @@ export default {
 
 <style lang="scss" scoped>
 .add {
-  background-color: #36a7d7;
-  color: rgb(255, 255, 255);
-  font-family: "Saira Condensed", sans-serif;
-  padding: 3px;
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-right: 4vh;
-}
-.share {
   background-color: #9964cc;
   color: rgb(255, 255, 255);
   font-family: "Saira Condensed", sans-serif;
   padding: 3px;
   padding-left: 8px;
   padding-right: 8px;
+  margin-right: 2vh;
+}
+.share {
+  background-color: #9964cc;
+  color: rgb(255, 255, 255);
+  font-family: "Saira Condensed", sans-serif;
+  padding: 3px;
+  padding-left: 3px;
+  padding-bottom: 2px;
+  padding-right: 8px;
   margin-right: 4vh;
   margin-bottom: 2vh;
 }
 .delete {
-  background-color: #e94040;
-  color: rgb(255, 255, 255);
-  font-family: "Saira Condensed", sans-serif;
+  color: #999999;
+  border-color: #999999;
   padding: 3px;
   padding-left: 8px;
   padding-right: 8px;
+  padding-bottom: 2px;
   margin-right: 4vh;
   margin-bottom: 2vh;
+}
+.delete:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
 }
 .desktop {
   display: block;
