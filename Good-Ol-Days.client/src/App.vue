@@ -10,7 +10,7 @@
   <footer class="background d-flex justify-content-center">
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
-    <PictureModal :posts="posts" />
+    <PictureModal />
   </footer>
 </template>
 

@@ -7,39 +7,69 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content border-0 rounded-0 transparent">
+      <div class="modal-dialog modal-xl">
+        <div
+          class="modal-content border-0 rounded-0 transparent"
+          @click="flipped = !flipped"
+        >
           <div class="modal-body d-flex justify-content-center">
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <img class="img-fluid" :src="activePost.imgUrl" alt="" />
+            <transition v-if="flipped">
+              <div class="card">
+                <div class="text-end py-1">
+                  <button
+                    type="button"
+                    class="btn-close small"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <img class="img-fluid" :src="activePost.imgUrl" alt="" />
+                </div>
+                <div class="text-center d-flex">
+                  <p class="m-0 pb-2 pt-3 w-100 title titleSize">
+                    {{ activePost.title }}
+                  </p>
+                  <div class="text-end align-self-center">
+                    <button
+                      v-show="
+                        activePost.creatorId === account.id ||
+                        activeAlbum.creatorId === account.id
+                      "
+                      title="Delete this picture"
+                      @click="deletePost"
+                      class="btn delete m-0"
+                    >
+                      <i class="mdi mdi-24px me-2 mdi-trash-can"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <!-- <div class="text-end py-1"></div>
-              <div class="d-flex justify-content-center"></div>
-              <div class="text-center d-flex">
-                <p class="m-0 pb-2 pt-3 w-100 title">{{ activePost.title }}</p>
-                <div class="text-end align-self-center"> -->
-              <!-- <button
-                    v-show="
-                      posts.creatorId === account.id ||
-                      activeAlbum.creatorId === account.id
-                    "
-                    title="Delete this picture"
-                    @click="deletePost"
-                    class="btn delete m-0"
-                  >
-                    <i class="mdi mdi-24px me-2 mdi-trash-can"></i> 
-                  </button> -->
-            </div>
+            </transition>
+            <transition v-else>
+              <div class="card sizing">
+                <div class="card-title text-center">
+                  <h3 class="title titlePadding">{{ activePost.title }}</h3>
+                  <p class="title datePadding dateWords">10/12/2021</p>
+                  <!-- <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                    ></button> -->
+                </div>
+                <div class="card-body p-0">
+                  <div class="polaroidBody">
+                    <h1 class="text-center title description">
+                      {{ activePost.description }}
+                    </h1>
+                  </div>
+                  <h1 class="challenge font">
+                    Challenge: Take a photo of something that makes you smile
+                  </h1>
+                </div>
+              </div>
+            </transition>
           </div>
-          <!-- <div class="modal-footer">
-            <button
-              type="button"
-              class="btn-close small"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div> -->
         </div>
       </div>
     </div>
@@ -48,18 +78,19 @@
 
 
 <script>
-import { computed } from "@vue/reactivity"
+import { computed, ref } from "@vue/reactivity"
 import { AppState } from "../AppState"
 import { onMounted } from "@vue/runtime-core"
 import { postService } from "../services/PostService"
 import { Modal } from "bootstrap"
 import Pop from "../utils/Pop"
 export default {
-  props: {
-    posts: { type: Object }
-  },
   setup() {
+    let height = ref('')
+    let flipped = ref(true)
     return {
+      height,
+      flipped,
       async deletePost() {
         if (await Pop.confirm()) {
           await postService.deletePost()
@@ -77,49 +108,49 @@ export default {
 
 
 <style lang="scss" scoped>
-.flip-card {
-  background-color: transparent;
-  width: 80%;
-  height: 100%;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+.challenge {
+  font-size: 2vh;
+  display: flex;
+  justify-content: center;
+  padding: 1vh;
+  border-color: #4ac26d;
+  border-width: 1vh;
 }
-
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+.titlePadding {
+  font-size: 4.5vh;
+  margin-top: 1.5vh;
+  margin-bottom: 0;
 }
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
+.titleSize {
+  font-size: 4.5vh;
 }
-
-/* Position the front and back side */
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
+.datePadding {
+  font-size: 2.25vh;
+  margin: 0;
+  padding: 0;
 }
-
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
+.description {
+  padding-top: 0vh;
+  padding: 1.5vh;
+  transform: rotate(-15deg);
 }
-
-/* Style the back side */
-.flip-card-back {
-  background-color: dodgerblue;
-  color: white;
-  transform: rotateY(180deg);
+.polaroidBody {
+  height: 45vh !important;
+  background-color: rgba(0, 0, 0, 0.87);
+  color: rgb(255, 255, 255) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25vh;
+}
+.sizing {
+  min-height: 60vh;
+  // height: 80vh;
+  width: 60vh;
+  margin-top: 10vh;
+}
+.font {
+  font-family: "Saira Condensed", sans-serif;
 }
 @font-face {
   font-family: "MyWebFont";
@@ -127,7 +158,6 @@ export default {
 }
 .title {
   font-family: "MyWebFont";
-  font-size: 4vh;
 }
 .transparent {
   background-color: rgba(255, 255, 255, 0) !important;
@@ -148,9 +178,9 @@ export default {
   margin-top: 0;
   margin-bottom: 0;
 }
-// .img-fluid {
-//   max-height: 80vh;
-// }
+.img-fluid {
+  max-height: 80vh;
+}
 .delete {
   color: #999999;
   border-color: #999999;
