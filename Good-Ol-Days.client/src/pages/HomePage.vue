@@ -177,7 +177,7 @@ export default {
   display: block;
 }
 .margindesk {
-  margin-bottom: 2vh;
+  margin-bottom: 1.5vh;
 }
 @media only screen and (max-width: 500px) {
   .media {

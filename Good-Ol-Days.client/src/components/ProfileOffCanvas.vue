@@ -2,7 +2,7 @@
   <div class="ProfileOffCanvas">
     <div class="ProfileCanvas">
       <div
-        class="offcanvas offcanvas-start"
+        class="offcanvas offcanvas-end"
         tabindex="-1"
         id="offcanvasExample"
         aria-labelledby="offcanvasLabel"
