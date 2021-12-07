@@ -7,7 +7,7 @@
       <router-view :user="user" />
     </div>
   </main>
-  <footer>
+  <footer class="background d-flex justify-content-center">
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
     <PictureModal :posts="posts" />
@@ -17,10 +17,13 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
+import { useRoute } from "vue-router"
 export default {
   name: 'App',
   setup() {
+    const route = useRoute()
     return {
+      route,
       appState: computed(() => AppState),
       account: computed(() => AppState.account),
       user: computed(() => AppState.user),

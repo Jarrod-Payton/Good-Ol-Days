@@ -39,7 +39,7 @@
       </div>
       <!-- ALBUMS GO HERE ^  -->
     </div>
-    <div v-if="collaborators.length > 0" class="card cardspec mb-3">
+    <div v-if="collaborators.length > 0" class="card cardspec pb-4 mb-4">
       <div class="d-flex justify-content-between">
         <div class="p-4">
           <p class="titles">Your Group Albums:</p>
@@ -48,20 +48,14 @@
       </div>
       <!-- GROUP ALBUMS GO HERE v  -->
       <div
-        class="
-          d-flex
-          justify-content-center
-          align-items-center
-          flex-column
-          margindesk
-        "
+        class="d-flex justify-content-center align-items-center flex-column"
         v-for="c in collaborators"
         :key="c.albumId"
       >
         <div
           v-if="c.verified"
           @click="routerLink(c.albumId)"
-          class="card selectable cardgroupalbum grow2 mb-2"
+          class="card selectable cardgroupalbum grow2 mb-3"
         >
           <p class="gpalbumtitle">{{ c.albumTitle }}</p>
         </div>
@@ -70,6 +64,20 @@
     </div>
   </div>
   <CreateAlbumModal />
+  <div class="d-flex justify-content-center">
+    <div class="footer">
+      <div>
+        <div class="d-flex align-items-center">
+          <img class="img-fluid1" src="../assets/img/logo2.png" alt="" />
+          <div>
+            <button @click="routeAbout" class="btn p-0">
+              <p class="m-0 about">About</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -79,11 +87,12 @@ import { collaboratorService } from "../services/CollaboratorService"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import { resetService } from "../services/ResetService"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import { notificationService } from "../services/NotificationService"
 export default {
   name: 'Home',
   setup() {
+    const route = useRoute()
     const router = useRouter()
     watchEffect(async () => {
       if (AppState.account.name) {
@@ -97,6 +106,7 @@ export default {
     })
     return {
       router,
+      route,
       myAlbums: computed(() => AppState.myAlbums),
       collaborators: computed(() => AppState.collaborators),
       routerLink(albumId) {
@@ -104,6 +114,9 @@ export default {
           name: "Album",
           params: { albumId: albumId }
         })
+      },
+      routeAbout() {
+        router.push('About')
       }
     }
   }
@@ -176,10 +189,38 @@ export default {
 .desktop {
   display: block;
 }
-.margindesk {
-  margin-bottom: 1.5vh;
+.footer {
+  height: 8vh;
+  width: 99%;
+  border-top-width: 5px;
+  border-left-width: 5px;
+  border-right-width: 5px;
+  border-bottom-width: 5px;
+  border-style: solid;
+  border-color: #9964cc;
+  background-color: rgba(255, 255, 255, 0.842);
+  margin-bottom: 2px;
 }
+.img-fluid1 {
+  height: 6vh;
+  margin-top: 4px;
+}
+.about {
+  padding-top: 4px;
+  border-style: solid;
+  border-color: #9964cc;
+  border-top: 0ch;
+  border-left: 0ch;
+  border-right: 0ch;
+  border-width: 2px;
+}
+
 @media only screen and (max-width: 500px) {
+  .footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   .media {
     display: block;
   }

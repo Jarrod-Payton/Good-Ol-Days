@@ -243,9 +243,6 @@ export default {
       clear() {
         albumService.clear()
       },
-      routeAbout() {
-        router.push('About')
-      }
     }
   }
 }
