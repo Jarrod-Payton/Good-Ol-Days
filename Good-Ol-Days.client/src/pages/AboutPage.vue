@@ -31,11 +31,17 @@
                 <div><p class="m-0 me-2 f-18">Autumn Lay</p></div>
                 <div>
                   <a
+                    href="https://www.linkedin.com/in/autumn-lay/"
+                    target="_blank"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
-                  <a class="mdi f-24 mdi-github github selectable1"></a>
+                  <a
+                    href="https://github.com/autumnlay"
+                    target="_blank"
+                    class="mdi f-24 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
@@ -53,12 +59,14 @@
                 <div><p class="m-0 me-1 f-18">Jake Carpenter</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://www.linkedin.com/in/dev-man-jacob-carpenter/"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://github.com/JakeCarp"
                     class="mdi f-24 mdi-github github selectable1"
                   ></a>
@@ -79,12 +87,14 @@
                 <div><p class="m-0 me-3 f-18">John Melo</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://www.linkedin.com/in/johnmelo94/"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://github.com/JoaoLucasMelo"
                     class="mdi f-24 mdi-github github selectable1"
                   ></a>
@@ -107,11 +117,14 @@
                 <div><p class="m-0 me-2 f-18">Lucas Payton</p></div>
                 <div>
                   <a
+                    href=""
+                    target="_blank"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     class="mdi f-24 mdi-github github selectable1"
                     href="https://github.com/Jarrod-Payton"
                   ></a>
@@ -132,12 +145,14 @@
                 <div><p class="m-0 me-3 f-18">Ryan Mera</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://www.linkedin.com/in/ryan-mera/"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://github.com/ryanmera3"
                     class="mdi f-24 mdi-github github selectable1"
                   ></a>
@@ -162,12 +177,17 @@
                 <div><p class="m-0 me-4 f-18">Autumn Lay</p></div>
                 <div>
                   <a
-                    href=""
+                    target="_blank"
+                    href="https://www.linkedin.com/in/autumn-lay/"
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
-                  <a href="" class="mdi f-26 mdi-github github selectable1"></a>
+                  <a
+                    target="_blank"
+                    href=""
+                    class="mdi f-26 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
@@ -185,12 +205,14 @@
                 <div><p class="m-0 me-4 f-18">Jake Carpenter</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://www.linkedin.com/in/dev-man-jacob-carpenter/"
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://github.com/JakeCarp"
                     class="mdi f-26 mdi-github github selectable1"
                   ></a>
@@ -211,12 +233,14 @@
                 <div><p class="m-0 me-4 f-18">John Melo</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://www.linkedin.com/in/johnmelo94/"
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://github.com/JoaoLucasMelo"
                     class="mdi f-26 mdi-github github selectable1"
                   ></a>
@@ -238,12 +262,14 @@
                 <div><p class="m-0 me-4 f-18">Lucas Payton</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href=""
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
+                    target="_blank"
                     href="https://github.com/Jarrod-Payton"
                     class="mdi f-26 mdi-github github selectable1"
                   ></a>
@@ -264,12 +290,17 @@
                 <div><p class="m-0 me-4 f-18">Ryan Mera</p></div>
                 <div>
                   <a
+                    target="_blank"
                     href=""
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
-                  <a href="" class="mdi f-26 mdi-github github selectable1"></a>
+                  <a
+                    target="_blank"
+                    href=""
+                    class="mdi f-26 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
