@@ -32,14 +32,9 @@
                     "
                     title="Delete this picture"
                     @click="deletePost"
-                    class="btn p-0 m-0"
+                    class="btn delete m-0"
                   >
-                    <i class="mdi mdi-24px me-2 text-danger mdi-trash-can"></i>
-                  </button>
-                </div>
-                <div class="text-end align-self-center">
-                  <button title="Download This Picture" class="btn p-0 m-0">
-                    <i class="mdi mdi-24px blue mdi-cloud-download"></i>
+                    <i class="mdi mdi-24px me-2 mdi-trash-can"></i>
                   </button>
                 </div>
               </div>
@@ -111,5 +106,21 @@ export default {
 }
 .img-fluid {
   max-height: 80vh;
+}
+.delete {
+  color: #999999;
+  border-color: #999999;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 0px;
+  padding-left: 6px !important;
+
+  margin-right: 4vh;
+  margin-bottom: 2vh;
+}
+.delete:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
 }
 </style>
