@@ -23,7 +23,8 @@ class NotificationService {
   }
   async seen() {
     //this just sets all the notifications on someones profile to seen
-    await api.put(`account/notifications`)
+    const res = await api.put(`account/notifications`)
+    logger.log('SEEN',res.data)
   }
   async clear() {
     //This just deletes every notification that a person has through a simple forloop

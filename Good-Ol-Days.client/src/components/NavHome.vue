@@ -5,13 +5,28 @@
         <!--The notifications button for monitor view-->
         <!--This button is set to an onclick that both opens the notifications but also sets every one of them to seen-->
         <button
-          class="btn notifications elevation-3 dropdown-toggle"
+          class="btn notifications elevation-3 dropdown"
           type="button"
           id="notifications"
           data-bs-toggle="dropdown"
           @click="seen"
         >
           Notifications <i class="mdi ms-1 mdi-18px mdi-bell-outline"></i>
+          <span
+            v-if="notifications.filter((n) => n.seen === false).length > 0"
+            class="
+              desktop
+              position-absolute
+              top-25
+              start-100
+              translate-middle
+              badge
+              rounded-pill
+              bg-danger
+            "
+          >
+            {{ notifications.filter((n) => n.seen === false).length }}
+          </span>
         </button>
         <ul class="dropdown-menu">
           <!--This is if there are no notifications at all-->
