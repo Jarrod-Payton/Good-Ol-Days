@@ -17,7 +17,7 @@
       <Challenge />
     </div>
     <div class="col-md-6 order-md-1">
-      <div class="row">
+      <div class="row" v-if="posts.length > 0">
         <!--Divided all posts into two sets of posts in order to keep the challenge on the right hand side even if there no posts made yet (We were stumped on how to do this for quite a while, so thank you to one of our instructors Mick Shannahan for coming up with this brilliant method)-->
         <div class="col-6 rotationanim" v-for="p in posts1" :key="p.id">
           <div
@@ -29,6 +29,13 @@
           >
             <Post :post="p" />
           </div>
+        </div>
+      </div>
+      <div v-if="posts.length === 0" class="row justify-content-center">
+        <div class="col-11 card cardmessage">
+          <p class="message m-0 p-1">
+            Add a picture and start creating memories!
+          </p>
         </div>
       </div>
     </div>
@@ -49,8 +56,8 @@
       </div>
     </div>
     <!--Our modal for the sharing of the album-->
-    <ShareAlbumModal :activeAlbum="activeAlbum" />
   </div>
+  <ShareAlbumModal :activeAlbum="activeAlbum" />
 </template>
 <script>
 import { computed, ref } from "@vue/reactivity";
@@ -110,6 +117,7 @@ export default {
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
+      posts: computed(() => AppState.posts),
       setActive(id) {
         //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)
@@ -120,6 +128,15 @@ export default {
 };
 </script>
 <style scoped>
+.cardmessage {
+  border-color: #9964cc;
+  border-width: 4px;
+  background-color: rgba(245, 245, 245, 0.781);
+}
+.message {
+  font-size: 5vh;
+  color: rgb(90, 90, 90);
+}
 .item {
   width: 100%;
   display: inline-block;
@@ -195,5 +212,14 @@ export default {
   right: 5%;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
   transition: all 0.35s;
+}
+@media only screen and (max-width: 500px) {
+  .message {
+    font-size: 2.4vh;
+    color: rgb(90, 90, 90);
+  }
+  .cardmessage {
+    margin-top: 3vh;
+  }
 }
 </style>

@@ -94,7 +94,7 @@ export default {
   border-radius: 0;
 }
 .blue {
-  color: #36a7d7;
+  color: #1e90ff;
 }
 .btn:focus {
   outline: none;

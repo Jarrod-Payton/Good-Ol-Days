@@ -1,14 +1,5 @@
 <template>
-  <div
-    class="
-      home
-      flex-grow-1
-      d-flex
-      flex-column
-      align-items-center
-      justify-content-center
-    "
-  >
+  <div class="home flex-grow-1 d-flex flex-column align-items-center">
     <div class="card cardspec">
       <div class="d-flex justify-content-between">
         <div class="p-4">
@@ -25,8 +16,15 @@
         </div>
       </div>
       <!-- ALBUMS GO HERE v  -->
-      <div class="row">
+      <div class="row" v-if="myAlbums.length > 0">
         <Album v-for="a in myAlbums" :key="a.id" :album="a" />
+      </div>
+      <div class="row" v-else>
+        <div>
+          <div class="ms-5">
+            <p class="addalbumstart">Add an album to start!</p>
+          </div>
+        </div>
       </div>
       <div class="media text-center mb-3">
         <button
@@ -124,6 +122,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.addalbumstart {
+  font-size: 3.5vh;
+  color: #5c5c5c;
+  font-style: italic;
+  margin-bottom: 10vh;
+  margin-top: 4vh;
+}
 .eachone {
   width: 100%;
 }
@@ -133,7 +138,7 @@ export default {
   min-height: 20vh;
   border-width: 5px;
   border-radius: 0;
-  border-color: #36a7d7;
+  border-color: #1e90ff;
   background-color: rgba(245, 245, 245, 0.842);
 }
 .titles {
@@ -214,7 +219,9 @@ export default {
   border-right: 0ch;
   border-width: 2px;
 }
-
+.home {
+  min-height: 70vh;
+}
 @media only screen and (max-width: 500px) {
   .footer {
     width: 100%;
@@ -253,6 +260,12 @@ export default {
   }
   .margindesk {
     margin-bottom: 0vh;
+  }
+  .addalbumstart {
+    margin-bottom: 6vh;
+    margin-top: 3vh;
+    font-size: 3vh;
+    margin-left: 2vh;
   }
 }
 </style>

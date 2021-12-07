@@ -395,7 +395,7 @@ export default {
   padding-bottom: 0;
 }
 .linkedin {
-  color: #36a7d7;
+  color: #1e90ff;
 }
 .github {
   color: #9964cc;

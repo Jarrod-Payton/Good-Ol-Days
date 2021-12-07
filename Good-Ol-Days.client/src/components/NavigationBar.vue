@@ -274,7 +274,7 @@ export default {
 }
 .cardspec {
   border-radius: 0;
-  border-width: 4px !important;
+  border-width: 5px !important;
   border-color: #9964cc !important;
   margin-top: 2.5vh;
   margin-left: 1vh;
@@ -287,7 +287,7 @@ export default {
   border-color: #9964cc !important;
 }
 .logout {
-  color: #36a7d7;
+  color: #1e90ff;
   margin-top: 7px !important;
 }
 

@@ -1,9 +1,9 @@
-<template>
+<template >
   <main class="container-fluid background">
     <div class="row">
       <NavigationBar :user="user" />
     </div>
-    <div class="row">
+    <div class="row scrollbar">
       <router-view :user="user" />
     </div>
   </main>
@@ -43,5 +43,21 @@ export default {
 }
 p {
   font-family: "Saira Condensed", sans-serif;
+}
+.scrollbar {
+  overflow-y: scroll;
+  height: 82vh;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: #2e2e2ebd;
+  width: 7px;
+  border-radius: 7px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #adadad;
+  border-radius: 7px;
 }
 </style>

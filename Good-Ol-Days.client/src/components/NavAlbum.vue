@@ -123,6 +123,7 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 2px;
+  padding-top: 4px;
   margin-right: 4vh;
   margin-bottom: 2vh;
 }

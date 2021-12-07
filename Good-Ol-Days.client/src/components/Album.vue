@@ -53,7 +53,7 @@ export default {
   min-height: 20vh;
   border-width: 5px;
   border-radius: 0;
-  border-color: #36a7d7;
+  border-color: #1e90ff;
   background-color: rgba(245, 245, 245, 0.842);
 }
 .titles {
@@ -97,7 +97,7 @@ export default {
   border-width: 3px;
   border-radius: 0;
   background-color: rgb(243, 243, 243);
-  border-color: #36a7d7;
+  border-color: #1e90ff;
 }
 .gpalbumtitle {
   margin-left: 3vh;
