@@ -1,7 +1,5 @@
 import { dbContext } from '../db/DbContext'
-import { BadRequest, Forbidden } from '../utils/Errors'
-import { logger } from '../utils/Logger'
-import { albumsService } from './AlbumsService'
+import { BadRequest } from '../utils/Errors'
 import { notificationService } from './NotificationService'
 
 class CollaboratorsService {

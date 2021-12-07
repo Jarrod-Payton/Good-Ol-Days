@@ -1,9 +1,9 @@
 import { dbContext } from '../db/DbContext'
+import { collaboratorsService } from './CollaboratorsService'
 import { socketProvider } from '../SocketProvider'
-import { BadRequest, Forbidden } from '../utils/Errors'
-import { accountService } from './AccountService'
+import { BadRequest } from '../utils/Errors'
 import { albumsService } from './AlbumsService'
-import { profileService } from './ProfileService'
+import { logger } from '../utils/Logger'
 
 class NotificationService {
   // creates a notification when a collaborator is created
@@ -23,10 +23,19 @@ class NotificationService {
   async createPostNotification(user, album) {
     // Finds an album by album ID
     const found = await albumsService.getAlbumById({ _id: album })
+    const collaborators = await collaboratorsService.getCollabByAlbumId(album)
     // Creates a post notification using the found album's data
-    if(!user === found.creatorId){
+    if (user !== found.creatorId) {
       await dbContext.Notifications.create({ type: 'post', notifierId: `${user}`, albumId: found.id, recipient: [found.creatorId] })
     }
+    const eventName = 'NEW_NOTIFICATION'
+    collaborators.forEach(async c => {
+      if (c.accountId.toString() !== user) {
+        await dbContext.Notifications.create({ type: 'post', notifierId: `${user}`, albumId: found.id, recipient: [c.accountId] })
+        const payload = await this.getMyNotifications(c.accountId)
+        socketProvider.messageUser(c.accountId.toString(), eventName, payload)
+      }
+    })
   }
 
   async getMyNotifications(userId) {

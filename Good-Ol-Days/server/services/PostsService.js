@@ -33,7 +33,7 @@ class PostsService {
     // Gets album information by albumId
     const album = await albumsService.getAlbumById(post.albumId)
     // Checks to see if the posts creator matches the current userId. If false throws a Forbidden
-    if (post.creatorId.toString() !== userId) {
+    if (post.creatorId.toString() !== userId && album.creatorId.toString() !== userId) {
       throw new Forbidden('You do not have permission to delete this post')
     }
     // Checks to see if you were able to get a post. If false throws a badrequest
@@ -41,7 +41,7 @@ class PostsService {
       throw new BadRequest('Invalid Id')
     }
     // Deletes post from firebase
-    await firebaseService.deleteFirebasePost(album.title, post.imgUrl, userId)
+    await firebaseService.deleteFirebasePost(album.title, post.imgUrl)
     // Deletes post from mongodb matching the postId
     await dbContext.Posts.findByIdAndDelete(postId)
   }
