@@ -3,7 +3,7 @@ import { accountService } from '../services/AccountService'
 import { albumsService } from '../services/AlbumsService'
 import { collaboratorsService } from '../services/CollaboratorsService'
 import { firebaseService } from '../services/FirebaseService'
-import { notificationService } from "../services/NotificationService"
+import { notificationService } from '../services/NotificationService'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -31,7 +31,7 @@ export class AccountController extends BaseController {
     }
   }
 
-  //This is so we can edit the parts of an account
+  // This is so we can edit the parts of an account
   async updateAccount(req, res, next) {
     try {
       const account = await accountService.updateAccount(req.userInfo, req.body)
@@ -51,7 +51,7 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
-  
+
   // This gets all of my albums that I am a collaborator for
   async getAllMyCollabAlbums(req, res, next) {
     try {
@@ -72,8 +72,8 @@ export class AccountController extends BaseController {
     }
   }
 
-  //This function gets all of my notifactions, both the posts and the collaborator ones
-  async getMyNotifications(req,res,next){
+  // This function gets all of my notifactions, both the posts and the collaborator ones
+  async getMyNotifications(req, res, next) {
     try {
       const result = await notificationService.getMyNotifications(req.userInfo.id)
       return res.send(result)
@@ -83,7 +83,7 @@ export class AccountController extends BaseController {
   }
 
   // This deletes a notification and it is a Hard Delete
-  async deleteNotification(req, res, next){
+  async deleteNotification(req, res, next) {
     try {
       const result = await notificationService.deleteNotification(req.params.id)
       return res.send(result)
@@ -91,9 +91,9 @@ export class AccountController extends BaseController {
       next(error)
     }
   }
-  
-  //This edits the bool of the notification on the "seen" to true
-  async setSeen(req,res,next){
+
+  // This edits the bool of the notification on the "seen" to true
+  async setSeen(req, res, next) {
     try {
       const result = await notificationService.editSeen(req.userInfo.id)
       return res.send(result)

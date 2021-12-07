@@ -41,7 +41,7 @@ class PostsService {
       throw new BadRequest('Invalid Id')
     }
     // Deletes post from firebase
-    await firebaseService.deleteFirebasePost(album.title, post.imgUrl)
+    await firebaseService.deleteFirebasePost(album.title, post.imgUrl, userId)
     // Deletes post from mongodb matching the postId
     await dbContext.Posts.findByIdAndDelete(postId)
   }

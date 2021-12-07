@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { firebaseService } from './FirebaseService'
 
 // Private Methods
 

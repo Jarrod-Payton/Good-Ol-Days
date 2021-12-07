@@ -56,35 +56,33 @@
                 </div>
               </div>
               <div class="d-flex flex-column">
-                <div class="input-group">
-                  <span class="input-group-text border-dark">Picture URL:</span>
+                <p class="S1">
+                  Profile Picture:
                   <input
-                    class="form-control border-dark"
-                    type="text"
-                    placeholder=""
-                    name="pic-url"
-                    v-model="editProfile.picture"
+                    class="inputupload mtop"
+                    type="file"
+                    accept="image/*"
+                    id="inputfile"
+                    @change="changePFP"
                   />
-                </div>
+                </p>
               </div>
               <div class="d-flex justify-content-center mt-3">
-                <i
-                  type="submit"
-                  @click="editAccount"
-                  v-if="edit === false"
-                  class="
-                    mdi mdi-content-save
-                    selectable1
-                    align-self-end
-                    border
-                    p-1
-                    rounded
-                    bg-light
-                    mb-3
-                  "
+                <button
+                  :disabled="submitting"
+                  class="btn btn-outline-dark"
+                  @click="uploadProfilePic"
                 >
-                  Save
-                </i>
+                  <span v-if="!submitting">
+                    <i
+                      v-if="edit === false"
+                      class="mdi mdi-content-save selectable1"
+                    >
+                      Save
+                    </i>
+                  </span>
+                  <i class="mdi mdi-spin mdi-loading" v-if="submitting" />
+                </button>
               </div>
             </form>
           </div>
@@ -137,35 +135,52 @@ import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
 import { AppState } from "../AppState"
 import { useRouter } from "vue-router"
+import { firebaseService } from '../services/FirebaseService'
 export default {
   props: {
     account: { type: Object }
   },
-  setup() {
+  setup(props) {
     //TODO flip this ref on close of the off canvas
     let edit = ref(true)
     let editProfile = ref({})
+    let files = ref([])
+    const submitting = ref(false)
     const router = useRouter()
     return {
+      submitting,
       myAlbums: computed(() => AppState.myAlbums),
       collaborators: computed(() => AppState.collaborators),
       edit,
+      files,
       editProfile,
       router,
-      //This is on the right track, but needs more thought
-      // async changePFP(e) {
-      //   try {
-      //     editProfile.picture.value = e.target.file
+      changePFP(e) {
+        try {
+          files = e.target.files
+          console.log('Hitting Change', files)
+        } catch (error) {
+          logger.error(error)
+        }
 
-      //   } catch (error) {
-      //     logger.error(error)
-      //   }
-
-      // },
+      },
+      async uploadProfilePic() {
+        try {
+          submitting.value = true
+          const url = await firebaseService.upload(files[0], props.account, 'profile')
+          logger.log(url)
+          editProfile.value.picture = url
+          logger.log(editProfile.value)
+          this.editAccount()
+        } catch (error) {
+          logger.error(error)
+        }
+      },
       async editAccount() {
         try {
           await accountService.editAccount(editProfile.value)
           edit.value = !edit.value
+          submitting.value = false
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, 'error')
@@ -181,6 +196,17 @@ export default {
 
 
 <style lang="scss" scoped>
+.inputupload {
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+  border: 0 !important;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+}
+.mtop {
+  margin-top: 5px;
+}
 .line {
   width: 100%;
   height: 2px;

@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submi" class="btn" :disabled="submitting">
+            <button type="submit" class="btn" :disabled="submitting">
               <h5 v-if="!submitting">Submit</h5>
               <i class="mdi mdi-spin mdi-loading" v-if="submitting" />
             </button>
@@ -161,7 +161,7 @@ export default {
           logger.log('Submitting', submitting.value)
 
           //This line is going to both upload the image into firebase and return the new hosted URL for our img
-          const url = await firebaseService.upload(files.value[0], this.activeAlbum)
+          const url = await firebaseService.upload(files.value[0], this.activeAlbum, 'post')
 
           //Now just set the reference objects image url to our new firebase hosted one
           postDetails.value.imgUrl = url

@@ -66,16 +66,14 @@ import { onMounted, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { albumService } from "../services/AlbumService";
 import { postService } from "../services/PostService";
-import Pop from "../utils/Pop";
 import { logger } from "../utils/Logger";
 import { challengeService } from "../services/ChallengeService";
 import { collaboratorService } from "../services/CollaboratorService";
 export default {
-  props: {
-    user: { type: Object }
-  },
-  setup(props) {
+
+  setup() {
     document.title = "Good Ol' Days | Album"
+    const user = computed(() => AppState.user)
     // A ref to be used to split the posts
     const splicedPosts = ref([])
     // The router to be able to grab the album Id off of the url
@@ -91,23 +89,23 @@ export default {
         //Sets the active album in the AppState
         await albumService.setActiveAlbum(route.params.albumId);
         //Checks if they are authenticated so that if they are not then they will not get the challenges
-        if (props.user.isAuthenticated) {
+        if (user.isAuthenticated) {
           //Grabs the challenges using the active album in the AppState
           await challengeService.getChallenges()
         }
         //Grabs the posts for this album by using the album id in the url
         await postService.getPosts(route.params.albumId)
       } catch (error) {
-        Pop.toast(error);
+        logger.error(error);
       }
     });
     watchEffect(async () => {
       try {
-        if (props.user.isAuthenticated && route.params.albumId) {
+        if (user.isAuthenticated && route.params.albumId) {
           await collaboratorService.getCollabThisAlbum(route.params.albumId)
         }
       } catch (error) {
-        Pop.toast(error);
+        logger.error(error);
       }
     });
     return {

@@ -214,19 +214,17 @@ import { watchEffect } from "@vue/runtime-core"
 import { collaboratorService } from "../services/CollaboratorService"
 import Pop from "../utils/Pop"
 export default {
-  props: {
-    user: { type: Object }
-  },
-  setup(props) {
+  setup() {
+    const user = computed(() => AppState.user)
     const route = useRoute()
     const router = useRouter()
     watchEffect(async () => {
       try {
-        if (props.user.isAuthenticated && route.params.albumId) {
+        if (user.isAuthenticated && route.params.albumId) {
           await collaboratorService.getCollabThisAlbum(route.params.albumId)
         }
       } catch (error) {
-        Pop.toast(error);
+        logger.error(error);
       }
     });
     return {

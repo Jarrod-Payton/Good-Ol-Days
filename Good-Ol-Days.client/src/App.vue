@@ -1,10 +1,10 @@
 <template >
   <main class="container-fluid background">
     <div class="row">
-      <NavigationBar :user="user" />
+      <NavigationBar />
     </div>
     <div class="row scrollbar">
-      <router-view :user="user" />
+      <router-view />
     </div>
   </main>
   <footer class="background d-flex justify-content-center">

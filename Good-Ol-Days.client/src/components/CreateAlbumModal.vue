@@ -3,7 +3,7 @@
   <div class="modal fade" id="createAlbumModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form @submit.prevent="uploadCoverImg">
+        <form @submit.prevent="upload">
           <div class="modal-header">
             <div class="modal-title f-18">
               <p>New Album</p>
@@ -121,14 +121,14 @@ export default {
           document.getElementById('image').src = reader.result
         }
       },
-      async uploadCoverImg() {
+      async upload() {
         try {
           submitting.value = true
           if (!files.value[0]) {
             await this.createAlbum()
           }
           else {
-            const url = await firebaseService.uploadCoverImg(files.value[0], albumDetails.editable)
+            const url = await firebaseService.upload(files.value[0], albumDetails.editable, 'cover')
             albumDetails.editable.coverImg = url
             logger.log(url)
             await this.createAlbum()
