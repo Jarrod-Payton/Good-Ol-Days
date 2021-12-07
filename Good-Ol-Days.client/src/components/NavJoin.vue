@@ -47,25 +47,24 @@ import { collaboratorService } from "../services/CollaboratorService"
 import { useRoute } from "vue-router"
 import { challengeService } from "../services/ChallengeService"
 export default {
-  props: {
-    user: { type: Object }
-  },
-  setup(props) {
+
+  setup() {
     const route = useRoute()
+    const user = computed(() => AppState.user)
     return {
+      user,
       route,
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
       activeAlbum: computed(() => AppState.activeAlbum),
       account: computed(() => AppState.account),
       async login() {
-        if (!props.user.isAuthenticated) {
+        debugger
+        if (!AppState.user.isAuthenticated) {
           await AuthService.loginWithPopup()
         }
-        else if (props.user.isAuthenticated && !this.collabThisAlbum.find((c) => c.accountId === this.account.id)) {
+        else if (!this.collabThisAlbum.find((c) => c.accountId === this.account.id)) {
           await collaboratorService.addColab(route.params.albumId)
         }
-        await challengeService.getChallenges()
-        await collaboratorService.getCollabThisAlbum(this.activeAlbum.id)
       },
     }
   }

@@ -161,13 +161,7 @@
           </div>
           <!--  -->
           <!-- Condition set to show "Request Pending" checking if the user account is a collaborator and isn't verified -->
-          <div
-            v-if="
-              collabThisAlbum.find(
-                (c) => c.accountId === account.id && !c.verified
-              ) && activeAlbum.creatorId !== account.id
-            "
-          >
+          <div v-if="collabPending">
             <button
               title="Request pending"
               class="btn share disabled elevation-3"
@@ -222,7 +216,7 @@ export default {
     const router = useRouter()
     watchEffect(async () => {
       try {
-        if (props.user.isAuthenticated && route.params.albumId) {
+        if (route.params.albumId) {
           await collaboratorService.getCollabThisAlbum(route.params.albumId)
         }
       } catch (error) {
@@ -235,6 +229,7 @@ export default {
       route: computed(() => route),
       activeAlbum: computed(() => AppState.activeAlbum),
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
+      collabPending: computed(() => AppState.collabThisAlbum.find((c) => c.accountId === AppState.account.id && !c.verified) && AppState.activeAlbum.creatorId !== AppState.account.id),
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       async logout() {
