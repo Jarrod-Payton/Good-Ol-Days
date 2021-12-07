@@ -1,4 +1,5 @@
 import { AppState } from "../AppState"
+import { logger } from "../utils/Logger"
 
 class ResetService {
   resetUtil() {
@@ -9,6 +10,9 @@ class ResetService {
     AppState.myGroupAlbums = []
     AppState.activeChallenge = {}
     AppState.doneSyncing = false
+  }
+  openOffCanvas() {
+    AppState.editProfile = true
   }
 }
 

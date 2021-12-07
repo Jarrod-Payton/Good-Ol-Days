@@ -21,7 +21,7 @@
             class="d-flex justify-content-center flex-column align-items-center"
           >
             <i
-              @click="edit = !edit"
+              @click="openEdit"
               aria-label="edit profile"
               class="mdi mdi-pencil selectable1 align-self-end"
               >Edit Profile</i
@@ -137,18 +137,18 @@ import Pop from "../utils/Pop"
 import { accountService } from "../services/AccountService"
 import { AppState } from "../AppState"
 import { useRouter } from "vue-router"
+import { onMounted, watchEffect } from "@vue/runtime-core"
+import { resetService } from "../services/ResetService"
 export default {
   props: {
     account: { type: Object }
   },
   setup() {
     //TODO flip this ref on close of the off canvas
-    let edit = ref(true)
     let editProfile = ref({})
+    let edit = ref(false)
     const router = useRouter()
     return {
-      myAlbums: computed(() => AppState.myAlbums),
-      collaborators: computed(() => AppState.collaborators),
       edit,
       editProfile,
       router,
@@ -165,15 +165,20 @@ export default {
       async editAccount() {
         try {
           await accountService.editAccount(editProfile.value)
-          edit.value = !edit.value
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, 'error')
         }
       },
+      openEdit() {
+        AppState.editProfile = !AppState.editProfile
+      },
       routeTo(id) {
         router.push({ name: 'Album', params: { albumId: id } })
       },
+      myAlbums: computed(() => AppState.myAlbums),
+      collaborators: computed(() => AppState.collaborators),
+      edit: computed(() => AppState.editProfile)
     }
   }
 }
