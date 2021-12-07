@@ -53,13 +53,13 @@
                 <div><p class="m-0 me-1 f-18">Jake Carpenter</p></div>
                 <div>
                   <a
-                    src="https://www.linkedin.com/in/dev-man-jacob-carpenter/"
+                    href="https://www.linkedin.com/in/dev-man-jacob-carpenter/"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
                   <a
-                    src="https://github.com/JakeCarp"
+                    href="https://github.com/JakeCarp"
                     class="mdi f-24 mdi-github github selectable1"
                   ></a>
                 </div>
@@ -177,7 +177,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://animesenpai.net/wp-content/uploads/2021/09/images_720.jpg"
+                  src="https://honeysanime.com/wp-content/uploads/2019/08/Dr.-Stone-Wallpaper-2-560x313.png"
                   alt=""
                 />
               </div>
@@ -185,12 +185,15 @@
                 <div><p class="m-0 me-4 f-18">Jake Carpenter</p></div>
                 <div>
                   <a
-                    href=""
+                    href="https://www.linkedin.com/in/dev-man-jacob-carpenter/"
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
                 <div>
-                  <a href="" class="mdi f-26 mdi-github github selectable1"></a>
+                  <a
+                    href="https://github.com/JakeCarp"
+                    class="mdi f-26 mdi-github github selectable1"
+                  ></a>
                 </div>
               </div>
             </div>
