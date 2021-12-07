@@ -1,15 +1,15 @@
 <template>
   <div class="PictureModal">
     <div
-      class="modal fade"
+      class="modal fade scrollbar-post parent"
       id="picture-modal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content border-0 rounded-0 transparent">
-          <div class="modal-body d-flex justify-content-center">
+          <div class="modal-body d-flex justify-content-center parent">
             <div class="flip-card">
               <div class="flip-card-inner">
                 <img class="img-fluid" :src="activePost.imgUrl" alt="" />
@@ -77,6 +77,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.polaroid {
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+}
+.polaroid > img {
+  max-width: auto;
+  height: 30vh;
+  object-fit: cover;
+}
+.scrollbar-post {
+  overflow-y: scroll;
+}
+.scrollbar-post::-webkit-scrollbar {
+  width: 0vh;
+}
+.image {
+  width: auto !important;
+}
 .flip-card {
   background-color: transparent;
   width: 80%;
@@ -148,9 +167,11 @@ export default {
   margin-top: 0;
   margin-bottom: 0;
 }
-// .img-fluid {
-//   max-height: 80vh;
-// }
+.img-fluid {
+  max-height: 80vh;
+  max-width: 200vh;
+  width: auto !important;
+}
 .delete {
   color: #999999;
   border-color: #999999;
@@ -166,5 +187,17 @@ export default {
   background-color: red;
   color: white;
   border-color: red;
+}
+@media only screen and (max-width: 500px) {
+  .img-fluid {
+    // max-height: 30vh;
+    max-width: 30vh;
+    width: auto !important;
+    margin-left: 0;
+  }
+  .parent {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
 }
 </style>
