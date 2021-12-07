@@ -1,6 +1,10 @@
 <template>
   <!--Whenever you open up an album this is the page you are routed to-->
   <div class="row mt-md-5 mt-2 m-0 p-0">
+    <button class="btn btn-primary" @click="downloadMode">Download Mode</button>
+    <button class="btn btn-danger" @click="downloadImages" v-if="downloading">
+      Download Images
+    </button>
     <!--Checks to see your role on this page in order to determine your interaction ability and view of the challenge-->
     <div
       class="col-md-6 order-md-2 p-0"
@@ -20,12 +24,24 @@
       <div class="row" v-if="posts.length > 0">
         <!--Divided all posts into two sets of posts in order to keep the challenge on the right hand side even if there no posts made yet (We were stumped on how to do this for quite a while, so thank you to one of our instructors Mick Shannahan for coming up with this brilliant method)-->
         <div class="col-6 rotationanim" v-for="p in posts1" :key="p.id">
+          <button
+            :id="p.id + 'dlBtn'"
+            class="btn btn-warning"
+            @click="addToQue(p)"
+            v-if="downloading"
+          >
+            Add to Download
+          </button>
           <div
             @click="setActive(p.id)"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#picture-modal"
-            class="item selectable1"
+            :class="
+              downloading && !que.find((elem) => elem.id === p.id)
+                ? 'item disabled'
+                : 'item selectable1'
+            "
           >
             <Post :post="p" />
           </div>
@@ -48,12 +64,27 @@
       v-for="p in splicedPosts"
       :key="p.id"
     >
+      <button
+        :id="p.id + 'dlBtn'"
+        class="btn btn-warning"
+        @click="addToQue(p)"
+        v-if="downloading"
+      >
+        <span v-if="!que.find((elem) => elem.id === p.id)">
+          Add to Download
+        </span>
+        <span v-else> Added to Download</span>
+      </button>
       <div
         @click="setActive(p.id)"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#picture-modal"
-        class="item selectable1"
+        :class="
+          downloading && !que.find((elem) => elem.id === p.id)
+            ? 'item disabled'
+            : 'item selectable1'
+        "
       >
         <Post :post="p" />
       </div>
@@ -72,9 +103,13 @@ import { postService } from "../services/PostService";
 import { logger } from "../utils/Logger";
 import { challengeService } from "../services/ChallengeService";
 import { collaboratorService } from "../services/CollaboratorService";
+import { firebaseService } from '../services/FirebaseService';
 export default {
 
   setup() {
+    //ref used to toggle download mode
+    const downloading = ref(false)
+    const que = ref([])
     document.title = "Good Ol' Days | Album"
     const user = computed(() => AppState.user)
     // A ref to be used to split the posts
@@ -112,6 +147,8 @@ export default {
       }
     });
     return {
+      que,
+      downloading,
       splicedPosts,
       posts1: computed(() => AppState.posts.slice(0, 2)),
       activeAlbum: computed(() => AppState.activeAlbum),
@@ -124,6 +161,20 @@ export default {
       setActive(id) {
         //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)
+      },
+      downloadMode() {
+        downloading.value = !downloading.value
+      },
+      addToQue(post) {
+        que.value.push(post)
+        document.getElementById(`${post.id}dlBtn`).disabled = true
+      },
+      async downloadImages() {
+        try {
+          await firebaseService.downloadFirebase(que.value)
+        } catch (error) {
+          logger.error(error)
+        }
       }
     };
 

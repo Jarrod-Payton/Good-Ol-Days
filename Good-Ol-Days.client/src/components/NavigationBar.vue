@@ -69,7 +69,7 @@
               route.name !== 'About'
             "
           >
-            <NavJoin :user="user" />
+            <NavJoin />
           </div>
           <!--  -->
           <!-- Condition set to show "Request Pending" checking if the user account is a collaborator and isn't verified -->
@@ -158,7 +158,7 @@
               route.name !== 'About'
             "
           >
-            <NavJoin :user="user" />
+            <NavJoin />
           </div>
           <!--  -->
           <!-- Condition set to show "Request Pending" checking if the user account is a collaborator and isn't verified -->

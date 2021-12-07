@@ -47,39 +47,37 @@ class FirebaseService {
 
     //This function mimics the upload function above, except that it stores the images
     //in a different destination to be used as album cover images
-    //TODO refactor to reduce repeated lines
 
 
 
-    async uploadCoverImg(data, albumData) {
-        logger.log('Cover DATA:', data)
-        logger.log('ALBUM DATA:', albumData)
-        const collection = storage.ref('albums')
+    // async uploadCoverImg(data, albumData) {
+    //     logger.log('Cover DATA:', data)
+    //     logger.log('ALBUM DATA:', albumData)
+    //     const collection = storage.ref('albums')
       
-        const snapshot = await resource.put(data, {
-            customMetadata: {
-                 uid: AppState.account.id, size: data.size, type: data.type
-            }
-        })
-        const url = await snapshot.ref.getDownloadURL()
-        logger.log(url)
-        return url
-    }
+    //     const snapshot = await resource.put(data, {
+    //         customMetadata: {
+    //              uid: AppState.account.id, size: data.size, type: data.type
+    //         }
+    //     })
+    //     const url = await snapshot.ref.getDownloadURL()
+    //     logger.log(url)
+    //     return url
+    // }
 
-    //Same story here except for profile pictures
-    //TODO this is unfinished and needs refactoring
-      async uploadProfileImage(profileImg, profileName) {
+    // //Same story here except for profile pictures
+    //   async uploadProfileImage(profileImg, profileName) {
         
-        const resource = collection.child('profilePic').child(profileImg)
-        const snapshot = await resource.put(data, {
-            customMetadata: {
-                 uid: AppState.account.id, size: data.size, type: data.type
-            }
-        })
-        const url = await snapshot.ref.getDownloadURL()
-        logger.log(url)
-        return url
-    }
+    //     const resource = collection.child('profilePic').child(profileImg)
+    //     const snapshot = await resource.put(data, {
+    //         customMetadata: {
+    //              uid: AppState.account.id, size: data.size, type: data.type
+    //         }
+    //     })
+    //     const url = await snapshot.ref.getDownloadURL()
+    //     logger.log(url)
+    //     return url
+    // }
     
     //This function calls to our backend service to establish a connection with 
     //firebase. The app uses only one FB user. 
