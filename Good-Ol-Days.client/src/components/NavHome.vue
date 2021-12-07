@@ -55,7 +55,7 @@
       <div class="dropdown">
         <!--This button is set to an onclick that both opens the notifications but also sets every one of them to seen-->
         <button
-          class="btn notifications me-5 elevation-3 dropdown-toggle"
+          class="btn notifications me-5 elevation-3 dropdown"
           type="button"
           id="notifications"
           data-bs-toggle="dropdown"

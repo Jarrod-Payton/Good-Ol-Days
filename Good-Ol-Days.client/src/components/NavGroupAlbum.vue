@@ -15,7 +15,7 @@
                 <div class="">
                   <img
                     :title="activeAlbum.creator.name"
-                    class="profilepics"
+                    class="profilepics border"
                     :src="activeAlbum.creator.picture"
                     alt=""
                   />
@@ -67,7 +67,7 @@
           @click="deleteAlbum"
           v-if="activeAlbum.creatorId === account.id"
           title="Delete this album"
-          class="btn btn-danger-outline ms-2 delete elevation-3"
+          class="btn btn-danger-outline ms-2 delete"
         >
           <i class="mdi mdi-18px mdi-trash-can"></i>
         </button>
@@ -162,6 +162,9 @@ export default {
 }
 .profilepics {
   border-radius: 50%;
+  border-color: #9964cc !important;
+  border-width: 2px !important;
+  border-style: solid !important;
   height: 4vh;
   width: 4vh;
   object-fit: cover;

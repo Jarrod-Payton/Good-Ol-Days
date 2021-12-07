@@ -90,6 +90,7 @@ import { notificationService } from "../services/NotificationService"
 export default {
   name: 'Home',
   setup() {
+    document.title = "Good Ol' Days | Home"
     const route = useRoute()
     const router = useRouter()
     watchEffect(async () => {

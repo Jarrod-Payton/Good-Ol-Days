@@ -75,6 +75,7 @@ export default {
     user: { type: Object }
   },
   setup(props) {
+    document.title = "Good Ol' Days | Album"
     // A ref to be used to split the posts
     const splicedPosts = ref([])
     // The router to be able to grab the album Id off of the url

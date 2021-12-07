@@ -313,7 +313,10 @@
 
 <script>
 export default {
-  name: 'AboutPage'
+  name: 'AboutPage',
+  setup() {
+    document.title = "Good Ol' Days | About"
+  }
 }
 </script>
 <style lang="scss" scoped>

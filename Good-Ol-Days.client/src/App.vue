@@ -22,13 +22,13 @@ export default {
   name: 'App',
   setup() {
     const route = useRoute()
+
     return {
       route,
       appState: computed(() => AppState),
       account: computed(() => AppState.account),
       user: computed(() => AppState.user),
       posts: computed(() => AppState.posts),
-
     }
   }
 }
