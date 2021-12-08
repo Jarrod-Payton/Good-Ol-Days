@@ -10,12 +10,7 @@
   <footer class="background d-flex justify-content-center">
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
-<<<<<<< HEAD
-    <PictureModal :posts="posts" />
-    <VideoModal :posts="posts" />
-=======
     <PictureModal />
->>>>>>> Flippin-Photos
   </footer>
 </template>
 
