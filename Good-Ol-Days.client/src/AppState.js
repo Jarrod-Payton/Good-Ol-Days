@@ -32,4 +32,5 @@ export const AppState = reactive({
   editProfile: true,
   //A list of every notification set a user has and is set in the NavHome.vue component's on load
   notifications: [],
+  postChallenge: {},
 })

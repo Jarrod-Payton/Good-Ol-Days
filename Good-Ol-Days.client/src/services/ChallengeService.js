@@ -45,6 +45,11 @@ class ChallengeService {
     }
   }
   // 606590170 This is a week in miliseconds in order to actually get our app functional
+
+  async getPostChallenge(id){
+    const res = await api.get('api/challenges/' + id)
+    logger.log('Posts Challenge info',res.data)
+  }
 }
 
 export const challengeService = new ChallengeService()

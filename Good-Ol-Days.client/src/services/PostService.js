@@ -2,6 +2,7 @@ import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
+import { challengeService } from "./ChallengeService"
 
 
 
@@ -11,6 +12,11 @@ class PostService {
     const active = AppState.posts.find(p => p.id === id)
     AppState.activePost = active
     logger.log('ACTIVE', AppState.activePost)
+    if(active.challengeId) {
+      const challenge = challengeService.getPostChallenge(active.challengeId)
+      AppState.postChallenge = challenge
+      logger.log(AppState.postChallenge)
+    }
   }
   async getPosts(albumId) {
     // Get all posts for this album with album ID

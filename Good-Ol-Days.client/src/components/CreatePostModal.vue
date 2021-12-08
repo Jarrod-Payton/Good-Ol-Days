@@ -165,6 +165,7 @@ export default {
 
           //Now just set the reference objects image url to our new firebase hosted one
           postDetails.value.imgUrl = url
+          postDetails.value.type = files[0].type
           logger.log(url)
 
           //now we kick over to our created function to make the mongoDB calls

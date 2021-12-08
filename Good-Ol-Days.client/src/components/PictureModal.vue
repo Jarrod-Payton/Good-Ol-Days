@@ -92,10 +92,9 @@
                       <i class="mdi mdi-24px me-2 mdi-trash-can"></i>
                     </button>
                   </div>
-                  <div class="card-title text-center">
-                    <h3 class="title titlePadding">{{ activePost.title }}</h3>
-                    <p class="title datePadding dateWords">10/12/2021</p>
-                  </div>
+                  <h1 class="challenge font">
+                    Challenge: {{ postChallenge.title }}
+                  </h1>
                   <button
                     type="button"
                     class="btn-close"
@@ -108,9 +107,10 @@
                       {{ activePost.description }}
                     </h1>
                   </div>
-                  <h1 class="challenge font">
-                    Challenge: Take a photo of something that makes you smile
-                  </h1>
+                  <div class="card-title text-center">
+                    <h3 class="title titlePadding">{{ activePost.title }}</h3>
+                    <p class="title datePadding dateWords">10/12/2021</p>
+                  </div>
                 </div>
               </div>
             </transition>
@@ -129,41 +129,13 @@ import { onMounted } from "@vue/runtime-core"
 import { postService } from "../services/PostService"
 import { Modal } from "bootstrap"
 import Pop from "../utils/Pop"
-import gsap from 'gsap'
 import { logger } from "../utils/Logger"
+import { challengeService } from "../services/ChallengeService"
 
 export default {
   setup() {
     let height = ref('')
     let flipped = ref(true)
-    // const beforeEnter = (el) => {
-    //   logger.log('before enter')
-    //   el.style.transform = 'translateY(90vh)'
-    //   // el.style.opacity = 0
-    // }
-    // const enter = (el, done) => {
-    //   logger.log('starting to enter')
-    //   gsap.to(el, {
-    //     duration: 1,
-    //     y: 0,
-    //     opacity: 1,
-    //     onComplete: done
-    //   })
-    // }
-    // const afterEnter = () => {
-    //   logger.log('after enter')
-    // }
-    // const beforeAppear = (el) => {
-    //   el.style.transform = 'translateY(-90vh)'
-    // }
-    // const appear = (el, done) => {
-    //   gsap.to(el, {
-    //     duration: 1,
-    //     y: 0,
-    //     opacity: 1,
-    //     onComplete: done
-    //   })
-    // }
 
     return {
       height,
@@ -177,7 +149,8 @@ export default {
       },
       activePost: computed(() => AppState.activePost),
       account: computed(() => AppState.account),
-      activeAlbum: computed(() => AppState.activeAlbum)
+      activeAlbum: computed(() => AppState.activeAlbum),
+      postChallenge: computed(() => AppState.postChallenge),
     }
   }
 }
