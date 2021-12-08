@@ -200,6 +200,8 @@ export default {
       collabThisAlbum: computed(() => AppState.collabThisAlbum),
       posts: computed(() => AppState.posts),
       doneSyncing: computed(() => AppState.doneSyncing),
+      activePost: computed(() => AppState.activePost),
+
       setActive(id) {
         //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)
