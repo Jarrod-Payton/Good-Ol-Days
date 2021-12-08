@@ -18,7 +18,7 @@
             <div class="row">
               <div class="col-12">
                 <!-- Upload File from computer v  -->
-                <p class="S1">
+                <p id="uploadfile" class="S1">
                   Upload Album Cover <i>(Optional)</i>
                   <input
                     class="inputupload mtop"
@@ -67,6 +67,7 @@
         </form>
       </div>
     </div>
+    <Tour />
   </div>
   <!-- Create a new Album Modal ^ -->
 </template>

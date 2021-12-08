@@ -3,7 +3,7 @@
     <div class="row">
       <NavigationBar :user="user" />
     </div>
-    <div class="row scrollbar">
+    <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
       <router-view :user="user" />
     </div>
   </main>
@@ -11,6 +11,7 @@
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
     <PictureModal :posts="posts" />
+    <VideoModal :posts="posts" />
   </footer>
 </template>
 

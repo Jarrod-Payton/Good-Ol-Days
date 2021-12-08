@@ -58,7 +58,6 @@ export default {
       activeAlbum: computed(() => AppState.activeAlbum),
       account: computed(() => AppState.account),
       async login() {
-        debugger
         if (!AppState.user.isAuthenticated) {
           await AuthService.loginWithPopup()
         }

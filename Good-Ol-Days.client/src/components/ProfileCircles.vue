@@ -25,13 +25,17 @@
 
 
 <script>
+import { computed } from "@vue/reactivity"
 import { collaboratorService } from "../services/CollaboratorService"
+import { AppState } from "../AppState"
 export default {
   props: {
     collab: { type: Object, required: true }
   },
   setup() {
     return {
+      activeAlbum: computed(() => AppState.activeAlbum),
+      account: computed(() => AppState.account),
       async unverify(collab) {
         await collaboratorService.unverify(collab)
       }
