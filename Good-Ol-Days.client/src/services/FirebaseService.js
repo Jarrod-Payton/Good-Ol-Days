@@ -58,17 +58,23 @@ class FirebaseService {
                   const fileName = p.imgUrl.slice(p.imgUrl.indexOf('%2F') + 3, p.imgUrl.indexOf('?alt'))
             const slice = fileName.slice(fileName.indexOf('%2F') + 3)
                 logger.log(slice)
-   
-                downloadUrls.push(this.albumsCollection.child(albumName + '-' + accountId).child(slice).getDownloadURL())
+            let resource = await this.albumsCollection.child(albumName + '-' + accountId).child(slice)
+            logger.log('RESOURCE', resource)
+             let url = await resource.getDownloadURL()
+             logger.log('URL', url)
+                downloadUrls.push(url)
           })
         
         logger.log('urls', downloadUrls)
         const downloadedFiles = []
-          //FIXME do this later
-        await Promise.all(downloadUrls.forEach(url => fetch(url).then(async (res) => {
-            logger.log('Res', res)
-            downloadedFiles.push(await res.blob())
-        }).catch(err => logger.error(err))))
+        downloadUrls.forEach(async url => {
+            logger.log('hitting loop')
+            await fetch(url).then(async res => {
+
+                logger.log('Res', res)
+                downloadedFiles.push(await res.blob())
+            })
+        })
         
         logger.warn('blobs', downloadedFiles)
         downloadedFiles.forEach((file, i) => {
