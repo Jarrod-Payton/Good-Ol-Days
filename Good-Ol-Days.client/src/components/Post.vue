@@ -1,7 +1,14 @@
 <template>
   <div class="polaroid">
     <img class="image border border-dark" :src="post.imgUrl" />
-    <div class="caption sharpie">{{ post.title }}</div>
+    <div>
+      <div class="caption sharpie">
+        {{ post.title }}
+      </div>
+      <div v-if="post.challengeId" class="stamp stampPosition is-approved">
+        Challenge
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -11,6 +18,33 @@ export default {
 };
 </script>
 <style scoped>
+.stampPosition {
+  position: absolute;
+  bottom: 20px;
+  right: 5px;
+}
+.stamp {
+  transform: rotate(12deg);
+  color: #555;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 0.25rem solid #555;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-transform: uppercase;
+  border-radius: 3rem;
+  font-family: "Courier";
+  -webkit-mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+  -webkit-mask-size: 944px 604px;
+  mix-blend-mode: multiply;
+}
+.is-approved {
+  color: #1db13dc5;
+  border: 0.5rem solid #23b8435b;
+  -webkit-mask-position: 13rem 6rem;
+  transform: rotate(-18deg);
+  border-radius: 0;
+}
 @font-face {
   font-family: "MyWebFont";
   src: url("../assets/fonts/Stickynotes-ywLPd.otf") format("woff");

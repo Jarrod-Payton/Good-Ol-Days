@@ -3,14 +3,20 @@
     <div class="row">
       <NavigationBar />
     </div>
+<<<<<<< HEAD
     <div class="row scrollbar">
       <router-view />
+=======
+    <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
+      <router-view :user="user" />
+>>>>>>> origin/Vue-Tour
     </div>
   </main>
   <footer class="background d-flex justify-content-center">
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
     <PictureModal :posts="posts" />
+    <VideoModal :posts="posts" />
   </footer>
 </template>
 

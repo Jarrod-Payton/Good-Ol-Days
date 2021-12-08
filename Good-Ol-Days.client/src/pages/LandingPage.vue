@@ -7,6 +7,7 @@
       d-flex
       justify-content-center
       align-items-center
+      scrollbar
     "
   >
     <div class="card cardspec d-flex align-items-center">
@@ -53,8 +54,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.scrollbar {
+  height: 100vh !important;
+}
 .colheight {
-  height: 100vh;
+  height: 100vh !important;
 }
 .cardspec {
   height: 85vh;

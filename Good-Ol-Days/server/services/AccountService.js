@@ -68,10 +68,11 @@ class AccountService {
    */
   async updateAccount(user, body) {
     const update = sanitizeBody(body)
+    update.hasTour = true
     const account = await dbContext.Account.findOneAndUpdate(
       { _id: user.id },
       { $set: update },
-      { runValidators: true, setDefaultsOnInsert: true, new: true }
+      { runValidators: true, setDefaultsOnInsert: false, new: true }
     )
     return account
   }
