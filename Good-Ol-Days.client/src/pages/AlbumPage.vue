@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-1">
           <button
-            class="btn btn-primary"
+            class="btn btn-primary text-white elevation 3"
             @click="downloadMode"
             title="toggle download"
           >
@@ -20,7 +20,7 @@
         <div class="col-3">
           <button
             title="download selected images"
-            class="btn btn-danger"
+            class="btn btn-primary text-white elevation-3"
             @click="downloadImages"
             v-if="downloading"
           >
@@ -64,12 +64,16 @@
           <button
             title="add to download"
             :id="p.id + 'dlBtn'"
-            class="btn btn-warning"
+            :class="
+              !que.find((elem) => elem.id === p.id)
+                ? 'btn btn-success text-white elevation-3 elevation-3'
+                : 'btn btn-primary text-white elevation-3 elevation-3'
+            "
             @click="addToQue(p)"
             v-if="downloading"
           >
             <span v-if="!que.find((elem) => elem.id === p.id)">
-              <i class="mdi mdi-check"></i>
+              <i class="mdi mdi-download"></i>
             </span>
             <span v-else>
               <i class="mdi mdi-close"></i>
@@ -111,12 +115,16 @@
       <button
         title="add to download"
         :id="p.id + 'dlBtn'"
-        class="btn btn-warning"
+        :class="
+          !que.find((elem) => elem.id === p.id)
+            ? 'btn btn-success text-white elevation-3'
+            : 'btn btn-primary text-white elevation-3'
+        "
         @click="addToQue(p)"
         v-if="downloading"
       >
         <span v-if="!que.find((elem) => elem.id === p.id)">
-          <i class="mdi mdi-check"></i>
+          <i class="mdi mdi-download"></i>
         </span>
         <span v-else>
           <i class="mdi mdi-close"></i>
