@@ -41,6 +41,16 @@
           <p class="album text-center">Album: Shared</p>
         </div>
       </div>
+      <div>
+        <button
+          data-bs-toggle="modal"
+          data-bs-target="#shareModal"
+          title="Share this album"
+          class="btn share elevation-3"
+        >
+          <i class="mdi ms-1 mdi-18px mdi-share-variant"></i>
+        </button>
+      </div>
       <div
         class="d-flex align-items-center"
         v-if="activeAlbum.creatorId === account.id"
@@ -127,10 +137,11 @@ export default {
   color: rgb(255, 255, 255);
   font-family: "Saira Condensed", sans-serif;
   padding: 3px;
-  padding-left: 8px;
+  padding-left: 4px;
   padding-right: 8px;
+  padding-top: 4px;
   margin-right: 4vh;
-  margin-bottom: 2vh;
+  margin-top: 1.8vh;
 }
 .desktop {
   display: block;

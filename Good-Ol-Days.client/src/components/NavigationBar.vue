@@ -14,6 +14,7 @@
       <div class="d-flex">
         <router-link :to="{ name: 'Home' }">
           <img
+            id="homebutton"
             @click="clear"
             width="230"
             class="img-fluid"
@@ -99,6 +100,7 @@
           </p>
         </div>
         <img
+          id="profilepic"
           v-if="user.isAuthenticated"
           data-bs-toggle="offcanvas"
           href="#offcanvasExample"
@@ -182,6 +184,7 @@
           </p>
         </div>
         <img
+          id="profilepic"
           v-if="user.isAuthenticated"
           data-bs-toggle="offcanvas"
           href="#offcanvasExample"

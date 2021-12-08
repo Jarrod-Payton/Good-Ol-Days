@@ -7,7 +7,8 @@
         </div>
         <div class="desktop">
           <button
-            class="btn buttonscss elevation-3"
+            id="v-step-0"
+            class="btn buttonscss elevation-3 v-step-this"
             data-bs-toggle="modal"
             data-bs-target="#createAlbumModal"
           >
@@ -68,13 +69,14 @@
         <div class="d-flex align-items-center">
           <img class="img-fluid1" src="../assets/img/logo2.png" alt="" />
           <div>
-            <button @click="routeAbout" class="btn p-0">
+            <button id="aboutinfo" @click="routeAbout" class="btn p-0">
               <p class="m-0 about">About</p>
             </button>
           </div>
         </div>
       </div>
     </div>
+    <Tour v-if="account.hasTour" />
   </div>
 </template>
 
@@ -108,6 +110,7 @@ export default {
       route,
       myAlbums: computed(() => AppState.myAlbums),
       collaborators: computed(() => AppState.collaborators),
+      account: computed(() => AppState.account),
       routerLink(albumId) {
         router.push({
           name: "Album",
