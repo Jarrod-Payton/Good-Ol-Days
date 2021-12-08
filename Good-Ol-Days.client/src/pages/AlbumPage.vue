@@ -1,10 +1,34 @@
 <template>
   <!--Whenever you open up an album this is the page you are routed to-->
-  <div class="row mt-md-5 mt-2 m-0 p-0">
-    <button class="btn btn-primary" @click="downloadMode">Download Mode</button>
-    <button class="btn btn-danger" @click="downloadImages" v-if="downloading">
-      Download Images
-    </button>
+  <div class="row mt-2 m-0 p-0">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-1">
+          <button
+            class="btn btn-primary"
+            @click="downloadMode"
+            title="toggle download"
+          >
+            <span v-if="!downloading">
+              <i class="mdi mdi-download"></i>
+            </span>
+            <span v-else>
+              <i class="mdi mdi-close"></i>
+            </span>
+          </button>
+        </div>
+        <div class="col-3">
+          <button
+            title="download selected images"
+            class="btn btn-danger"
+            @click="downloadImages"
+            v-if="downloading"
+          >
+            Download Images
+          </button>
+        </div>
+      </div>
+    </div>
     <!--Checks to see your role on this page in order to determine your interaction ability and view of the challenge-->
     <div
       class="col-md-6 order-md-2 p-0"
@@ -24,14 +48,6 @@
       <div class="row" v-if="posts.length > 0">
         <!--Divided all posts into two sets of posts in order to keep the challenge on the right hand side even if there no posts made yet (We were stumped on how to do this for quite a while, so thank you to one of our instructors Mick Shannahan for coming up with this brilliant method)-->
         <div class="col-6 rotationanim" v-for="p in posts1" :key="p.id">
-          <button
-            :id="p.id + 'dlBtn'"
-            class="btn btn-warning"
-            @click="addToQue(p)"
-            v-if="downloading"
-          >
-            Add to Download
-          </button>
           <div
             @click="setActive(p.id)"
             type="button"
@@ -45,6 +61,20 @@
           >
             <Post :post="p" />
           </div>
+          <button
+            title="add to download"
+            :id="p.id + 'dlBtn'"
+            class="btn btn-warning"
+            @click="addToQue(p)"
+            v-if="downloading"
+          >
+            <span v-if="!que.find((elem) => elem.id === p.id)">
+              <i class="mdi mdi-check"></i>
+            </span>
+            <span v-else>
+              <i class="mdi mdi-close"></i>
+            </span>
+          </button>
         </div>
       </div>
       <div
@@ -64,18 +94,8 @@
       v-for="p in splicedPosts"
       :key="p.id"
     >
-      <button
-        :id="p.id + 'dlBtn'"
-        class="btn btn-warning"
-        @click="addToQue(p)"
-        v-if="downloading"
-      >
-        <span v-if="!que.find((elem) => elem.id === p.id)">
-          Add to Download
-        </span>
-        <span v-else> Added to Download</span>
-      </button>
       <div
+        title="add to download"
         @click="setActive(p.id)"
         type="button"
         data-bs-toggle="modal"
@@ -88,6 +108,20 @@
       >
         <Post :post="p" />
       </div>
+      <button
+        title="add to download"
+        :id="p.id + 'dlBtn'"
+        class="btn btn-warning"
+        @click="addToQue(p)"
+        v-if="downloading"
+      >
+        <span v-if="!que.find((elem) => elem.id === p.id)">
+          <i class="mdi mdi-check"></i>
+        </span>
+        <span v-else>
+          <i class="mdi mdi-close"></i>
+        </span>
+      </button>
     </div>
     <!--Our modal for the sharing of the album-->
   </div>
@@ -166,8 +200,12 @@ export default {
         downloading.value = !downloading.value
       },
       addToQue(post) {
-        que.value.push(post)
-        document.getElementById(`${post.id}dlBtn`).disabled = true
+        if (!que.value.find(p => p.id === post.id)) {
+          que.value.push(post)
+        } else {
+          que.value = que.value.filter(p => p.id !== post.id)
+
+        }
       },
       async downloadImages() {
         try {
