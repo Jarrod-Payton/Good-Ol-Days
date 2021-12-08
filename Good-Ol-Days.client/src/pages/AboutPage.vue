@@ -51,7 +51,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://animesenpai.net/wp-content/uploads/2021/09/images_720.jpg"
+                  src="../assets/img/IMG_9874-2.jpg"
                   alt=""
                 />
               </div>
