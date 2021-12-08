@@ -4,7 +4,7 @@
       <NavigationBar />
     </div>
     <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
-      <router-view :user="user" />
+      <router-view />
     </div>
   </main>
   <footer class="background d-flex justify-content-center">

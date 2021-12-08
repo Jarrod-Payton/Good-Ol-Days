@@ -2,9 +2,7 @@
   <div class="polaroid">
     <img class="image border border-dark" :src="post.imgUrl" />
     <div>
-      <div class="caption sharpie">
-        {{ post.title }}
-      </div>
+      <div class="caption sharpie">{{ post.title }} - {{ getTimeAgo() }}</div>
       <div v-if="post.challengeId" class="stamp stampPosition is-approved">
         Challenge
       </div>
@@ -12,9 +10,23 @@
   </div>
 </template>
 <script>
+import { momentService } from '../services/MomentService'
+import { logger } from '../utils/Logger';
 export default {
   props: { post: { type: Object, required: true } },
-  setup(props) { },
+  setup(props) {
+    return {
+      getTimeAgo() {
+        try {
+          logger.log('CreatedAt', props.post.createdAt)
+          const timeAgo = momentService.date(props.post.createdAt)
+          return timeAgo
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    }
+  },
 };
 </script>
 <style scoped>
