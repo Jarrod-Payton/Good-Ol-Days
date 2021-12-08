@@ -48,33 +48,34 @@ class FirebaseService {
     }
 
     async downloadFirebase(posts, albumName) {
-        logger.log(posts)
+        logger.log('posts',posts)
         const accountId = AppState.account.id
         const jszip = new JSZip()
-        const downloadUrls = []
-    
-        posts.forEach(async p => {
-                
-                  const fileName = p.imgUrl.slice(p.imgUrl.indexOf('%2F') + 3, p.imgUrl.indexOf('?alt'))
-            const slice = fileName.slice(fileName.indexOf('%2F') + 3)
-                logger.log(slice)
-            let resource = await this.albumsCollection.child(albumName + '-' + accountId).child(slice)
-            logger.log('RESOURCE', resource)
-             let url = await resource.getDownloadURL()
-             logger.log('URL', url)
-                downloadUrls.push(url)
-          })
-        
-        logger.log('urls', downloadUrls)
-        const downloadedFiles = []
-        downloadUrls.forEach(async url => {
-            logger.log('hitting loop')
-            await fetch(url).then(async res => {
+        let resources = []
+        let downloadUrls = []
 
-                logger.log('Res', res)
-                downloadedFiles.push(await res.blob())
-            })
-        })
+      
+        await posts.forEach( async p => {
+                
+                const fileName = p.imgUrl.slice(p.imgUrl.indexOf('%2F') + 3, p.imgUrl.indexOf('?alt'))
+                const slice = fileName.slice(fileName.indexOf('%2F') + 3)
+                 logger.log(slice)
+                 const resource = this.albumsCollection.child(albumName + '-' + accountId).child(slice)
+                resources.push(resource)
+                logger.log('RESOURCE', resource)
+             })
+        
+             logger.log('RESOURCE AT 0', resources[0])
+        await Promise.all(
+            resources.map(async r => r.getDownloadURL().then(res => downloadUrls.push(res)))
+        )
+        
+        logger.log('urls', downloadUrls[0])
+        const downloadedFiles = []
+        await Promise.all(downloadUrls.map(url => fetch(url).then(async (res) => {
+            logger.log('RES', res)
+            downloadedFiles.push(await res.blob())
+       })))
         
         logger.warn('blobs', downloadedFiles)
         downloadedFiles.forEach((file, i) => {
