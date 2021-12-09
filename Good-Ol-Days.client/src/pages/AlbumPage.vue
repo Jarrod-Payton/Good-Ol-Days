@@ -3,7 +3,7 @@
   <div class="row mt-2 m-0 p-0">
     <div class="col-12 heightDownload">
       <div class="row m-0">
-        <div class="col-md-2">
+        <div class="col-md-2 p-0 ps-md-2">
           <div class="d-flex justify-content-start">
             <div class="dropdown">
               <button
@@ -48,15 +48,17 @@
             </button>
           </div>
         </div>
-        <div class="col-md-2 mt-2 mb-3 m-md-0">
-          <button
-            title="download selected images"
-            class="btn btn-primary text-white elevation-3"
-            @click="downloadImages"
-            v-if="downloading"
-          >
-            Download Images
-          </button>
+        <div class="col-md-2 mt-2 mb-3 m-md-0 p-0">
+          <div class="d-flex">
+            <button
+              title="download selected images"
+              class="btn btn-primary text-white elevation-3"
+              @click="downloadImages"
+              v-if="downloading"
+            >
+              Download Images
+            </button>
+          </div>
         </div>
       </div>
     </div>
