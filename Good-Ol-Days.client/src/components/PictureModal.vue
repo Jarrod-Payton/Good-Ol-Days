@@ -154,7 +154,6 @@ export default {
       flip() {
         resetService.flipPhotoModal()
         let size = document.getElementById('image-' + AppState.activePost.id).getBoundingClientRect()
-        logger.log('size', size)
         height.value = size.height + 'px'
         width.value = size.width + 'px'
       }

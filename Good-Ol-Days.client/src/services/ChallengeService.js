@@ -19,14 +19,12 @@ class ChallengeService {
     body.title = ChallengeBody
     body.albumId = AppState.activeAlbum.id
     const activeChallenge = await api.post(`api/challenges`, body)
-    logger.log('active Challenge', activeChallenge.data)
     AppState.activeChallenge = activeChallenge.data
   }
   async getChallenges() {
     //This checks if the active album has challenges and if it does it makes a network request to get all of them and if it doesn't it saves the client from sending an extra network request, it then filters those to find the one that is set to is active and if there is none then it comes back as an empty object but keeps the challenges stored in the AppState to be used for the back of the post cards
     if (AppState.activeAlbum.hasChallenges === true) {
       const res = await api.get(`api/albums/${AppState.activeAlbum.id}/challenges`)
-      logger.log('challenges', res.data)
       AppState.challenges = res.data
       if (AppState.challenges.length > 0) {
         let found = AppState.challenges.find(c => c.isActive === true)
@@ -46,10 +44,9 @@ class ChallengeService {
   }
   // 606590170 This is a week in miliseconds in order to actually get our app functional
 
-  async getPostChallenge(id){
+  async getPostChallenge(id) {
     const res = await api.get('api/challenges/' + id)
     AppState.postChallenge = res.data
-    logger.log('Posts Challenge info',AppState.postChallenge)
   }
 }
 

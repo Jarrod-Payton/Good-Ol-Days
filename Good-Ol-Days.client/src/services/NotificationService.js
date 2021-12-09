@@ -8,11 +8,9 @@ class NotificationService {
   async getMyNotifications() {
     //This grabs all of the notifications wether seen or not and sets them to the AppState to be filtered or shown later on
     const res = await api.get(`account/notifications`)
-    logger.log('Notifications', res.data)
     AppState.notifications = res.data
   }
   async deleteNotification(notification) {
-    logger.log('Notification', notification)
     if (notification.type === "collaborator") {
       collaboratorService.Deny(notification)
     }
@@ -24,7 +22,6 @@ class NotificationService {
   async seen() {
     //this just sets all the notifications on someones profile to seen
     const res = await api.put(`account/notifications`)
-    logger.log('SEEN',res.data)
     AppState.notifications = res.data
   }
   async clear() {

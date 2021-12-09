@@ -17,7 +17,6 @@ class AccountService {
   }
   async hasTour() {
     const res = await api.put('/account')
-    logger.log('HAS TOUR', res.data)
     AppState.account = res.data
   }
 }

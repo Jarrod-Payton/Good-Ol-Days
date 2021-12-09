@@ -7,19 +7,17 @@ import { challengeService } from "./ChallengeService"
 
 
 class PostService {
- async setActive(id) {
+  async setActive(id) {
     // Set post to Active Post
     const active = AppState.posts.find(p => p.id === id)
     AppState.activePost = active
-    logger.log('ACTIVE', AppState.activePost)
-    if(active.challengeId) {
-  await challengeService.getPostChallenge(active.challengeId)
+    if (active.challengeId) {
+      await challengeService.getPostChallenge(active.challengeId)
     }
   }
   async getPosts(albumId) {
     // Get all posts for this album with album ID
     const res = await api.get(`api/albums/${albumId}/posts`)
-    logger.log('Posts', res.data)
     AppState.posts = res.data
     AppState.doneSyncing = true
   }

@@ -3,14 +3,13 @@ import { logger } from '../utils/Logger'
 
 
 class MomentService {
-  timeAgo(time) {
-        const timeAgo =  moment(time).fromNow()
-        logger.log(timeAgo)
+    timeAgo(time) {
+        const timeAgo = moment(time).fromNow()
         return timeAgo
     }
 
-   date(time) {
-        const date =  moment(time).format("MMM Do YY")
+    date(time) {
+        const date = moment(time).format("MMM Do YY")
         return date
     }
 }
