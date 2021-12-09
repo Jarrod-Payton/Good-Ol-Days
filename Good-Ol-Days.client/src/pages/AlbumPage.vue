@@ -12,24 +12,42 @@
                 data-bs-toggle="dropdown"
                 class="btn dropdown-toggle btn-primary text-white"
               >
-                Filter
+                Sort By
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item dropdown-item-text">Most Recent</a>
-                </li>
-                <li><a class="dropdown-item dropdown-item-text">Oldest</a></li>
-                <li><a class="dropdown-item dropdown-item-text">A-Z</a></li>
-                <li><a class="dropdown-item dropdown-item-text">Z-A</a></li>
-                <li><hr class="dropdown-divider dropdown-item-text" /></li>
-                <li>
-                  <a class="dropdown-item dropdown-item-text"
-                    >Includes a Challenge</a
+                  <a
+                    class="dropdown-item dropdown-item-text"
+                    @click="sort('oldest')"
+                    >Oldest</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item dropdown-item-text"
-                    >Does not Include a Challenge</a
+                  <a
+                    class="dropdown-item dropdown-item-text"
+                    @click="sort('mostRecent')"
+                    >Most Recent</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item dropdown-item-text"
+                    @click="sort('aToZ')"
+                    >A-Z</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item dropdown-item-text"
+                    @click="sort('zToA')"
+                    >Z-A</a
+                  >
+                </li>
+                <li v-if="activeAlbum.hasChallenges">
+                  <a
+                    class="dropdown-item dropdown-item-text"
+                    @click="sort('challenges')"
+                    >Challenges</a
                   >
                 </li>
               </ul>
@@ -186,6 +204,7 @@ import { resetService } from "../services/ResetService";
 export default {
 
   setup() {
+    const generalSort = ref('')
     //ref used to toggle download mode
     const downloading = ref(false)
     const que = ref([])
@@ -229,6 +248,7 @@ export default {
       que,
       downloading,
       splicedPosts,
+      generalSort,
       posts1: computed(() => AppState.posts.slice(0, 2)),
       activeAlbum: computed(() => AppState.activeAlbum),
       activeChallenge: computed(() => AppState.activeChallenge),
@@ -262,6 +282,9 @@ export default {
         } catch (error) {
           logger.error(error)
         }
+      },
+      sort(type) {
+        postService.sort(type)
       }
     };
 
