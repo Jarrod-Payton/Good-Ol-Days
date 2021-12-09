@@ -11,6 +11,7 @@
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
     <PictureModal />
+    <VideoModal />
   </footer>
 </template>
 

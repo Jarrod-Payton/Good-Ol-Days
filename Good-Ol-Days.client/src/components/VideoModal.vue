@@ -22,14 +22,19 @@
                 ></button>
               </div>
               <div class="d-flex justify-content-center">
-                <img class="img-fluid" :src="activePost.imgUrl" alt="" />
+                <video
+                  controls
+                  class="img-fluid"
+                  :src="activePost.imgUrl"
+                  alt=""
+                />
               </div>
               <div class="text-center d-flex">
                 <!-- <p class="m-0 pb-2 pt-3 w-100 title">{{ activePost.title }}</p> -->
                 <div class="text-end align-self-center">
                   <button
                     v-show="
-                      posts.creatorId === account.id ||
+                      activePost.creatorId === account.id ||
                       activeAlbum.creatorId === account.id
                     "
                     title="Delete this picture"
