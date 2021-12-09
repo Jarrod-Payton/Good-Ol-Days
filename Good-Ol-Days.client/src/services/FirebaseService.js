@@ -26,11 +26,11 @@ class FirebaseService {
             resource = this.profileCollection.child(parentData.name + '-' + parentData.id)
 
         } else if (collectionType === 'post') {
-            resource = this.albumsCollection.child(`${parentData.title}-${accountId}`).child(`${mediaData.name}-${accountId}`)
+            resource = this.albumsCollection.child(`${parentData.title}-${accountId}`).child(`${accountId}-${mediaData.name}`)
         } else {
-            resource = this.albumsCollection.child(`${parentData.title}-${accountId}`).child('coverImg').child(`${mediaData.name}-${accountId}`)
+            resource = this.albumsCollection.child(`${parentData.title}-${accountId}`).child('coverImg').child(`${accountId}-${mediaData.name}`)
         }
-
+        logger.log(mediaData)
         //Snapshot is a banana word, this part appends our metadata to the file
 
         const snapshot = await resource.put(mediaData, {
@@ -53,33 +53,35 @@ class FirebaseService {
         const jszip = new JSZip()
         let resources = []
         let downloadUrls = []
-
+        let slices = []
 
         await posts.forEach(async p => {
 
             const fileName = p.imgUrl.slice(p.imgUrl.indexOf('%2F') + 3, p.imgUrl.indexOf('?alt'))
             const slice = fileName.slice(fileName.indexOf('%2F') + 3)
             logger.log(slice)
+            slices.push(slice.slice(slice.indexOf('-') + 1))
             const resource = this.albumsCollection.child(albumName + '-' + accountId).child(slice)
             resources.push(resource)
             logger.log('RESOURCE', resource)
         })
 
-        logger.log('RESOURCE AT 0', resources[0])
+        logger.log('RESOURCES', resources)
         await Promise.all(
             resources.map(async r => r.getDownloadURL().then(res => downloadUrls.push(res)))
         )
 
-        logger.log('urls', downloadUrls[0])
+        logger.log('urls', downloadUrls)
         const downloadedFiles = []
-        await Promise.all(downloadUrls.map(url => fetch(url).then(async (res) => {
+        await Promise.all(downloadUrls.map((url, i) => fetch(url).then(async (res) => {
             logger.log('RES', res)
             downloadedFiles.push(await res.blob())
         })))
 
         logger.warn('blobs', downloadedFiles)
         downloadedFiles.forEach((file, i) => {
-            jszip.file(posts[i].title, file)
+            jszip.file(slices[i], file)
+
         })
         const content = await jszip.generateAsync({ type: 'blob' })
         saveAs(content, "Good Ol' Days")

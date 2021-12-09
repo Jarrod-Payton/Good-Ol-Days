@@ -25,7 +25,8 @@ class NotificationService {
     const found = await albumsService.getAlbumById({ _id: album })
     const collaborators = await collaboratorsService.getCollabByAlbumId(album)
     // Creates a post notification using the found album's data
-    if (user !== found.creatorId) {
+    logger.log(found.creatorId, user)
+    if (user !== found.creatorId.toString()) {
       await dbContext.Notifications.create({ type: 'post', notifierId: `${user}`, albumId: found.id, recipient: [found.creatorId] })
     }
     const eventName = 'NEW_NOTIFICATION'
