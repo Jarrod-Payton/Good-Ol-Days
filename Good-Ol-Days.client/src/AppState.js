@@ -34,4 +34,5 @@ export const AppState = reactive({
   photoFlipped: true,
   notifications: [],
   postChallenge: {},
+  messages: []
 })

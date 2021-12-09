@@ -63,12 +63,17 @@ class SocketProvider {
     }
   }
 
+  joinRoom(room) {
+    this.io.socketsJoin(room)
+  }
+
   /**
    * Sends a message to all sockets in a room
    * @param {string} room
    * @param {string} eventName
    * @param {any} payload
    */
+
   messageRoom(room, eventName, payload) {
     this.io.to(room).emit(eventName, payload)
   }

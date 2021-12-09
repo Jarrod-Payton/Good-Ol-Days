@@ -148,6 +148,7 @@ import { collaboratorService } from "../services/CollaboratorService";
 import { firebaseService } from '../services/FirebaseService';
 import { Modal } from "bootstrap";
 import { resetService } from "../services/ResetService";
+import { socketService } from '../services/SocketService';
 export default {
 
   setup() {
@@ -168,6 +169,7 @@ export default {
     })
     onMounted(async () => {
       try {
+        socketService.joinAlbumRoom(route.params.albumId)
         //Sets the active album in the AppState
         await albumService.setActiveAlbum(route.params.albumId);
         //Checks if they are authenticated so that if they are not then they will not get the challenges
