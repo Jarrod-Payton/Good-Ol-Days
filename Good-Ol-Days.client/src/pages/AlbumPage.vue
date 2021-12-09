@@ -3,29 +3,62 @@
   <div class="row mt-2 m-0 p-0">
     <div class="col-12 heightDownload">
       <div class="row m-0">
-        <div class="col-1">
-          <button
-            class="btn btn-primary text-white elevation 3"
-            @click="downloadMode"
-            title="toggle download"
-          >
-            <span v-if="!downloading">
-              <i class="mdi mdi-download"></i>
-            </span>
-            <span v-else>
-              <i class="mdi mdi-close"></i>
-            </span>
-          </button>
+        <div class="col-md-2 p-0 ps-md-2">
+          <div class="d-flex justify-content-start">
+            <div class="dropdown">
+              <button
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                class="btn dropdown-toggle btn-primary text-white"
+              >
+                Filter
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item dropdown-item-text">Most Recent</a>
+                </li>
+                <li><a class="dropdown-item dropdown-item-text">Oldest</a></li>
+                <li><a class="dropdown-item dropdown-item-text">A-Z</a></li>
+                <li><a class="dropdown-item dropdown-item-text">Z-A</a></li>
+                <li><hr class="dropdown-divider dropdown-item-text" /></li>
+                <li>
+                  <a class="dropdown-item dropdown-item-text"
+                    >Includes a Challenge</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item dropdown-item-text"
+                    >Does not Include a Challenge</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <button
+              class="btn btn-primary text-white elevation 3 ms-4"
+              @click="downloadMode"
+              title="toggle download"
+            >
+              <span v-if="!downloading">
+                <i class="mdi mdi-download"></i>
+              </span>
+              <span v-else>
+                <i class="mdi mdi-close"></i>
+              </span>
+            </button>
+          </div>
         </div>
-        <div class="col-3">
-          <button
-            title="download selected images"
-            class="btn btn-primary text-white elevation-3"
-            @click="downloadImages"
-            v-if="downloading"
-          >
-            Download Images
-          </button>
+        <div class="col-md-2 mt-2 mb-3 m-md-0 p-0">
+          <div class="d-flex">
+            <button
+              title="download selected images"
+              class="btn btn-primary text-white elevation-3"
+              @click="downloadImages"
+              v-if="downloading"
+            >
+              Download Images
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -238,6 +271,10 @@ export default {
 };
 </script>
 <style scoped>
+.dropdown-item-text {
+  font-size: 1.75vh;
+  font-family: "Saira Condensed", sans-serif;
+}
 .cardmessage {
   border-color: #9964cc;
   border-width: 4px;
@@ -330,6 +367,9 @@ export default {
   }
   .cardmessage {
     margin-top: 3vh;
+  }
+  .dropdown-item-text {
+    font-size: 1.58vh;
   }
 }
 </style>
