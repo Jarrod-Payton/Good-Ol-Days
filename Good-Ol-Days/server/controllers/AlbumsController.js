@@ -6,6 +6,7 @@ import { firebaseService } from '../services/FirebaseService'
 import { collaboratorsService } from '../services/CollaboratorsService'
 import { postsService } from '../services/PostsService'
 import { messagesService } from '../services/MessagesService'
+import { socketProvider } from '../SocketProvider'
 export class AlbumsController extends BaseController {
   constructor() {
     super('api/albums')
@@ -89,7 +90,8 @@ export class AlbumsController extends BaseController {
       req.body.creatorId = req.userInfo.id
       req.body.albumId = req.params.id
       const message = await messagesService.createMessage(req.body)
-      return res.send(message)
+      res.send(message)
+      socketProvider.messageRoom(`ALBUM_ROOM_${req.params.id}`, 'NEW_MESSAGE', message)
     } catch (error) {
       next(error)
     }
@@ -100,7 +102,7 @@ export class AlbumsController extends BaseController {
       const messageId = req.params.messageId
       const userId = req.userInfo.id
       await messagesService.deleteMessage(messageId, userId)
-      return('Deleted')
+      return ('Deleted')
     } catch (error) {
       next(error)
     }

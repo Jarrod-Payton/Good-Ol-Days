@@ -9,16 +9,13 @@ class SocketService extends SocketHandler {
     this
       .on('error', this.onError)
       .on('NEW_NOTIFICATION', this.recieveCollabNotification)
-      .on('JOIN_ROOM', this.joinAlbumRoom)
-    .on('NEW_MESSAGE', this.recieveAlbumMessage)
+      .on('NEW_MESSAGE', this.recieveAlbumMessage)
     //TODO write recieved function here to catch emits from server
   }
-  joinAlbumRoom(albumId) {
-    this.socket?.emit('joinRoom', albumId)
-  }
+  
   recieveAlbumMessage(payload) {
     logger.log('RECIEVING_ALBUM_MESSAGE')
-    AppState.messages = payload
+    AppState.messages.push(payload)
   }
   recieveCollabNotification(payload) {
     logger.log('HIT_DA_SOCKET')

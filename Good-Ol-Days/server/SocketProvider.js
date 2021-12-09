@@ -63,10 +63,6 @@ class SocketProvider {
     }
   }
 
-  joinRoom(room) {
-    this.io.socketsJoin(room)
-  }
-
   /**
    * Sends a message to all sockets in a room
    * @param {string} room
