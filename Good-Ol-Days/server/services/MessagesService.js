@@ -13,7 +13,8 @@ class MessagesService {
   }
 
   async updateMessages(albumId) {
-    const update = await dbContext.Messages.updateMany({ albumId: album })
+    const update = await dbContext.Messages.updateMany({ albumId: albumId }, { seen: true })
+    return update
   }
 
   async createMessage(body) {

@@ -14,6 +14,9 @@ export class AlbumsController extends BaseController {
       .get('/:id', this.getAlbumById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/:id/messages', this.createMessage)
+      .get('/:id/messages', this.getMessages)
+      .put('/:id/messages', this.toggleMessage)
+      .delete('/:id/messages/:messageId')
       .get('/:id/challenges', this.getChallengesByAlbum)
       .get('/:id/collaborators', this.getCollabByAlbumId)
       .post('', this.createAlbum)
@@ -94,9 +97,18 @@ export class AlbumsController extends BaseController {
 
   async deleteMessage(req, res, next) {
     try {
-      const messageId = req.params.messagId
+      const messageId = req.params.messageId
       const userId = req.userInfo.id
       await messagesService.deleteMessage(messageId, userId)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async toggleMessage(req, res, next) {
+    try {
+      const messages = await messagesService.updateMessages(req.params.id)
+      res.send(messages)
     } catch (error) {
       next(error)
     }
