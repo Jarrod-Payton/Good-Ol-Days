@@ -1,4 +1,4 @@
-<template>
+<template v>
   <div>
     <v-tour name="myTour" :steps="steps"></v-tour>
   </div>
@@ -70,18 +70,30 @@ export default {
         //   content: `Click here to learn a little more about the developers`
         // },
       ],
-      tour() {
-        if (AppState.account.hasTour) {
-          this.$tours['myTour'].start()
-          accountService.hasTour()
-        }
-      }
+      // async hasTour() {
+      //   try {
+      //     logger.log('HAS TOUR WORKING')
+      //     accountService.hasTour()
+      //   } catch (error) {
+      //     logger.error(error)
+      //   }
+      // },
+      // myCallbacks: {
+      //   onFinish: this.hasTour,
+      //   onSkip: this.hasTour,
+      //   onStop: this.hasTour
+      // },
+
     }
+
   },
 
-  mounted: function () {
+  mounted: async function () {
     this.$tours['myTour'].start()
-    accountService.hasTour()
+
+
+
+
   }
 }
 </script>

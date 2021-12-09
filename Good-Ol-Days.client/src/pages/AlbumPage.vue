@@ -55,7 +55,7 @@
             <button
               class="btn btn-primary text-white elevation 3 ms-4"
               @click="downloadMode"
-              title="toggle download"
+              title="Download"
             >
               <span v-if="!downloading">
                 <i class="mdi mdi-download"></i>
@@ -103,7 +103,9 @@
             @click="setActive(p.id)"
             type="button"
             data-bs-toggle="modal"
-            data-bs-target="#picture-modal"
+            :data-bs-target="
+              p.type.includes('video') ? '#video-modal' : '#picture-modal'
+            "
             :class="
               downloading && !que.find((elem) => elem.id === p.id)
                 ? 'item disabled'

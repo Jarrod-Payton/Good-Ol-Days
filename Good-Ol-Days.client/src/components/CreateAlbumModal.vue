@@ -67,7 +67,6 @@
         </form>
       </div>
     </div>
-    <Tour />
   </div>
   <!-- Create a new Album Modal ^ -->
 </template>
