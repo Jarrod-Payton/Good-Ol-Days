@@ -14,6 +14,12 @@ class ResetService {
   openOffCanvas() {
     AppState.editProfile = true
   }
+  openPhotoModal() {
+    AppState.photoFlipped = true
+  }
+  flipPhotoModal() {
+    AppState.photoFlipped = !AppState.photoFlipped
+  }
 }
 
 export const resetService = new ResetService()

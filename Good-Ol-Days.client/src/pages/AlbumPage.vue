@@ -146,6 +146,8 @@ import { logger } from "../utils/Logger";
 import { challengeService } from "../services/ChallengeService";
 import { collaboratorService } from "../services/CollaboratorService";
 import { firebaseService } from '../services/FirebaseService';
+import { Modal } from "bootstrap";
+import { resetService } from "../services/ResetService";
 export default {
 
   setup() {
@@ -205,6 +207,7 @@ export default {
       setActive(id) {
         //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)
+        resetService.openPhotoModal()
       },
       downloadMode() {
         downloading.value = !downloading.value
@@ -231,9 +234,6 @@ export default {
 };
 </script>
 <style scoped>
-.heightDownload {
-  height: 0vh;
-}
 .cardmessage {
   border-color: #9964cc;
   border-width: 4px;

@@ -31,6 +31,7 @@ export const AppState = reactive({
   //A bool so when you leave your off canvas for the profile edit you don't stay on that edit
   editProfile: true,
   //A list of every notification set a user has and is set in the NavHome.vue component's on load
+  photoFlipped: true,
   notifications: [],
   postChallenge: {},
 })

@@ -57,21 +57,6 @@
                   </p>
                 </div>
               </div>
-              <!-- <div class="text-end align-self-center">
-                    <button
-                      v-show="
-                        activePost.creatorId === account.id ||
-                        activeAlbum.creatorId === account.id
-                      "
-                      title="Delete this picture"
-                      @click="deletePost"
-                      class="btn delete m-0"
-                    >
-                      <i class="mdi mdi-24px me-2 mdi-trash-can"></i>
-                    </button>
-                  </div> -->
-              <!-- Back side of Modal -->
-
               <div v-else class="card sizing">
                 <div
                   class="
@@ -115,9 +100,9 @@
                   </div>
                   <div class="card-title text-center">
                     <h3 class="title titlePadding">{{ activePost.title }}</h3>
-                    <span class="title datePadding dateWords">{{
-                      getDate()
-                    }}</span>
+                    <span class="title datePadding dateWords">
+                      {{ getDate() }}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -133,25 +118,20 @@
 <script>
 import { computed, ref } from "@vue/reactivity"
 import { AppState } from "../AppState"
-import { onMounted } from "@vue/runtime-core"
 import { postService } from "../services/PostService"
 import { Modal } from "bootstrap"
 import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
-import { challengeService } from "../services/ChallengeService"
 import { momentService } from "../services/MomentService"
+import { resetService } from "../services/ResetService"
 
 export default {
   setup() {
     let height = ref('')
-    let flipped = ref(true)
     let width = ref(0)
-
-
     return {
       height,
       width,
-      flipped,
       async deletePost() {
         if (await Pop.confirm()) {
           await postService.deletePost()
@@ -163,21 +143,20 @@ export default {
       account: computed(() => AppState.account),
       activeAlbum: computed(() => AppState.activeAlbum),
       postChallenge: computed(() => AppState.postChallenge),
-
+      flipped: computed(() => AppState.photoFlipped),
       getDate() {
         try {
           return momentService.date(this.activePost.createdAt)
-
         } catch (error) {
           logger.error(error)
         }
       },
       flip() {
-        const size = document.getElementById('image-' + AppState.activePost.id).getBoundingClientRect()
+        resetService.flipPhotoModal()
+        let size = document.getElementById('image-' + AppState.activePost.id).getBoundingClientRect()
         logger.log('size', size)
         height.value = size.height + 'px'
         width.value = size.width + 'px'
-        flipped.value = !flipped.value
       }
 
     }
@@ -199,7 +178,6 @@ export default {
   border-width: 1vh;
   flex-wrap: wrap;
   max-width: 40vh;
-  // min-width: v-bind(width);
   margin: 0;
 }
 .titlePadding {
