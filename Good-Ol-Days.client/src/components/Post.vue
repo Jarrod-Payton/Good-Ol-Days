@@ -1,6 +1,11 @@
 <template>
   <div class="polaroid">
-    <img class="image border border-dark" :src="post.imgUrl" />
+    <img
+      v-if="post.type.includes('video')"
+      class="image border border-dark"
+      src="src\assets\img\albumpic.png"
+    />
+    <img v-else class="image border border-dark" :src="post.imgUrl" />
     <div>
       <div class="caption sharpie">{{ post.title }} - {{ getTimeAgo() }}</div>
       <div v-if="post.challengeId" class="stamp stampPosition is-approved">

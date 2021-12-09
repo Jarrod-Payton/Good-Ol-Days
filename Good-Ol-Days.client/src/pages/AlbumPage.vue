@@ -52,7 +52,9 @@
             @click="setActive(p.id)"
             type="button"
             data-bs-toggle="modal"
-            data-bs-target="#picture-modal"
+            :data-bs-target="
+              p.type.includes('video') ? '#video-modal' : '#picture-modal'
+            "
             :class="
               downloading && !que.find((elem) => elem.id === p.id)
                 ? 'item disabled'

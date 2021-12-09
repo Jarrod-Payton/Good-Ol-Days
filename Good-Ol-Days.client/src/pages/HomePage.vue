@@ -7,6 +7,7 @@
         </div>
         <div class="desktop">
           <button
+            @click="hasTour"
             id="v-step-0"
             class="btn buttonscss elevation-3 v-step-this"
             data-bs-toggle="modal"
@@ -76,7 +77,9 @@
         </div>
       </div>
     </div>
-    <Tour v-if="!account.hasTour" />
+    <div v-if="!account.hasTour">
+      <Tour />
+    </div>
   </div>
 </template>
 
@@ -89,6 +92,7 @@ import { logger } from "../utils/Logger"
 import { resetService } from "../services/ResetService"
 import { useRoute, useRouter } from "vue-router"
 import { notificationService } from "../services/NotificationService"
+import { accountService } from "../services/AccountService"
 export default {
   name: 'Home',
   setup() {
@@ -116,6 +120,15 @@ export default {
           name: "Album",
           params: { albumId: albumId }
         })
+      },
+      async hasTour() {
+        try {
+          if (!this.account.hasTour) {
+            await accountService.hasTour()
+          }
+        } catch (error) {
+          logger.error(error)
+        }
       },
       routeAbout() {
         router.push('About')

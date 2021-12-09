@@ -12,7 +12,7 @@
           <div
             class="modal-body d-flex justify-content-center align-items-center"
           >
-            <div class="card filmstrip">
+            <div class="card d-flex justify-content-center filmstrip">
               <div class="text-end py-1">
                 <button
                   type="button"
@@ -96,9 +96,10 @@ export default {
   background-color: rgba(255, 255, 255, 0) !important;
 }
 .card {
-  padding-top: 7vh !important;
+  padding-top: 9vh !important;
   border-radius: 0;
   width: 100% !important;
+  min-height: 90vh;
   background-color: #00000091;
 }
 .blue {
