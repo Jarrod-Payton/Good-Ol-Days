@@ -7,7 +7,7 @@
     />
     <img v-else class="image border border-dark" :src="post.imgUrl" />
     <div>
-      <div class="caption sharpie">{{ post.title }} - {{ getTimeAgo() }}</div>
+      <div class="caption sharpie">{{ post.title }}</div>
       <div v-if="post.challengeId" class="stamp stampPosition is-approved">
         Challenge
       </div>

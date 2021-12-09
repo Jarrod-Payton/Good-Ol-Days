@@ -37,7 +37,7 @@
             <button
               class="btn btn-primary text-white elevation 3 ms-4"
               @click="downloadMode"
-              title="toggle download"
+              title="Download"
             >
               <span v-if="!downloading">
                 <i class="mdi mdi-download"></i>
