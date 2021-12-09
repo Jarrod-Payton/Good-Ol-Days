@@ -109,7 +109,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
+                  src="../assets/img/ProfessionalPhoto.jpg"
                   alt=""
                 />
               </div>
@@ -117,7 +117,7 @@
                 <div><p class="m-0 me-2 f-18">Lucas Payton</p></div>
                 <div>
                   <a
-                    href=""
+                    href="https://www.linkedin.com/in/lucaspayton/"
                     target="_blank"
                     class="mdi me-2 f-24 linkedin selectable1 mdi-linkedin"
                   ></a>
@@ -197,7 +197,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://honeysanime.com/wp-content/uploads/2019/08/Dr.-Stone-Wallpaper-2-560x313.png"
+                  src="../assets/img/IMG_9874-2.jpg"
                   alt=""
                 />
               </div>
@@ -254,7 +254,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://i.ytimg.com/vi/jrz66made-I/hqdefault.jpg"
+                  src="../assets/img/ProfessionalPhoto.jpg"
                   alt="Lucas Payton's Profile Picture"
                 />
               </div>
@@ -263,7 +263,7 @@
                 <div>
                   <a
                     target="_blank"
-                    href=""
+                    href="https://www.linkedin.com/in/lucaspayton/"
                     class="mdi me-2 f-26 linkedin selectable1 mdi-linkedin"
                   ></a>
                 </div>
