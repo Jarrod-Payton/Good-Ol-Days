@@ -28,6 +28,21 @@ class AlbumService {
     AppState.activeAlbum = newPost.data
     return newPost.data
   }
+  async getMessages(albumId) {
+    const res = await api.get('api/albums/' + albumId + '/messages')
+    logger.log(res.data)
+    AppState.messages = res.data
+  }
+
+  async createMessage(albumId, message) {
+    logger.log('Message', message)
+     await api.post('api/albums/' + albumId + '/messages', message)
+  }
+
+  async deleteMessage(albumId, messageId) {
+    await api.delete('api/albums/' + albumId + '/messages/' + messageId)
+    AppState.messages = AppState.messages.filter(m => m.id !== messageId)
+  }
   async deleteAlbum(albumId) {
     // Deletes an Album with album ID
     const res = await api.delete('api/albums/' + albumId)

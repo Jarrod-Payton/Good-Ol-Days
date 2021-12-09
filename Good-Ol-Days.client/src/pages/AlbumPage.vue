@@ -133,6 +133,7 @@
     </div>
     <!--Our modal for the sharing of the album-->
   </div>
+  <Chatbox :album="activeAlbum" />
   <ShareAlbumModal :activeAlbum="activeAlbum" />
 </template>
 <script>
@@ -149,7 +150,9 @@ import { firebaseService } from '../services/FirebaseService';
 import { Modal } from "bootstrap";
 import { resetService } from "../services/ResetService";
 import { socketService } from '../services/SocketService';
+
 export default {
+
 
   setup() {
     //ref used to toggle download mode
