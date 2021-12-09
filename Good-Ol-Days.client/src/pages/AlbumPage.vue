@@ -1,8 +1,8 @@
 <template>
   <!--Whenever you open up an album this is the page you are routed to-->
   <div class="row mt-2 m-0 p-0">
-    <div class="col-12">
-      <div class="row">
+    <div class="col-12 heightDownload">
+      <div class="row m-0">
         <div class="col-1">
           <button
             class="btn btn-primary text-white elevation 3"
@@ -148,6 +148,8 @@ import { logger } from "../utils/Logger";
 import { challengeService } from "../services/ChallengeService";
 import { collaboratorService } from "../services/CollaboratorService";
 import { firebaseService } from '../services/FirebaseService';
+import { Modal } from "bootstrap";
+import { resetService } from "../services/ResetService";
 export default {
 
   setup() {
@@ -207,6 +209,7 @@ export default {
       setActive(id) {
         //Sets the clicked on post to the active post in the AppState
         postService.setActive(id)
+        resetService.openPhotoModal()
       },
       downloadMode() {
         downloading.value = !downloading.value
