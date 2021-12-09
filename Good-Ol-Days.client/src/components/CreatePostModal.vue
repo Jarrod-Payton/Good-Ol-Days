@@ -72,8 +72,8 @@
                 </p>
               </div>
               <!--This image tag is for spacing between the bottom of the modal and the bottom of the input area-->
-              <video class="img-fluid" src="" id="video"></video>
               <img src="" alt="" class="img-fluid" id="image" />
+              <video class="img-fluid visually-hidden" src="" id="video" />
             </div>
           </div>
           <div class="modal-footer">

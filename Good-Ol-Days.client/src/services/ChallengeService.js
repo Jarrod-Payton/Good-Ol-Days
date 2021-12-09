@@ -48,7 +48,8 @@ class ChallengeService {
 
   async getPostChallenge(id){
     const res = await api.get('api/challenges/' + id)
-    logger.log('Posts Challenge info',res.data)
+    AppState.postChallenge = res.data
+    logger.log('Posts Challenge info',AppState.postChallenge)
   }
 }
 

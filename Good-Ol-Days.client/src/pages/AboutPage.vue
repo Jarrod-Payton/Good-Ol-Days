@@ -79,7 +79,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="../assets/img/i-8h7w38K-X2.jpg"
                   alt=""
                 />
               </div>
@@ -225,7 +225,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://www.siliconera.com/wp-content/uploads/2020/12/bleach-brave-souls-ten-year-later-ichigo-710x400.jpg"
+                  src="../assets/img/i-8h7w38K-X2.jpg"
                   alt=""
                 />
               </div>

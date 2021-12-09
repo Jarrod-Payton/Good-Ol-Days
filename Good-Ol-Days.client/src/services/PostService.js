@@ -7,15 +7,13 @@ import { challengeService } from "./ChallengeService"
 
 
 class PostService {
-  setActive(id) {
+ async setActive(id) {
     // Set post to Active Post
     const active = AppState.posts.find(p => p.id === id)
     AppState.activePost = active
     logger.log('ACTIVE', AppState.activePost)
     if(active.challengeId) {
-      const challenge = challengeService.getPostChallenge(active.challengeId)
-      AppState.postChallenge = challenge
-      logger.log(AppState.postChallenge)
+  await challengeService.getPostChallenge(active.challengeId)
     }
   }
   async getPosts(albumId) {

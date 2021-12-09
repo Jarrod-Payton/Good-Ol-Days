@@ -9,8 +9,8 @@
     >
       <div class="modal-dialog modal-xl">
         <div
-          class="modal-content border-0 rounded-0 transparent"
-          @click="flipped = !flipped"
+          class="modal-content border-0 rounded-0 transparent selectable1"
+          @click="flip"
         >
           <div class="modal-body d-flex justify-content-center">
             <!-- Front side of modal -->
@@ -33,7 +33,7 @@
                     "
                     title="Delete this picture"
                     @click="deletePost"
-                    class="btn delete m-0"
+                    class="btn delete m-0 mb-1"
                   >
                     <i class="mdi mdi-24px me-2 mdi-trash-can"></i>
                   </button>
@@ -45,7 +45,10 @@
                   ></button>
                   <!-- <div class="text-end align-self-center"></div> -->
                 </div>
-                <div class="d-flex justify-content-center">
+                <div
+                  :id="'image-' + activePost.id"
+                  class="d-flex justify-content-center"
+                >
                   <img class="img-fluid" :src="activePost.imgUrl" alt="" />
                 </div>
                 <div class="text-center d-flex">
@@ -87,14 +90,17 @@
                       "
                       title="Delete this picture"
                       @click="deletePost"
-                      class="btn delete m-0"
+                      class="btn delete m-0 mb-2"
                     >
                       <i class="mdi mdi-24px me-2 mdi-trash-can"></i>
                     </button>
                   </div>
-                  <h1 class="challenge font">
+                  <p
+                    v-if="activePost.challengeId"
+                    class="challenge font text-center"
+                  >
                     Challenge: {{ postChallenge.title }}
-                  </h1>
+                  </p>
                   <button
                     type="button"
                     class="btn-close"
@@ -102,14 +108,16 @@
                   ></button>
                 </div>
                 <div class="card-body p-0">
-                  <div class="polaroidBody">
+                  <div :id="'image-' + activePost.id" class="polaroidBody2">
                     <h1 class="text-center title description">
                       {{ activePost.description }}
                     </h1>
                   </div>
                   <div class="card-title text-center">
                     <h3 class="title titlePadding">{{ activePost.title }}</h3>
-                    <p class="title datePadding dateWords">10/12/2021</p>
+                    <span class="title datePadding dateWords">{{
+                      getDate()
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -131,14 +139,18 @@ import { Modal } from "bootstrap"
 import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
 import { challengeService } from "../services/ChallengeService"
+import { momentService } from "../services/MomentService"
 
 export default {
   setup() {
     let height = ref('')
     let flipped = ref(true)
+    let width = ref(0)
+
 
     return {
       height,
+      width,
       flipped,
       async deletePost() {
         if (await Pop.confirm()) {
@@ -151,6 +163,23 @@ export default {
       account: computed(() => AppState.account),
       activeAlbum: computed(() => AppState.activeAlbum),
       postChallenge: computed(() => AppState.postChallenge),
+
+      getDate() {
+        try {
+          return momentService.date(this.activePost.createdAt)
+
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      flip() {
+        const size = document.getElementById('image-' + AppState.activePost.id).getBoundingClientRect()
+        logger.log('size', size)
+        height.value = size.height + 'px'
+        width.value = size.width + 'px'
+        flipped.value = !flipped.value
+      }
+
     }
   }
 }
@@ -168,6 +197,10 @@ export default {
   padding: 1vh;
   border-color: #4ac26d;
   border-width: 1vh;
+  flex-wrap: wrap;
+  max-width: 40vh;
+  // min-width: v-bind(width);
+  margin: 0;
 }
 .titlePadding {
   font-size: 4.5vh;
@@ -187,7 +220,18 @@ export default {
   transform: rotate(-15deg);
 }
 .polaroidBody {
-  height: 45vh !important;
+  height: v-bind(height);
+  width: v-bind(width);
+  background-color: rgba(0, 0, 0, 0.87);
+  color: rgb(255, 255, 255) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25vh;
+}
+.polaroidBody2 {
+  height: v-bind(height);
+  width: v-bind(width);
   background-color: rgba(0, 0, 0, 0.87);
   color: rgb(255, 255, 255) !important;
   display: flex;
@@ -198,7 +242,6 @@ export default {
 .sizing {
   min-height: 60vh;
   // height: 80vh;
-  width: 60vh;
   margin-top: 5vh;
 }
 .font {
@@ -234,7 +277,9 @@ export default {
   margin-bottom: 0;
 }
 .img-fluid {
-  max-height: 80vh;
+  max-height: 70vh;
+  min-height: 50vh;
+  min-width: 20vh;
 }
 .delete {
   color: #999999;
@@ -243,7 +288,6 @@ export default {
   padding-bottom: 2px;
   padding-right: 0px;
   padding-left: 6px !important;
-
   margin-right: 4vh;
   margin-bottom: 2vh;
 }

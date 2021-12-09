@@ -76,7 +76,7 @@
         </div>
       </div>
     </div>
-    <Tour v-if="account.hasTour" />
+    <Tour v-if="!account.hasTour" />
   </div>
 </template>
 

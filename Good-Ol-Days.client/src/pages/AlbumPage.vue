@@ -117,7 +117,7 @@
         :id="p.id + 'dlBtn'"
         :class="
           !que.find((elem) => elem.id === p.id)
-            ? 'btn btn-success text-white elevation-3'
+            ? 'btn btn-success text-white elevation-3 mb-1'
             : 'btn btn-primary text-white elevation-3'
         "
         @click="addToQue(p)"
