@@ -1,11 +1,9 @@
 <template>
   <!--Is just the style of the individual suggested challenges-->
   <div class="card selectable card-styling" @click="createActive">
-    <div class="card-title">
-      <h5 class="font">
-        {{ suggestion.body }}
-      </h5>
-    </div>
+    <h5 class="font">
+      {{ suggestion.body }}
+    </h5>
   </div>
 </template>
 <script>
@@ -37,7 +35,15 @@ export default {
 }
 @media only screen and (max-width: 500px) {
   .font {
-    font-size: 2vh;
+    font-size: 1.5vh;
+  }
+  .card-styling {
+    border-color: #4ac26e;
+    padding-top: 0.5vh;
+    margin-top: 0.3vh;
+    padding-left: 0.8vh;
+    border-width: 0.3vh;
+    border-radius: 0vh;
   }
 }
 </style>
