@@ -55,9 +55,23 @@
         <div
           v-if="c.verified"
           @click="routerLink(c.albumId)"
-          class="card selectable cardgroupalbum grow2 mb-3"
+          class="
+            card
+            selectable
+            d-flex
+            flex-row
+            justify-content-between
+            cardgroupalbum
+            grow2
+            mb-3
+          "
         >
-          <p class="gpalbumtitle">{{ c.albumTitle }}</p>
+          <div>
+            <p class="gpalbumtitle">{{ c.albumTitle }}</p>
+          </div>
+          <!-- <div class="desktop">
+            <img :title="c.name" class="profilepics" :src="c.picture" alt="" />
+          </div> -->
         </div>
       </div>
       <!-- GROUP ALBUMS GO HERE ^ -->
@@ -132,13 +146,23 @@ export default {
       },
       routeAbout() {
         router.push('About')
-      }
+      },
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.profilepics {
+  padding-top: 2px;
+  border-radius: 50%;
+  height: 4vh;
+  width: 4vh;
+  object-fit: cover;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
 .addalbumstart {
   font-size: 3.5vh;
   color: #5c5c5c;

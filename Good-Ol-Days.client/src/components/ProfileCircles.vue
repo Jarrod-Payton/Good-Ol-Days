@@ -3,7 +3,7 @@
     <div class="">
       <img
         id="dropdownMenuLink"
-        data-bs-toggle="dropdown"
+        :data-bs-toggle="activeAlbum.creatorId === account.id ? 'dropdown' : ''"
         v-if="collab.verified"
         :title="collab.name"
         class="profilepics"
