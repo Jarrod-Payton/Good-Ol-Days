@@ -297,9 +297,8 @@ export default {
 </script>
 <style scoped>
 .heightDownload {
-  height: 0vh;
+  height: 4.5vh;
   margin: 0;
-  height: 0;
 }
 .closeIcon {
   font-size: 2vh;
