@@ -32,7 +32,7 @@ class ChallengeService {
           AppState.activeChallenge = {}
         } else {
           AppState.activeChallenge = found
-          const check = new Date(AppState.activeChallenge.createdAt).getTime() + 60000
+          const check = new Date(AppState.activeChallenge.createdAt).getTime() + 300000
           const today = new Date().getTime()
           if (check < today) {
             await api.delete(`api/challenges/${AppState.activeChallenge.id}`)
