@@ -137,7 +137,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5jEe3u-zFbNX7_hKxiG-NWIz_3pDTaRcVTP0x3W7TMgoYO1k1Prrtf3oewZDfmHX67aQ&usqp=CAU"
+                  src="../assets/img/ryanmphoto.jpg"
                   alt=""
                 />
               </div>
