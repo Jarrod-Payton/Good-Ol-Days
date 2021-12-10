@@ -53,7 +53,7 @@
               </ul>
             </div>
             <button
-              class="btn btn-primary text-white elevation 3 ms-4"
+              class="btn btn-primary text-white elevation-3 ms-4"
               @click="downloadMode"
               title="Download"
             >
@@ -64,6 +64,7 @@
                 <i class="mdi mdi-close"></i>
               </span>
             </button>
+            <Chatbox :album="activeAlbum" />s
           </div>
         </div>
         <div class="col-md-2 mt-2 mb-3 m-md-0 p-0">
@@ -188,7 +189,7 @@
     </div>
     <!--Our modal for the sharing of the album-->
   </div>
-  <Chatbox :album="activeAlbum" />
+
   <ShareAlbumModal :activeAlbum="activeAlbum" />
 </template>
 <script>

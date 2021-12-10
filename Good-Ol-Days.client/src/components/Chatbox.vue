@@ -2,7 +2,7 @@
   <div class="component">
     <button
       title="Album Live Chat"
-      class="btn btn-primary text-white postition-absolute"
+      class="btn btn-primary text-white ms-4"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#chatOffcanvas"
@@ -175,7 +175,7 @@ export default {
   width: 45.8%;
 }
 .message-form-container {
-  height: 15vh;
+  max-height: 15vh;
 }
 .line {
   width: 100%;
@@ -210,7 +210,7 @@ export default {
 }
 .scroll {
   height: auto;
-  max-height: 70vh;
+  height: 70vh;
   overflow-y: scroll;
 }
 @media only screen and (max-width: 500px) {
