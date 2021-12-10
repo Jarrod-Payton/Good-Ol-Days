@@ -56,19 +56,12 @@
                 <p>
                   Is this post for the challenge?
                   <input
-                    type="radio"
+                    type="checkbox"
                     class="ms-3"
                     v-model="hasChallenge"
                     value="true"
                   />
                   Yes
-                  <input
-                    type="radio"
-                    class="ms-2"
-                    v-model="hasChallenge"
-                    value="false"
-                  />
-                  No
                 </p>
               </div>
               <!--This image tag is for spacing between the bottom of the modal and the bottom of the input area-->

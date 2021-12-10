@@ -218,7 +218,6 @@ export default {
 }
 .sizing {
   min-height: 60vh;
-  // height: 80vh;
   margin-top: 5vh;
 }
 .font {
@@ -291,5 +290,56 @@ export default {
   position: absolute;
   opacity: 0;
   transform: rotate3d(0, 1, 0, -180deg);
+}
+@media only screen and (max-width: 500px) {
+  .challenge {
+    font-size: 1.3vh;
+    display: flex;
+    justify-content: center;
+    padding: 1vh;
+    border-color: #4ac26d;
+    border-width: 1vh;
+    flex-wrap: wrap;
+    max-width: 40vh;
+    margin: 0;
+  }
+  .titlePadding {
+    font-size: 3vh;
+    margin-bottom: 0;
+  }
+  .titleSize {
+    font-size: 3vh;
+  }
+  .sizing {
+    min-height: 10vh;
+    margin-top: 5vh;
+  }
+  .polaroidBody {
+    height: v-bind(height);
+    width: v-bind(width);
+    max-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.87);
+    color: rgb(255, 255, 255) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25vh;
+  }
+  .polaroidBody2 {
+    height: v-bind(height);
+    width: v-bind(width);
+    max-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.87);
+    color: rgb(255, 255, 255) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25vh;
+  }
+  .img-fluid {
+    max-height: 34vh;
+    min-height: 20vh;
+    min-width: 20vh;
+  }
 }
 </style>

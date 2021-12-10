@@ -3,14 +3,14 @@
   <div class="row mt-2 m-0 p-0">
     <div class="col-12 heightDownload">
       <div class="row m-0">
-        <div class="col-md-2 p-0 ps-md-2">
+        <div class="col-12 p-0 ps-md-2 mb-md-0 mb-2">
           <div class="d-flex justify-content-start">
             <div class="dropdown">
               <button
                 type="button"
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
-                class="btn dropdown-toggle btn-primary text-white"
+                class="btn dropdown-toggle btn-primary text-white sort"
               >
                 Sort By
               </button>
@@ -58,10 +58,10 @@
               title="Download"
             >
               <span v-if="!downloading">
-                <i class="mdi mdi-download"></i>
+                <i class="mdi mdi-download downloadIcon"></i>
               </span>
               <span v-else>
-                <i class="mdi mdi-close"></i>
+                <i class="mdi mdi-close closeIcon"></i>
               </span>
             </button>
             <Chatbox :album="activeAlbum" />s
@@ -71,7 +71,7 @@
           <div class="d-flex">
             <button
               title="download selected images"
-              class="btn btn-primary text-white elevation-3"
+              class="btn btn-primary text-white elevation-3 downloadImages ms-4"
               @click="downloadImages"
               v-if="downloading"
             >
@@ -127,7 +127,7 @@
             v-if="downloading"
           >
             <span v-if="!que.find((elem) => elem.id === p.id)">
-              <i class="mdi mdi-download"></i>
+              <i class="mdi mdi-download downloadIcon"></i>
             </span>
             <span v-else>
               <i class="mdi mdi-close"></i>
@@ -180,10 +180,10 @@
         v-if="downloading"
       >
         <span v-if="!que.find((elem) => elem.id === p.id)">
-          <i class="mdi mdi-download"></i>
+          <i class="mdi mdi-download downloadIcon"></i>
         </span>
         <span v-else>
-          <i class="mdi mdi-close"></i>
+          <i class="mdi mdi-close closeIcon"></i>
         </span>
       </button>
     </div>
@@ -301,6 +301,29 @@ export default {
 };
 </script>
 <style scoped>
+.heightDownload {
+  height: 4.5vh;
+  margin: 0;
+}
+.closeIcon {
+  font-size: 2vh;
+}
+.downloadImages {
+  font-size: 1.6vh;
+}
+.downloadMode {
+  padding-left: 1vh;
+  padding-right: 1vh;
+  padding-bottom: 0vh;
+  padding-top: 0vh;
+  height: 3.8vh;
+}
+.downloadIcon {
+  font-size: 2vh;
+}
+.sort {
+  font-size: 1.6vh;
+}
 .dropdown-item-text {
   font-size: 1.75vh;
   font-family: "Saira Condensed", sans-serif;
@@ -391,6 +414,29 @@ export default {
   transition: all 0.35s;
 }
 @media only screen and (max-width: 500px) {
+  .heightDownload {
+    height: 4.5vh;
+    margin: 0;
+  }
+  .closeIcon {
+    font-size: 1.6vh;
+  }
+  .downloadImages {
+    font-size: 1.3vh;
+  }
+  .downloadMode {
+    padding-left: 1vh;
+    padding-right: 1vh;
+    padding-bottom: 0vh;
+    padding-top: 0vh;
+    height: 3.5vh;
+  }
+  .downloadIcon {
+    font-size: 1.3vh;
+  }
+  .sort {
+    font-size: 1.3vh;
+  }
   .message {
     font-size: 2.4vh;
     color: rgb(90, 90, 90);
@@ -399,7 +445,7 @@ export default {
     margin-top: 3vh;
   }
   .dropdown-item-text {
-    font-size: 1.58vh;
+    font-size: 1.35vh;
   }
 }
 </style>
