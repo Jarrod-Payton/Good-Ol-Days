@@ -33,7 +33,7 @@
                   <div>
                     <video
                       controls
-                      class="img-fluid"
+                      class="img-fluid border"
                       :src="activePost.imgUrl"
                       alt=""
                     />
@@ -150,7 +150,7 @@ export default {
   border-color: red;
 }
 .filmstrip {
-  --background: rgba(0, 0, 0, 0.746);
+  --background: rgba(0, 0, 0, 0.815);
   --size: 35px;
   background-image: linear-gradient(
       to right,
