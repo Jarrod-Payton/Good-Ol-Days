@@ -47,10 +47,16 @@
       >
         <i class="mdi mdi-18px mdi-plus-circle-outline"> </i>
       </button>
-      <button title="Share this album" class="btn share elevation-3">
+      <button
+        title="Share this album"
+        class="btn share elevation-3"
+        data-bs-toggle="modal"
+        data-bs-target="#shareModal"
+      >
         <i class="mdi mdi-18px mdi-share-variant"></i>
       </button>
       <button
+        @click="deleteAlbum"
         title="Delete this album"
         class="btn delete delete btn-outline-danger elevation-3"
       >
@@ -127,11 +133,6 @@ export default {
   margin-right: 4vh;
   margin-bottom: 2vh;
 }
-.delete:hover {
-  background-color: red;
-  color: white;
-  border-color: red;
-}
 .desktop {
   display: block;
 }
@@ -148,6 +149,11 @@ export default {
 .btn:focus {
   outline: none;
   box-shadow: none;
+}
+.delete:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
 }
 @media only screen and (max-width: 500px) {
   .desktop {
@@ -176,6 +182,17 @@ export default {
     margin: 0;
     margin-right: 0;
     margin-bottom: 0;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .delete {
+    padding: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-top: 0.4vh;
   }
 }
 </style>

@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
 import { AccountSchema, ProfileSchema } from '../models/Account'
-import { AlbumSchema } from "../models/Album";
-import { ChallengeSchema } from "../models/Challenge";
-import { CollaboratorSchema } from "../models/Collaborator";
-import { NotificationSchema } from "../models/Notification";
-import { PostSchema } from "../models/Post";
+import { AlbumSchema } from '../models/Album'
+import { ChallengeSchema } from '../models/Challenge'
+import { CollaboratorSchema } from '../models/Collaborator'
+import { MessageSchema } from '../models/Message'
+import { NotificationSchema } from '../models/Notification'
+import { PostSchema } from '../models/Post'
 import { ValueSchema } from '../models/Value'
 
 class DbContext {
@@ -21,6 +22,8 @@ class DbContext {
   Posts = mongoose.model('Post', PostSchema)
 
   Notifications = mongoose.model('Notification', NotificationSchema)
+
+  Messages = mongoose.model('Message', MessageSchema)
 }
 
 export const dbContext = new DbContext()
