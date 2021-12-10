@@ -49,7 +49,7 @@ p {
 }
 .scrollbar {
   overflow-y: scroll;
-  height: 82vh;
+  height: 85vh;
 }
 .scrollbar::-webkit-scrollbar {
   width: 7px;
