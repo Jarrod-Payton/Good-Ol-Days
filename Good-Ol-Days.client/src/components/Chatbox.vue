@@ -1,6 +1,7 @@
 <template>
   <div class="component">
     <button
+      title="Album Live Chat"
       class="btn btn-primary text-white postition-absolute"
       type="button"
       data-bs-toggle="offcanvas"
@@ -29,17 +30,63 @@
       </div>
       <div class="line"></div>
       <div class="offcanvas-body row align-items-between">
-        <div class="messagesContainer col-12">
-          <div class="row" v-for="m in messages" :key="m.id">
-            <p
+        <div class="messagesContainer col-12 p-4 scroll">
+          <div
+            v-for="m in messages"
+            :key="m.id"
+            class="row jusify-content-between"
+          >
+            <div
+              v-if="screenSize < 500 || m.creatorId === account.id"
+              class="col-2 p-0 d-flex align-items-center"
+            >
+              <img
+                :title="m.creator.name"
+                class="img-fluid profilepics me-2 elevation-3"
+                :src="m.creator.picture"
+                alt="profile"
+              />
+            </div>
+            <div
               :class="
-                m.isMine ? 'm-0 justify-self-start' : 'm-o justify-self-end'
+                m.creatorId === account.id
+                  ? 'card col-md-10 p-0 d-flex rounded-pill elevation-3 bg-primary bg-gradient my-3 p-3'
+                  : 'card col-md-10 p-0 d-flex  rounded-pill elevation-3 bg-success bg-gradient my-3 p-3'
               "
             >
-              {{ m.body }}
-            </p>
+              <div class="row justify-content-between">
+                <div class="col-10 d-flex align-items-center text-wrap">
+                  <p class="m-0 text-break">{{ m.body }}</p>
+                </div>
+                <div class="col-2 d-flex">
+                  <button
+                    title="delete message"
+                    aria-describedby="delete message"
+                    class="btn delete rounded-pill"
+                    v-if="m.creatorId === account.id"
+                  >
+                    <i
+                      class="selectable mdi mdi-trash-can"
+                      @click="deleteMessage(m.id)"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="m.creatorId !== account.id && screenSize > 500"
+              class="col-2 p-0 d-flex align-items-center justify-content-end"
+            >
+              <img
+                :title="m.creator.name"
+                class="img-fluid profilepics me-2 elevation-3"
+                :src="m.creator.picture"
+                alt="profile"
+              />
+            </div>
           </div>
         </div>
+
         <div class="line"></div>
         <div class="message-form-container col-12">
           <div class="d-flex justify-content-start mt-3">
@@ -62,8 +109,8 @@
                 type="text"
                 maxlength="100"
               />
-              <span @click="createMessage" class="input-group-text bg-dark"
-                ><i class="mdi mdi-send"></i
+              <span @click="createMessage" class="input-group-text bg-dark">
+                <i class="mdi mdi-send"></i
               ></span>
             </div>
           </form>
@@ -79,6 +126,7 @@ import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { albumService } from '../services/AlbumService'
 import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
 export default {
   props: {
     album: {
@@ -90,18 +138,25 @@ export default {
     const messageData = ref('')
     return {
       messageData,
+      screenSize: computed(() => window.innerWidth),
+      account: computed(() => AppState.account),
       messages: computed(() => AppState.messages),
       async createMessage() {
         try {
           logger.log(props.album)
           await albumService.createMessage(props.album.id, messageData.value)
+          messageData.value = ''
         } catch (error) {
           logger.error(error)
         }
       },
       async deleteMessage(messageId) {
         try {
-          await albumService.deleteMessage(messageId)
+          if (await Pop.confirm('Delete Your Message?', 'You can not undo this', 'warning')) {
+
+            logger.log(messageId)
+            await albumService.deleteMessage(props.album.id, messageId)
+          }
         } catch (error) {
           logger.error(error)
         }
@@ -114,7 +169,7 @@ export default {
 
 <style lang="scss" scoped>
 .messagesContainer {
-  height: 73vh;
+  height: 70vh;
 }
 .chatbox {
   width: 45.8%;
@@ -133,5 +188,34 @@ export default {
     rgba(139, 139, 139) 75%,
     rgba(225, 225, 225, 0) 100%
   );
+}
+.profilepics {
+  border-radius: 50%;
+  height: auto;
+  width: 4em;
+  object-fit: cover;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+.delete {
+  width: 3em;
+  color: #e9e9e9;
+  border-color: #ebeaea;
+}
+.delete:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
+}
+.scroll {
+  height: auto;
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+@media only screen and (max-width: 500px) {
+  .offcanvas {
+    width: 100%;
+  }
 }
 </style>    

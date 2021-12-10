@@ -41,7 +41,7 @@ class AlbumService {
 
   async deleteMessage(albumId, messageId) {
     await api.delete('api/albums/' + albumId + '/messages/' + messageId)
-    AppState.messages = AppState.messages.filter(m => m.id !== messageId)
+   AppState.messages = AppState.messages.filter(m => m.id !== messageId)
   }
   async deleteAlbum(albumId) {
     // Deletes an Album with album ID

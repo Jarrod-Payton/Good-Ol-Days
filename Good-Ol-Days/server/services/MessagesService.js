@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 
 class MessagesService {
   async getAll(id) {
-    const messages = await dbContext.Messages.find({ albumId: id })
+    const messages = await dbContext.Messages.find({ albumId: id }).populate('creator')
     return messages
   }
 
@@ -19,7 +19,7 @@ class MessagesService {
 
   async createMessage(body) {
     const message = await dbContext.Messages.create(body)
-    return message
+    return message.populate('creator')
   }
 
   async deleteMessage(messageId, userId) {

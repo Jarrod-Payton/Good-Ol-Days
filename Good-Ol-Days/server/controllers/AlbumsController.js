@@ -102,7 +102,7 @@ export class AlbumsController extends BaseController {
       const messageId = req.params.messageId
       const userId = req.userInfo.id
       await messagesService.deleteMessage(messageId, userId)
-      return ('Deleted')
+      res.send('Deleted')
     } catch (error) {
       next(error)
     }
