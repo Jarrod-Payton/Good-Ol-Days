@@ -1,7 +1,6 @@
 import firebaseAdmin from 'firebase-admin'
 import { logger } from '../utils/Logger'
-
-const firebaseAccountKey = require('../../firebase-admin.json')
+import { firebaseAccountKey } from '../../firebase-admin'
 
 class FirebaseService {
   constructor() {
