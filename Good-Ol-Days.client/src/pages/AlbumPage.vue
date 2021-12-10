@@ -67,7 +67,14 @@
             <Chatbox :album="activeAlbum" />s
             <button
               title="download selected images"
-              class="btn btn-primary text-white elevation-3 downloadImages ms-4"
+              class="
+                btn btn-primary
+                text-white
+                elevation-3
+                downloadImages
+                ms-4
+                mt-4
+              "
               @click="downloadImages"
               v-if="downloading"
             >
