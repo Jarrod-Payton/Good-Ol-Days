@@ -53,7 +53,7 @@
               </ul>
             </div>
             <button
-              class="btn btn-primary text-white elevation-3 ms-4"
+              class="btn btn-primary text-white elevation-3 ms-4 downloadMode"
               @click="downloadMode"
               title="Download"
             >
@@ -65,10 +65,6 @@
               </span>
             </button>
             <Chatbox :album="activeAlbum" />s
-          </div>
-        </div>
-        <div class="col-md-2 mt-2 mb-3 m-md-0 p-0">
-          <div class="d-flex">
             <button
               title="download selected images"
               class="
