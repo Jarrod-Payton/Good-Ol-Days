@@ -30,7 +30,7 @@
       </div>
       <div class="line"></div>
       <div class="offcanvas-body row align-items-between">
-        <div class="messagesContainer col-12 p-4 scroll">
+        <div class="messagesContainer col-12 p-4 scrollbar">
           <div
             v-for="m in messages"
             :key="m.id"
@@ -50,8 +50,8 @@
             <div
               :class="
                 m.creatorId === account.id
-                  ? 'card col-md-10 p-0 d-flex rounded-pill elevation-3 bg-primary bg-gradient my-3 p-3'
-                  : 'card col-md-10 p-0 d-flex  rounded-pill elevation-3 bg-success bg-gradient my-3 p-3'
+                  ? 'card col-md-10 p-0 d-flex rounded-pill elevation-3 bg-dark lighten-3  bg-gradient my-3 p-3'
+                  : 'card col-md-10 p-0 d-flex  rounded-pill elevation-3 bg-light darken-3 bg-gradient my-3 p-3'
               "
             >
               <div class="row justify-content-between">
@@ -218,9 +218,8 @@ export default {
   color: white;
   border-color: red;
 }
-.scroll {
-  height: auto;
-  height: 70vh;
+.scrollbar {
+  height: 70vh !important;
   overflow-y: scroll;
 }
 @media only screen and (max-width: 500px) {
