@@ -3,9 +3,12 @@
     <div class="row">
       <NavigationBar />
     </div>
-    <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
-      <router-view />
-    </div>
+
+    <transition name="route" mode="out-in">
+      <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
+        <router-view />
+      </div>
+    </transition>
   </main>
   <footer class="background d-flex justify-content-center">
     <ProfileOffCanvas :account="account" />
@@ -19,6 +22,7 @@
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import { useRoute } from "vue-router"
+import 'animate.css';
 export default {
   name: 'App',
   setup() {
@@ -61,4 +65,36 @@ p {
   background-color: #adadad;
   border-radius: 7px;
 }
+
+//route
+/* route transitions */
+.route-enter-from {
+  opacity: 1;
+  transform: translateX(100px);
+}
+.route-enter-active {
+  transition: all 0.3s ease-out;
+}
+.route-leave-to {
+  opacity: 1;
+  transform: translateX(-100px);
+}
+.route-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+// .enter-from {
+//   opacity: 1;
+//   transform: translateX(100px);
+// }
+// .enter-active {
+//   transition: all 0.3s ease-out;
+// }
+// .leave-to {
+//   opacity: 1;
+//   transform: translateX(-100px);
+// }
+// .leave-active {
+//   transition: all 0.3s ease-in;
+// }
 </style>

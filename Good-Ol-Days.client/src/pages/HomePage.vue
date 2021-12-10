@@ -1,5 +1,14 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center">
+  <div
+    class="
+      home
+      flex-grow-1
+      d-flex
+      flex-column
+      align-items-center
+      animate__animated animate__fadeIn
+    "
+  >
     <div class="card cardspec">
       <div class="d-flex justify-content-between">
         <div class="p-4">
@@ -46,6 +55,14 @@
         </div>
         <div class="desktop"></div>
       </div>
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <p class="mb-0 f-16 text-end pt-1 pe-3">Album</p>
+        </div>
+        <div class="col-3">
+          <p class="mb-0 f-16 pt-1 pe-3">Collaborators</p>
+        </div>
+      </div>
       <!-- GROUP ALBUMS GO HERE v  -->
       <div
         class="d-flex justify-content-center align-items-center flex-column"
@@ -55,9 +72,23 @@
         <div
           v-if="c.verified"
           @click="routerLink(c.albumId)"
-          class="card selectable cardgroupalbum grow2 mb-3"
+          class="
+            card
+            selectable
+            d-flex
+            flex-row
+            justify-content-between
+            cardgroupalbum
+            grow2
+            mb-3
+          "
         >
-          <p class="gpalbumtitle">{{ c.albumTitle }}</p>
+          <div>
+            <p class="gpalbumtitle">{{ c.albumTitle }}</p>
+          </div>
+          <div class="desktop me-3">
+            <img :title="c.name" class="profilepics" :src="c.picture" alt="" />
+          </div>
         </div>
       </div>
       <!-- GROUP ALBUMS GO HERE ^ -->
@@ -132,13 +163,23 @@ export default {
       },
       routeAbout() {
         router.push('About')
-      }
+      },
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.profilepics {
+  padding-top: 2px;
+  border-radius: 50%;
+  height: 4vh;
+  width: 4vh;
+  object-fit: cover;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
 .addalbumstart {
   font-size: 3.5vh;
   color: #5c5c5c;
