@@ -3,7 +3,7 @@
     <img
       v-if="post.type.includes('video')"
       class="video border-dark"
-      src="src\assets\img\videoicon.png"
+      src="../assets/img/videoicon.png"
     />
     <img v-else class="image border border-dark" :src="post.imgUrl" />
     <div>
