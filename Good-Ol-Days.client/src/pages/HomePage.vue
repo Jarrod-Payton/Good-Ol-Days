@@ -240,7 +240,7 @@ export default {
   border-width: 3px;
   border-radius: 0;
   background-color: rgb(243, 243, 243);
-  border-color: #36a7d7;
+  border-color: #1e90ff;
 }
 .gpalbumtitle {
   margin-left: 3vh;
