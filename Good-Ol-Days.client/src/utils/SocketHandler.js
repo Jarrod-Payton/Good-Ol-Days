@@ -40,6 +40,9 @@ export class SocketHandler {
     this.playback()
   }
 
+    joinAlbumRoom(albumId) {
+    this.socket.emit('JOIN_ALBUM_ROOM', `ALBUM_ROOM_${albumId}`)
+  }
   onAuthenticated(auth) {
     logger.log('[SOCKET_AUTHENTICATED]', auth)
     this.authenticated = true
