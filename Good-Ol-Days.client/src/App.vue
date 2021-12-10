@@ -4,11 +4,9 @@
       <NavigationBar />
     </div>
 
-    <transition name="route" mode="out-in">
-      <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
-        <router-view />
-      </div>
-    </transition>
+    <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
+      <router-view />
+    </div>
   </main>
   <footer class="background d-flex justify-content-center">
     <ProfileOffCanvas :account="account" />
