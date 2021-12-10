@@ -53,7 +53,7 @@
               </ul>
             </div>
             <button
-              class="btn btn-primary text-white elevation-3 ms-4"
+              class="btn btn-primary text-white elevation-3 ms-4 downloadMode"
               @click="downloadMode"
               title="Download"
             >
@@ -65,10 +65,6 @@
               </span>
             </button>
             <Chatbox :album="activeAlbum" />s
-          </div>
-        </div>
-        <div class="col-md-2 mt-2 mb-3 m-md-0 p-0">
-          <div class="d-flex">
             <button
               title="download selected images"
               class="
@@ -90,7 +86,7 @@
     </div>
     <!--Checks to see your role on this page in order to determine your interaction ability and view of the challenge-->
     <div
-      class="col-md-6 order-md-2 p-0"
+      class="col-md-6 order-md-2 p-0 animate__animated animate__fadeIn"
       v-if="
         (activeAlbum.hasChallenges &&
           user.isAuthenticated &&
@@ -106,7 +102,11 @@
     <div class="col-md-6 order-md-1">
       <div class="row" v-if="posts.length > 0">
         <!--Divided all posts into two sets of posts in order to keep the challenge on the right hand side even if there no posts made yet (We were stumped on how to do this for quite a while, so thank you to one of our instructors Mick Shannahan for coming up with this brilliant method)-->
-        <div class="col-6 rotationanim" v-for="p in posts1" :key="p.id">
+        <div
+          class="col-6 rotationanim animate__animated animate__jackInTheBox"
+          v-for="p in posts1"
+          :key="p.id"
+        >
           <div
             @click="setActive(p.id)"
             type="button"
@@ -155,7 +155,12 @@
     </div>
     <!--Second half of our split posts-->
     <div
-      class="col-6 col-md-3 rotationanim order-md-3"
+      class="
+        col-6 col-md-3
+        rotationanim
+        order-md-3
+        animate__animated animate__jackInTheBox
+      "
       v-for="p in splicedPosts"
       :key="p.id"
     >

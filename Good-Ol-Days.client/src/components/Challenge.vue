@@ -167,9 +167,6 @@ import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
 export default {
   //If you are a collaborator you can see the challenge, this is to pass down the collaborators
-  props: {
-    collabThisAlbum: { type: Object, required: true }
-  },
   setup() {
     //The filter for the suggested challenges
     const type = ref('')
@@ -229,6 +226,7 @@ export default {
       activeAlbum: computed(() => AppState.activeAlbum),
       doneSyncing: computed(() => AppState.doneSyncing),
       account: computed(() => AppState.account),
+      collabThisAlbum: computed(() => AppState.collabThisAlbum),
     }
   },
 }

@@ -2,13 +2,13 @@
   <div class="component">
     <button
       title="Album Live Chat"
-      class="btn btn-primary text-white ms-4"
+      class="btn btn-primary text-white ms-4 elevation-3 downloadMode"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#chatOffcanvas"
       aria-controls="chatOffcanvas"
     >
-      <i class="mdi mdi-chat"></i>
+      <i class="mdi mdi-chat downloadIcon"></i>
     </button>
 
     <div
@@ -168,6 +168,16 @@ export default {
 
 
 <style lang="scss" scoped>
+.downloadMode {
+  padding-left: 1vh;
+  padding-right: 1vh;
+  padding-bottom: 0vh;
+  padding-top: 0vh;
+  height: 3.8vh;
+}
+.downloadIcon {
+  font-size: 2vh;
+}
 .messagesContainer {
   height: 70vh;
 }
@@ -215,6 +225,16 @@ export default {
 @media only screen and (max-width: 500px) {
   .offcanvas {
     width: 100%;
+  }
+  .downloadMode {
+    padding-left: 1vh;
+    padding-right: 1vh;
+    padding-bottom: 0vh;
+    padding-top: 0vh;
+    height: 3.5vh;
+  }
+  .downloadIcon {
+    font-size: 1.3vh;
   }
 }
 </style>    
