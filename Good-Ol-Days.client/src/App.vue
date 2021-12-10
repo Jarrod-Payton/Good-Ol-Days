@@ -3,6 +3,7 @@
     <div class="row">
       <NavigationBar />
     </div>
+
     <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
       <router-view />
     </div>
@@ -19,6 +20,7 @@
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import { useRoute } from "vue-router"
+import 'animate.css';
 export default {
   name: 'App',
   setup() {

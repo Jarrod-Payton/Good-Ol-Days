@@ -2,6 +2,7 @@ import { AppState } from "../AppState"
 import { Collaborator } from "../models/Collaborator"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
+import { albumService } from "./AlbumService"
 import { api } from "./AxiosService"
 import { notificationService } from "./NotificationService"
 
@@ -16,6 +17,7 @@ class CollaboratorService {
   async getCollabThisAlbum(albumId) {
     // Get all the collaborator for this album, verify true or false with album ID
     const res = await api.get('api/albums/' + albumId + '/collaborators')
+    logger.log('collab HERE', res.data)
     const collab = res.data.map(c => c = new Collaborator(c))
     AppState.collabThisAlbum = collab
   }
@@ -56,6 +58,11 @@ class CollaboratorService {
     const collab = AppState.collabThisAlbum.find(c => c.accountId === notification.notifierId)
     logger.log('TEST JOHN 2', collab)
     await api.delete(`api/collaborators/${collab.id}`)
+  }
+  async getCollabHome(albumId){
+    const collabs = await this.getCollabThisAlbum(albumId)
+    logger.log('collab for circles home',collabs)
+
   }
 }
 export const collaboratorService = new CollaboratorService()

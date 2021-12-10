@@ -6,17 +6,17 @@
 //   transtions change the settings below
 .route-enter-active,
 .route-leave-active {
-  transition: all 0s linear; // try changing 0s to .25s
+  transition: all 3s linear; // try changing 0s to .25s
 }
 .route-enter-from,
 .route-leave-to {
-  opacity: 1; // try setting to 0
+  opacity: 0; // try setting to 0
 }
 
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s ease;
+  transition: all 3s ease-out;
 }
 .fade-enter-from,
 .fade-leave-to {
@@ -24,8 +24,8 @@
 }
 .slideY-enter-active,
 .slideY-leave-active {
-  transform: translateY(0);
-  transition: all 0.5s ease;
+  transform: translateY(100px);
+  transition: all 3s ease-in;
 }
 .slideY-enter-from,
 .slideY-leave-to {
@@ -33,8 +33,8 @@
 }
 .slideX-enter-active,
 .slideX-leave-active {
-  transform: translateX(0);
-  transition: all 0.5s ease;
+  transform: translateX(100px);
+  transition: all 3s ease;
 }
 .slideX-enter-from,
 .slideX-leave-to {
