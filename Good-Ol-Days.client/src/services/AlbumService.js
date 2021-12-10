@@ -36,7 +36,7 @@ class AlbumService {
 
   async createMessage(albumId, message) {
     logger.log('Message', message)
-     await api.post('api/albums/' + albumId + '/messages', message)
+    await api.post('api/albums/' + albumId + '/messages', { body: message })
   }
 
   async deleteMessage(albumId, messageId) {

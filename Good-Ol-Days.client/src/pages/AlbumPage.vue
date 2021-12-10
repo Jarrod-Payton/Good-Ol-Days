@@ -173,6 +173,7 @@ export default {
     onMounted(async () => {
       try {
         socketService.joinAlbumRoom(route.params.albumId)
+        await albumService.getMessages(route.params.albumId)
         //Sets the active album in the AppState
         await albumService.setActiveAlbum(route.params.albumId);
         //Checks if they are authenticated so that if they are not then they will not get the challenges
