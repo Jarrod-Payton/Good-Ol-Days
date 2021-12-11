@@ -12,8 +12,8 @@
           <div
             class="modal-body d-flex justify-content-center align-items-center"
           >
-            <div class="card filmstrip">
-              <div class="text-end py-1">
+            <div class="card d-flex justify-content-center filmstrip">
+              <div class="text-end pb-3">
                 <button
                   type="button"
                   class="btn-close bg-white small"
@@ -21,15 +21,31 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="d-flex justify-content-center">
-                <img class="img-fluid" :src="activePost.imgUrl" alt="" />
+              <div class="d-md-flex justify-content-md-center">
+                <div class="d-md-flex justify-content-center">
+                  <div class="descriptionCard sharpie">
+                    <p class="sharpie text-md-center mb-4 title">
+                      {{ activePost.title }}
+                    </p>
+                    <p class="f-20">Video description:</p>
+                    <p class="f-18">{{ "“" + activePost.description + "”" }}</p>
+                  </div>
+                  <div>
+                    <video
+                      controls
+                      class="img-fluid border"
+                      :src="activePost.imgUrl"
+                      alt=""
+                    />
+                  </div>
+                </div>
               </div>
-              <div class="text-center d-flex">
+              <div class="text-center d-flex mt-3">
                 <!-- <p class="m-0 pb-2 pt-3 w-100 title">{{ activePost.title }}</p> -->
                 <div class="text-end align-self-center">
                   <button
                     v-show="
-                      posts.creatorId === account.id ||
+                      activePost.creatorId === account.id ||
                       activeAlbum.creatorId === account.id
                     "
                     title="Delete this picture"
@@ -79,21 +95,28 @@ export default {
 
 
 <style lang="scss" scoped>
+.descriptionCard {
+  margin-top: 2vh;
+}
+.sharpie {
+  font-family: "MyWebFont";
+}
 @font-face {
   font-family: "MyWebFont";
   src: url("../assets/fonts/Stickynotes-ywLPd.otf") format("woff");
 }
 .title {
   font-family: "MyWebFont";
-  font-size: 4vh;
+  font-size: 6vh;
 }
 .transparent {
   background-color: rgba(255, 255, 255, 0) !important;
 }
 .card {
-  padding-top: 7vh !important;
+  padding-top: 11vh !important;
   border-radius: 0;
   width: 100% !important;
+  min-height: 90vh;
   background-color: #00000091;
 }
 .blue {
@@ -127,7 +150,7 @@ export default {
   border-color: red;
 }
 .filmstrip {
-  --background: rgba(0, 0, 0, 0.746);
+  --background: rgba(0, 0, 0, 0.815);
   --size: 35px;
   background-image: linear-gradient(
       to right,
@@ -168,5 +191,22 @@ div {
   max-height: 100vh;
   width: 100%;
   color: rgb(255, 255, 255);
+}
+@media only screen and (max-width: 500px) {
+  .title {
+    font-family: "MyWebFont";
+    font-size: 4vh;
+  }
+  .descriptionCard {
+    margin-top: 0vh;
+  }
+  .card {
+    width: 100vh;
+  }
+  .filmstrip {
+    padding-left: 1vh;
+    padding-right: 1vh;
+    --size: 25px;
+  }
 }
 </style>

@@ -1,29 +1,52 @@
 <template>
-  <div class="about col-12 d-flex justify-content-center align-items-center">
+  <div
+    class="
+      about
+      col-12
+      d-flex
+      justify-content-center
+      align-items-center
+      animate__animated animate__fadeIn
+    "
+  >
     <div class="card cardspec d-flex flex-md-row">
       <div class="col-12 col-md-4 d-flex align-items-center flex-column">
         <div>
           <img class="img-fluid1 mt-2" src="../assets/img/landing.png" alt="" />
         </div>
-        <div class="mt-3 ps-5 pt-0">
-          <p class="f-20 m-0">About our app</p>
-          <p class="f-16 mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s.
+        <div class="mt-1 ps-5 pt-0">
+          <!-- <p class="f-20 m-0">About our app</p> -->
+          <p class="f-14 mt-2">
+            This application was designed to create life long memories with your
+            family and close friends. We wanted a place where we could share our
+            memories with our loved ones and create new ones in a fun way. Check
+            out your weekly challenges to start making new memories!
           </p>
+          <a
+            class="btn btn-primary text-white elevation-3"
+            target="_blank"
+            href="http://github.com/Jarrod-Payton/Good-Ol-Days"
+          >
+            Check out our Repo!
+          </a>
         </div>
       </div>
       <div class="col-12 col-md-8 desktop">
         <div class="col-12 cardpics d-md-flex mt-3">
           <div
-            class="col-12 col-md-4 cardsheight d-flex justify-content-center"
+            class="
+              col-12 col-md-4
+              cardsheight
+              d-flex
+              justify-content-center
+              animate__animated animate__jackInTheBox
+            "
           >
             <div class="card1 elevation-3 grow">
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://images.immediate.co.uk/production/volatile/sites/23/2014/11/GettyImages-888995042-c1288ee.jpg?quality=90&crop=147px%2C265px%2C1605px%2C1069px&resize=620%2C413"
+                  src="../assets/img/autumnll.jpg"
                   alt=""
                 />
               </div>
@@ -46,7 +69,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-4 animate__animated animate__jackInTheBox">
             <div class="card2 elevation-3 grow">
               <div>
                 <img
@@ -74,7 +97,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-4 animate__animated animate__jackInTheBox">
             <div class="card3 elevation-3 grow">
               <div>
                 <img
@@ -104,7 +127,7 @@
           </div>
         </div>
         <div class="col-12 cardpics d-md-flex justify-content-center">
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-4 animate__animated animate__jackInTheBox">
             <div class="card4 elevation-3 grow">
               <div>
                 <img
@@ -132,12 +155,12 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-4 animate__animated animate__jackInTheBox">
             <div class="card5 elevation-3 grow">
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5jEe3u-zFbNX7_hKxiG-NWIz_3pDTaRcVTP0x3W7TMgoYO1k1Prrtf3oewZDfmHX67aQ&usqp=CAU"
+                  src="../assets/img/ryanmphoto.jpg"
                   alt=""
                 />
               </div>
@@ -169,7 +192,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://images.immediate.co.uk/production/volatile/sites/23/2014/11/GettyImages-888995042-c1288ee.jpg?quality=90&crop=147px%2C265px%2C1605px%2C1069px&resize=620%2C413"
+                  src="../assets/img/autumnll.jpg"
                   alt=""
                 />
               </div>
@@ -282,7 +305,7 @@
               <div>
                 <img
                   class="img-fluid images"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5jEe3u-zFbNX7_hKxiG-NWIz_3pDTaRcVTP0x3W7TMgoYO1k1Prrtf3oewZDfmHX67aQ&usqp=CAU"
+                  src="../assets/img/ryanmphoto.jpg"
                   alt=""
                 />
               </div>

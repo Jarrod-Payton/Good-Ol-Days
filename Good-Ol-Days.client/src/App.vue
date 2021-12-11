@@ -3,6 +3,7 @@
     <div class="row">
       <NavigationBar />
     </div>
+
     <div class="row" :class="{ scrollbar: $route.name != 'Landing' }">
       <router-view />
     </div>
@@ -11,6 +12,7 @@
     <ProfileOffCanvas :account="account" />
     <CreatePostModal />
     <PictureModal />
+    <VideoModal />
   </footer>
 </template>
 
@@ -18,6 +20,7 @@
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import { useRoute } from "vue-router"
+import 'animate.css';
 export default {
   name: 'App',
   setup() {
@@ -46,7 +49,7 @@ p {
 }
 .scrollbar {
   overflow-y: scroll;
-  height: 82vh;
+  height: 85vh;
 }
 .scrollbar::-webkit-scrollbar {
   width: 7px;

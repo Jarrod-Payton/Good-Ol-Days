@@ -69,6 +69,7 @@ class SocketProvider {
    * @param {string} eventName
    * @param {any} payload
    */
+
   messageRoom(room, eventName, payload) {
     this.io.to(room).emit(eventName, payload)
   }

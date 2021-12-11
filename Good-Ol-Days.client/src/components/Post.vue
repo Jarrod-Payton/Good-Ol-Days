@@ -1,10 +1,21 @@
 <template>
   <div class="polaroid">
-    <img class="image border border-dark" :src="post.imgUrl" />
+    <img
+      v-if="post.type.includes('video')"
+      class="video border-dark"
+      src="../assets/img/videoicon.png"
+    />
+    <img v-else class="image border border-dark" :src="post.imgUrl" />
     <div>
-      <div class="caption sharpie">{{ post.title }} - {{ getTimeAgo() }}</div>
+      <div class="caption sharpie">{{ post.title }}</div>
       <div v-if="post.challengeId" class="stamp stampPosition is-approved">
         Challenge
+      </div>
+      <div
+        v-if="post.type.includes('video')"
+        class="stampVideo stampVideoPosition is-approvedVideo"
+      >
+        Video
       </div>
     </div>
   </div>
@@ -35,6 +46,11 @@ export default {
   bottom: 20px;
   right: 5px;
 }
+.stampVideoPosition {
+  position: absolute;
+  bottom: 15px;
+  left: 5px;
+}
 .stamp {
   transform: rotate(12deg);
   color: #555;
@@ -55,6 +71,28 @@ export default {
   border: 0.5rem solid #23b8435b;
   -webkit-mask-position: 13rem 6rem;
   transform: rotate(-18deg);
+  border-radius: 0;
+}
+.stampVideo {
+  transform: rotate(-9deg);
+  color: #555;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 0.25rem solid #555;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-transform: uppercase;
+  border-radius: 3rem;
+  font-family: "Courier";
+  -webkit-mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/grunge.png");
+  -webkit-mask-size: 944px 604px;
+  mix-blend-mode: multiply;
+}
+.is-approvedVideo {
+  color: #952dc55b;
+  border: 0.5rem solid #952dc55b;
+  -webkit-mask-position: 13rem 6rem;
+  transform: rotate(9deg);
   border-radius: 0;
 }
 @font-face {
@@ -96,6 +134,12 @@ export default {
   height: 30vh;
   width: 100%;
   object-fit: cover;
+}
+.video {
+  height: 30vh;
+  width: 100%;
+  background-color: rgb(46, 46, 46);
+  object-fit: fill;
 }
 @media only screen and (max-width: 500px) {
   .image {

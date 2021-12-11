@@ -37,8 +37,10 @@
                       class="customBtn btn btn-success cloudy"
                       title="Upload Photo"
                     >
-                      <i class="mdi mdi-cloud-upload me-1" />
-                      Upload
+                      <div class="d-flex align-items-center">
+                        <i class="mdi mdi-cloud-upload me-1" />
+                        <h5 class="upload">Upload</h5>
+                      </div>
                     </button>
                   </div>
                 </div>
@@ -136,7 +138,7 @@
             </div>
             <div class="row m-0">
               <div class="col-12 align-self-end">
-                <p class="text-center mt-3">"{{ quote }}"</p>
+                <p class="text-center mt-3 quote-font">"{{ quote }}"</p>
               </div>
             </div>
           </div>
@@ -165,9 +167,6 @@ import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
 export default {
   //If you are a collaborator you can see the challenge, this is to pass down the collaborators
-  props: {
-    collabThisAlbum: { type: Object, required: true }
-  },
   setup() {
     //The filter for the suggested challenges
     const type = ref('')
@@ -227,11 +226,20 @@ export default {
       activeAlbum: computed(() => AppState.activeAlbum),
       doneSyncing: computed(() => AppState.doneSyncing),
       account: computed(() => AppState.account),
+      collabThisAlbum: computed(() => AppState.collabThisAlbum),
     }
   },
 }
 </script>
 <style scoped>
+.upload {
+  font-size: 1.5vh;
+  margin-top: 1vh;
+}
+.quote-font {
+  font-size: 1.47vh;
+  font-family: "Saira Condensed", sans-serif;
+}
 .loadingthing {
   font-size: 3vh;
   width: 10vh;
@@ -308,23 +316,27 @@ export default {
   background-color: #4ac26d;
   color: rgb(255, 255, 255);
   font-family: "Saira Condensed", sans-serif;
-  padding: 3px;
+  padding: 0;
   padding-left: 8px;
   padding-right: 8px;
   margin-right: 4vh;
 }
 @media only screen and (max-width: 500px) {
   .challengeFont {
-    font-size: 3vh !important;
+    font-size: 2.5vh !important;
+  }
+  .upload {
+    font-size: 1.4vh;
+    margin-top: 1vh;
   }
   .cloudy {
     margin-top: 1vh;
-    font-size: 1.5vh;
+    font-size: 1.3vh;
   }
   .cardspec {
     height: 100%;
-    width: 70%;
-    min-height: 25vh;
+    width: 100%;
+    min-height: 20vh;
     border-width: 5px;
     border-radius: 0;
     border-color: #4ac26d;
@@ -333,20 +345,27 @@ export default {
   .text-sm-h2 {
     font-size: 3vh;
   }
-  .cardspec {
-    height: 100%;
-    width: 100%;
-    border-width: 5px;
-    border-radius: 0;
-    border-color: #4ac26d;
-    background-color: rgb(245, 245, 245, 0.9);
-  }
   .paddingmobile {
     padding: 0;
   }
-
   .font {
-    font-size: 2vh;
+    font-size: 1.4vh;
+  }
+  .refreshButton {
+    font-size: 1.5vh;
+  }
+  .quote-font {
+    font-size: 1.2vh;
+    font-family: "Saira Condensed", sans-serif;
+  }
+  .customBtn {
+    background-color: #4ac26d;
+    color: rgb(255, 255, 255);
+    font-family: "Saira Condensed", sans-serif;
+    padding: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 4vh;
   }
 }
 </style>
