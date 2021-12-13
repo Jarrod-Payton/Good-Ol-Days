@@ -50,8 +50,8 @@
             <div
               :class="
                 m.creatorId === account.id
-                  ? 'card col-md-10 p-0 d-flex rounded-pill elevation-3 bg-dark lighten-3  bg-gradient my-3 p-3'
-                  : 'card col-md-10 p-0 d-flex  rounded-pill elevation-3 bg-light darken-3 bg-gradient my-3 p-3'
+                  ? 'card col-md-10 p-0 d-flex rounded elevation-3 chatuser border-2 my-3 p-3'
+                  : 'card col-md-10 p-0 d-flex  rounded elevation-3 chatother border-2 my-3 p-3'
               "
             >
               <div class="row justify-content-between">
@@ -62,7 +62,7 @@
                   <button
                     title="delete message"
                     aria-describedby="delete message"
-                    class="btn delete rounded-pill"
+                    class="btn p-0 delete rounded"
                     v-if="m.creatorId === account.id"
                   >
                     <i
@@ -109,7 +109,14 @@
                 type="text"
                 maxlength="100"
               />
-              <span @click="createMessage" class="input-group-text bg-dark">
+              <span
+                @click="createMessage"
+                class="
+                  input-group-text
+                  bg-primary
+                  border border-3 border-primary
+                "
+              >
                 <i class="mdi mdi-send"></i
               ></span>
             </div>
@@ -168,6 +175,14 @@ export default {
 
 
 <style lang="scss" scoped>
+.chatother {
+  background-color: rgba(176, 112, 218, 0.411);
+  border-color: rgb(110, 110, 110);
+}
+.chatuser {
+  background-color: rgba(228, 228, 228, 0.685);
+  border-color: rgb(110, 110, 110);
+}
 .downloadMode {
   padding-left: 1vh;
   padding-right: 1vh;
@@ -201,7 +216,7 @@ export default {
 }
 .profilepics {
   border-radius: 50%;
-  height: auto;
+  height: 4em;
   width: 4em;
   object-fit: cover;
   margin-left: 3px;
@@ -210,8 +225,8 @@ export default {
 }
 .delete {
   width: 3em;
-  color: #e9e9e9;
-  border-color: #ebeaea;
+  color: #6b6b6b;
+  border-color: #838383;
 }
 .delete:hover {
   background-color: red;
