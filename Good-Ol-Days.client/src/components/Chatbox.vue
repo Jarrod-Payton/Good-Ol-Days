@@ -38,7 +38,7 @@
           >
             <div
               v-if="screenSize < 500 || m.creatorId === account.id"
-              class="col-2 p-0 d-flex align-items-center"
+              class="col-2 p-0 d-flex align-items-center justify-content-center"
             >
               <img
                 :title="m.creator.name"
@@ -75,7 +75,7 @@
             </div>
             <div
               v-if="m.creatorId !== account.id && screenSize > 500"
-              class="col-2 p-0 d-flex align-items-center justify-content-end"
+              class="col-2 p-0 d-flex align-items-center justify-content-center"
             >
               <img
                 :title="m.creator.name"
