@@ -72,6 +72,7 @@ export default {
 }
 .picalbum {
   height: 20vh;
+  object-fit: cover;
 }
 .albumname {
   margin-top: 0.5vh;
