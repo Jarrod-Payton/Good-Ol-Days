@@ -26,7 +26,9 @@
                 v-on:focus="$event.target.select()"
                 ref="clone"
                 readonly
-                :value="'http://localhost:8080/#/album/' + activeAlbum.id"
+                :value="
+                  'https://good-ol-days.herokuapp.com/#/album/' + activeAlbum.id
+                "
               />
               <button class="btn buttoncopy elevation-3 ms-2" @click="copy">
                 <i class="mdi mdi-content-copy"> Copy</i>
