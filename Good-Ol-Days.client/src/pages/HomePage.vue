@@ -60,7 +60,7 @@
           <p class="mb-0 f-16 text-end pt-1 pe-3">Album</p>
         </div>
         <div class="col-3">
-          <p class="mb-0 f-16 pt-1 pe-3">Collaborators</p>
+          <!-- <p class="mb-0 f-16 pt-1 pe-3">Collaborators</p> -->
         </div>
       </div>
       <!-- GROUP ALBUMS GO HERE v  -->
